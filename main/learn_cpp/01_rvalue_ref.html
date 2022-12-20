@@ -1,0 +1,1179 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="canonical" href="https://blog.horrordor.tk/main/learn_cpp/01_rvalue_ref.html">
+      
+      <link rel="icon" href="../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.1.11">
+    
+    
+      
+        <title>右值引用 - horrordor's blog</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.3754935a.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#546d78">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="blue-grey">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="horrordor&#39;s blog" class="md-header__button md-logo" aria-label="horrordor's blog" data-md-component="logo">
+      
+  <img src="../assets/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            horrordor's blog
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              右值引用
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/horrordor/blog/" title="前往 GitHub 仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    horrordor
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../index.html" class="md-tabs__link">
+      首页
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../github/01_how_to_pr.html" class="md-tabs__link">
+        一起学 GitHub
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="01_rvalue_ref.html" class="md-tabs__link md-tabs__link--active">
+        研究 C++ 新语法
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="horrordor&#39;s blog" class="md-nav__button md-logo" aria-label="horrordor's blog" data-md-component="logo">
+      
+  <img src="../assets/logo.svg" alt="logo">
+
+    </a>
+    horrordor's blog
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/horrordor/blog/" title="前往 GitHub 仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    horrordor
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        首页
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      <label class="md-nav__link" for="__nav_2">
+        一起学 GitHub
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="一起学 GitHub" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          一起学 GitHub
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../github/01_how_to_pr.html" class="md-nav__link">
+        如何提交 PR
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../github/02_learn_from_pr.html" class="md-nav__link">
+        如何通过 PR 学习
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../github/03_SSH_for_github.html" class="md-nav__link">
+        github SSH免密码登录设置
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../github/04_beauty_code.html" class="md-nav__link">
+        美化代码工具分享
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../github/05_get_started_with_Markdown.html" class="md-nav__link">
+        快速上手 Markdown
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../github/06_Mkdocs.html" class="md-nav__link">
+        MkDocs 工具使用
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../github/07_GitHub_Pages.html" class="md-nav__link">
+        GitHub Pages 的生成和使用
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../github/08_GitHub_Actions.html" class="md-nav__link">
+        GitHub Actions 介绍 & 使用
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../github/09_merge_conflicts.html" class="md-nav__link">
+        解决 Git 冲突 Merge Conflicts
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../github/10_git_rebase.html" class="md-nav__link">
+        删除指定 commit 小妙招 git rebase
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      <label class="md-nav__link" for="__nav_3">
+        研究 C++ 新语法
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="研究 C++ 新语法" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          研究 C++ 新语法
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          右值引用
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="01_rvalue_ref.html" class="md-nav__link md-nav__link--active">
+        右值引用
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    什么是右值
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    什么是右值引用
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#move" class="md-nav__link">
+    move 语义
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stdmove" class="md-nav__link">
+    std::move
+  </a>
+  
+    <nav class="md-nav" aria-label="std::move">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stdmove_1" class="md-nav__link">
+    std::move 原理解析
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stdmove_2" class="md-nav__link">
+    std::move 的使用注意事项
+  </a>
+  
+    <nav class="md-nav" aria-label="std::move 的使用注意事项">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stdmove_3" class="md-nav__link">
+    组合或者继承时，显式调用 std::move
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stdmove_4" class="md-nav__link">
+    局部变量返回时，不调用 std::move
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="02_forward.html" class="md-nav__link">
+        完美转发
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="03_varadic_template.html" class="md-nav__link">
+        可变参模板
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="04_singleton.html" class="md-nav__link">
+        单例模式
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="05_using_against_typedef.html" class="md-nav__link">
+        类型别名：从 typedef 到 using
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="06_functor.html" class="md-nav__link">
+        仿函数
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="07_complie_link_macro.html" class="md-nav__link">
+        编译链接和宏本质
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="08_template.html" class="md-nav__link">
+        模板 template
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="09_template_special.html" class="md-nav__link">
+        模板特例
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="11_template_sfinae.html" class="md-nav__link">
+        搞懂 SFINAE
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="012_enable_if.html" class="md-nav__link">
+        enable_if 新标准
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="13_enable_if_redefine_mistake.html" class="md-nav__link">
+        enable_if 的重定义错误
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="014_materials.html" class="md-nav__link">
+        模板元编程
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    什么是右值
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    什么是右值引用
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#move" class="md-nav__link">
+    move 语义
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stdmove" class="md-nav__link">
+    std::move
+  </a>
+  
+    <nav class="md-nav" aria-label="std::move">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stdmove_1" class="md-nav__link">
+    std::move 原理解析
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stdmove_2" class="md-nav__link">
+    std::move 的使用注意事项
+  </a>
+  
+    <nav class="md-nav" aria-label="std::move 的使用注意事项">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stdmove_3" class="md-nav__link">
+    组合或者继承时，显式调用 std::move
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stdmove_4" class="md-nav__link">
+    局部变量返回时，不调用 std::move
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/horrordor/blog/edit/master/docs/learn_cpp/01_rvalue_ref.md" title="编辑此页" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="_1">右值引用<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>右值引用起码解决了两个问题：</p>
+<ul>
+<li>实现 move 语义（本文介绍）</li>
+<li>实现完美转发（下一篇文章介绍）</li>
+</ul>
+<p>本文会介绍什么是：</p>
+<ul>
+<li>什么是右值</li>
+<li>什么是右值引用、move 语义</li>
+<li>std::move 原理剖析</li>
+<li>std::move 使用注意事项</li>
+</ul>
+<h2 id="_2">什么是右值<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>C++ 中表达式分为左值和右值，简单而言，有内存地址的表达式就是左值，它可以出现在赋值语句的**左边或者右边**。无法取内存地址的表达式是右值，**只能**出现在赋值语句的右边。</p>
+<p>以下是 C++ 中常见的出现右值的情况：</p>
+<ol>
+<li>常量字面量</li>
+<li>函数调用返回的值或对象（左值引用类型除外）</li>
+<li>无名对象</li>
+</ol>
+<p>```c++
+int funA(int a) {
+    return a;
+}</p>
+<p>int&amp; funB(int a) {
+    return a;
+}</p>
+<p>class A {
+public:
+    A() {}
+    ~A() {}
+};</p>
+<p>int main(int argc, char* argv[]) {
+    auto pos_num = &amp;(10);            // 不能取地址 1. 常量字面量
+    auto pos_funA = &amp;(funA(0x1111)); // 不能取地址 2. 函数调用的返回值
+    auto pos_funB = &amp;(funB(0x2222)); // 函数调用返回的类型为左值引用，则返回的结果为左值
+    auto pos_class = &amp;(A());         // 不能取地址 3. 无名对象
+    return 0;
+}
+```</p>
+<h2 id="_3">什么是右值引用<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>在 C++11 之前，是只有左值引用（C++11之后，为了和右值引用区分，原来的“引用”才称为“左值引用”），没有右值引用的。因此无法用非 <code>const</code> （左值）引用匹配右值的。</p>
+<p>比如：</p>
+<p><code>c++
+int fun(int&amp; a){
+    return a;
+}</code></p>
+<p>以下调用会出错：</p>
+<p><code>c++
+fun(10); // 编译报错：无法从 int 转为 int&amp;</code></p>
+<p>如果非要匹配，则需要使用 <code>const</code> （左值）引用：</p>
+<p>```c++
+int fun(const int&amp; a){
+    return a;
+}</p>
+<p>int main(int argc, char* argv[]){
+    fun(10); // 可以编译通过。const (左值)引用可以匹配右值
+    return 0;
+}
+```</p>
+<p>在 C++11 之后，不用 <code>const</code> 左值引用，也可以匹配右值了：</p>
+<p>```c++
+int fun(int&amp;&amp; a){
+    return a;
+}</p>
+<p>int main(int argc, char* argv[]){
+    fun(10); // 右值引用可以匹配右值
+    return 0;
+}
+```</p>
+<p>当然，右值引用的发明不是主要为了解决这类简单的调用匹配问题，而是为了引入 <strong>move 语义</strong>。</p>
+<h2 id="move">move 语义<a class="headerlink" href="#move" title="Permanent link">&para;</a></h2>
+<p>先看一个右值引用发明前，资源利用效率不高的问题，以字符串类为例。我们知道，通常情况下，如果字符串做浅拷贝，是错误的：</p>
+<p><code>c++
+class CMyString {
+public:
+    char* m_pBuffer;
+    int m_iLen;
+    CMyString(const char* pString) {
+        m_iLen = strlen(pString) + 1;
+        m_pBuffer = new char[m_iLen];
+        strcpy(m_pBuffer, pString);
+    }
+    ~CMyString() {
+        m_iLen = 0;
+        if(m_pBuffer) {
+            delete[] m_pBuffer;
+        }
+    }
+    CMyString(CMyString&amp; other) {
+        // 浅拷贝，错误
+        this-&gt;m_pBuffer = other.m_pBuffer;
+        this-&gt;m_iLen = other.m_iLen;
+    }
+};</code></p>
+<p>错误的原因在于，如果 A 对象拷贝复制自 B 对象，那么当 B 对象析构时，会销毁 <code>m_pBuffer</code> 指向的缓冲区，这样 A 对象所指向的缓冲区也被一起销毁了。因此 CMyString 其实需要的是深拷贝：</p>
+<p><code>c++
+CMyString(CMyString&amp; other) {
+    // 深拷贝
+    this-&gt;m_iLen = other.m_iLen;
+    this-&gt;m_pBuffer = new char[m_iLen];
+    strcpy(this-&gt;m_pBuffer, other.m_pBuffer);
+}</code></p>
+<p>这是安全、正确的做法。但是，在某些特殊情况下，这种深拷贝其实 <strong>不是最高效的</strong>，比如对于以下代码：</p>
+<p><code>c++
+int main(int argc, char* argv[]){
+    CMyString str1(CMyString("hello"));
+    return 0;
+}</code></p>
+<p>以上的 <code>CMyString("hello")</code> 是一个右值（无名对象），这个无名对象在完成 <code>str1</code> 的构造后，生命周期也就结束了，无名对象的资源也就被释放了。</p>
+<p>这个时候问题来了：既然明知道无名对象的资源马上就会释放，那何必不做深拷贝，而是直接“偷”这个无名对象的资源呢？代码逻辑如下：</p>
+<p><code>c++
+CMyString(/*类型暂且保密*/ other) {
+    this-&gt;m_iLen = other.m_iLen;
+    this-&gt;m_pBuffer = other.m_pBuffer; // 浅拷贝、偷资源
+    other.m_pBuffer = nullptr;         // 让 other.m_pBuffer 不被释放
+}</code></p>
+<p>有了以上概念后，我们就知道了，其实有两种“从对象B得到对象A”的构造：</p>
+<ul>
+<li>一种是 C++11 之前的拷贝构造</li>
+<li>一种是 C++11 之后引入的，专门针对 B 是右值、可以被“偷资源”场景的构造，称为 <strong>移动构造</strong></li>
+</ul>
+<p>用以上 CMyString 为例，揭晓移动构造的原型，它的形参是 <strong>右值引用</strong>：</p>
+<p><code>c++
+CMyString(CMyString&amp;&amp; other) {
+    this-&gt;m_iLen = other.m_iLen;
+    this-&gt;m_pBuffer = other.m_pBuffer; // 浅拷贝、偷资源
+    other.m_pBuffer = nullptr;         // 让 m_pBuffer 不因为other析构而释放
+}</code></p>
+<p>类似于拷贝构造有与之对应的运算符重载 <code>operator=(CMyString&amp;)</code>（拷贝赋值），移动构造也有与之对应的运算符重载：<code>operator=(CMyString&amp;&amp;)</code>（移动赋值）。</p>
+<p>移动构造和移动赋值，统称为 <strong>移动语义</strong>。</p>
+<h2 id="stdmove">std::move<a class="headerlink" href="#stdmove" title="Permanent link">&para;</a></h2>
+<p>C++11 中引入右值引用的同时，还在标准中引入了 <code>std::move</code> 函数。它的作用是“将表达式强行转为右值类型”。</p>
+<p>我们先看下例，它是一个“可以改进”的 <code>myswap</code> 函数：</p>
+<p><code>c++
+template&lt;typename T&gt;
+void myswap(T&amp; a, T&amp; b) {
+    T temp(a);  // 发生拷贝构造
+    a = b;      // 发生拷贝赋值
+    b = temp;   // 发生拷贝赋值
+}</code></p>
+<p>以上三行代码，因为没有右值类型，所以不会触发移动语义。如果 <code>T</code> 是 <code>CMyString</code>，那么会发生三次深拷贝。</p>
+<p>但是仔细分析一下，实际上以上三行使用移动语义也是可以的：作为构造或者赋值的源变量，要么使用过一次后就不再使用，要么仅作为赋值的目标。换言之，它们的资源是可以被“偷”的。</p>
+<p>这时候，就可以使用 <code>std::move</code> 强行把变量转为右值类型，来触发移动语义了：</p>
+<p><code>c++
+template&lt;typename T&gt;
+void myswap(T&amp; a, T&amp; b) {
+    T temp(std::move(a)); // 发生移动构造，偷 a 的资源
+    a = std::move(b);     // 发生移动构造，偷 b 的资源
+    b = std::move(temp);  // 发生移动赋值，偷 temp 的资源
+}</code></p>
+<h3 id="stdmove_1">std::move 原理解析<a class="headerlink" href="#stdmove_1" title="Permanent link">&para;</a></h3>
+<p><code>std::move</code> 为什么可以神奇地把左值给强制转变成右值呢？我们可以解析它的源码知晓答案，从 C++ 头文件中找到 <code>move</code> 的源码：</p>
+<p><code>c++
+template&lt;typename _Tp&gt;
+constexpr typename std::remove_reference&lt;_Tp&gt;::type&amp;&amp;
+move(_Tp&amp;&amp; __t) noexcept {
+    return static_cast&lt;typename std::remove_reference&lt;_Tp&gt;::type&amp;&amp;&gt;(__t);
+}</code></p>
+<p>移除掉不太相关的 <code>constexpr</code>、<code>noexcept</code> 得到：</p>
+<p><code>c++
+template&lt;typename _Tp&gt;
+typename std::remove_reference&lt;_Tp&gt;::type&amp;&amp;
+move(_Tp&amp;&amp; __t) {
+    return static_cast&lt;typename std::remove_reference&lt;_Tp&gt;::type&amp;&amp;&gt;(__t);
+}</code></p>
+<p>会发现 <code>move</code> 的返回值和内部实现，都和 <code>std::remove_reference&lt;_Tp&gt;::type</code> 很有关系，那么继续看看 <code>std::remove_reference</code> 的实现：</p>
+<p>```c++
+template<typename _Tp>
+struct remove_reference {
+    typedef _Tp   type;
+};</p>
+<p>template<typename _Tp>
+struct remove_reference&lt;_Tp&amp;&gt; {
+    typedef _Tp   type;
+};</p>
+<p>template<typename _Tp>
+struct remove_reference&lt;_Tp&amp;&amp;&gt; {
+    typedef _Tp   type;
+};
+```</p>
+<p>发现 <code>remove_reference</code> ，发现它的作用很简单，就是不管模板参数是 <code>_Tp</code>，还是 <code>_Tp</code> 的左值引用，或者 <code>_Tp</code> 的右值引用，都统统都定义一个 <code>type</code> 等价于 <code>_Tp</code> 类型。回头看，其实 <code>remove_reference</code> 的作用顾名思义，就是“移除掉类型的引用性质” 的意思。</p>
+<p>知道这个以后，我们可以进步一部简化 <code>move</code> 的源码，只谈原理不求严谨的话其实就是：</p>
+<p><code>c++
+template&lt;typename _Tp&gt;
+_Tp&amp;&amp; move(_Tp&amp;&amp; __t) {
+    return (_Tp&amp;&amp;)(__t); // 强制类型转换
+}</code></p>
+<p><code>move</code> 仅仅是做了一个强制类型转换而已（其实还涉及到了“万能引用”的知识点，我们下一篇文章介绍）。</p>
+<h2 id="stdmove_2">std::move 的使用注意事项<a class="headerlink" href="#stdmove_2" title="Permanent link">&para;</a></h2>
+<h3 id="stdmove_3">组合或者继承时，显式调用 std::move<a class="headerlink" href="#stdmove_3" title="Permanent link">&para;</a></h3>
+<p>一般而言，派生类如果是移动，那么也 <strong>期待</strong> 基类也是移动构造（派生类、基类的资源一起“偷”）。
+但是，以下的写法是不正确的：</p>
+<p><code>c++
+class CDerived:public CBase {
+public:
+    CDerived(CDerived&amp;&amp; other)
+        :CBase(other) { // 无法触发 CBase 的移动构造
+        // ...
+    }
+};</code></p>
+<p>实际上，以上代码 <strong>不会</strong> 触发 <code>CBase</code> 的移动构造，而是触发的拷贝构造。</p>
+<p>因为<code>有名字</code>的右值引用其实是<code>左值</code>，所以，当我们期待“基类也是做移动构造时”，应该显式调用<code>std::move</code>：</p>
+<p><code>c++
+class CDerived:public CBase {
+public:
+    CDerived(CDerived&amp;&amp; other)
+        :CBase(std::move(other)) { // 强制转为右值，触发 CBase 的移动构造
+        // ...
+    }
+};</code></p>
+<div class="admonition note">
+<p class="admonition-title">这样的例子也适用于组合（成员初始化）的情况。</p>
+</div>
+<h3 id="stdmove_4">局部变量返回时，不调用 std::move<a class="headerlink" href="#stdmove_4" title="Permanent link">&para;</a></h3>
+<p>有些情况下，我们会返回局部变量，比如下例：</p>
+<p><code>c++
+CTemp foo() {
+    CTemp x;
+    return x; // x 的作用域和生命周期即将结束
+}</code></p>
+<p>这时你可能会想到“等等，在 <code>foo()</code> 调用并返回的地方，会复制一次返回值，而 x 最好转成右值，使用移动构造来复制：</p>
+<p><code>c++
+CTemp foo() {
+    CTemp x;
+    return std::move(x); // 很可能好心办坏事
+}</code></p>
+<p>其实这样修改后，反而可能会把事情变糟糕，我们用以下试验看看效果：</p>
+<p>```c++</p>
+<h1 id="include">include <iostream><a class="headerlink" href="#include" title="Permanent link">&para;</a></h1>
+<h1 id="include_1">include <utility><a class="headerlink" href="#include_1" title="Permanent link">&para;</a></h1>
+<p>class CTemp {
+public:
+    CTemp() {
+        std::cout &lt;&lt; "CTemp：构造" &lt;&lt; std::endl;
+    }
+    CTemp(CTemp&amp; other) {
+        std::cout &lt;&lt; "CTemp：拷贝构造" &lt;&lt; std::endl;
+    }
+    CTemp(CTemp&amp;&amp; other) {
+        std::cout &lt;&lt; "CTemp：移动构造" &lt;&lt; std::endl;
+    }
+};</p>
+<p>//2.注意实现：返回时优化
+CTemp foo() {
+    CTemp x;
+    return x;//作用域在该函数中就结束了
+}
+CTemp foo_move() {
+    CTemp x;
+    return std::move(x);//作用域在该函数中就结束了
+}</p>
+<p>int main(int argc, char* argv[]) {
+    auto a = foo();
+    std::cout &lt;&lt; "-----------" &lt;&lt; std::endl;
+    auto b = foo_move();
+    return 0;
+}
+```</p>
+<p>输出结果是：</p>
+<p>```text
+CTemp：构造</p>
+<hr />
+<p>CTemp：构造
+CTemp：移动构造
+```</p>
+<p>会发现反而是做了 <code>std::move</code> 的 <code>foo_move</code> 多了一次构造。这是为什么呢？其实是因为，现代编译器一般都做 <strong>返回值优化</strong>，也就是说，与其现在 <code>foo</code> 内部构造一个局部变量 <code>x</code>，再把它复制出去；不如直接在 <code>foo</code> 函数调用的地方直接构造一个 <code>x</code> 对象。这样做的效率显然比移动语义要高。</p>
+<p>在这类情况下，不用 <code>std::move</code> 为佳。</p>
+<p>当然，这也不是一概而论的。总之，需要非常深刻的理解 <code>std::move</code> 的“副作用”，才能做好相关优化，推荐大家可以看看 <a href="https://en.cppreference.com/w/cpp/language/copy_elision">copy elision</a>。</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../github/10_git_rebase.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: 删除指定 commit 小妙招 git rebase" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              删除指定 commit 小妙招 git rebase
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="02_forward.html" class="md-footer__link md-footer__link--next" aria-label="下一页: 完美转发" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              完美转发
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; horrordor
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.top", "instant"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.477d984a.min.js", "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.ddd52ceb.min.js"></script>
+      
+        <script src="../javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1003 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="canonical" href="https://blog.horrordor.tk/main/learn_cpp/06_functor.html">
+      
+      <link rel="icon" href="../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.1.11">
+    
+    
+      
+        <title>仿函数 - horrordor's blog</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.3754935a.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#546d78">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="blue-grey">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="horrordor&#39;s blog" class="md-header__button md-logo" aria-label="horrordor's blog" data-md-component="logo">
+      
+  <img src="../assets/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            horrordor's blog
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              仿函数
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/horrordor/blog/" title="前往 GitHub 仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    horrordor
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../index.html" class="md-tabs__link">
+      首页
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../github/01_how_to_pr.html" class="md-tabs__link">
+        一起学 GitHub
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="01_rvalue_ref.html" class="md-tabs__link md-tabs__link--active">
+        研究 C++ 新语法
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="horrordor&#39;s blog" class="md-nav__button md-logo" aria-label="horrordor's blog" data-md-component="logo">
+      
+  <img src="../assets/logo.svg" alt="logo">
+
+    </a>
+    horrordor's blog
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/horrordor/blog/" title="前往 GitHub 仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    horrordor
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        首页
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      <label class="md-nav__link" for="__nav_2">
+        一起学 GitHub
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="一起学 GitHub" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          一起学 GitHub
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../github/01_how_to_pr.html" class="md-nav__link">
+        如何提交 PR
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../github/02_learn_from_pr.html" class="md-nav__link">
+        如何通过 PR 学习
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../github/03_SSH_for_github.html" class="md-nav__link">
+        github SSH免密码登录设置
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../github/04_beauty_code.html" class="md-nav__link">
+        美化代码工具分享
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../github/05_get_started_with_Markdown.html" class="md-nav__link">
+        快速上手 Markdown
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../github/06_Mkdocs.html" class="md-nav__link">
+        MkDocs 工具使用
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../github/07_GitHub_Pages.html" class="md-nav__link">
+        GitHub Pages 的生成和使用
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../github/08_GitHub_Actions.html" class="md-nav__link">
+        GitHub Actions 介绍 & 使用
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../github/09_merge_conflicts.html" class="md-nav__link">
+        解决 Git 冲突 Merge Conflicts
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../github/10_git_rebase.html" class="md-nav__link">
+        删除指定 commit 小妙招 git rebase
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      <label class="md-nav__link" for="__nav_3">
+        研究 C++ 新语法
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="研究 C++ 新语法" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          研究 C++ 新语法
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="01_rvalue_ref.html" class="md-nav__link">
+        右值引用
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="02_forward.html" class="md-nav__link">
+        完美转发
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="03_varadic_template.html" class="md-nav__link">
+        可变参模板
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="04_singleton.html" class="md-nav__link">
+        单例模式
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="05_using_against_typedef.html" class="md-nav__link">
+        类型别名：从 typedef 到 using
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          仿函数
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="06_functor.html" class="md-nav__link md-nav__link--active">
+        仿函数
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    仿函数的定义与示例
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="07_complie_link_macro.html" class="md-nav__link">
+        编译链接和宏本质
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="08_template.html" class="md-nav__link">
+        模板 template
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="09_template_special.html" class="md-nav__link">
+        模板特例
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="11_template_sfinae.html" class="md-nav__link">
+        搞懂 SFINAE
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="012_enable_if.html" class="md-nav__link">
+        enable_if 新标准
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="13_enable_if_redefine_mistake.html" class="md-nav__link">
+        enable_if 的重定义错误
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="014_materials.html" class="md-nav__link">
+        模板元编程
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    仿函数的定义与示例
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/horrordor/blog/edit/master/docs/learn_cpp/06_functor.md" title="编辑此页" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="_1">仿函数<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>本文将从以下方面简单介绍 C++ 中的仿函数：</p>
+<ul>
+<li>仿函数的定义</li>
+<li>仿函数的两大优点</li>
+<li>lambda 函数也是一种仿函数</li>
+</ul>
+<h2 id="_2">仿函数的定义与示例<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>西方有句谚语：如果一个东西看起来像鸭子，走起来像鸭子，那么它就是一只鸭子。而如果一样东西，不是函数，但是具有函数的性质，例如可以像函数一样调用、传参、返回值，那它是什么呢？C++ 中将其称为 <strong>仿函数</strong>。</p>
+<p>中规中矩的定义和调用函数方式：</p>
+<p>```c++</p>
+<h1 id="include">include <iostream><a class="headerlink" href="#include" title="Permanent link">&para;</a></h1>
+<p>void show_value(int x) {
+ std::cout &lt;&lt; x &lt;&lt; std::endl;
+}
+int main(int argc, char* argv[]) {
+    show_value(10);
+    return 0;
+}
+```</p>
+<p>仿函数不是函数，但是可以像函数一样调用、传参、返回值。那么如何定义仿函数？答案是重载 <strong>括号运算符</strong>。如下代码是一个仿函数示例。</p>
+<p>```c++</p>
+<h1 id="include_1">include <iostream><a class="headerlink" href="#include_1" title="Permanent link">&para;</a></h1>
+<p>struct CMyFunctor{
+    void operator()(int x) {
+     std::cout &lt;&lt; x &lt;&lt; std::endl;
+    }
+};</p>
+<p>int main(int argc, char* argv[]) {
+    // auto p = CMyFunctor();  // 实例化结构体
+    // p(10);                  // 调用实例化对象</p>
+<div class="codehilite"><pre><span></span><code>CMyFunctor()(10);          // 将创建实例和调用写在一起即仿函数
+
+return 0;
+</code></pre></div>
+
+<p>}
+```</p>
+<p>现代 C++ 代码中会大量使用仿函数，如 <a href="https://github.com/Oneflow-Inc/oneflow/blob/master/oneflow/core/functional/impl/math_functor.cpp">OneFlow 的算子层</a> ：</p>
+<p>```c++
+class ReduceSumFunctor {
+public:
+    ReduceSumFunctor() {
+        op_ = CHECK_JUST(
+                  one::OpBuilder("reduce_sum").Input("input_tensor").Output("output_tensor").Build());
+    }
+    Maybe<Tensor> operator()(const std::shared_ptr<one::Tensor>&amp; x, const std::vector<int32_t>&amp; axis,
+                             const bool&amp; keepdims) const {
+        // const DataType dtype = x-&gt;dtype()-&gt;data_type();
+        MutableAttrMap attrs;
+        if (axis.empty()) {
+            std::vector<int32_t> reduce_axis(x-&gt;shape()-&gt;NumAxes());
+            std::iota(reduce_axis.begin(), reduce_axis.end(), 0);
+            JUST(attrs.SetAttr<std::vector\<int32_t>>("axis", reduce_axis));
+        } else {
+            JUST(attrs.SetAttr<std::vector\<int32_t>>("axis", axis));
+        }
+        JUST(attrs.SetAttr<bool>("keepdims", keepdims));
+        TensorProcessor tensor_processor;
+        JUST(tensor_processor.AddInputs( {x}, /<em>lowest_dtype=</em>/DType::Int64()).Apply());
+        TensorTuple input_tuple = JUST(tensor_processor.GetInputs());
+        return OpInterpUtil::Dispatch<Tensor>(*op_, input_tuple, attrs);
+    }</p>
+<p>private:
+    std::shared_ptr<OpExpr> op_;
+};
+```</p>
+<p>再如 <a href="https://github.com/Oneflow-Inc/oneflow/blob/master/oneflow/core/cuda/elementwise.cuh">OneFlow 类工厂</a>：</p>
+<p>```c++
+template<typename FunctorT>
+struct SimpleFactory {
+    explicit SimpleFactory(FunctorT functor) : tpl(functor) {}
+    <strong>device</strong> FunctorT operator()() const {
+        return tpl;
+    }</p>
+<p>private:
+    FunctorT tpl;
+};
+```</p>
+<h2 id="_3">仿函数的优点<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<ul>
+<li>可以保存状态</li>
+<li>作为模板参数</li>
+</ul>
+<h3 id="_4">可以保存状态<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>以计算税场景为例：</p>
+<p>```c++</p>
+<h1 id="include_2">include <iostream><a class="headerlink" href="#include_2" title="Permanent link">&para;</a></h1>
+<h1 id="include_3">include <vector><a class="headerlink" href="#include_3" title="Permanent link">&para;</a></h1>
+<h1 id="include_4">include <algorithm><a class="headerlink" href="#include_4" title="Permanent link">&para;</a></h1>
+<p>double calc_tax(double salary) {
+    // 计算税的函数，税率为0.2
+    return salary * 0.2;
+}</p>
+<p>void show_value(double value) {
+    std::cout &lt;&lt; value &lt;&lt; ",";
+}</p>
+<p>int main(int argc, char* argv[]) {
+    std::vector<double> salary = { 3000, 5000, 4800, 2800 };  // 收入
+    std::vector<double> tax(4);                               // 税结果</p>
+<div class="codehilite"><pre><span></span><code>std::transform(salary.begin(), salary.end(), tax.begin(), calc_tax);  // 遍历和计算税率
+std::for_each(salary.begin(), salary.end(), show_value);
+std::cout &lt;&lt; std::endl;
+std::for_each(tax.begin(), tax.end(), show_value);
+return 0;
+</code></pre></div>
+
+<p>}
+```</p>
+<p>当存在 <strong>多种税率</strong> 的时候，需要重写 <code>calc_tax</code> 函数。常见的做法是将税率作为函数参数，即：</p>
+<p><code>c++
+double calc_tax_two_args(double salary, double rate) {
+    return salary * rate;
+}</code></p>
+<p>但是 STL 的 <code>transform</code> 函数接受的函数类型只允许有一个参数，<code>calc_tax_two_args</code> 会出现编译不通过问题。以上问题可以通过仿函数得到解决。如下列代码所示，使用 <code>_rate</code> 保存税率，在新建实例的时候可以自定义税率，同时保持 <code>operator</code> 函数仍然只有一个参数。</p>
+<p>```c++</p>
+<h1 id="include_5">include <iostream><a class="headerlink" href="#include_5" title="Permanent link">&para;</a></h1>
+<h1 id="include_6">include <vector><a class="headerlink" href="#include_6" title="Permanent link">&para;</a></h1>
+<h1 id="include_7">include <algorithm><a class="headerlink" href="#include_7" title="Permanent link">&para;</a></h1>
+<p>struct CMyCalcTax {
+    CMyCalcTax(double rate):_rate(rate) {</p>
+<div class="codehilite"><pre><span></span><code>}
+double operator()(double salary) {    // 仍然只有一个参数
+    return salary * _rate;
+}
+</code></pre></div>
+
+<p>private:
+    double _rate;                         // 用于保存税率
+}</p>
+<p>void show__value (double value) {
+    std::cout &lt;&lt; value &lt;&lt; ",";
+}</p>
+<p>int main(int argc, char* argv[]) {
+    std::vector<double> salaryl = { 3000, 5000, 4800, 2800 };
+    std::vector<double> salary2 = { 3000, 5000, 4800, 2800 };
+    std::vector<double> tax1(4);
+    std::vector<double> tax2(4);
+    std::transform(salary1.begin(), salary1.end(), tax1.begin(), CMyCalcTax(0.2));
+    std::for_each(salary1.begin(), salary1.end(), show_value) ;
+    std::cout &lt;&lt; std::endl;
+    std::for_each(tax1.begin(), tax1.end(), show_value);</p>
+<div class="codehilite"><pre><span></span><code>std::cout&lt;&lt;std::endl &lt;&lt; &quot;===========&quot; &lt;&lt; std::endl;
+std::transform(salary2.begin(), salary2.end(), tax2.begin(), CMyCalcTax(0.1));
+std::for_each(salary2.begin(), salary2.end(), show_value);
+std::cout &lt;&lt; std::endl;
+std::for_each(tax2.begin(), tax2.end(), show_value);
+std::cout &lt;&lt; std::endl;
+return 0;
+</code></pre></div>
+
+<p>}
+```</p>
+<p>从上述实例中也可以看出仿函数可以有状态，而这一特性使得仿函数比普通函数更加灵活。</p>
+<h3 id="_5">作为模板参数<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>这一优点体现在模板编程中。因为仿函数的本质是 <strong>类或者结构体的对象</strong>，这就使得可以把仿函数的类型当作模板参数进行传递。于是某些时候就可以把运行时的开销在编译时解决掉，这也可以让软件的效率变得更高。</p>
+<p>什么是编译时的开销？以 STL 的 <code>for_each</code> 函数为例，部分源码如下：</p>
+<p><code>c++
+template&lt;typename _InputIterator, typename _Function&gt;
+_Function
+for_each(_InputIterator __first, _InputIterator __last, _Function __f) {
+    // concept requirements
+    __glibcxx_function_requires(_InputIteratorConcept&lt;_InputIterator&gt;)
+    __glibcxx_requires_valid_range(__first, __last);
+    for (; __first != __last; ++__first)
+        __f(*__first);
+    return __f; // N.B. [alg.foreach] says std::move(f) but it's redundant.
+}</code></p>
+<p><code>for_each</code> 的第三个参数就是函数指针 <code>__f</code>，在函数内部会遍历每一个指针，并且把函数指针的效果应用到每一个元素上。但是函数既然作为参数进行传递了就涉及到 <strong>栈资源的分配和回收</strong>，那就会产生运行时的开销。</p>
+<blockquote>
+<p>具体解释节省运行时开销：在底层的机器码中，函数调用时，参数是需要通过入栈出栈操作指令进行数据传输的，参数个数越多，则对应的传输指令越多，需要越多额外运行时间，这就是函数调用的开销。仿函数可以使某些不经常变的参数（如示例代码中的税率）不再通过参数传递、而是相当于以某个全局变量的形式传递，从而减少了参数个数。</p>
+</blockquote>
+<p>如果此时使用的是仿函数，就可以省去这部分开销。如下代码所示，自定义一个 <code>my_for_each</code>。因为是模板编程，所以在编译时就可以完全确定，所以在运行时就不会有额外的开销了。</p>
+<p>```c++</p>
+<h1 id="include_8">include <iostream><a class="headerlink" href="#include_8" title="Permanent link">&para;</a></h1>
+<h1 id="include_9">include <vector><a class="headerlink" href="#include_9" title="Permanent link">&para;</a></h1>
+<p>struct CMyFunctor {
+    void operator()(double value) {
+        std::cout &lt;&lt; value &lt;&lt; ",";
+    }
+};</p>
+<p>template<class InputIt, class UnaryFunction>   // 使用模板参数来处理每一个元素
+UnaryFunction my_for_each(InputIt first, InputIt last) {
+    for(; first != last; ++first) {
+        UnaryFunction()(*first);
+    }
+    return UnaryFunction();
+}</p>
+<p>void show_value(double value) {
+    std::cout &lt;&lt; value &lt;&lt; ",";
+}</p>
+<p>int main(int argc, char* argv[]) {
+    std::vector<double> salary = { 3000, 5000, 4800, 2800 };
+    my_for_each<decltype(salary.begin()), CMyFunctor>(salary.begin(), salary.end());
+    return 0;
+}
+```</p>
+<h2 id="c-lambda">C++ 中的 lambda 也是一种仿函数<a class="headerlink" href="#c-lambda" title="Permanent link">&para;</a></h2>
+<p>lambda 函数的本质与前面讲的通过重载 <code>operator()</code> 是一模一样的。如下所示从汇编语言角度看 lambda 函数，定义 <code>fun</code> 时，<code>n</code> 放入 eax 寄存器中，并被 push 进栈；<code>fun</code> 放入 ecx 中，可以看到函数存放地址。</p>
+<p><code>c++
+auto fun = [=](int x)-&gt;int {
+    return X + n;
+}</code></p>
+<p><code>asm
+007F5FOF lea   eax, [n]
+007F5F12 push  eax
+007F5F13 lea   ecx, [fun]
+007F5F16 call  &lt;1ambda_681e4b0e14b637a31b672c8686ddc480&gt;::&lt;lambda_681e4b0e4b637a31b672c8686ddc480&gt; (07F33A0h)</code></p>
+<p>如下调用示例，可以看到是通过 <code>operator()</code> 调用 <code>fun</code>，即编译器自动转换 lambda 表达式为函数对象执行。</p>
+<p><code>c++
+ fun(5);</code></p>
+<p><code>asm
+007F5F1B push 5
+007F5F1D lea ecx, [fun]
+007F5F20 call &lt;lambda_681e4b0e14b637a31b672c8686ddc480&gt;::operator() (07F4080h)</code></p>
+<p>包括 lambda 函数的 <strong>闭包特性</strong> 与用成员保存状态原理是基本一致的。</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="05_using_against_typedef.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: 类型别名：从 typedef 到 using" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              类型别名：从 typedef 到 using
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="07_complie_link_macro.html" class="md-footer__link md-footer__link--next" aria-label="下一页: 编译链接和宏本质" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              编译链接和宏本质
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; horrordor
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.top", "instant"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.477d984a.min.js", "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.ddd52ceb.min.js"></script>
+      
+        <script src="../javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
