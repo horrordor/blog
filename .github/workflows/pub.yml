@@ -4,8 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main
-  
+      - master
 
 jobs:
   deploy:
@@ -19,7 +18,7 @@ jobs:
       - run: git config --global user.name "horrordor"
       - run: sh ./scripts/bulid.sh
       - run: git checkout docs_output
-      - run: git checkout main -- CNAME
+      - run: git checkout master -- CNAME
       - run: mv CNAME ./_site/
 
       - name: Deploy
