@@ -19,3 +19,11 @@ jobs:
       - run: mkdocs gh-deploy
       - run: rm -rf ./site
       - run: ls -R
+      - run: git checkout -b fuck origin/gh-pages
+      - run: echo "blog.horrordor.tk" > CNAME
+      - run: git add -A
+      - run: git commit -a -m "fuck"
+      - uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: fuck
