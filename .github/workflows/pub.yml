@@ -16,13 +16,6 @@ jobs:
       - run: pip3 install --user -r requirements.txt
       - run: git config --global user.email "cccccc2002@outlook.com"
       - run: git config --global user.name "horrordor"
-      - run: sh ./scripts/bulid.sh
-      - run: git checkout docs_output
-      - run: git checkout master -- CNAME
-      - run: mv CNAME ./_site/
-
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_site
+      - run: mkdocs gh-deploy
+      - run: rm -rf ./site
+      - run: ls -R

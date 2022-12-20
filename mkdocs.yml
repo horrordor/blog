@@ -16,6 +16,8 @@ theme:
   name: material
   custom_dir: "overrides/"
   logo: assets/logo.svg
+  favicon: assets/logo.svg
+  static-templates: ["404.html", "robots.txt"]
 
   # Don't include MkDocs' JavaScript
   include_search_page: false
@@ -49,7 +51,6 @@ theme:
   font:
     text: Roboto
     code: Roboto Mono
-  favicon: assets/favicon.png
 
 # Plugins
 plugins:
