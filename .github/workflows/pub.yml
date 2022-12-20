@@ -1,0 +1,29 @@
+name: Doc Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - run: pip3 install --user -r requirements.txt
+      - run: git config --global user.email "cccccc2002@outlook.com"
+      - run: git config --global user.name "horrordor"
+      - run: sh ./scripts/bulid.sh
+      - run: git checkout docs_output
+      - run: git checkout main -- CNAME
+      - run: mv CNAME ./_site/
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site

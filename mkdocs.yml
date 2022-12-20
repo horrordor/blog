@@ -1,0 +1,131 @@
+site_name: horrordor's blog
+site_url: https://blog.horrordor.tk/
+# Repository
+repo_name: horrordor
+repo_url: https://github.com/horrordor/blog/
+repo_branch: main
+
+# Copyright
+copyright: Copyright &copy; horrordor
+
+#website/xxx.html style
+use_directory_urls: false
+
+# Configuration
+theme:
+  name: material
+  custom_dir: "overrides/"
+  logo: assets/logo.svg
+
+  # Don't include MkDocs' JavaScript
+  include_search_page: false
+  search_index_only: true
+
+  # Default values, taken from mkdocs_theme.yml
+  language: zh
+  features:
+    - navigation.tabs
+    - navigation.top
+    - instant
+  palette:
+    scheme: default
+    primary: blue grey
+    accent: blue grey
+  icon:
+    admonition:
+      note: octicons/tag-16
+      abstract: octicons/checklist-16
+      info: octicons/info-16
+      tip: octicons/squirrel-16
+      success: octicons/check-16
+      question: octicons/question-16
+      warning: octicons/alert-16
+      failure: octicons/x-circle-16
+      danger: octicons/zap-16
+      bug: octicons/bug-16
+      example: octicons/beaker-16
+      quote: octicons/quote-16
+
+  font:
+    text: Roboto
+    code: Roboto Mono
+  favicon: assets/favicon.png
+
+# Plugins
+plugins:
+  - search
+extra:
+  version:
+    provider: mike
+  #disqus: livere_indeed
+
+# Extensions
+markdown_extensions:
+  - markdown.extensions.admonition
+  - markdown.extensions.attr_list
+  - markdown.extensions.codehilite:
+      guess_lang: false
+  - markdown.extensions.def_list
+  - markdown.extensions.footnotes
+  - markdown.extensions.meta
+  - markdown.extensions.toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      user: squidfunk
+      repo: mkdocs-material
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets:
+      check_paths: true
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+extra_javascript:
+  - javascripts/config.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+nav:
+  - 首页: index.md
+  - 一起学 GitHub:
+      - 如何提交 PR: github/01_how_to_pr.md
+      - 如何通过 PR 学习: github/02_learn_from_pr.md
+      - github SSH免密码登录设置: github/03_SSH_for_github.md
+      - 美化代码工具分享: github/04_beauty_code.md
+      - 快速上手 Markdown: github/05_get_started_with_Markdown.md
+      - MkDocs 工具使用: github/06_Mkdocs.md
+      - GitHub Pages 的生成和使用: github/07_GitHub_Pages.md
+      - GitHub Actions 介绍 & 使用: github/08_GitHub_Actions.md
+      - 解决 Git 冲突 Merge Conflicts: github/09_merge_conflicts.md
+      - 删除指定 commit 小妙招 git rebase: github/10_git_rebase.md
+
+  - 研究 C++ 新语法:
+      - 右值引用: learn_cpp/01_rvalue_ref.md
+      - 完美转发: learn_cpp/02_forward.md
+      - 可变参模板: learn_cpp/03_varadic_template.md
+      - 单例模式: learn_cpp/04_singleton.md
+      - 类型别名：从 typedef 到 using: learn_cpp/05_using_against_typedef.md
+      - 仿函数: learn_cpp/06_functor.md
+      - 编译链接和宏本质: learn_cpp/07_complie_link_macro.md
+      - 模板 template: learn_cpp/08_template.md
+      - 模板特例: learn_cpp/09_template_special.md
+      - 搞懂 SFINAE: learn_cpp/11_template_sfinae.md
+      - enable_if 新标准: learn_cpp/012_enable_if.md
+      - enable_if 的重定义错误: learn_cpp/13_enable_if_redefine_mistake.md
+      - 模板元编程: learn_cpp/014_materials.md
