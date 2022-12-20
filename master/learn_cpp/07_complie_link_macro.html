@@ -9,14 +9,14 @@
       
       
       
-        <link rel="canonical" href="https://blog.horrordor.tk/main/learn_cpp/04_singleton.html">
+        <link rel="canonical" href="https://blog.horrordor.tk/master/learn_cpp/07_complie_link_macro.html">
       
       <link rel="icon" href="../assets/favicon.png">
       <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.1.11">
     
     
       
-        <title>单例模式 - horrordor's blog</title>
+        <title>编译链接和宏本质 - horrordor's blog</title>
       
     
     
@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#naive" class="md-skip">
+        <a href="#_1" class="md-skip">
           跳转至
         </a>
       
@@ -96,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              单例模式
+              编译链接和宏本质
             
           </span>
         </div>
@@ -480,85 +480,11 @@
             
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          单例模式
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="04_singleton.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="04_singleton.html" class="md-nav__link">
         单例模式
       </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    什么是单例模式
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#oneflow" class="md-nav__link">
-    OneFlow 中的工业级单例模式
-  </a>
-  
-    <nav class="md-nav" aria-label="OneFlow 中的工业级单例模式">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#new" class="md-nav__link">
-    New 接口实现
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    单例的同步问题
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    总结
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -590,11 +516,58 @@
             
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="07_complie_link_macro.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          编译链接和宏本质
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="07_complie_link_macro.html" class="md-nav__link md-nav__link--active">
         编译链接和宏本质
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    前言
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    C 程序的编译、链接和运行
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -703,42 +676,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    什么是单例模式
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#oneflow" class="md-nav__link">
-    OneFlow 中的工业级单例模式
-  </a>
-  
-    <nav class="md-nav" aria-label="OneFlow 中的工业级单例模式">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#new" class="md-nav__link">
-    New 接口实现
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
-    单例的同步问题
+    前言
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    总结
+  <a href="#c" class="md-nav__link">
+    C 程序的编译、链接和运行
   </a>
   
 </li>
@@ -755,117 +701,149 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/horrordor/blog/edit/master/docs/learn_cpp/04_singleton.md" title="编辑此页" class="md-content__button md-icon">
+                  <a href="https://github.com/horrordor/blog/edit/master/docs/learn_cpp/07_complie_link_macro.md" title="编辑此页" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="naive">单例模式：从 naive 到工业级<a class="headerlink" href="#naive" title="Permanent link">&para;</a></h1>
-<h2 id="_1">什么是单例模式<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>在实际场景中，经常有 “某个类只能有一个实例化对象” 的需求。如全屏游戏运行时应该只有一个窗口、系统日志由一个日志管理器统一记录。</p>
-<p>《设计模式》一书中，给出了单例模式的简单实现：</p>
-<p>```c++
-// singleton.h
-class CSingleton {
-public:
-    static CSingleton* Instance() {
-        if (_instance == nullptr) {
-            _instance = new CSingleton;
-        }
-        return _instance;
-    }
-    //该类的其它接口 ...
-protected:
-    CSingleton() {}
-private:
-    static CSingleton* _instance;
-};</p>
-<p>// singleton.cpp
-CSingleton* CSingleton::_instance;
-```</p>
-<p>它的实现要点是：</p>
-<ol>
-<li>将构造函数设置为非 public 的权限</li>
-<li>使用一个类静态成员保存唯一的实例</li>
-<li>实现一个 public 的静态方法，用于获取唯一的对象实例</li>
-</ol>
-<p>但是，这种示例代码，仍然有一些缺陷。比如拷贝构造、移动构造还未delete，所以用户可能有其它方式构造对象实例。不过，这个相信大家都会自己注意和修改。</p>
-<p>更重要的是，它还其它缺陷，满足不了工业级的需求：</p>
-<ol>
-<li>不同的类想要变成单例，都需要重复添加 <code>Instance</code> 方法及静态成员，比较冗余。</li>
-<li>不能处理一个类的构造存在重载的情况。更没有办法统一优雅地解决不同类的构造函数的参数个数、参数类型可能不同的问题。这个版本直接回避了这个问题，举例用的是无参构造。</li>
-<li>无法精确控制单例对象的顺序依赖关系。比如建建学校，要先有校长。这就必需保证校长在学校构造前已经被实例化。
-但是这个朴素版本，把创建对象和获取对象的逻辑放在了一起，无法精确控制单例的生命周期。</li>
-</ol>
-<p>我们看看 OneFlow 中是怎么克服以上缺陷的。</p>
-<h2 id="oneflow">OneFlow 中的工业级单例模式<a class="headerlink" href="#oneflow" title="Permanent link">&para;</a></h2>
-<p>OneFlow 的单例模式代码在 <a href="https://github.com/Oneflow-Inc/oneflow/blob/master/oneflow/core/common/global.h">global.h</a> 中。它的核心代码如下（我简化了和异常处理、错误检查等代码）：</p>
-<p>```c++
-template<typename T>
-class Global final {
-public:
-    static T* Get() {
-        return *GetPPtr();
-    }</p>
-<div class="codehilite"><pre><span></span><code>template&lt;typename... Args&gt;
-static void New(Args&amp;&amp;... args) {
-    CHECK(Get() == nullptr); //不为 nullptr 将抛异常
-    *GetPPtr() = new T(std::forward&lt;Args&gt;(args)...);
+                <h1 id="_1">编译链接和宏本质<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="_2">前言<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>本期我们要回顾一个非常经典的内容 <strong>C/C++ 程序的编译、链接、运行</strong> ，这有助于理解之后要讲的<a href="08_template.html">模板</a>的高级特性相关内容。这一部分内容虽然经典，但是考虑到有部分读者没有了解过，还是有必要专门讲解的。如果想要更深入理解，可以去 2021 年的 cpp conference，有关于编译和链接的<a href="https://www.youtube.com/watch?v=cpkDQaYttR4">专题视频</a>。</p>
+<p>本期文章主要分为两个部分：</p>
+<ul>
+<li>C 程序的编译、链接和运行</li>
+<li>宏的本质和优缺点</li>
+</ul>
+<h2 id="c">C 程序的编译、链接和运行<a class="headerlink" href="#c" title="Permanent link">&para;</a></h2>
+<p>先从 C++ 程序的习惯谈起，相信大家在编写 C/C++ 程序时都会被告知这样的“约定”。</p>
+<p>比如：</p>
+<ul>
+<li>声明要写在头文件中</li>
+<li>实现要放在源文件 cpp 文件中</li>
+<li>全局变量的声明要放在头文件中，并且要加上 <code>extern</code> 关键字，还不能赋值</li>
+</ul>
+<p>但是，在 C++ 标准中，并没有对哪些声明应该放在头文件，哪些声明应该放在源文件中有标准规定，这种“约定”只是工程的最佳实践。</p>
+<p>实际上，<strong>编译时的基本单位是源文件</strong> 。那么头文件到底有什么作用呢？我们用 <code>helloworld</code> 这个程序来解析解析这背后的原理。因为 IDE 和 cmake 这类构建工具会屏蔽原理，接下来我们就以纯手工 gcc 的方式来编译、链接一个程序。</p>
+<p>在 <code>main.cpp</code> 文件中编写如下代码：</p>
+<p>```c++</p>
+<h1 id="include">include <stdio.h><a class="headerlink" href="#include" title="Permanent link">&para;</a></h1>
+<p>int main(int argc, char* argv[]) {
+    printf("Hello World\n");
+    return 0;
 }
-
-static void Delete() {
-    if (Get() != nullptr) {
-        delete Get();
-        *GetPPtr() = nullptr;
-    }
-}
-</code></pre></div>
-
-<p>private:
-    static T** GetPPtr() {
-        static T* ptr = nullptr;
-        return &ptr;
-    }
-};
 ```</p>
-<p>我们看到，它提供了三个重要的公开方法：<code>New</code>、<code>Get</code>、<code>Delete</code>。其中 <code>New</code> 是用来实例化单例、<code>Delete</code> 用来销毁单例、<code>Get</code> 用来获取全局唯一的单例对象。</p>
-<p>我们看到，与之前朴素版本的单例模式相比，<code>Global</code> 专门设计了 <code>New</code> 接口和 <code>Delete</code> 接口。它的好处在于，不再把单例对象的生命周期管理交给运行时和编译器。而是可以非常精确地控制单例对象的生命周期。</p>
-<p>比如这里的代码，这个线程池单例，就依赖了 <code>ResourceDesc</code> 单例。因为可以精确控制生命周期，我们可以确保线程池实例化时，<code>ResourceDesc</code> 已经存在了。</p>
+<p>我们可以通过 gcc 来将这个 cpp 文件编译成一个可执行程序，使用如下命令：</p>
+<p><code>shell
+gcc main.cpp -o ttlarva.exe</code></p>
+<p>即可在当前目录生成 <code>ttlarva.exe</code> 文件，并且运行该文件就可以得到 Hello World 的打印结果。</p>
+<p>不过这样依然屏蔽了程序诞生的细节。实际上，这一行命令 gcc 帮我们完成了三件事情：预编译、编译、链接。</p>
+<p>接下来我们通过对 gcc 设置编译选项，就可以看到这几个过程的细节。</p>
+<h3 id="_3">预编译<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>gcc 中的 -E 选项可以显示预编译的结果，所谓预编译就是把预编译指令给转化为纯 C 代码。通过运行如下命令进行 <strong>预编译</strong>：</p>
+<p><code>shell
+gcc -E main.cpp &gt; main.i</code></p>
+<p>这时候我们就获得了一个 <code>main.i</code> 文件。打开该文件我们可以看到，原本简单几行的 helloworld 代码变成了近千行。且在代码的最末尾部分，就是我们在 <code>main.cpp</code> 中写的 <code>main</code> 函数。</p>
+<p>那上面多出的几百行代码是怎么来的呢？其实对比可以发现，原本 <code>#include &lt;stdio.h&gt;</code> 在的位置变成了那些新的代码。这些代码就是 <code>#include &lt;stdio.h&gt;</code> 这一条预编译指令得来的。</p>
+<p><code>include</code> 的作用大家可以简单理解为：找到对应的文件，然后把文件的内容复制粘贴到当前的源文件中。大家可以验证 <code>main.i</code> 上方的代码就是 <code>stdio.h</code> 中的内容。</p>
+<p>通过以上内容，相信大家应该对 <code>include</code> 的本质有了大致的了解了。那么理解了以上原理之后呢，相信大家也应该能理解我们开篇所说的那一些编程习惯了。</p>
+<ul>
+<li>Q 1：为什么只有源文件是编译基本单位？</li>
+<li>A 1：因为头文件其实是以复制粘贴的方式，被粘贴到了源文件中再编译。</li>
+<li>Q 2：为什么函数的实现一般不放在头文件中？</li>
+<li>A 2：因为如果把函数的实现放在头文件中，那么头文件被多个源文件 <code>include</code> 时，函数被多次重复实现，造成链接冲突。</li>
+</ul>
+<h3 id="_4">编译<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>预编译得到的纯 C 代码文件经过编译就可以得到了 object 文件。object 文件中包含了对应的机器码。</p>
+<p>我们可以使用如下命令将 <code>main.cpp</code> <strong>编译</strong> 成 <code>main.o</code> 文件。</p>
+<p><code>shell
+gcc - c main.cpp</code></p>
+<p><code>main.o</code> 文件其实就是一个二进制文件，包含了程序功能的机器码。不过它并不能直接运行，需要链接才可以。</p>
+<h3 id="_5">链接<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>为什么我们编译得到的机器码不能直接运行，而是要经过链接才能成为程序呢？</p>
+<p>这其实是因为当前编译单元（即当前源文件）所调用到的函数，它的实现不一定在当前的编译单元中，可能在其他 cpp 中实现。就像我们前面调用的 <code>printf</code> 函数，它的实现也并不是我们实现的，而是库函数实现的。</p>
+<p>链接的责任就是把各个编译单元给“拼接”到一起，“打通”各个 object 文件之间的调用关系。</p>
+<p>我们通过下面的例子获得更清楚的理解。</p>
+<p>首先我们创建一个 <code>my_math.cpp</code>文件。</p>
 <p><code>c++
-Global&lt;ThreadPool&gt;::New(Global&lt;ResourceDesc, ForSession&gt;::Get()-&gt;ComputeThreadPoolSize());</code></p>
-<h3 id="new">New 接口实现<a class="headerlink" href="#new" title="Permanent link">&para;</a></h3>
-<p>我们看看 <code>New</code> 接口的实现。已经掌握了完美转发和变参模板的同学，可以很容易看懂，这里就是做了一个完美转发，
-并且支持任意个数、任意类型参数的转发。这使得 <code>OneFlow</code> 的单例非常灵活，可以用 <code>New</code> 接口统一地创建各种各样的类。</p>
-<p><code>c++
-template&lt;typename... Args&gt;
-static void New(Args&amp;&amp;... args) {
-    CHECK(Get() == nullptr); //不为 nullptr 将抛异常
-    *GetPPtr() = new T(std::forward&lt;Args&gt;(args)...);
+int my_add(int a, int b) {
+    retrun a+b;
 }</code></p>
-<p>不过创建好的对象放哪去了呢？这和方法 <code>GetPPtr</code> 有关系。读懂 <code>GetPPtr</code> 的实现，牵涉到二级指针的使用技巧。</p>
-<p><code>c++
-static T** GetPPtr() {
-    static T* ptr = nullptr;
-    return &amp;ptr;
-}</code></p>
-<p>熟悉命名规范的同学知道，其实 <code>GetPPtr</code> 的名字就暗示了它和二级指针有关。我们看 <code>GetPPtr</code> 中，准备了一个静态变量，它是一个指针。但是这个函数并不是直接返回这个静态变量。而是返回这个变量的地址。因此这个函数的返回类型是 <strong>二级指针</strong>。</p>
-<p>而实例化对象的过程，就需要先定位到这个静态变量。然后把创建的对象地址给放进去。</p>
-<p><code>c++
-*GetPPtr() = new T(std::forward&lt;Args&gt;(args)...);</code></p>
-<p>获取单例时也类似，是先通过 <code>GetPPtr</code> 定位到了那个静态变量。然后通过解引用，得到静态变量中的内容，也就是单例对象的地址。</p>
-<p><code>c++
-static T* Get() { return *GetPPtr(); }</code></p>
-<h3 id="_2">单例的同步问题<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
-<p>在不少单例模式的示范中，都喜欢在单例设计中，<strong>统一处理多线程同步问题</strong>。其实这很容易带来性能的损失。实际上，同步问题和单例模式是2个独立的问题，最好不要将他们混为一谈。同步问题应该是具体情况具体对待的。</p>
-<p>以 <code>OneFlow</code> 为例，所有 <code>Global</code> 单例对象的创建和销毁都在主线程里，并不存在并发，这样就不需要特别的同步操作。在 <code>OneFlow</code> 这种情况下，如果 <code>Global</code> 单例类中的某一个成员存在并发问题，那就单独对那个成员加锁解决就可以了。在通常的编程实践中，锁的粒度要尽可能小。</p>
-<h2 id="_3">总结<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>总结起来，<code>OneFlow</code> 这种工业级代码里的单例模式有以下优势：</p>
-<ol>
-<li>任意一个类都可以通过 <code>Global</code> 模板成为单例</li>
-<li>可以用统一的 <code>New</code> 接口创建各种类单例、并支持构造重载</li>
-<li>可以精确地控制单例对象的生命周期和依赖关系</li>
-<li>把细粒度地解决同步问题的权力交给了开发者</li>
-</ol>
+<p>再在 <code>main.cpp</code> 文件中调用这个函数。</p>
+<p>```c++</p>
+<h1 id="include_1">include <stdio.h><a class="headerlink" href="#include_1" title="Permanent link">&para;</a></h1>
+<p>int my_add(int a, int b)</p>
+<p>int main(int argc, char* argv[]) {
+    printf("5+9=%d\n", my_add(5,9));
+    return 0;
+}
+```</p>
+<p>然后分别编译这两个文件。</p>
+<p><code>shell
+gcc - c main.cpp
+gcc - c my_math.cpp</code></p>
+<p>编译完成后，我们就得到了 <code>main.o</code> 和 <code>my_math.o</code> 两个 object 文件。</p>
+<p>接着我们使用如下命令将两个文件 <strong>链接</strong> 到一起。</p>
+<p><code>shell
+gcc main.o my_math.o -o ttlarva.exe</code></p>
+<p>我们就获得了类似之前的可执行程序 <code>ttlarva.exe</code>，运行该程序就得到了 <code>5+9=14</code> 的计算打印结果。</p>
+<p>对这种多个源文件的程序，我们就不能使用 <code>gcc main.cpp</code> 直接获得结果，会报错找不到 <code>my_add(int, int)</code> 函数的引用。这也是因为链接过程中找不到 <code>my_add</code> 的实现。</p>
+<h2 id="_6">宏的本质和优缺点<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>宏和 C++ 中的模板息息相关，可以这样说，说明模板的目的就是为了集成宏的优点，解决宏的缺点。</p>
+<h3 id="_7">宏的本质<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>宏的本质就是 <strong>查找替换</strong> ，所以大家应该有看到使用宏来代替函数的场景。</p>
+<p>```c++</p>
+<h1 id="define-mymaxxyxyyx">define MYMAX(x,y)((x)&lt;(y)?(y):(x))<a class="headerlink" href="#define-mymaxxyxyyx" title="Permanent link">&para;</a></h1>
+<p>```</p>
+<h3 id="_8">宏的优缺点<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>优点:</p>
+<ul>
+<li>使用宏来代替函数能提高效率。因为使用宏的话，那么就可以省去函数调用和返回时的开销了。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>宏是没有类型检查的</li>
+</ul>
+<p>我们通过下面的例子获得更清楚的理解。</p>
+<p>```c++</p>
+<h1 id="include_2">include <stdio.h><a class="headerlink" href="#include_2" title="Permanent link">&para;</a></h1>
+<h1 id="define-mymaxxyxyyx_1">define MYMAX(x,y)((x)&lt;(y)?(y):(x))<a class="headerlink" href="#define-mymaxxyxyyx_1" title="Permanent link">&para;</a></h1>
+<p>int main(int argc, char* argv[]) {
+    printf("%d\n", MYMAX(10, 5));
+    printf("%1f\n", MYMAX(3.14, 2.73));
+    printf("%s\n", MYMAX("short string","very very long string"));
+    return 0;
+}
+```</p>
+<p>这里定义了一个 <code>MYMAX</code> 的宏，它的作用是取 x 和
+y 中的较大者。</p>
+<p>运行后发现如下输出：</p>
+<p><code>text
+10
+3.140000
+very very long string</code></p>
+<p>运行没有报错，咋一看输出结果好像也并没有什么问题，但其实我们最后一次调用是有问题的。</p>
+<p>我们输出 <code>very very long string</code> 并不是因为这个字符串比较长，只是我们运气好。</p>
+<p>当我们调换最后一次调用两个参数的位置时：</p>
+<p>```c++</p>
+<h1 id="include_3">include <stdio.h><a class="headerlink" href="#include_3" title="Permanent link">&para;</a></h1>
+<h1 id="define-mymaxxyxyyx_2">define MYMAX(x,y)((x)&lt;(y)?(y):(x))<a class="headerlink" href="#define-mymaxxyxyyx_2" title="Permanent link">&para;</a></h1>
+<p>int main(int argc, char* argv[]) {
+    printf("%d\n", MYMAX(10, 5));
+    printf("%1f\n", MYMAX(3.14, 2.73));
+    //printf("%s\n", MYMAX("short string","very very long string"));
+    printf("%s\n", MYMAX("very very long string","short string"));
+    return 0;
+}
+```</p>
+<p>运行结果如下：</p>
+<p><code>text
+10
+3.140000
+short string</code></p>
+<p>第三次调用的结果不再是 <code>very very long string</code> 。</p>
+<p>为什么会这样呢？我们根据 <code>MYMAX</code> 宏的定义可以知道，在传递字符串的时候，字符串的比较实际上是其内存中地址的比较，而两者地址的比较在语言标准中是没有去做过明确规定的。</p>
+<p>综上所述，我们编写了一段意义不大的代码，它的运行结果和业务逻辑完全不相关。更恐怖的是，这类代码在编译时，连个报错或者是警告都没有。这直接拔高了我们以后查找 bug 的难度。</p>
+<p>那么有没有一种既继承了宏优点，又弥补了宏没有类型检查缺陷的方法呢？当然有！它就是我们下一期要讲的<a href="08_template.html">模板</a>。</p>
                 
               
               
@@ -890,7 +868,7 @@ static T* Get() { return *GetPPtr(); }</code></p>
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="03_varadic_template.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: 可变参模板" rel="prev">
+        <a href="06_functor.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: 仿函数" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -899,20 +877,20 @@ static T* Get() { return *GetPPtr(); }</code></p>
               <span class="md-footer__direction">
                 上一页
               </span>
-              可变参模板
+              仿函数
             </div>
           </div>
         </a>
       
       
         
-        <a href="05_using_against_typedef.html" class="md-footer__link md-footer__link--next" aria-label="下一页: 类型别名：从 typedef 到 using" rel="next">
+        <a href="08_template.html" class="md-footer__link md-footer__link--next" aria-label="下一页: 模板 template" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 下一页
               </span>
-              类型别名：从 typedef 到 using
+              模板 template
             </div>
           </div>
           <div class="md-footer__button md-icon">

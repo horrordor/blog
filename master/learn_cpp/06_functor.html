@@ -9,14 +9,14 @@
       
       
       
-        <link rel="canonical" href="https://blog.horrordor.tk/main/learn_cpp/01_rvalue_ref.html">
+        <link rel="canonical" href="https://blog.horrordor.tk/master/learn_cpp/06_functor.html">
       
       <link rel="icon" href="../assets/favicon.png">
       <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.1.11">
     
     
       
-        <title>右值引用 - horrordor's blog</title>
+        <title>仿函数 - horrordor's blog</title>
       
     
     
@@ -96,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              右值引用
+              仿函数
             
           </span>
         </div>
@@ -444,112 +444,11 @@
             
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          右值引用
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="01_rvalue_ref.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="01_rvalue_ref.html" class="md-nav__link">
         右值引用
       </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    什么是右值
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    什么是右值引用
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#move" class="md-nav__link">
-    move 语义
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#stdmove" class="md-nav__link">
-    std::move
-  </a>
-  
-    <nav class="md-nav" aria-label="std::move">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#stdmove_1" class="md-nav__link">
-    std::move 原理解析
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#stdmove_2" class="md-nav__link">
-    std::move 的使用注意事项
-  </a>
-  
-    <nav class="md-nav" aria-label="std::move 的使用注意事项">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#stdmove_3" class="md-nav__link">
-    组合或者继承时，显式调用 std::move
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#stdmove_4" class="md-nav__link">
-    局部变量返回时，不调用 std::move
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -605,11 +504,51 @@
             
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="06_functor.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          仿函数
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="06_functor.html" class="md-nav__link md-nav__link--active">
         仿函数
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    仿函数的定义与示例
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -731,69 +670,8 @@
       
         <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
-    什么是右值
+    仿函数的定义与示例
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    什么是右值引用
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#move" class="md-nav__link">
-    move 语义
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#stdmove" class="md-nav__link">
-    std::move
-  </a>
-  
-    <nav class="md-nav" aria-label="std::move">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#stdmove_1" class="md-nav__link">
-    std::move 原理解析
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#stdmove_2" class="md-nav__link">
-    std::move 的使用注意事项
-  </a>
-  
-    <nav class="md-nav" aria-label="std::move 的使用注意事项">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#stdmove_3" class="md-nav__link">
-    组合或者继承时，显式调用 std::move
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#stdmove_4" class="md-nav__link">
-    局部变量返回时，不调用 std::move
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -809,281 +687,227 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/horrordor/blog/edit/master/docs/learn_cpp/01_rvalue_ref.md" title="编辑此页" class="md-content__button md-icon">
+                  <a href="https://github.com/horrordor/blog/edit/master/docs/learn_cpp/06_functor.md" title="编辑此页" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="_1">右值引用<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>右值引用起码解决了两个问题：</p>
+                <h1 id="_1">仿函数<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>本文将从以下方面简单介绍 C++ 中的仿函数：</p>
 <ul>
-<li>实现 move 语义（本文介绍）</li>
-<li>实现完美转发（下一篇文章介绍）</li>
+<li>仿函数的定义</li>
+<li>仿函数的两大优点</li>
+<li>lambda 函数也是一种仿函数</li>
 </ul>
-<p>本文会介绍什么是：</p>
-<ul>
-<li>什么是右值</li>
-<li>什么是右值引用、move 语义</li>
-<li>std::move 原理剖析</li>
-<li>std::move 使用注意事项</li>
-</ul>
-<h2 id="_2">什么是右值<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>C++ 中表达式分为左值和右值，简单而言，有内存地址的表达式就是左值，它可以出现在赋值语句的**左边或者右边**。无法取内存地址的表达式是右值，**只能**出现在赋值语句的右边。</p>
-<p>以下是 C++ 中常见的出现右值的情况：</p>
-<ol>
-<li>常量字面量</li>
-<li>函数调用返回的值或对象（左值引用类型除外）</li>
-<li>无名对象</li>
-</ol>
-<p>```c++
-int funA(int a) {
-    return a;
-}</p>
-<p>int&amp; funB(int a) {
-    return a;
-}</p>
-<p>class A {
-public:
-    A() {}
-    ~A() {}
-};</p>
-<p>int main(int argc, char* argv[]) {
-    auto pos_num = &amp;(10);            // 不能取地址 1. 常量字面量
-    auto pos_funA = &amp;(funA(0x1111)); // 不能取地址 2. 函数调用的返回值
-    auto pos_funB = &amp;(funB(0x2222)); // 函数调用返回的类型为左值引用，则返回的结果为左值
-    auto pos_class = &amp;(A());         // 不能取地址 3. 无名对象
-    return 0;
-}
-```</p>
-<h2 id="_3">什么是右值引用<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>在 C++11 之前，是只有左值引用（C++11之后，为了和右值引用区分，原来的“引用”才称为“左值引用”），没有右值引用的。因此无法用非 <code>const</code> （左值）引用匹配右值的。</p>
-<p>比如：</p>
-<p><code>c++
-int fun(int&amp; a){
-    return a;
-}</code></p>
-<p>以下调用会出错：</p>
-<p><code>c++
-fun(10); // 编译报错：无法从 int 转为 int&amp;</code></p>
-<p>如果非要匹配，则需要使用 <code>const</code> （左值）引用：</p>
-<p>```c++
-int fun(const int&amp; a){
-    return a;
-}</p>
-<p>int main(int argc, char* argv[]){
-    fun(10); // 可以编译通过。const (左值)引用可以匹配右值
-    return 0;
-}
-```</p>
-<p>在 C++11 之后，不用 <code>const</code> 左值引用，也可以匹配右值了：</p>
-<p>```c++
-int fun(int&amp;&amp; a){
-    return a;
-}</p>
-<p>int main(int argc, char* argv[]){
-    fun(10); // 右值引用可以匹配右值
-    return 0;
-}
-```</p>
-<p>当然，右值引用的发明不是主要为了解决这类简单的调用匹配问题，而是为了引入 <strong>move 语义</strong>。</p>
-<h2 id="move">move 语义<a class="headerlink" href="#move" title="Permanent link">&para;</a></h2>
-<p>先看一个右值引用发明前，资源利用效率不高的问题，以字符串类为例。我们知道，通常情况下，如果字符串做浅拷贝，是错误的：</p>
-<p><code>c++
-class CMyString {
-public:
-    char* m_pBuffer;
-    int m_iLen;
-    CMyString(const char* pString) {
-        m_iLen = strlen(pString) + 1;
-        m_pBuffer = new char[m_iLen];
-        strcpy(m_pBuffer, pString);
-    }
-    ~CMyString() {
-        m_iLen = 0;
-        if(m_pBuffer) {
-            delete[] m_pBuffer;
-        }
-    }
-    CMyString(CMyString&amp; other) {
-        // 浅拷贝，错误
-        this-&gt;m_pBuffer = other.m_pBuffer;
-        this-&gt;m_iLen = other.m_iLen;
-    }
-};</code></p>
-<p>错误的原因在于，如果 A 对象拷贝复制自 B 对象，那么当 B 对象析构时，会销毁 <code>m_pBuffer</code> 指向的缓冲区，这样 A 对象所指向的缓冲区也被一起销毁了。因此 CMyString 其实需要的是深拷贝：</p>
-<p><code>c++
-CMyString(CMyString&amp; other) {
-    // 深拷贝
-    this-&gt;m_iLen = other.m_iLen;
-    this-&gt;m_pBuffer = new char[m_iLen];
-    strcpy(this-&gt;m_pBuffer, other.m_pBuffer);
-}</code></p>
-<p>这是安全、正确的做法。但是，在某些特殊情况下，这种深拷贝其实 <strong>不是最高效的</strong>，比如对于以下代码：</p>
-<p><code>c++
-int main(int argc, char* argv[]){
-    CMyString str1(CMyString("hello"));
-    return 0;
-}</code></p>
-<p>以上的 <code>CMyString("hello")</code> 是一个右值（无名对象），这个无名对象在完成 <code>str1</code> 的构造后，生命周期也就结束了，无名对象的资源也就被释放了。</p>
-<p>这个时候问题来了：既然明知道无名对象的资源马上就会释放，那何必不做深拷贝，而是直接“偷”这个无名对象的资源呢？代码逻辑如下：</p>
-<p><code>c++
-CMyString(/*类型暂且保密*/ other) {
-    this-&gt;m_iLen = other.m_iLen;
-    this-&gt;m_pBuffer = other.m_pBuffer; // 浅拷贝、偷资源
-    other.m_pBuffer = nullptr;         // 让 other.m_pBuffer 不被释放
-}</code></p>
-<p>有了以上概念后，我们就知道了，其实有两种“从对象B得到对象A”的构造：</p>
-<ul>
-<li>一种是 C++11 之前的拷贝构造</li>
-<li>一种是 C++11 之后引入的，专门针对 B 是右值、可以被“偷资源”场景的构造，称为 <strong>移动构造</strong></li>
-</ul>
-<p>用以上 CMyString 为例，揭晓移动构造的原型，它的形参是 <strong>右值引用</strong>：</p>
-<p><code>c++
-CMyString(CMyString&amp;&amp; other) {
-    this-&gt;m_iLen = other.m_iLen;
-    this-&gt;m_pBuffer = other.m_pBuffer; // 浅拷贝、偷资源
-    other.m_pBuffer = nullptr;         // 让 m_pBuffer 不因为other析构而释放
-}</code></p>
-<p>类似于拷贝构造有与之对应的运算符重载 <code>operator=(CMyString&amp;)</code>（拷贝赋值），移动构造也有与之对应的运算符重载：<code>operator=(CMyString&amp;&amp;)</code>（移动赋值）。</p>
-<p>移动构造和移动赋值，统称为 <strong>移动语义</strong>。</p>
-<h2 id="stdmove">std::move<a class="headerlink" href="#stdmove" title="Permanent link">&para;</a></h2>
-<p>C++11 中引入右值引用的同时，还在标准中引入了 <code>std::move</code> 函数。它的作用是“将表达式强行转为右值类型”。</p>
-<p>我们先看下例，它是一个“可以改进”的 <code>myswap</code> 函数：</p>
-<p><code>c++
-template&lt;typename T&gt;
-void myswap(T&amp; a, T&amp; b) {
-    T temp(a);  // 发生拷贝构造
-    a = b;      // 发生拷贝赋值
-    b = temp;   // 发生拷贝赋值
-}</code></p>
-<p>以上三行代码，因为没有右值类型，所以不会触发移动语义。如果 <code>T</code> 是 <code>CMyString</code>，那么会发生三次深拷贝。</p>
-<p>但是仔细分析一下，实际上以上三行使用移动语义也是可以的：作为构造或者赋值的源变量，要么使用过一次后就不再使用，要么仅作为赋值的目标。换言之，它们的资源是可以被“偷”的。</p>
-<p>这时候，就可以使用 <code>std::move</code> 强行把变量转为右值类型，来触发移动语义了：</p>
-<p><code>c++
-template&lt;typename T&gt;
-void myswap(T&amp; a, T&amp; b) {
-    T temp(std::move(a)); // 发生移动构造，偷 a 的资源
-    a = std::move(b);     // 发生移动构造，偷 b 的资源
-    b = std::move(temp);  // 发生移动赋值，偷 temp 的资源
-}</code></p>
-<h3 id="stdmove_1">std::move 原理解析<a class="headerlink" href="#stdmove_1" title="Permanent link">&para;</a></h3>
-<p><code>std::move</code> 为什么可以神奇地把左值给强制转变成右值呢？我们可以解析它的源码知晓答案，从 C++ 头文件中找到 <code>move</code> 的源码：</p>
-<p><code>c++
-template&lt;typename _Tp&gt;
-constexpr typename std::remove_reference&lt;_Tp&gt;::type&amp;&amp;
-move(_Tp&amp;&amp; __t) noexcept {
-    return static_cast&lt;typename std::remove_reference&lt;_Tp&gt;::type&amp;&amp;&gt;(__t);
-}</code></p>
-<p>移除掉不太相关的 <code>constexpr</code>、<code>noexcept</code> 得到：</p>
-<p><code>c++
-template&lt;typename _Tp&gt;
-typename std::remove_reference&lt;_Tp&gt;::type&amp;&amp;
-move(_Tp&amp;&amp; __t) {
-    return static_cast&lt;typename std::remove_reference&lt;_Tp&gt;::type&amp;&amp;&gt;(__t);
-}</code></p>
-<p>会发现 <code>move</code> 的返回值和内部实现，都和 <code>std::remove_reference&lt;_Tp&gt;::type</code> 很有关系，那么继续看看 <code>std::remove_reference</code> 的实现：</p>
-<p>```c++
-template<typename _Tp>
-struct remove_reference {
-    typedef _Tp   type;
-};</p>
-<p>template<typename _Tp>
-struct remove_reference&lt;_Tp&amp;&gt; {
-    typedef _Tp   type;
-};</p>
-<p>template<typename _Tp>
-struct remove_reference&lt;_Tp&amp;&amp;&gt; {
-    typedef _Tp   type;
-};
-```</p>
-<p>发现 <code>remove_reference</code> ，发现它的作用很简单，就是不管模板参数是 <code>_Tp</code>，还是 <code>_Tp</code> 的左值引用，或者 <code>_Tp</code> 的右值引用，都统统都定义一个 <code>type</code> 等价于 <code>_Tp</code> 类型。回头看，其实 <code>remove_reference</code> 的作用顾名思义，就是“移除掉类型的引用性质” 的意思。</p>
-<p>知道这个以后，我们可以进步一部简化 <code>move</code> 的源码，只谈原理不求严谨的话其实就是：</p>
-<p><code>c++
-template&lt;typename _Tp&gt;
-_Tp&amp;&amp; move(_Tp&amp;&amp; __t) {
-    return (_Tp&amp;&amp;)(__t); // 强制类型转换
-}</code></p>
-<p><code>move</code> 仅仅是做了一个强制类型转换而已（其实还涉及到了“万能引用”的知识点，我们下一篇文章介绍）。</p>
-<h2 id="stdmove_2">std::move 的使用注意事项<a class="headerlink" href="#stdmove_2" title="Permanent link">&para;</a></h2>
-<h3 id="stdmove_3">组合或者继承时，显式调用 std::move<a class="headerlink" href="#stdmove_3" title="Permanent link">&para;</a></h3>
-<p>一般而言，派生类如果是移动，那么也 <strong>期待</strong> 基类也是移动构造（派生类、基类的资源一起“偷”）。
-但是，以下的写法是不正确的：</p>
-<p><code>c++
-class CDerived:public CBase {
-public:
-    CDerived(CDerived&amp;&amp; other)
-        :CBase(other) { // 无法触发 CBase 的移动构造
-        // ...
-    }
-};</code></p>
-<p>实际上，以上代码 <strong>不会</strong> 触发 <code>CBase</code> 的移动构造，而是触发的拷贝构造。</p>
-<p>因为<code>有名字</code>的右值引用其实是<code>左值</code>，所以，当我们期待“基类也是做移动构造时”，应该显式调用<code>std::move</code>：</p>
-<p><code>c++
-class CDerived:public CBase {
-public:
-    CDerived(CDerived&amp;&amp; other)
-        :CBase(std::move(other)) { // 强制转为右值，触发 CBase 的移动构造
-        // ...
-    }
-};</code></p>
-<div class="admonition note">
-<p class="admonition-title">这样的例子也适用于组合（成员初始化）的情况。</p>
-</div>
-<h3 id="stdmove_4">局部变量返回时，不调用 std::move<a class="headerlink" href="#stdmove_4" title="Permanent link">&para;</a></h3>
-<p>有些情况下，我们会返回局部变量，比如下例：</p>
-<p><code>c++
-CTemp foo() {
-    CTemp x;
-    return x; // x 的作用域和生命周期即将结束
-}</code></p>
-<p>这时你可能会想到“等等，在 <code>foo()</code> 调用并返回的地方，会复制一次返回值，而 x 最好转成右值，使用移动构造来复制：</p>
-<p><code>c++
-CTemp foo() {
-    CTemp x;
-    return std::move(x); // 很可能好心办坏事
-}</code></p>
-<p>其实这样修改后，反而可能会把事情变糟糕，我们用以下试验看看效果：</p>
+<h2 id="_2">仿函数的定义与示例<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>西方有句谚语：如果一个东西看起来像鸭子，走起来像鸭子，那么它就是一只鸭子。而如果一样东西，不是函数，但是具有函数的性质，例如可以像函数一样调用、传参、返回值，那它是什么呢？C++ 中将其称为 <strong>仿函数</strong>。</p>
+<p>中规中矩的定义和调用函数方式：</p>
 <p>```c++</p>
 <h1 id="include">include <iostream><a class="headerlink" href="#include" title="Permanent link">&para;</a></h1>
-<h1 id="include_1">include <utility><a class="headerlink" href="#include_1" title="Permanent link">&para;</a></h1>
-<p>class CTemp {
-public:
-    CTemp() {
-        std::cout &lt;&lt; "CTemp：构造" &lt;&lt; std::endl;
-    }
-    CTemp(CTemp&amp; other) {
-        std::cout &lt;&lt; "CTemp：拷贝构造" &lt;&lt; std::endl;
-    }
-    CTemp(CTemp&amp;&amp; other) {
-        std::cout &lt;&lt; "CTemp：移动构造" &lt;&lt; std::endl;
-    }
-};</p>
-<p>//2.注意实现：返回时优化
-CTemp foo() {
-    CTemp x;
-    return x;//作用域在该函数中就结束了
+<p>void show_value(int x) {
+ std::cout &lt;&lt; x &lt;&lt; std::endl;
 }
-CTemp foo_move() {
-    CTemp x;
-    return std::move(x);//作用域在该函数中就结束了
-}</p>
-<p>int main(int argc, char* argv[]) {
-    auto a = foo();
-    std::cout &lt;&lt; "-----------" &lt;&lt; std::endl;
-    auto b = foo_move();
+int main(int argc, char* argv[]) {
+    show_value(10);
     return 0;
 }
 ```</p>
-<p>输出结果是：</p>
-<p>```text
-CTemp：构造</p>
-<hr />
-<p>CTemp：构造
-CTemp：移动构造
+<p>仿函数不是函数，但是可以像函数一样调用、传参、返回值。那么如何定义仿函数？答案是重载 <strong>括号运算符</strong>。如下代码是一个仿函数示例。</p>
+<p>```c++</p>
+<h1 id="include_1">include <iostream><a class="headerlink" href="#include_1" title="Permanent link">&para;</a></h1>
+<p>struct CMyFunctor{
+    void operator()(int x) {
+     std::cout &lt;&lt; x &lt;&lt; std::endl;
+    }
+};</p>
+<p>int main(int argc, char* argv[]) {
+    // auto p = CMyFunctor();  // 实例化结构体
+    // p(10);                  // 调用实例化对象</p>
+<div class="codehilite"><pre><span></span><code>CMyFunctor()(10);          // 将创建实例和调用写在一起即仿函数
+
+return 0;
+</code></pre></div>
+
+<p>}
 ```</p>
-<p>会发现反而是做了 <code>std::move</code> 的 <code>foo_move</code> 多了一次构造。这是为什么呢？其实是因为，现代编译器一般都做 <strong>返回值优化</strong>，也就是说，与其现在 <code>foo</code> 内部构造一个局部变量 <code>x</code>，再把它复制出去；不如直接在 <code>foo</code> 函数调用的地方直接构造一个 <code>x</code> 对象。这样做的效率显然比移动语义要高。</p>
-<p>在这类情况下，不用 <code>std::move</code> 为佳。</p>
-<p>当然，这也不是一概而论的。总之，需要非常深刻的理解 <code>std::move</code> 的“副作用”，才能做好相关优化，推荐大家可以看看 <a href="https://en.cppreference.com/w/cpp/language/copy_elision">copy elision</a>。</p>
+<p>现代 C++ 代码中会大量使用仿函数，如 <a href="https://github.com/Oneflow-Inc/oneflow/blob/master/oneflow/core/functional/impl/math_functor.cpp">OneFlow 的算子层</a> ：</p>
+<p>```c++
+class ReduceSumFunctor {
+public:
+    ReduceSumFunctor() {
+        op_ = CHECK_JUST(
+                  one::OpBuilder("reduce_sum").Input("input_tensor").Output("output_tensor").Build());
+    }
+    Maybe<Tensor> operator()(const std::shared_ptr<one::Tensor>&amp; x, const std::vector<int32_t>&amp; axis,
+                             const bool&amp; keepdims) const {
+        // const DataType dtype = x-&gt;dtype()-&gt;data_type();
+        MutableAttrMap attrs;
+        if (axis.empty()) {
+            std::vector<int32_t> reduce_axis(x-&gt;shape()-&gt;NumAxes());
+            std::iota(reduce_axis.begin(), reduce_axis.end(), 0);
+            JUST(attrs.SetAttr<std::vector\<int32_t>>("axis", reduce_axis));
+        } else {
+            JUST(attrs.SetAttr<std::vector\<int32_t>>("axis", axis));
+        }
+        JUST(attrs.SetAttr<bool>("keepdims", keepdims));
+        TensorProcessor tensor_processor;
+        JUST(tensor_processor.AddInputs( {x}, /<em>lowest_dtype=</em>/DType::Int64()).Apply());
+        TensorTuple input_tuple = JUST(tensor_processor.GetInputs());
+        return OpInterpUtil::Dispatch<Tensor>(*op_, input_tuple, attrs);
+    }</p>
+<p>private:
+    std::shared_ptr<OpExpr> op_;
+};
+```</p>
+<p>再如 <a href="https://github.com/Oneflow-Inc/oneflow/blob/master/oneflow/core/cuda/elementwise.cuh">OneFlow 类工厂</a>：</p>
+<p>```c++
+template<typename FunctorT>
+struct SimpleFactory {
+    explicit SimpleFactory(FunctorT functor) : tpl(functor) {}
+    <strong>device</strong> FunctorT operator()() const {
+        return tpl;
+    }</p>
+<p>private:
+    FunctorT tpl;
+};
+```</p>
+<h2 id="_3">仿函数的优点<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<ul>
+<li>可以保存状态</li>
+<li>作为模板参数</li>
+</ul>
+<h3 id="_4">可以保存状态<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>以计算税场景为例：</p>
+<p>```c++</p>
+<h1 id="include_2">include <iostream><a class="headerlink" href="#include_2" title="Permanent link">&para;</a></h1>
+<h1 id="include_3">include <vector><a class="headerlink" href="#include_3" title="Permanent link">&para;</a></h1>
+<h1 id="include_4">include <algorithm><a class="headerlink" href="#include_4" title="Permanent link">&para;</a></h1>
+<p>double calc_tax(double salary) {
+    // 计算税的函数，税率为0.2
+    return salary * 0.2;
+}</p>
+<p>void show_value(double value) {
+    std::cout &lt;&lt; value &lt;&lt; ",";
+}</p>
+<p>int main(int argc, char* argv[]) {
+    std::vector<double> salary = { 3000, 5000, 4800, 2800 };  // 收入
+    std::vector<double> tax(4);                               // 税结果</p>
+<div class="codehilite"><pre><span></span><code>std::transform(salary.begin(), salary.end(), tax.begin(), calc_tax);  // 遍历和计算税率
+std::for_each(salary.begin(), salary.end(), show_value);
+std::cout &lt;&lt; std::endl;
+std::for_each(tax.begin(), tax.end(), show_value);
+return 0;
+</code></pre></div>
+
+<p>}
+```</p>
+<p>当存在 <strong>多种税率</strong> 的时候，需要重写 <code>calc_tax</code> 函数。常见的做法是将税率作为函数参数，即：</p>
+<p><code>c++
+double calc_tax_two_args(double salary, double rate) {
+    return salary * rate;
+}</code></p>
+<p>但是 STL 的 <code>transform</code> 函数接受的函数类型只允许有一个参数，<code>calc_tax_two_args</code> 会出现编译不通过问题。以上问题可以通过仿函数得到解决。如下列代码所示，使用 <code>_rate</code> 保存税率，在新建实例的时候可以自定义税率，同时保持 <code>operator</code> 函数仍然只有一个参数。</p>
+<p>```c++</p>
+<h1 id="include_5">include <iostream><a class="headerlink" href="#include_5" title="Permanent link">&para;</a></h1>
+<h1 id="include_6">include <vector><a class="headerlink" href="#include_6" title="Permanent link">&para;</a></h1>
+<h1 id="include_7">include <algorithm><a class="headerlink" href="#include_7" title="Permanent link">&para;</a></h1>
+<p>struct CMyCalcTax {
+    CMyCalcTax(double rate):_rate(rate) {</p>
+<div class="codehilite"><pre><span></span><code>}
+double operator()(double salary) {    // 仍然只有一个参数
+    return salary * _rate;
+}
+</code></pre></div>
+
+<p>private:
+    double _rate;                         // 用于保存税率
+}</p>
+<p>void show__value (double value) {
+    std::cout &lt;&lt; value &lt;&lt; ",";
+}</p>
+<p>int main(int argc, char* argv[]) {
+    std::vector<double> salaryl = { 3000, 5000, 4800, 2800 };
+    std::vector<double> salary2 = { 3000, 5000, 4800, 2800 };
+    std::vector<double> tax1(4);
+    std::vector<double> tax2(4);
+    std::transform(salary1.begin(), salary1.end(), tax1.begin(), CMyCalcTax(0.2));
+    std::for_each(salary1.begin(), salary1.end(), show_value) ;
+    std::cout &lt;&lt; std::endl;
+    std::for_each(tax1.begin(), tax1.end(), show_value);</p>
+<div class="codehilite"><pre><span></span><code>std::cout&lt;&lt;std::endl &lt;&lt; &quot;===========&quot; &lt;&lt; std::endl;
+std::transform(salary2.begin(), salary2.end(), tax2.begin(), CMyCalcTax(0.1));
+std::for_each(salary2.begin(), salary2.end(), show_value);
+std::cout &lt;&lt; std::endl;
+std::for_each(tax2.begin(), tax2.end(), show_value);
+std::cout &lt;&lt; std::endl;
+return 0;
+</code></pre></div>
+
+<p>}
+```</p>
+<p>从上述实例中也可以看出仿函数可以有状态，而这一特性使得仿函数比普通函数更加灵活。</p>
+<h3 id="_5">作为模板参数<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>这一优点体现在模板编程中。因为仿函数的本质是 <strong>类或者结构体的对象</strong>，这就使得可以把仿函数的类型当作模板参数进行传递。于是某些时候就可以把运行时的开销在编译时解决掉，这也可以让软件的效率变得更高。</p>
+<p>什么是编译时的开销？以 STL 的 <code>for_each</code> 函数为例，部分源码如下：</p>
+<p><code>c++
+template&lt;typename _InputIterator, typename _Function&gt;
+_Function
+for_each(_InputIterator __first, _InputIterator __last, _Function __f) {
+    // concept requirements
+    __glibcxx_function_requires(_InputIteratorConcept&lt;_InputIterator&gt;)
+    __glibcxx_requires_valid_range(__first, __last);
+    for (; __first != __last; ++__first)
+        __f(*__first);
+    return __f; // N.B. [alg.foreach] says std::move(f) but it's redundant.
+}</code></p>
+<p><code>for_each</code> 的第三个参数就是函数指针 <code>__f</code>，在函数内部会遍历每一个指针，并且把函数指针的效果应用到每一个元素上。但是函数既然作为参数进行传递了就涉及到 <strong>栈资源的分配和回收</strong>，那就会产生运行时的开销。</p>
+<blockquote>
+<p>具体解释节省运行时开销：在底层的机器码中，函数调用时，参数是需要通过入栈出栈操作指令进行数据传输的，参数个数越多，则对应的传输指令越多，需要越多额外运行时间，这就是函数调用的开销。仿函数可以使某些不经常变的参数（如示例代码中的税率）不再通过参数传递、而是相当于以某个全局变量的形式传递，从而减少了参数个数。</p>
+</blockquote>
+<p>如果此时使用的是仿函数，就可以省去这部分开销。如下代码所示，自定义一个 <code>my_for_each</code>。因为是模板编程，所以在编译时就可以完全确定，所以在运行时就不会有额外的开销了。</p>
+<p>```c++</p>
+<h1 id="include_8">include <iostream><a class="headerlink" href="#include_8" title="Permanent link">&para;</a></h1>
+<h1 id="include_9">include <vector><a class="headerlink" href="#include_9" title="Permanent link">&para;</a></h1>
+<p>struct CMyFunctor {
+    void operator()(double value) {
+        std::cout &lt;&lt; value &lt;&lt; ",";
+    }
+};</p>
+<p>template<class InputIt, class UnaryFunction>   // 使用模板参数来处理每一个元素
+UnaryFunction my_for_each(InputIt first, InputIt last) {
+    for(; first != last; ++first) {
+        UnaryFunction()(*first);
+    }
+    return UnaryFunction();
+}</p>
+<p>void show_value(double value) {
+    std::cout &lt;&lt; value &lt;&lt; ",";
+}</p>
+<p>int main(int argc, char* argv[]) {
+    std::vector<double> salary = { 3000, 5000, 4800, 2800 };
+    my_for_each<decltype(salary.begin()), CMyFunctor>(salary.begin(), salary.end());
+    return 0;
+}
+```</p>
+<h2 id="c-lambda">C++ 中的 lambda 也是一种仿函数<a class="headerlink" href="#c-lambda" title="Permanent link">&para;</a></h2>
+<p>lambda 函数的本质与前面讲的通过重载 <code>operator()</code> 是一模一样的。如下所示从汇编语言角度看 lambda 函数，定义 <code>fun</code> 时，<code>n</code> 放入 eax 寄存器中，并被 push 进栈；<code>fun</code> 放入 ecx 中，可以看到函数存放地址。</p>
+<p><code>c++
+auto fun = [=](int x)-&gt;int {
+    return X + n;
+}</code></p>
+<p><code>asm
+007F5FOF lea   eax, [n]
+007F5F12 push  eax
+007F5F13 lea   ecx, [fun]
+007F5F16 call  &lt;1ambda_681e4b0e14b637a31b672c8686ddc480&gt;::&lt;lambda_681e4b0e4b637a31b672c8686ddc480&gt; (07F33A0h)</code></p>
+<p>如下调用示例，可以看到是通过 <code>operator()</code> 调用 <code>fun</code>，即编译器自动转换 lambda 表达式为函数对象执行。</p>
+<p><code>c++
+ fun(5);</code></p>
+<p><code>asm
+007F5F1B push 5
+007F5F1D lea ecx, [fun]
+007F5F20 call &lt;lambda_681e4b0e14b637a31b672c8686ddc480&gt;::operator() (07F4080h)</code></p>
+<p>包括 lambda 函数的 <strong>闭包特性</strong> 与用成员保存状态原理是基本一致的。</p>
                 
               
               
@@ -1108,7 +932,7 @@ CTemp：移动构造
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../github/10_git_rebase.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: 删除指定 commit 小妙招 git rebase" rel="prev">
+        <a href="05_using_against_typedef.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: 类型别名：从 typedef 到 using" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -1117,20 +941,20 @@ CTemp：移动构造
               <span class="md-footer__direction">
                 上一页
               </span>
-              删除指定 commit 小妙招 git rebase
+              类型别名：从 typedef 到 using
             </div>
           </div>
         </a>
       
       
         
-        <a href="02_forward.html" class="md-footer__link md-footer__link--next" aria-label="下一页: 完美转发" rel="next">
+        <a href="07_complie_link_macro.html" class="md-footer__link md-footer__link--next" aria-label="下一页: 编译链接和宏本质" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 下一页
               </span>
-              完美转发
+              编译链接和宏本质
             </div>
           </div>
           <div class="md-footer__button md-icon">

@@ -9,14 +9,14 @@
       
       
       
-        <link rel="canonical" href="https://blog.horrordor.tk/main/learn_cpp/09_template_special.html">
+        <link rel="canonical" href="https://blog.horrordor.tk/master/learn_cpp/012_enable_if.html">
       
       <link rel="icon" href="../assets/favicon.png">
       <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.1.11">
     
     
       
-        <title>模板特例 - horrordor's blog</title>
+        <title>enable_if 新标准 - horrordor's blog</title>
       
     
     
@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#enable_if" class="md-skip">
           跳转至
         </a>
       
@@ -96,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              模板特例
+              enable_if 新标准
             
           </span>
         </div>
@@ -540,51 +540,11 @@
             
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          模板特例
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="09_template_special.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="09_template_special.html" class="md-nav__link">
         模板特例
       </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    泛型编程的特殊情况
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -604,11 +564,119 @@
             
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="012_enable_if.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          enable_if 新标准
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="012_enable_if.html" class="md-nav__link md-nav__link--active">
         enable_if 新标准
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#enable_if_1" class="md-nav__link">
+    为什么要使用 enable_if ？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enable_if-is_same" class="md-nav__link">
+    enable_if 与 is_same 的使用
+  </a>
+  
+    <nav class="md-nav" aria-label="enable_if 与 is_same 的使用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enable_if_2" class="md-nav__link">
+    enable_if 的使用
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is_same" class="md-nav__link">
+    is_same 的使用
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enable_if-is_same_1" class="md-nav__link">
+    enable_if 与 is_same 内部的实现原理
+  </a>
+  
+    <nav class="md-nav" aria-label="enable_if 与 is_same 内部的实现原理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#type-traits" class="md-nav__link">
+    什么是 type traits ?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable_if_3" class="md-nav__link">
+    enable_if 源码解析
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is_same_1" class="md-nav__link">
+    is_same 源码解析
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    总结
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -669,8 +737,76 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    泛型编程的特殊情况
+  <a href="#enable_if_1" class="md-nav__link">
+    为什么要使用 enable_if ？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enable_if-is_same" class="md-nav__link">
+    enable_if 与 is_same 的使用
+  </a>
+  
+    <nav class="md-nav" aria-label="enable_if 与 is_same 的使用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enable_if_2" class="md-nav__link">
+    enable_if 的使用
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is_same" class="md-nav__link">
+    is_same 的使用
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enable_if-is_same_1" class="md-nav__link">
+    enable_if 与 is_same 内部的实现原理
+  </a>
+  
+    <nav class="md-nav" aria-label="enable_if 与 is_same 内部的实现原理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#type-traits" class="md-nav__link">
+    什么是 type traits ?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable_if_3" class="md-nav__link">
+    enable_if 源码解析
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is_same_1" class="md-nav__link">
+    is_same 源码解析
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    总结
   </a>
   
 </li>
@@ -687,112 +823,147 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/horrordor/blog/edit/master/docs/learn_cpp/09_template_special.md" title="编辑此页" class="md-content__button md-icon">
+                  <a href="https://github.com/horrordor/blog/edit/master/docs/learn_cpp/012_enable_if.md" title="编辑此页" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="_1">模板特例<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p><a href="08_template.html">上一篇文章</a>我们了解了模版，在此基础上，我们这期谈谈模板特例，包括三个主要内容：</p>
+                <h1 id="enable_if">新标准：enable_if<a class="headerlink" href="#enable_if" title="Permanent link">&para;</a></h1>
+<p><a href="11_template_sfinae.html">上一期</a> 我们介绍了 SFINAE 原则，在此基础上，本篇文章将继续介绍了<code>enable_if</code> 新标准，为后续深入学习模板元编程打下基础。</p>
+<p>本文的结构如下：</p>
 <ul>
-<li>泛型编程的特殊情况</li>
-<li>偏特化</li>
-<li>特化的应用</li>
+<li>为什么要使用 <code>enable_if</code> ？</li>
+<li><code>enable_if</code> 与 <code>is_same</code> 的使用</li>
+<li><code>enable_if</code> 与 <code>is_same</code> 内部的实现原理</li>
 </ul>
-<h2 id="_2">泛型编程的特殊情况<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>我们还是使用原来写过的 MYMAX 代码来作为例子：</p>
-<p>```C++</p>
-<h1 id="include">include <stdio.h><a class="headerlink" href="#include" title="Permanent link">&para;</a></h1>
-<h1 id="include_1">include <type_traits><a class="headerlink" href="#include_1" title="Permanent link">&para;</a></h1>
-<h1 id="include_2">include <string.h><a class="headerlink" href="#include_2" title="Permanent link">&para;</a></h1>
+<h2 id="enable_if_1">为什么要使用 enable_if ？<a class="headerlink" href="#enable_if_1" title="Permanent link">&para;</a></h2>
+<p>C++模板函数重载依赖于 SFINAE (substitution-failure-is-not-an-error) 原则，即替换失败不认为是错误，编译器将会继续寻找合适的重载函数；以返回长度的函数为例，该函数针对 STL 中的  <code>vector</code> 容器来实现（容器中有<code>size()</code>成员函数）</p>
+<p>```c++
+class CMyclass {
+public:
+    using size_type = unsigned int;
+};</p>
 <p>template <typename T>
-T MYMAX(T x , T y) {
-    static_assert(std::is_integral<T>::value || std::is_floating_point<T>::value,
-                  "T must be  integral or floating point");
-    return x&lt;y ? y : x;
-}</p>
-<p>int main(int argc, char* argv[]) {
-    printf("%d\n", MYMAX<int>(10, 5));
-    printf("%1f\n", MYMAX<double>(3.14, 2.73));
-    printf("%s\n", MYMAX("short string", "very very long string"));
+decltype(T().size(), typename T::size_type()) len(T const &amp;t) { //该函数可以避免匹配到 CMyclass 类
+    return t.size();
+}
+unsigned len(...) {
     return 0;
-}
-```</p>
-<p>原来的代码做了静态检查，遇到输入是字符串时可以达到编译时就报错。这种做法其实是回避问题而不是解决问题，因此我们可以使用模版特例来解决：</p>
-<p>```c++
-template <typename T>
-T MYMAX(T x , T y) {
-    static_assert(std::is_integral<T>::value || std::is_floating_point<T>::value,
-                  "T must be  integral or floating point");
-    return x&lt;y ? y : x;
 }</p>
-<p>template &lt;&gt;
-const char* MYMAX(const char* x , const char* y) {
-    if (strlen(x) &lt; strlen(y)) {
-        return y;
-    } else {
-        return x;
-    }
-}
-```</p>
-<p>这里我们增加了一个模版特化的 <code>MYMAX</code>，有 <code>template</code> 关键字，但是没有参数。这个函数仅仅只针对 <code>const char*</code> 类型生效，函数内部的实现也是专门针对字符串的。其实就是针对某些模版参数进行了特化，编译器在实例化模版的过程中，会优先选择特化的模版，那模版特化的优点也是很明显的了。首先，从功能上来说，有类似虚函数那样“多态”的效果，我们对不同的数据调用的都是 <code>MYMAX</code>，但是会自动选择不同的处理逻辑。其次，模版特化的性能更优，虚函数依赖的是运行时刷新虚表、查询虚表，而模板特化在编译时就完成了“分支的选择”，不占用运行时的资源，因此一般来说它的性能更优。</p>
-<h2 id="_3">偏特化<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>刚刚写的模版特化，<code>template</code> 括号中是没有任何模版参数的，这种情况被称为“全特化”，其表示所有的模版参数都被特别指定了。与之对应的，对于类模版而言还有“偏特化”，表示只用特化部分模版参数。</p>
-<p>```c++</p>
-<h1 id="include_3">include <iostream><a class="headerlink" href="#include_3" title="Permanent link">&para;</a></h1>
-<p>using namespace std;</p>
-<p>enum class DEVICE {
-    CPU,
-    GPU
-};</p>
-<p>template <DEVICE dev, typename IN_T1, typename IN_T2>
-struct CExample {
-    void operator()(IN_T1 a, IN_T2 b);
-};</p>
-<p>template <typename IN_T1, typename IN_T2>
-struct CExample<DEVICE::CPU, IN_T1, IN_T2> {
-    void operator()(IN_T1 a, IN_T2 b) {
-        cout &lt;&lt; "CPU template for: " &lt;&lt; a &lt;&lt; " " &lt;&lt; b &lt;&lt; endl;
-    }
-};</p>
-<p>template <typename IN_T1, typename IN_T2>
-struct CExample<DEVICE::GPU, IN_T1, IN_T2> {
-    void operator()(IN_T1 a, IN_T2 b) {
-        cout &lt;&lt; "GPU template for: " &lt;&lt; a &lt;&lt; " " &lt;&lt; b &lt;&lt; endl;
-    }
-};</p>
 <p>int main() {
-    CExample<DEVICE::CPU, double, double>()(1.5, 2.4);
-    CExample<DEVICE::GPU, int, int>()(4, 2);
-    return 0;
+    vector<int>vec= {1,2,3};
+    cout&lt;&lt;len(vec)&lt;&lt;endl;  //调用针对stl库容器的len函数
+    cout &lt;&lt; len(CMyclass()) &lt;&lt; endl; //调用len(...)函数
 }
 ```</p>
-<p>这里实现了一个 <code>CExample</code> 的模版类，其有三个模版参数。然后我们实现两个模版类，分别对 <code>CPU</code> 和 <code>GPU</code> 的 <code>DEVICE</code> 进行偏特化。可以看到针对给定的不同“设备类型”，我们调用时使用的都是统一的接口，但是却触发了完全不同的运行流程。</p>
-<h2 id="_4">特化的应用<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p>通过上面的介绍，我们了解了模版的全特化和偏特化，接下来我们就从知名开源软件 PyTorch 模版特化的用处。</p>
-<p>PyTorch 一般会针对 CPU 和 GPU 分别写一套独立的代码，接下来我们就以 PyTorch 的<code>eye</code>算子为例看看。它的 CPU 版本的实现放在 <a href="https://github.com/pytorch/pytorch/blob/master/aten/src/ATen/native/TensorFactories.cpp#L434">eye_out_cpu</a> 中。</p>
-<p>```c++
-result.resize_( {n, m});
-result.zero_();</p>
-<p>int64_t sz = std::min<int64_t>(n, m);
-AT_DISPATCH_ALL_TYPES_AND_COMPLEX_AND2(at::ScalarType::Half, at::ScalarType::Bool, result.scalar_type(), "eye", <a href="">&amp;</a> -&gt; void {
-    scalar_t* result_data = result.data_ptr<scalar_t>();
-    at::parallel_for(0, sz, internal::GRAIN_SIZE, <a href="int64_t p_begin, int64_t p_end">&amp;</a> {
-for (const auto i : c10::irange(p_begin, p_end))
-            result_data[i*(result.strides()[0] + result.stride()[1])] = 1;
-    });
-});
+<p><code>decltype(T().size(), typename T::size_type()) len(T const &amp;t)</code> 该函数声明通过 <code>decltype</code> 类型判别将不包含 <code>size()</code> 成员函数的特例类排除出去，同时逗号表达式返回逗号后面的参数 <code>typename T::size_type()</code> ，实现避免匹配到 <code>CMyclass</code> 类的功能；这种编程技巧晦涩难懂，需要程序员根据特例类不存在的方法制因此造“错误”,并不通用；</p>
+<p>为了实现 SFINAE ，同时降低程序的繁琐度，C++11 采用了具有通用性的 <code>enable_if</code> 新标准代替这种技巧 ；我们使用 <code>enable_if</code> 的形式重写该函数</p>
+<p><code>``c++
+//</code>enable_if`的应用
+class CMyclass {
+public:
+    using size_type = unsigned int;
+};</p>
+<p>template &lt;typename T, typename T2 = typename enable_if&lt;!is_same<T, CMyclass>::value&gt;::type&gt; //<code>enable_if</code>形式
+typename T::size_type len(T const &amp;t) {
+    return t.size();
+}</p>
+<p>unsigned len(...) {
+    return 0;
+}</p>
+<p>int main() {
+    vector<int> vec = {1, 2, 3};
+    cout &lt;&lt; len(vec) &lt;&lt; endl;
+    cout &lt;&lt; len(CMyclass()) &lt;&lt; endl;
+}
 ```</p>
-<p>上面是 CPU 版本的 <code>eye</code> 算子实现，而在 GPU 版本中，其实现在<a href="https://github.com/pytorch/pytorch/blob/master/aten/src/ATen/native/cuda/TensorFactories.cu#L39">eye_out_gpu</a>中。</p>
-<p>```c++
-result.resize_( {n, m});
-result.zero_();</p>
-<p>int64_t sz = std::min<int64_t>(n, m);
-int64_t stride = result.stride(0) + result.stride(1);</p>
-<p>Tensor diag = result.as_strided( {sz}, {stride});
-diag.fill_(1);
+<p>该程序的输出结果与不采用 <code>enable_if</code> 的程序一致，说明采用 <code>enable_if</code> 也可以实现**重载函数避免匹配到特例类**的功能。</p>
+<p>不同的地方在于，<code>enable_if</code> 可以避免匹配到 <code>CMyclass</code> 这个类，<code>decltype(T().size(), typename T::size_type()) len(T const &amp;t)</code> 是避免匹配到不包含 <code>size()</code> 成员函数的类；
+相比之下 <code>enable_if</code> 更加**灵活**。</p>
+<h2 id="enable_if-is_same">enable_if 与 is_same 的使用<a class="headerlink" href="#enable_if-is_same" title="Permanent link">&para;</a></h2>
+<h3 id="enable_if_2">enable_if 的使用<a class="headerlink" href="#enable_if_2" title="Permanent link">&para;</a></h3>
+<p>首先给出 <code>enable_if</code> 的基本形式</p>
+<p><code>c++
+template&lt;bool B,typename T=void&gt;struct enable_if</code></p>
+<ul>
+<li>当传入的模板参数 <code>B</code> 为 <code>True</code> 的时候，<code>enable_if</code> 模板类的 <code>type</code> 就等于 <code>T</code> ；如果不传入模板参数 <code>T</code> ， <code>type</code> 也会默认为 <code>void</code></li>
+<li>当传入的模板参数 <code>B</code> 为 <code>False</code> 的时候， <code>enable_if</code> 模板类就不再拥有 <code>type</code> 。</li>
+</ul>
+<p>使用 <code>enable_if</code> 时可以让重载函数自由丢弃不需要匹配的特例类；下面给出实际应用的例子</p>
+<p><code>``c++
+//判断类型字节数是否大于4输出显示
+template &lt;typename T&gt;
+typename std::enable_if&lt;(sizeof(T) &lt;= 4)&gt;::type show() { //针对</code>T` 的长度小于等于4的情况生效
+    printf("size&lt;=4\n");
+}</p>
+<p>template <typename T>
+typename std::enable_if&lt;(sizeof(T) &gt; 4)&gt;::type show() { //针对 <code>T</code> 的长度大于4的情况生效
+    printf("size&gt;4\n");
+}</p>
+<p>int main() {
+    show<double>();
+    show<char>();
+}
 ```</p>
-<p>PyTorch 这种风格为每一种硬件都写一套 <code>kernel</code>，这样代码清爽简洁，更容易让人看懂，但是可能会产生比较多的重复代码。</p>
+<p>输出结果为</p>
+<p><code>text
+size&gt;4
+size&lt;=4</code></p>
+<h3 id="is_same">is_same 的使用<a class="headerlink" href="#is_same" title="Permanent link">&para;</a></h3>
+<p><code>c++
+template&lt;class T,class U&gt;struct is_same</code></p>
+<ul>
+<li>当模板参数 <code>T</code> 等于模板参数 <code>U</code> 时, <code>is_same&lt;T,U&gt;</code>模板类的成员 <code>value</code> 等于 <code>True</code></li>
+<li>当模板参数 <code>T</code> 不等于模板 <code>U</code> 时, <code>is_same&lt;T,U&gt;</code>模板类的成员 <code>value</code> 等于 <code>False</code></li>
+</ul>
+<p><code>is_same</code> 经常与 <code>eanble_if</code> 搭配使用</p>
+<p><code>c++
+template &lt;typename T, typename T2 = typename enable_if&lt;!is_same&lt;T, CMyclass&gt;::value&gt;::type&gt; //`enable_if`形式
+typename T::size_type len(T const &amp;t) {
+    return t.size();
+}</code></p>
+<p><code>enable_if</code> 模板类的第一个参数经常用 <code>is_same</code> 的 <code>value</code> 来代替，结合起来对一些特例进行判断，实现 SFINAE</p>
+<h2 id="enable_if-is_same_1">enable_if 与 is_same 内部的实现原理<a class="headerlink" href="#enable_if-is_same_1" title="Permanent link">&para;</a></h2>
+<p>了解这两个模板类的内部实现原理之前，需要了解 type traits 的概念</p>
+<h3 id="type-traits">什么是 type traits ?<a class="headerlink" href="#type-traits" title="Permanent link">&para;</a></h3>
+<p>traits 是 C++ 模板编程中使用的一种技术，主要功能是把功能相同而参数不同的函数抽象出来，通过 traits 将不同的参数的相同属性提取出来，在函数中利用这些用 traits 提取的属性，使得**函数对不同的参数表现一致**。</p>
+<h3 id="enable_if_3">enable_if 源码解析<a class="headerlink" href="#enable_if_3" title="Permanent link">&para;</a></h3>
+<p>下面给出 <code>enable_if</code> 的源码</p>
+<p>```c++
+template<bool, typename _Tp = void>
+struct enable_if { };</p>
+<p>template<typename _Tp>
+struct enable_if<true, _Tp> {
+    typedef _Tp type;
+};
+```</p>
+<ul>
+<li>首先定义了一个空的通用模板，不包含任何成员</li>
+<li>当第一个模板参数值为 <code>True</code> 时，将模板特例化; <code>type</code> 的类型为第二个模板参数 <code>_Tp</code> 。</li>
+</ul>
+<h3 id="is_same_1">is_same 源码解析<a class="headerlink" href="#is_same_1" title="Permanent link">&para;</a></h3>
+<p>以下代码简单实现了 <code>is_same</code> 模板类的作用</p>
+<p>```c++
+template <typename T,typename U>
+struct my_is_same {
+    static constexpr bool value=false;
+}</p>
+<p>template <typename T>
+struct my_is_same {
+    static constexpr bool value=true;
+};
+```</p>
+<ul>
+<li>定义一个通用模板，针对两个模板参数类型不一致的情况，默认 <code>value</code> 值为 <code>False</code> 。</li>
+<li>模板特例化，针对两个模板参数类型一致的情况，将 <code>value</code> 值设置为 <code>True</code> 。</li>
+</ul>
+<p><code>is_same</code> 和 <code>enable_if</code> 的基本实现方案可以总结为：<strong>通用模板加模板实例化</strong>。</p>
+<h2 id="_1">总结<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong><code>enable_if</code> 是通用的避免重载函数匹配到特例类的解决方案,使用简单而且更加自由。</strong></li>
+<li><strong><code>is_same</code> 与 <code>enable_if</code> 是 type traits 技术的典型应用,实现函数对不同参数表现一致的功能。</strong></li>
+<li><strong><code>is_same</code> 与 <code>enable_if</code> 的源码实现采用了模板元编程的基本实现思想，大致分为通用模板与模板特例化。</strong></li>
+</ul>
                 
               
               
@@ -817,7 +988,7 @@ diag.fill_(1);
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="08_template.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: 模板 template" rel="prev">
+        <a href="11_template_sfinae.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: 搞懂 SFINAE" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -826,20 +997,20 @@ diag.fill_(1);
               <span class="md-footer__direction">
                 上一页
               </span>
-              模板 template
+              搞懂 SFINAE
             </div>
           </div>
         </a>
       
       
         
-        <a href="11_template_sfinae.html" class="md-footer__link md-footer__link--next" aria-label="下一页: 搞懂 SFINAE" rel="next">
+        <a href="13_enable_if_redefine_mistake.html" class="md-footer__link md-footer__link--next" aria-label="下一页: enable_if 的重定义错误" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 下一页
               </span>
-              搞懂 SFINAE
+              enable_if 的重定义错误
             </div>
           </div>
           <div class="md-footer__button md-icon">

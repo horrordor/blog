@@ -9,14 +9,14 @@
       
       
       
-        <link rel="canonical" href="https://blog.horrordor.tk/main/github/06_Mkdocs.html">
+        <link rel="canonical" href="https://blog.horrordor.tk/master/github/03_SSH_for_github.html">
       
       <link rel="icon" href="../assets/favicon.png">
       <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.1.11">
     
     
       
-        <title>MkDocs 工具使用 - horrordor's blog</title>
+        <title>github SSH免密码登录设置 - horrordor's blog</title>
       
     
     
@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#mkdocs" class="md-skip">
+        <a href="#github-ssh" class="md-skip">
           跳转至
         </a>
       
@@ -96,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              MkDocs 工具使用
+              github SSH免密码登录设置
             
           </span>
         </div>
@@ -318,11 +318,85 @@
             
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="03_SSH_for_github.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          github SSH免密码登录设置
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="03_SSH_for_github.html" class="md-nav__link md-nav__link--active">
         github SSH免密码登录设置
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ssh" class="md-nav__link">
+    什么是SSH
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sshgithub" class="md-nav__link">
+    配置SSH连接github
+  </a>
+  
+    <nav class="md-nav" aria-label="配置SSH连接github">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    本地生成密钥对
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#github" class="md-nav__link">
+    将公钥添加到github
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    测试使用
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -354,72 +428,11 @@
             
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          MkDocs 工具使用
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="06_Mkdocs.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="06_Mkdocs.html" class="md-nav__link">
         MkDocs 工具使用
       </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#mkdocs_1" class="md-nav__link">
-    MkDocs 介绍与安装
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#mkdocs_2" class="md-nav__link">
-    使用 MkDocs 创建工程
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#mkdocs_3" class="md-nav__link">
-    使用 Mkdocs 生成网页
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#mkdocs_4" class="md-nav__link">
-    MkDocs 的配置
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -690,30 +703,43 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#mkdocs_1" class="md-nav__link">
-    MkDocs 介绍与安装
+  <a href="#ssh" class="md-nav__link">
+    什么是SSH
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#mkdocs_2" class="md-nav__link">
-    使用 MkDocs 创建工程
+  <a href="#sshgithub" class="md-nav__link">
+    配置SSH连接github
+  </a>
+  
+    <nav class="md-nav" aria-label="配置SSH连接github">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    本地生成密钥对
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#mkdocs_3" class="md-nav__link">
-    使用 Mkdocs 生成网页
+        
+          <li class="md-nav__item">
+  <a href="#github" class="md-nav__link">
+    将公钥添加到github
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#mkdocs_4" class="md-nav__link">
-    MkDocs 的配置
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    测试使用
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -729,89 +755,49 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/horrordor/blog/edit/master/docs/github/06_Mkdocs.md" title="编辑此页" class="md-content__button md-icon">
+                  <a href="https://github.com/horrordor/blog/edit/master/docs/github/03_SSH_for_github.md" title="编辑此页" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="mkdocs"><a href="https://www.mkdocs.org/">MkDocs</a> 工具使用<a class="headerlink" href="#mkdocs" title="Permanent link">&para;</a></h1>
-<p>很多程序员朋友都有写技术博客的习惯，包括你们现在看到的这个网站。这个网站其实就对应了一个 GitHub 仓库，每次提交修改到这个仓库的时候，我的网站也会被自动更新。</p>
-<p>那这些是如何实现的呢？主要需要以下三个步骤：</p>
+                <h1 id="github-ssh">github SSH免密码登录<a class="headerlink" href="#github-ssh" title="Permanent link">&para;</a></h1>
+<h2 id="ssh">什么是SSH<a class="headerlink" href="#ssh" title="Permanent link">&para;</a></h2>
+<p>SSH是一种常见的登录协议，使用SSH的好处是不用在下载或者上传代码时，每次都输入账号密码。</p>
+<h2 id="sshgithub">配置SSH连接github<a class="headerlink" href="#sshgithub" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">可参考<a href="https://docs.github.com/cn/github/authenticating-to-github/connecting-to-github-with-ssh">https://docs.github.com/cn/github/authenticating-to-github/connecting-to-github-with-ssh</a></p>
+</div>
+<p>具体步骤如下：</p>
 <ul>
-<li>使用 <a href="https://www.mkdocs.org/">MkDocs</a> 工具生成网站</li>
-<li>使用 <a href="https://pages.github.com/">GitHub Pages</a> 展示自己的网站</li>
-<li>使用 <a href="https://docs.github.com/cn/actions">GitHub Actions</a> 帮助我们实现工作流自动化</li>
+<li>
+<p>本地生成密钥对</p>
+</li>
+<li>
+<p>将公钥添加到github</p>
+</li>
+<li>
+<p>测试使用</p>
+</li>
 </ul>
-<p>下面我们就具体介绍一下如何使用它们打造属于自己的免费网站。我们首先来介绍一下 MkDocs。</p>
-<h2 id="mkdocs_1">MkDocs 介绍与安装<a class="headerlink" href="#mkdocs_1" title="Permanent link">&para;</a></h2>
-<p>MkDocs 是一个文本工具，我们可以使用 Markdown 写文章，接着再使用 MkDocs 命令，将其转变为 HTML 文件。MkDocs 是一个 Python 包，我们可以使用 <a href="https://pypi.org/project/pip/">pip</a> 来进行安装，安装命令如下：</p>
+<h3 id="_1">本地生成密钥对<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>使用命令：</p>
 <p><code>shell
-python -m pip install mkdocs</code></p>
-<p>安装完 MkDocs 后，我们就可以运行 <code>mkdocs</code> 命令：</p>
+ssh-keygen -t rsa -b 4096 -C "最好为github的账号"</code></p>
+<p>后面一路直接回车,接着就在（用户/.ssh）目录下生成了两个文件</p>
+<ul>
+<li>id_rsa是私钥文件</li>
+<li>id_rsa.pub是公钥文件</li>
+</ul>
+<h3 id="github">将公钥添加到github<a class="headerlink" href="#github" title="Permanent link">&para;</a></h3>
+<p>打开github，点击个人页面的头像，点击<code>Settings</code>，然后点击 <code>SSH and GPG keys</code>，接下来点击<code>New SSH Key</code>，打开刚刚在本地生成的<code>id_rsa.pub</code>文件，将里面的所有内容复制到对话框中。最终点击<code>Add SSH Key</code>按钮 就能成功添加啦</p>
+<h3 id="_2">测试使用<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>使用命令：</p>
 <p><code>shell
-mkdocs</code></p>
-<p>可以看到相应的提示信息：</p>
-<p>``` shell
-Usage: mkdocs [OPTIONS] COMMAND [ARGS]...</p>
-<p>MkDocs - Project documentation with Markdown.</p>
-<p>Options:
-  -V, --version  Show the version and exit.
-  -q, --quiet    Silence warnings
-  -v, --verbose  Enable verbose output
-  -h, --help     Show this message and exit.</p>
-<p>Commands:
-  build      Build the MkDocs documentation
-  gh-deploy  Deploy your documentation to GitHub Pages
-  new        Create a new MkDocs project
-  serve      Run the builtin development server
-```</p>
-<h2 id="mkdocs_2">使用 MkDocs 创建工程<a class="headerlink" href="#mkdocs_2" title="Permanent link">&para;</a></h2>
-<p>接着，我们用 <code>mkdocs new</code> 命令来创建一个名叫 myblog 的工程。命令运行结束后，我们就可以看到<code>myblog</code>目录了。</p>
-<p>myblog 目录下只有两样东西，一个是 docs 目录和一个 yaml 文件，docs 目录下存放的就是 Markdown 文件，这里也就是我们网站的内容，yaml 文件是我们工程的配置文件。</p>
-<h2 id="mkdocs_3">使用 Mkdocs 生成网页<a class="headerlink" href="#mkdocs_3" title="Permanent link">&para;</a></h2>
-<p>接下俩，我们使用 <code>mkdocs build</code> 命令，就可以根据 yaml 文件的设置，将 Markdown 文件编译成网页 HTML 文件。 可以看到，命令完成之后，我们就得到了一个<code>site</code>文件夹。</p>
-<p>打开 site 文件，里面就是生成好的整个网站了，我们点击 index.html，就可以看到网站的效果了。</p>
-<h2 id="mkdocs_4">MkDocs 的配置<a class="headerlink" href="#mkdocs_4" title="Permanent link">&para;</a></h2>
-<p>通过改变  yaml 文件，我们可以改变网站的输出效果。那么 yaml 文件是如何起作用的呢？我们通过一个例子来了解一下。</p>
-<p>比如我们在  docs 目录下新增加一个 about.md 的文件，内容如下图所示：</p>
-<p>``` markdown</p>
-<h1 id="hello-world">hello world<a class="headerlink" href="#hello-world" title="Permanent link">&para;</a></h1>
-<p>```</p>
-<p>并且在  yaml 文件中做相应的修改：</p>
-<p><code>yaml
-site_name: My Docs
-nav:
-    - Home: index.md
-    - About: about.md</code></p>
-<p>重新编译，可以发现在网页中果然多了 about 这一栏。那么接下来我们就来看看 yaml 文件中的配置是如何起作用的。</p>
-<h3 id="1">1. 增加页面<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
-<p>如果我们想要在 mkdocs.yml 文件中配置添加页面，我们可以在并通过添加 <a href="https://mkdocs.zimoapps.com/user-guide/configuration/#nav">nav</a> 设置来实现：</p>
-<p><code>yaml
-site_name: myproject
-nav:
-    - Home: index.md
-    - About: about.md</code></p>
-<h3 id="2">2. 修改配置文件增加多级文档<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
-<p>我们也可以设置目录，增加多级文档：</p>
-<p><code>yaml
-site_name: myproject
-nav:
-    - Home: index.md
-    - Install: install.md
-    - Documents:
-        - Usage: usage.md
-        - Tutorial: tutorial.md</code></p>
-<h3 id="3">3. 主题化我们的文档<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
-<p>现在，更改配置文件以通过更改主题来更改文档的显示方式。 编辑 mkdocs.yml 文件并添加 <a href="https://mkdocs.zimoapps.com/user-guide/configuration/#theme">theme</a> 设置：</p>
-<p><code>yaml
-site_name: myproject
-nav:
-    - Home: index.md
-    - About: about.md
-theme: readthedocs</code></p>
-<p>保存更改并重新编译，你将看到改为使用了ReadTheDocs主题。</p>
-<h2 id="_1">扩展资料<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>通过以上介绍，相信你已经对 MkDocs 有了基本的了解，如果大家想要更详细了解 MkDocs，可以阅读 <a href="https://mkdocs.zimoapps.com/#mkdocs">MkDocs 中文文档</a>。</p>
+ssh -T git@github.com</code></p>
+<p>检验是否配置成功</p>
+<div class="admonition note">
+<p class="admonition-title">第一次连接，会有提示是否信任github服务器，我们需要输入yes</p>
+</div>
                 
               
               
@@ -836,7 +822,7 @@ theme: readthedocs</code></p>
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="05_get_started_with_Markdown.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: 快速上手 Markdown" rel="prev">
+        <a href="02_learn_from_pr.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: 如何通过 PR 学习" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -845,20 +831,20 @@ theme: readthedocs</code></p>
               <span class="md-footer__direction">
                 上一页
               </span>
-              快速上手 Markdown
+              如何通过 PR 学习
             </div>
           </div>
         </a>
       
       
         
-        <a href="07_GitHub_Pages.html" class="md-footer__link md-footer__link--next" aria-label="下一页: GitHub Pages 的生成和使用" rel="next">
+        <a href="04_beauty_code.html" class="md-footer__link md-footer__link--next" aria-label="下一页: 美化代码工具分享" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 下一页
               </span>
-              GitHub Pages 的生成和使用
+              美化代码工具分享
             </div>
           </div>
           <div class="md-footer__button md-icon">

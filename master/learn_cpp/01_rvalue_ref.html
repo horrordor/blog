@@ -9,14 +9,14 @@
       
       
       
-        <link rel="canonical" href="https://blog.horrordor.tk/main/learn_cpp/012_enable_if.html">
+        <link rel="canonical" href="https://blog.horrordor.tk/master/learn_cpp/01_rvalue_ref.html">
       
       <link rel="icon" href="../assets/favicon.png">
       <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.1.11">
     
     
       
-        <title>enable_if 新标准 - horrordor's blog</title>
+        <title>右值引用 - horrordor's blog</title>
       
     
     
@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#enable_if" class="md-skip">
+        <a href="#_1" class="md-skip">
           跳转至
         </a>
       
@@ -96,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              enable_if 新标准
+              右值引用
             
           </span>
         </div>
@@ -444,11 +444,112 @@
             
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="01_rvalue_ref.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          右值引用
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="01_rvalue_ref.html" class="md-nav__link md-nav__link--active">
         右值引用
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    什么是右值
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    什么是右值引用
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#move" class="md-nav__link">
+    move 语义
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stdmove" class="md-nav__link">
+    std::move
+  </a>
+  
+    <nav class="md-nav" aria-label="std::move">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stdmove_1" class="md-nav__link">
+    std::move 原理解析
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stdmove_2" class="md-nav__link">
+    std::move 的使用注意事项
+  </a>
+  
+    <nav class="md-nav" aria-label="std::move 的使用注意事项">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stdmove_3" class="md-nav__link">
+    组合或者继承时，显式调用 std::move
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stdmove_4" class="md-nav__link">
+    局部变量返回时，不调用 std::move
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -564,119 +665,11 @@
             
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          enable_if 新标准
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="012_enable_if.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="012_enable_if.html" class="md-nav__link">
         enable_if 新标准
       </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#enable_if_1" class="md-nav__link">
-    为什么要使用 enable_if ？
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#enable_if-is_same" class="md-nav__link">
-    enable_if 与 is_same 的使用
-  </a>
-  
-    <nav class="md-nav" aria-label="enable_if 与 is_same 的使用">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#enable_if_2" class="md-nav__link">
-    enable_if 的使用
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#is_same" class="md-nav__link">
-    is_same 的使用
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#enable_if-is_same_1" class="md-nav__link">
-    enable_if 与 is_same 内部的实现原理
-  </a>
-  
-    <nav class="md-nav" aria-label="enable_if 与 is_same 内部的实现原理">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#type-traits" class="md-nav__link">
-    什么是 type traits ?
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#enable_if_3" class="md-nav__link">
-    enable_if 源码解析
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#is_same_1" class="md-nav__link">
-    is_same 源码解析
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    总结
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -737,30 +730,37 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#enable_if_1" class="md-nav__link">
-    为什么要使用 enable_if ？
+  <a href="#_2" class="md-nav__link">
+    什么是右值
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#enable_if-is_same" class="md-nav__link">
-    enable_if 与 is_same 的使用
-  </a>
-  
-    <nav class="md-nav" aria-label="enable_if 与 is_same 的使用">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#enable_if_2" class="md-nav__link">
-    enable_if 的使用
+  <a href="#_3" class="md-nav__link">
+    什么是右值引用
   </a>
   
 </li>
+      
+        <li class="md-nav__item">
+  <a href="#move" class="md-nav__link">
+    move 语义
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stdmove" class="md-nav__link">
+    std::move
+  </a>
+  
+    <nav class="md-nav" aria-label="std::move">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#is_same" class="md-nav__link">
-    is_same 的使用
+  <a href="#stdmove_1" class="md-nav__link">
+    std::move 原理解析
   </a>
   
 </li>
@@ -771,43 +771,29 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#enable_if-is_same_1" class="md-nav__link">
-    enable_if 与 is_same 内部的实现原理
+  <a href="#stdmove_2" class="md-nav__link">
+    std::move 的使用注意事项
   </a>
   
-    <nav class="md-nav" aria-label="enable_if 与 is_same 内部的实现原理">
+    <nav class="md-nav" aria-label="std::move 的使用注意事项">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#type-traits" class="md-nav__link">
-    什么是 type traits ?
+  <a href="#stdmove_3" class="md-nav__link">
+    组合或者继承时，显式调用 std::move
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#enable_if_3" class="md-nav__link">
-    enable_if 源码解析
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#is_same_1" class="md-nav__link">
-    is_same 源码解析
+  <a href="#stdmove_4" class="md-nav__link">
+    局部变量返回时，不调用 std::move
   </a>
   
 </li>
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    总结
-  </a>
   
 </li>
       
@@ -823,147 +809,281 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/horrordor/blog/edit/master/docs/learn_cpp/012_enable_if.md" title="编辑此页" class="md-content__button md-icon">
+                  <a href="https://github.com/horrordor/blog/edit/master/docs/learn_cpp/01_rvalue_ref.md" title="编辑此页" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="enable_if">新标准：enable_if<a class="headerlink" href="#enable_if" title="Permanent link">&para;</a></h1>
-<p><a href="11_template_sfinae.html">上一期</a> 我们介绍了 SFINAE 原则，在此基础上，本篇文章将继续介绍了<code>enable_if</code> 新标准，为后续深入学习模板元编程打下基础。</p>
-<p>本文的结构如下：</p>
+                <h1 id="_1">右值引用<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>右值引用起码解决了两个问题：</p>
 <ul>
-<li>为什么要使用 <code>enable_if</code> ？</li>
-<li><code>enable_if</code> 与 <code>is_same</code> 的使用</li>
-<li><code>enable_if</code> 与 <code>is_same</code> 内部的实现原理</li>
+<li>实现 move 语义（本文介绍）</li>
+<li>实现完美转发（下一篇文章介绍）</li>
 </ul>
-<h2 id="enable_if_1">为什么要使用 enable_if ？<a class="headerlink" href="#enable_if_1" title="Permanent link">&para;</a></h2>
-<p>C++模板函数重载依赖于 SFINAE (substitution-failure-is-not-an-error) 原则，即替换失败不认为是错误，编译器将会继续寻找合适的重载函数；以返回长度的函数为例，该函数针对 STL 中的  <code>vector</code> 容器来实现（容器中有<code>size()</code>成员函数）</p>
+<p>本文会介绍什么是：</p>
+<ul>
+<li>什么是右值</li>
+<li>什么是右值引用、move 语义</li>
+<li>std::move 原理剖析</li>
+<li>std::move 使用注意事项</li>
+</ul>
+<h2 id="_2">什么是右值<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>C++ 中表达式分为左值和右值，简单而言，有内存地址的表达式就是左值，它可以出现在赋值语句的**左边或者右边**。无法取内存地址的表达式是右值，**只能**出现在赋值语句的右边。</p>
+<p>以下是 C++ 中常见的出现右值的情况：</p>
+<ol>
+<li>常量字面量</li>
+<li>函数调用返回的值或对象（左值引用类型除外）</li>
+<li>无名对象</li>
+</ol>
 <p>```c++
-class CMyclass {
+int funA(int a) {
+    return a;
+}</p>
+<p>int&amp; funB(int a) {
+    return a;
+}</p>
+<p>class A {
 public:
-    using size_type = unsigned int;
+    A() {}
+    ~A() {}
 };</p>
-<p>template <typename T>
-decltype(T().size(), typename T::size_type()) len(T const &amp;t) { //该函数可以避免匹配到 CMyclass 类
-    return t.size();
-}
-unsigned len(...) {
+<p>int main(int argc, char* argv[]) {
+    auto pos_num = &amp;(10);            // 不能取地址 1. 常量字面量
+    auto pos_funA = &amp;(funA(0x1111)); // 不能取地址 2. 函数调用的返回值
+    auto pos_funB = &amp;(funB(0x2222)); // 函数调用返回的类型为左值引用，则返回的结果为左值
+    auto pos_class = &amp;(A());         // 不能取地址 3. 无名对象
     return 0;
-}</p>
-<p>int main() {
-    vector<int>vec= {1,2,3};
-    cout&lt;&lt;len(vec)&lt;&lt;endl;  //调用针对stl库容器的len函数
-    cout &lt;&lt; len(CMyclass()) &lt;&lt; endl; //调用len(...)函数
 }
 ```</p>
-<p><code>decltype(T().size(), typename T::size_type()) len(T const &amp;t)</code> 该函数声明通过 <code>decltype</code> 类型判别将不包含 <code>size()</code> 成员函数的特例类排除出去，同时逗号表达式返回逗号后面的参数 <code>typename T::size_type()</code> ，实现避免匹配到 <code>CMyclass</code> 类的功能；这种编程技巧晦涩难懂，需要程序员根据特例类不存在的方法制因此造“错误”,并不通用；</p>
-<p>为了实现 SFINAE ，同时降低程序的繁琐度，C++11 采用了具有通用性的 <code>enable_if</code> 新标准代替这种技巧 ；我们使用 <code>enable_if</code> 的形式重写该函数</p>
-<p><code>``c++
-//</code>enable_if`的应用
-class CMyclass {
-public:
-    using size_type = unsigned int;
-};</p>
-<p>template &lt;typename T, typename T2 = typename enable_if&lt;!is_same<T, CMyclass>::value&gt;::type&gt; //<code>enable_if</code>形式
-typename T::size_type len(T const &amp;t) {
-    return t.size();
-}</p>
-<p>unsigned len(...) {
-    return 0;
-}</p>
-<p>int main() {
-    vector<int> vec = {1, 2, 3};
-    cout &lt;&lt; len(vec) &lt;&lt; endl;
-    cout &lt;&lt; len(CMyclass()) &lt;&lt; endl;
-}
-```</p>
-<p>该程序的输出结果与不采用 <code>enable_if</code> 的程序一致，说明采用 <code>enable_if</code> 也可以实现**重载函数避免匹配到特例类**的功能。</p>
-<p>不同的地方在于，<code>enable_if</code> 可以避免匹配到 <code>CMyclass</code> 这个类，<code>decltype(T().size(), typename T::size_type()) len(T const &amp;t)</code> 是避免匹配到不包含 <code>size()</code> 成员函数的类；
-相比之下 <code>enable_if</code> 更加**灵活**。</p>
-<h2 id="enable_if-is_same">enable_if 与 is_same 的使用<a class="headerlink" href="#enable_if-is_same" title="Permanent link">&para;</a></h2>
-<h3 id="enable_if_2">enable_if 的使用<a class="headerlink" href="#enable_if_2" title="Permanent link">&para;</a></h3>
-<p>首先给出 <code>enable_if</code> 的基本形式</p>
+<h2 id="_3">什么是右值引用<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>在 C++11 之前，是只有左值引用（C++11之后，为了和右值引用区分，原来的“引用”才称为“左值引用”），没有右值引用的。因此无法用非 <code>const</code> （左值）引用匹配右值的。</p>
+<p>比如：</p>
 <p><code>c++
-template&lt;bool B,typename T=void&gt;struct enable_if</code></p>
-<ul>
-<li>当传入的模板参数 <code>B</code> 为 <code>True</code> 的时候，<code>enable_if</code> 模板类的 <code>type</code> 就等于 <code>T</code> ；如果不传入模板参数 <code>T</code> ， <code>type</code> 也会默认为 <code>void</code></li>
-<li>当传入的模板参数 <code>B</code> 为 <code>False</code> 的时候， <code>enable_if</code> 模板类就不再拥有 <code>type</code> 。</li>
-</ul>
-<p>使用 <code>enable_if</code> 时可以让重载函数自由丢弃不需要匹配的特例类；下面给出实际应用的例子</p>
-<p><code>``c++
-//判断类型字节数是否大于4输出显示
-template &lt;typename T&gt;
-typename std::enable_if&lt;(sizeof(T) &lt;= 4)&gt;::type show() { //针对</code>T` 的长度小于等于4的情况生效
-    printf("size&lt;=4\n");
-}</p>
-<p>template <typename T>
-typename std::enable_if&lt;(sizeof(T) &gt; 4)&gt;::type show() { //针对 <code>T</code> 的长度大于4的情况生效
-    printf("size&gt;4\n");
-}</p>
-<p>int main() {
-    show<double>();
-    show<char>();
-}
-```</p>
-<p>输出结果为</p>
-<p><code>text
-size&gt;4
-size&lt;=4</code></p>
-<h3 id="is_same">is_same 的使用<a class="headerlink" href="#is_same" title="Permanent link">&para;</a></h3>
-<p><code>c++
-template&lt;class T,class U&gt;struct is_same</code></p>
-<ul>
-<li>当模板参数 <code>T</code> 等于模板参数 <code>U</code> 时, <code>is_same&lt;T,U&gt;</code>模板类的成员 <code>value</code> 等于 <code>True</code></li>
-<li>当模板参数 <code>T</code> 不等于模板 <code>U</code> 时, <code>is_same&lt;T,U&gt;</code>模板类的成员 <code>value</code> 等于 <code>False</code></li>
-</ul>
-<p><code>is_same</code> 经常与 <code>eanble_if</code> 搭配使用</p>
-<p><code>c++
-template &lt;typename T, typename T2 = typename enable_if&lt;!is_same&lt;T, CMyclass&gt;::value&gt;::type&gt; //`enable_if`形式
-typename T::size_type len(T const &amp;t) {
-    return t.size();
+int fun(int&amp; a){
+    return a;
 }</code></p>
-<p><code>enable_if</code> 模板类的第一个参数经常用 <code>is_same</code> 的 <code>value</code> 来代替，结合起来对一些特例进行判断，实现 SFINAE</p>
-<h2 id="enable_if-is_same_1">enable_if 与 is_same 内部的实现原理<a class="headerlink" href="#enable_if-is_same_1" title="Permanent link">&para;</a></h2>
-<p>了解这两个模板类的内部实现原理之前，需要了解 type traits 的概念</p>
-<h3 id="type-traits">什么是 type traits ?<a class="headerlink" href="#type-traits" title="Permanent link">&para;</a></h3>
-<p>traits 是 C++ 模板编程中使用的一种技术，主要功能是把功能相同而参数不同的函数抽象出来，通过 traits 将不同的参数的相同属性提取出来，在函数中利用这些用 traits 提取的属性，使得**函数对不同的参数表现一致**。</p>
-<h3 id="enable_if_3">enable_if 源码解析<a class="headerlink" href="#enable_if_3" title="Permanent link">&para;</a></h3>
-<p>下面给出 <code>enable_if</code> 的源码</p>
+<p>以下调用会出错：</p>
+<p><code>c++
+fun(10); // 编译报错：无法从 int 转为 int&amp;</code></p>
+<p>如果非要匹配，则需要使用 <code>const</code> （左值）引用：</p>
 <p>```c++
-template<bool, typename _Tp = void>
-struct enable_if { };</p>
-<p>template<typename _Tp>
-struct enable_if<true, _Tp> {
-    typedef _Tp type;
-};
-```</p>
-<ul>
-<li>首先定义了一个空的通用模板，不包含任何成员</li>
-<li>当第一个模板参数值为 <code>True</code> 时，将模板特例化; <code>type</code> 的类型为第二个模板参数 <code>_Tp</code> 。</li>
-</ul>
-<h3 id="is_same_1">is_same 源码解析<a class="headerlink" href="#is_same_1" title="Permanent link">&para;</a></h3>
-<p>以下代码简单实现了 <code>is_same</code> 模板类的作用</p>
-<p>```c++
-template <typename T,typename U>
-struct my_is_same {
-    static constexpr bool value=false;
+int fun(const int&amp; a){
+    return a;
 }</p>
-<p>template <typename T>
-struct my_is_same {
-    static constexpr bool value=true;
+<p>int main(int argc, char* argv[]){
+    fun(10); // 可以编译通过。const (左值)引用可以匹配右值
+    return 0;
+}
+```</p>
+<p>在 C++11 之后，不用 <code>const</code> 左值引用，也可以匹配右值了：</p>
+<p>```c++
+int fun(int&amp;&amp; a){
+    return a;
+}</p>
+<p>int main(int argc, char* argv[]){
+    fun(10); // 右值引用可以匹配右值
+    return 0;
+}
+```</p>
+<p>当然，右值引用的发明不是主要为了解决这类简单的调用匹配问题，而是为了引入 <strong>move 语义</strong>。</p>
+<h2 id="move">move 语义<a class="headerlink" href="#move" title="Permanent link">&para;</a></h2>
+<p>先看一个右值引用发明前，资源利用效率不高的问题，以字符串类为例。我们知道，通常情况下，如果字符串做浅拷贝，是错误的：</p>
+<p><code>c++
+class CMyString {
+public:
+    char* m_pBuffer;
+    int m_iLen;
+    CMyString(const char* pString) {
+        m_iLen = strlen(pString) + 1;
+        m_pBuffer = new char[m_iLen];
+        strcpy(m_pBuffer, pString);
+    }
+    ~CMyString() {
+        m_iLen = 0;
+        if(m_pBuffer) {
+            delete[] m_pBuffer;
+        }
+    }
+    CMyString(CMyString&amp; other) {
+        // 浅拷贝，错误
+        this-&gt;m_pBuffer = other.m_pBuffer;
+        this-&gt;m_iLen = other.m_iLen;
+    }
+};</code></p>
+<p>错误的原因在于，如果 A 对象拷贝复制自 B 对象，那么当 B 对象析构时，会销毁 <code>m_pBuffer</code> 指向的缓冲区，这样 A 对象所指向的缓冲区也被一起销毁了。因此 CMyString 其实需要的是深拷贝：</p>
+<p><code>c++
+CMyString(CMyString&amp; other) {
+    // 深拷贝
+    this-&gt;m_iLen = other.m_iLen;
+    this-&gt;m_pBuffer = new char[m_iLen];
+    strcpy(this-&gt;m_pBuffer, other.m_pBuffer);
+}</code></p>
+<p>这是安全、正确的做法。但是，在某些特殊情况下，这种深拷贝其实 <strong>不是最高效的</strong>，比如对于以下代码：</p>
+<p><code>c++
+int main(int argc, char* argv[]){
+    CMyString str1(CMyString("hello"));
+    return 0;
+}</code></p>
+<p>以上的 <code>CMyString("hello")</code> 是一个右值（无名对象），这个无名对象在完成 <code>str1</code> 的构造后，生命周期也就结束了，无名对象的资源也就被释放了。</p>
+<p>这个时候问题来了：既然明知道无名对象的资源马上就会释放，那何必不做深拷贝，而是直接“偷”这个无名对象的资源呢？代码逻辑如下：</p>
+<p><code>c++
+CMyString(/*类型暂且保密*/ other) {
+    this-&gt;m_iLen = other.m_iLen;
+    this-&gt;m_pBuffer = other.m_pBuffer; // 浅拷贝、偷资源
+    other.m_pBuffer = nullptr;         // 让 other.m_pBuffer 不被释放
+}</code></p>
+<p>有了以上概念后，我们就知道了，其实有两种“从对象B得到对象A”的构造：</p>
+<ul>
+<li>一种是 C++11 之前的拷贝构造</li>
+<li>一种是 C++11 之后引入的，专门针对 B 是右值、可以被“偷资源”场景的构造，称为 <strong>移动构造</strong></li>
+</ul>
+<p>用以上 CMyString 为例，揭晓移动构造的原型，它的形参是 <strong>右值引用</strong>：</p>
+<p><code>c++
+CMyString(CMyString&amp;&amp; other) {
+    this-&gt;m_iLen = other.m_iLen;
+    this-&gt;m_pBuffer = other.m_pBuffer; // 浅拷贝、偷资源
+    other.m_pBuffer = nullptr;         // 让 m_pBuffer 不因为other析构而释放
+}</code></p>
+<p>类似于拷贝构造有与之对应的运算符重载 <code>operator=(CMyString&amp;)</code>（拷贝赋值），移动构造也有与之对应的运算符重载：<code>operator=(CMyString&amp;&amp;)</code>（移动赋值）。</p>
+<p>移动构造和移动赋值，统称为 <strong>移动语义</strong>。</p>
+<h2 id="stdmove">std::move<a class="headerlink" href="#stdmove" title="Permanent link">&para;</a></h2>
+<p>C++11 中引入右值引用的同时，还在标准中引入了 <code>std::move</code> 函数。它的作用是“将表达式强行转为右值类型”。</p>
+<p>我们先看下例，它是一个“可以改进”的 <code>myswap</code> 函数：</p>
+<p><code>c++
+template&lt;typename T&gt;
+void myswap(T&amp; a, T&amp; b) {
+    T temp(a);  // 发生拷贝构造
+    a = b;      // 发生拷贝赋值
+    b = temp;   // 发生拷贝赋值
+}</code></p>
+<p>以上三行代码，因为没有右值类型，所以不会触发移动语义。如果 <code>T</code> 是 <code>CMyString</code>，那么会发生三次深拷贝。</p>
+<p>但是仔细分析一下，实际上以上三行使用移动语义也是可以的：作为构造或者赋值的源变量，要么使用过一次后就不再使用，要么仅作为赋值的目标。换言之，它们的资源是可以被“偷”的。</p>
+<p>这时候，就可以使用 <code>std::move</code> 强行把变量转为右值类型，来触发移动语义了：</p>
+<p><code>c++
+template&lt;typename T&gt;
+void myswap(T&amp; a, T&amp; b) {
+    T temp(std::move(a)); // 发生移动构造，偷 a 的资源
+    a = std::move(b);     // 发生移动构造，偷 b 的资源
+    b = std::move(temp);  // 发生移动赋值，偷 temp 的资源
+}</code></p>
+<h3 id="stdmove_1">std::move 原理解析<a class="headerlink" href="#stdmove_1" title="Permanent link">&para;</a></h3>
+<p><code>std::move</code> 为什么可以神奇地把左值给强制转变成右值呢？我们可以解析它的源码知晓答案，从 C++ 头文件中找到 <code>move</code> 的源码：</p>
+<p><code>c++
+template&lt;typename _Tp&gt;
+constexpr typename std::remove_reference&lt;_Tp&gt;::type&amp;&amp;
+move(_Tp&amp;&amp; __t) noexcept {
+    return static_cast&lt;typename std::remove_reference&lt;_Tp&gt;::type&amp;&amp;&gt;(__t);
+}</code></p>
+<p>移除掉不太相关的 <code>constexpr</code>、<code>noexcept</code> 得到：</p>
+<p><code>c++
+template&lt;typename _Tp&gt;
+typename std::remove_reference&lt;_Tp&gt;::type&amp;&amp;
+move(_Tp&amp;&amp; __t) {
+    return static_cast&lt;typename std::remove_reference&lt;_Tp&gt;::type&amp;&amp;&gt;(__t);
+}</code></p>
+<p>会发现 <code>move</code> 的返回值和内部实现，都和 <code>std::remove_reference&lt;_Tp&gt;::type</code> 很有关系，那么继续看看 <code>std::remove_reference</code> 的实现：</p>
+<p>```c++
+template<typename _Tp>
+struct remove_reference {
+    typedef _Tp   type;
+};</p>
+<p>template<typename _Tp>
+struct remove_reference&lt;_Tp&amp;&gt; {
+    typedef _Tp   type;
+};</p>
+<p>template<typename _Tp>
+struct remove_reference&lt;_Tp&amp;&amp;&gt; {
+    typedef _Tp   type;
 };
 ```</p>
-<ul>
-<li>定义一个通用模板，针对两个模板参数类型不一致的情况，默认 <code>value</code> 值为 <code>False</code> 。</li>
-<li>模板特例化，针对两个模板参数类型一致的情况，将 <code>value</code> 值设置为 <code>True</code> 。</li>
-</ul>
-<p><code>is_same</code> 和 <code>enable_if</code> 的基本实现方案可以总结为：<strong>通用模板加模板实例化</strong>。</p>
-<h2 id="_1">总结<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong><code>enable_if</code> 是通用的避免重载函数匹配到特例类的解决方案,使用简单而且更加自由。</strong></li>
-<li><strong><code>is_same</code> 与 <code>enable_if</code> 是 type traits 技术的典型应用,实现函数对不同参数表现一致的功能。</strong></li>
-<li><strong><code>is_same</code> 与 <code>enable_if</code> 的源码实现采用了模板元编程的基本实现思想，大致分为通用模板与模板特例化。</strong></li>
-</ul>
+<p>发现 <code>remove_reference</code> ，发现它的作用很简单，就是不管模板参数是 <code>_Tp</code>，还是 <code>_Tp</code> 的左值引用，或者 <code>_Tp</code> 的右值引用，都统统都定义一个 <code>type</code> 等价于 <code>_Tp</code> 类型。回头看，其实 <code>remove_reference</code> 的作用顾名思义，就是“移除掉类型的引用性质” 的意思。</p>
+<p>知道这个以后，我们可以进步一部简化 <code>move</code> 的源码，只谈原理不求严谨的话其实就是：</p>
+<p><code>c++
+template&lt;typename _Tp&gt;
+_Tp&amp;&amp; move(_Tp&amp;&amp; __t) {
+    return (_Tp&amp;&amp;)(__t); // 强制类型转换
+}</code></p>
+<p><code>move</code> 仅仅是做了一个强制类型转换而已（其实还涉及到了“万能引用”的知识点，我们下一篇文章介绍）。</p>
+<h2 id="stdmove_2">std::move 的使用注意事项<a class="headerlink" href="#stdmove_2" title="Permanent link">&para;</a></h2>
+<h3 id="stdmove_3">组合或者继承时，显式调用 std::move<a class="headerlink" href="#stdmove_3" title="Permanent link">&para;</a></h3>
+<p>一般而言，派生类如果是移动，那么也 <strong>期待</strong> 基类也是移动构造（派生类、基类的资源一起“偷”）。
+但是，以下的写法是不正确的：</p>
+<p><code>c++
+class CDerived:public CBase {
+public:
+    CDerived(CDerived&amp;&amp; other)
+        :CBase(other) { // 无法触发 CBase 的移动构造
+        // ...
+    }
+};</code></p>
+<p>实际上，以上代码 <strong>不会</strong> 触发 <code>CBase</code> 的移动构造，而是触发的拷贝构造。</p>
+<p>因为<code>有名字</code>的右值引用其实是<code>左值</code>，所以，当我们期待“基类也是做移动构造时”，应该显式调用<code>std::move</code>：</p>
+<p><code>c++
+class CDerived:public CBase {
+public:
+    CDerived(CDerived&amp;&amp; other)
+        :CBase(std::move(other)) { // 强制转为右值，触发 CBase 的移动构造
+        // ...
+    }
+};</code></p>
+<div class="admonition note">
+<p class="admonition-title">这样的例子也适用于组合（成员初始化）的情况。</p>
+</div>
+<h3 id="stdmove_4">局部变量返回时，不调用 std::move<a class="headerlink" href="#stdmove_4" title="Permanent link">&para;</a></h3>
+<p>有些情况下，我们会返回局部变量，比如下例：</p>
+<p><code>c++
+CTemp foo() {
+    CTemp x;
+    return x; // x 的作用域和生命周期即将结束
+}</code></p>
+<p>这时你可能会想到“等等，在 <code>foo()</code> 调用并返回的地方，会复制一次返回值，而 x 最好转成右值，使用移动构造来复制：</p>
+<p><code>c++
+CTemp foo() {
+    CTemp x;
+    return std::move(x); // 很可能好心办坏事
+}</code></p>
+<p>其实这样修改后，反而可能会把事情变糟糕，我们用以下试验看看效果：</p>
+<p>```c++</p>
+<h1 id="include">include <iostream><a class="headerlink" href="#include" title="Permanent link">&para;</a></h1>
+<h1 id="include_1">include <utility><a class="headerlink" href="#include_1" title="Permanent link">&para;</a></h1>
+<p>class CTemp {
+public:
+    CTemp() {
+        std::cout &lt;&lt; "CTemp：构造" &lt;&lt; std::endl;
+    }
+    CTemp(CTemp&amp; other) {
+        std::cout &lt;&lt; "CTemp：拷贝构造" &lt;&lt; std::endl;
+    }
+    CTemp(CTemp&amp;&amp; other) {
+        std::cout &lt;&lt; "CTemp：移动构造" &lt;&lt; std::endl;
+    }
+};</p>
+<p>//2.注意实现：返回时优化
+CTemp foo() {
+    CTemp x;
+    return x;//作用域在该函数中就结束了
+}
+CTemp foo_move() {
+    CTemp x;
+    return std::move(x);//作用域在该函数中就结束了
+}</p>
+<p>int main(int argc, char* argv[]) {
+    auto a = foo();
+    std::cout &lt;&lt; "-----------" &lt;&lt; std::endl;
+    auto b = foo_move();
+    return 0;
+}
+```</p>
+<p>输出结果是：</p>
+<p>```text
+CTemp：构造</p>
+<hr />
+<p>CTemp：构造
+CTemp：移动构造
+```</p>
+<p>会发现反而是做了 <code>std::move</code> 的 <code>foo_move</code> 多了一次构造。这是为什么呢？其实是因为，现代编译器一般都做 <strong>返回值优化</strong>，也就是说，与其现在 <code>foo</code> 内部构造一个局部变量 <code>x</code>，再把它复制出去；不如直接在 <code>foo</code> 函数调用的地方直接构造一个 <code>x</code> 对象。这样做的效率显然比移动语义要高。</p>
+<p>在这类情况下，不用 <code>std::move</code> 为佳。</p>
+<p>当然，这也不是一概而论的。总之，需要非常深刻的理解 <code>std::move</code> 的“副作用”，才能做好相关优化，推荐大家可以看看 <a href="https://en.cppreference.com/w/cpp/language/copy_elision">copy elision</a>。</p>
                 
               
               
@@ -988,7 +1108,7 @@ struct my_is_same {
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="11_template_sfinae.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: 搞懂 SFINAE" rel="prev">
+        <a href="../github/10_git_rebase.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: 删除指定 commit 小妙招 git rebase" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -997,20 +1117,20 @@ struct my_is_same {
               <span class="md-footer__direction">
                 上一页
               </span>
-              搞懂 SFINAE
+              删除指定 commit 小妙招 git rebase
             </div>
           </div>
         </a>
       
       
         
-        <a href="13_enable_if_redefine_mistake.html" class="md-footer__link md-footer__link--next" aria-label="下一页: enable_if 的重定义错误" rel="next">
+        <a href="02_forward.html" class="md-footer__link md-footer__link--next" aria-label="下一页: 完美转发" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 下一页
               </span>
-              enable_if 的重定义错误
+              完美转发
             </div>
           </div>
           <div class="md-footer__button md-icon">

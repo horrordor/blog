@@ -9,14 +9,14 @@
       
       
       
-        <link rel="canonical" href="https://blog.horrordor.tk/main/learn_cpp/13_enable_if_redefine_mistake.html">
+        <link rel="canonical" href="https://blog.horrordor.tk/master/learn_cpp/02_forward.html">
       
       <link rel="icon" href="../assets/favicon.png">
       <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.1.11">
     
     
       
-        <title>enable_if 的重定义错误 - horrordor's blog</title>
+        <title>完美转发 - horrordor's blog</title>
       
     
     
@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#enable_if" class="md-skip">
+        <a href="#_1" class="md-skip">
           跳转至
         </a>
       
@@ -96,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              enable_if 的重定义错误
+              完美转发
             
           </span>
         </div>
@@ -456,11 +456,78 @@
             
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="02_forward.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          完美转发
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="02_forward.html" class="md-nav__link md-nav__link--active">
         完美转发
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    什么是完美转发
+  </a>
+  
+    <nav class="md-nav" aria-label="什么是完美转发">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#i" class="md-nav__link">
+    转发参数的窘境 I
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ii" class="md-nav__link">
+    转发的窘境 II
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stdforward" class="md-nav__link">
+    完美转发 std::forward
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -576,58 +643,11 @@
             
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          enable_if 的重定义错误
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="13_enable_if_redefine_mistake.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="13_enable_if_redefine_mistake.html" class="md-nav__link">
         enable_if 的重定义错误
       </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    前言
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    错误使用示例
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -676,15 +696,35 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    前言
+  <a href="#_2" class="md-nav__link">
+    什么是完美转发
   </a>
+  
+    <nav class="md-nav" aria-label="什么是完美转发">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#i" class="md-nav__link">
+    转发参数的窘境 I
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ii" class="md-nav__link">
+    转发的窘境 II
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    错误使用示例
+  <a href="#stdforward" class="md-nav__link">
+    完美转发 std::forward
   </a>
   
 </li>
@@ -701,83 +741,230 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/horrordor/blog/edit/master/docs/learn_cpp/13_enable_if_redefine_mistake.md" title="编辑此页" class="md-content__button md-icon">
+                  <a href="https://github.com/horrordor/blog/edit/master/docs/learn_cpp/02_forward.md" title="编辑此页" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="enable_if">如何解决 <code>enable_if</code> 的重定义错误<a class="headerlink" href="#enable_if" title="Permanent link">&para;</a></h1>
-<h2 id="_1">前言<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>本文从 <code>enablie_if</code> 错误使用，导致编译报错入手，分析错误原因，并给出解决办法</p>
-<p>本文的结构如下：</p>
+                <h1 id="_1">完美转发<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>现代 C++ 项目的源码中，常常会使用 <code>std::forward</code> 函数。它是 C++ 标准库中的“完美转发”函数。</p>
+<p>本文会介绍：</p>
 <ul>
-<li>错误使用示例</li>
-<li>错误原因分析</li>
-<li>解决办法</li>
+<li>什么是完美转发</li>
+<li>万能引用</li>
+<li><code>std::forward</code> 原理剖析</li>
 </ul>
-<h2 id="_2">错误使用示例<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>```c++</p>
-<h1 id="include">include<iostream><a class="headerlink" href="#include" title="Permanent link">&para;</a></h1>
-<h1 id="include_1">include<vector><a class="headerlink" href="#include_1" title="Permanent link">&para;</a></h1>
-<p>using namespace std;</p>
-<p>class AMyClasss {
-public:
-    using size_type = unsigned int;
-};</p>
-<p>class BMyClasss {
-public:
-    using size_type = unsigned int;
-};</p>
-<p>//T的类型需要等于 AMyClass
-template<typename T, typename =  typename enable_if\<is_same\<T, AMyClass>::value>::type>
-unsigned len (T const&amp; t) {
-    return 0;
-}</p>
-<p>//T的类型需要等于BMyClass
-template<typename T, typename =  typename enable_if\<is_same\<T, BMyClass>::value>::type>
-unsigned len (T const&amp; t) {
-    return 1;
-}</p>
-<p>int main(int argc, char* argv[]) {
-    cout &lt;&lt; len(AMyClass()) &lt;&lt; endl;
-    cout &lt;&lt; len(AMyClass()) &lt;&lt; endl;
-    return 0;
-}
-```</p>
-<p>本段代码的期待是：如果是 AMyClass 返回 1 ， BMyClass 返回 2 。</p>
-<p>执行后，报错如下：</p>
-<p><code>error: redefinition of 'template&lt;class T,class&gt; unsigned int len(const T&amp;)'</code></p>
-<h2 id="_3">错误原因分析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>重定义了默认的模板参数，间接造成了重定义 <code>len</code> 函数。 <code>typename enable_if&lt;is_same&lt;T, BMyClass&gt;::value&gt;::type</code> 最终只是得到个类型。为了分析起来更清晰，简化代码如下：</p>
-<p>```c++
-template<typename T, typename =  double>
-unsigned len (T const&amp; t) {
-    return 0;
-}</p>
-<p>template<typename T, typename =  int>
-unsigned len (T const&amp; t) {
-    return 1;
-}
-```</p>
-<p>相当于我们定义了同一个 <code>len</code> 函数，却给了两套模板参数默认值。如果用户不设置这个模板参数， C++ 不知道是该调用 <code>int</code> 默认值还是 <code>double</code> 默认值，所以在编译时，会报重复定义的错误。</p>
-<h2 id="_4">解决办法<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p>使用非类型模板参数，类型已知，值可以是未知的。更改代码如下：</p>
-<p>```c++
-template<typename T, typename =  typename enable_if\<is_same\<T, AMyClass>::value>::type* = nullptr>
-unsigned len (T const&amp; t) {
-    return 0;
-}</p>
-<p>template<typename T, typename =  typename enable_if\<is_same\<T, BMyClass>::value>::type* = nullptr>
-unsigned len (T const&amp; t) {
-    return 1;
-}
-```</p>
-<p>在默认情况下， <code>type</code> 相当于 <code>void</code> ，<code>type*</code> 相当于 <code>void*'</code>，因为用了 <code>enable_if</code> ，可以借助 SFINAE 消除调用时的二义性，解决了在编译时出现的重复定义默认函数的问题。之所以选择 <code>type*</code>   相当于把它当做一个占位符，用来实现 SFINAE 。<code>type</code> 几乎可以是任意类型，默认值 <code>nullptr</code> 也是万能的，可以赋值给任意类型的指针。</p>
-<p>当然不一定需要使用指针来做占位符， OneFlow 中例子如下：</p>
+<h2 id="_2">什么是完美转发<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>在某些代码场景或设计模式中，会出现参数转发的需求。</p>
+<p>比如，以下的工厂模式，很显然是想通过<code>factory</code> 函数把参数，传递给 <code>T</code> 的构造。</p>
 <p><code>c++
-template&lt;typename T, typename std::enable_if&lt;!py::detail::is_pyobject&lt;T&gt;::value, int&gt;::type = 0&gt;</code></p>
-<p>使用 <code>int</code> 类型来做占位符，默认值是 0 。<a href="https://github.com/Oneflow-Inc/oneflow/blob/master/oneflow/api/python/functional/python_arg.h">对应源码地址</a>， 71 行</p>
-<p>更多的例子可以在 <a href="https://github.com/Oneflow-Inc/oneflow/blob/master/oneflow/api/python/functional">OneFlow源码</a> 中搜索</p>
+template&lt;typename T, typename Arg&gt;
+shared_ptr&lt;T&gt; factory(Arg arg) {
+    return shared_ptr&lt;T&gt;(new T(arg));
+}</code></p>
+<p>最理想的情况下，我们希望 <code>factory</code> 函数就像不存在一样，<code>T</code> 的构造就像被直接调用一样。不严谨地说（严谨的定义在下文中），这就是完美转发。</p>
+<h3 id="i">转发参数的窘境 I<a class="headerlink" href="#i" title="Permanent link">&para;</a></h3>
+<p>然而，以上的代码并不完美：<code>factory</code> 函数的参数是值传递的，<code>factory</code> 函数调用时，会先发生一次参数拷贝，这样有性能代价。</p>
+<p>那自然会有人想到，可以不做值传递，改成引用传递，提高性能：</p>
+<p><code>c++
+template&lt;typename T, typename Arg&gt;
+shared_ptr&lt;T&gt; factory(Arg&amp; arg /*改成（左值）引用*/) {
+    return shared_ptr&lt;T&gt;(new T(arg));
+}</code></p>
+<p>但是，以上的代码也不“完美”，首先的问题是 <code>factory</code> 调用时，无法传递右值：</p>
+<p><code>c++
+factory&lt;Foo, int&gt;(5/*右值*/); //出错，无法传递右值</code></p>
+<p>虽然这个问题可以通过使用 <code>const</code> 引用（勉强）解决：</p>
+<p><code>c++
+template&lt;typename T, typename Arg&gt;
+shared_ptr&lt;T&gt; factory(Arg const&amp; arg) {
+    return shared_ptr&lt;T&gt;(new T(arg));
+}</code></p>
+<p>但是它并不优雅，当有多个形参时，用这种方法解决右值传递的问题，需要为每个形参实现 <code>const</code> 和非 <code>cosnt</code> 版本，这是一个复杂的排列组合问题。</p>
+<p>比如，假设 <code>factory</code> 有三个形参，那么需要实现以下的重载：</p>
+<p><code>c++
+factory(const T&amp;, const T&amp;, const T&amp;);
+factory(T&amp;, const T&amp;, const T&amp;);
+factory(const T&amp;, T&amp;, const T&amp;);
+factory(const T&amp;, const T&amp;, T&amp;);
+factory(const T&amp;, T&amp;, T&amp;);
+factory(T&amp;, const T&amp;,  T&amp;);
+factory(T&amp;,  T&amp;, const T&amp;);
+factory(T&amp;,  T&amp;, T&amp;);</code></p>
+<h3 id="ii">转发的窘境 II<a class="headerlink" href="#ii" title="Permanent link">&para;</a></h3>
+<p>其次，这种方式 <strong>更本质的缺点</strong> 是：<code>factory</code> 内部，因为 <code>arg</code> 一定是左值，无法触发移动语义：</p>
+<p><code>c++
+template&lt;typename T, typename Arg&gt;
+shared_ptr&lt;T&gt; factory(Arg const&amp; arg) {
+    return shared_ptr&lt;T&gt;(new T(arg/* arg 有名字，一定是左值，无法触发移动语义*/));
+}</code></p>
+<h2 id="stdforward">完美转发 <code>std::forward</code><a class="headerlink" href="#stdforward" title="Permanent link">&para;</a></h2>
+<p>我们之前比较友好但是不严谨地定义了“完美转发”是“外层 warpper（<code>factory</code>函数）就像不存在，内层函数像是被直接调用一样”。</p>
+<p>完美转发的严谨定义其实应该是：</p>
+<ol>
+<li>调用 wrapper （<code>factory</code>）时传递的是左值，内层函数被调用时得到的就是左值</li>
+<li>调用 wrapper （<code>factory</code>）时传递的是右值，内层函数被调用时得到的就是右值</li>
+</ol>
+<p>这个时候，我们使用 <code>std::forward</code> 就可以达到这个目的。</p>
+<p>看以下的例子：</p>
+<p>```c++</p>
+<h1 id="include">include <iostream><a class="headerlink" href="#include" title="Permanent link">&para;</a></h1>
+<h1 id="include_1">include <utility><a class="headerlink" href="#include_1" title="Permanent link">&para;</a></h1>
+<h1 id="include_2">include <memory><a class="headerlink" href="#include_2" title="Permanent link">&para;</a></h1>
+<p>using namespace std;
+class CBase {
+public:
+    CBase(int&amp;) {
+        cout &lt;&lt; "CBase(int&amp;)" &lt;&lt; endl;
+    }</p>
+<div class="codehilite"><pre><span></span><code>CBase(int&amp;&amp;) {
+    cout &lt;&lt; &quot;CBase(int&amp;&amp;)&quot; &lt;&lt; endl;
+}
+</code></pre></div>
+
+<p>};</p>
+<p>template<typename T, typename Arg>
+shared_ptr<T> facotry(Arg&amp;&amp; arg) {
+    return shared_ptr<T>(new T(std::forward<Arg>(arg)));
+}</p>
+<p>int main() {
+    int value = 5;
+    auto p1 = facotry<CBase>(5);
+    auto p2 = facotry<CBase>(value);
+}
+```</p>
+<p>会输出：</p>
+<p><code>text
+CBase(int&amp;&amp;)  # 对应了 facotry&lt;CBase&gt;(5);
+CBase(int&amp;)   # 对应了 facotry&lt;CBase&gt;(value);</code></p>
+<p>这说明 <code>forward</code> 确实“完美转发”了参数：</p>
+<ul>
+<li>当调用 <code>facotry&lt;CBase&gt;(5)</code> 时，<code>5</code> 是右值，传递给 <code>new T(std::forward&lt;Arg&gt;(arg))</code> 的也是右值，最终触发的是 <code>CBase(int&amp;&amp;)</code></li>
+<li>当调用 <code>facotry&lt;CBase&gt;(value)</code> 时，<code>value</code> 是左值，传递给 <code>new T(std::forward&lt;Arg&gt;(arg))</code> 的也是左值，最终触发的是 <code>CBase(int&amp;)</code></li>
+</ul>
+<p>为什么会这样呢？等我们学习了“万能引用”和“引用折叠”后，就可以剖析 <code>std::forward</code> 的代码实现了。</p>
+<h2 id="stdforward_1"><code>std::forward</code> 代码剖析<a class="headerlink" href="#stdforward_1" title="Permanent link">&para;</a></h2>
+<p>要解读 <code>std::forward</code> 内部代码实现，需要先掌握 <strong>万能引用</strong> 和 <strong>引用折叠</strong> 的知识。</p>
+<h3 id="_3">万能引用<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>对于一个普通函数，它的形参，要么接受左值、要么接受右值类型。就像我们这里的 <code>foo1</code> 只能接收左值；<code>foo2</code> 只能接收右值。</p>
+<p>```c++</p>
+<h1 id="include_3">include <iostream><a class="headerlink" href="#include_3" title="Permanent link">&para;</a></h1>
+<h1 id="include_4">include <utility><a class="headerlink" href="#include_4" title="Permanent link">&para;</a></h1>
+<h1 id="include_5">include <memory><a class="headerlink" href="#include_5" title="Permanent link">&para;</a></h1>
+<p>using namespace std;</p>
+<p>void foo1(int&amp;) {
+    cout &lt;&lt; "foo(int&amp;)" &lt;&lt; endl;
+}</p>
+<p>void foo2(int&amp;&amp;) {
+    cout &lt;&lt; "foo(int&amp;&amp;)" &lt;&lt; endl;
+}</p>
+<p>int main() {
+    int value = 5;
+    foo1(5);     // 错
+    foo1(value); // 对</p>
+<div class="codehilite"><pre><span></span><code>foo2(5);     // 对
+foo2(value); // 错
+</code></pre></div>
+
+<p>}
+```</p>
+<p>但是，从 C++11 开始，规定了一种特殊的形式下，函数形参既可以匹配左值，也可以匹配右值。</p>
+<p>这种情况必须是模板的形式，并且以 <code>&amp;&amp;</code> 作为形参数。它被称为“万能引用”（英文为 universal reference 或 forwarding refference）。</p>
+<p>以下的 <code>foo</code> 的形参就是“万能引用”：</p>
+<p><code>c++
+template&lt;typename T&gt;
+void foo(T&amp;&amp; arg) {
+    cout &lt;&lt; "foo(T&amp;&amp; arg)" &lt;&lt; endl;
+}</code></p>
+<p>它既可以匹配左值，又可以匹配右值：</p>
+<p><code>c++
+int main() {
+    int value = 5;
+    foo(5);     // 可以
+    foo(value); // 可以
+}</code></p>
+<p>那为什么这种神奇的形式，可以既匹配左值，又匹配右值呢，其实是因为 C++11 引入了引用折叠。</p>
+<h3 id="_4">引用折叠<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>在 C++11 之前，是不允许引用的引用存在的。但是 C++11 之后，引用的引用在特定情况下允许存在，他们会在编译时，被自动化简为左值引用或者右值引用，化简的过程称为 <strong>引用折叠</strong>。</p>
+<p>化简的规则如下：</p>
+<p><code>text
+T&amp; &amp;   =&gt; T&amp;
+T&amp;&amp; &amp;  =&gt; T&amp;
+T&amp; &amp;&amp;  =&gt; T&amp;
+T&amp;&amp; &amp;&amp; =&gt; T&amp;&amp;</code></p>
+<p>它是怎么在“万能引用”中发挥作用的呢？这是因为 C++ 里规定了万能引用（模板）被调用时，模板参数的展开规则如下：</p>
+<ol>
+<li>当 foo 调用时实参为类型T的左值，那么模板T会被展开为 T&amp;</li>
+<li>当 foo 调用时实参为类型T的右值，那么模板T会被展开为 T</li>
+</ol>
+<p>我们回顾我们刚才的代码：</p>
+<p>```c++
+template<typename T>
+void foo(T&amp;&amp; arg) {
+    cout &lt;&lt; "foo(T&amp;&amp; arg)" &lt;&lt; endl;
+}</p>
+<p>int main() {
+    int value = 5;
+    foo(value); // 左值，模板T 被展开为 int&amp;
+    foo(5);     // 右值，模板T 被展开为 int
+}
+```</p>
+<p>所以当 <code>foo(value)</code> 调用时， <code>void foo(T&amp;&amp; arg)</code> 中的 <code>T</code> 会被展开为 <code>int&amp;</code>，函数被展开为 <code>void foo(int&amp; &amp;&amp; arg)</code>，经过引用折叠，得到的是 <code>void foo(int&amp; arg)</code>，匹配左值。</p>
+<p>类似的，当 <code>foo(5)</code> 调用时， <code>void foo(T&amp;&amp; arg)</code> 中的 <code>T</code> 会被展开为 <code>int</code>，函数被展开为 <code>void foo(int &amp;&amp; arg)</code>，匹配右值。</p>
+<h3 id="stdforward_2">std::forward 的原理剖析<a class="headerlink" href="#stdforward_2" title="Permanent link">&para;</a></h3>
+<p>现在我们可以来查看 <code>std::forward</code> 中的实现原理了。查看库函数中的原始实现：</p>
+<p return="return" static_cast__Tp___t_="static_cast&lt;_Tp&amp;&amp;&gt;(__t);">```c++
+template<typename _Tp>
+constexpr _Tp&amp;&amp;
+forward(typename std::remove_reference&lt;_Tp&gt;::type&amp; __t) noexcept</p>
+<p>template<typename _Tp>
+constexpr _Tp&amp;&amp;
+forward(typename std::remove_reference&lt;_Tp&gt;::type&amp;&amp; __t) noexcept {
+    static_assert(!std::is_lvalue_reference&lt;_Tp&gt;::value, "template argument"
+    " substituting _Tp is an lvalue reference type");
+    return static_cast&lt;_Tp&amp;&amp;&gt;(__t);
+}
+```</p>
+<p>与上一篇文章类似，去掉 <code>constexpr</code>、<code>static_assert</code>、<code>noexcept</code> 这些非核心重点，以及简化上一篇文章介绍过的 <code>remove_reference</code> 之后：</p>
+<p>```c++
+template<typename _Tp>
+_Tp&amp;&amp; forward(_TP&amp; __t) {
+    return static_cast&lt;_Tp&amp;&amp;&gt;(__t);
+}</p>
+<p>template<typename _Tp>
+_Tp&amp;&amp; forward(_TP&amp;&amp; __t) {
+    return static_cast&lt;_Tp&amp;&amp;&gt;(__t);
+}
+```</p>
+<p>当 <code>forward</code> 调用时传递的是左值时，会匹配模板特例：</p>
+<p><code>c++
+template&lt;typename _Tp&gt;
+_Tp&amp;&amp; forward(_TP&amp; __t) {
+    return static_cast&lt;_Tp&amp;&amp;&gt;(__t);
+}</code></p>
+<p><code>_TP</code> 会被展开为 <code>T&amp;</code>：</p>
+<p><code>c++
+T&amp; &amp;&amp; forward(T&amp; &amp; __t) {
+    return static_cast&lt;T&amp; &amp;&amp;&gt;(__t);
+}</code></p>
+<p>经引用折叠后得到：</p>
+<p><code>c++
+T&amp; forward(T&amp; __t) {
+    return static_cast&lt;T&amp;&gt;(__t);
+}</code></p>
+<p>也就说把 <code>__t</code> 转为左值引用类型后返回。</p>
+<p>类似地，如果 <code>forward</code> 调用时传递的是右值时，那么会匹配模板特例：</p>
+<p><code>c++
+template&lt;typename _Tp&gt;
+_Tp&amp;&amp; forward(_TP&amp;&amp; __t) {
+    return static_cast&lt;_Tp&amp;&amp;&gt;(__t);
+}</code></p>
+<p><code>_TP</code> 会被展开为 <code>T</code>：</p>
+<p><code>c++
+T&amp;&amp; forward(T &amp;&amp; __t) {
+    return static_cast&lt;T&amp;&amp;&gt;(__t);
+}</code></p>
+<p>也就说把 <code>__t</code> 转为右值引用类型后返回。</p>
                 
               
               
@@ -802,7 +989,7 @@ template&lt;typename T, typename std::enable_if&lt;!py::detail::is_pyobject&lt;T
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="012_enable_if.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: enable_if 新标准" rel="prev">
+        <a href="01_rvalue_ref.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: 右值引用" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -811,20 +998,20 @@ template&lt;typename T, typename std::enable_if&lt;!py::detail::is_pyobject&lt;T
               <span class="md-footer__direction">
                 上一页
               </span>
-              enable_if 新标准
+              右值引用
             </div>
           </div>
         </a>
       
       
         
-        <a href="014_materials.html" class="md-footer__link md-footer__link--next" aria-label="下一页: 模板元编程" rel="next">
+        <a href="03_varadic_template.html" class="md-footer__link md-footer__link--next" aria-label="下一页: 可变参模板" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 下一页
               </span>
-              模板元编程
+              可变参模板
             </div>
           </div>
           <div class="md-footer__button md-icon">

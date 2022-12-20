@@ -1,3 +1,5 @@
+<!-- Custom HTML site displayed as the Home chapter -->
+
 
 <!doctype html>
 <html lang="zh" class="no-js">
@@ -9,21 +11,21 @@
       
       
       
-        <link rel="canonical" href="https://blog.horrordor.tk/main/github/07_GitHub_Pages.html">
+        <link rel="canonical" href="https://blog.horrordor.tk/master/index.html">
       
-      <link rel="icon" href="../assets/favicon.png">
+      <link rel="icon" href="assets/favicon.png">
       <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.1.11">
     
     
       
-        <title>GitHub Pages 的生成和使用 - horrordor's blog</title>
+        <title>horrordor's blog</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.3754935a.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.3754935a.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.f1a3b89f.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/palette.f1a3b89f.min.css">
         
           
           
@@ -59,17 +61,12 @@
     <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="blue-grey">
   
     
-    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    <script>function __prefix(e){return new URL(".",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
-      
-        
-        <a href="#github-pages" class="md-skip">
-          跳转至
-        </a>
       
     </div>
     <div data-md-component="announce">
@@ -78,9 +75,9 @@
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../index.html" title="horrordor&#39;s blog" class="md-header__button md-logo" aria-label="horrordor's blog" data-md-component="logo">
+    <a href="index.html" title="horrordor&#39;s blog" class="md-header__button md-logo" aria-label="horrordor's blog" data-md-component="logo">
       
-  <img src="../assets/logo.svg" alt="logo">
+  <img src="assets/logo.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -96,7 +93,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              GitHub Pages 的生成和使用
+              首页
             
           </span>
         </div>
@@ -155,6 +152,7 @@
     <div class="md-container" data-md-component="container">
       
       
+
         
           
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
@@ -164,10 +162,12 @@
         
   
   
+    
+  
 
 
   <li class="md-tabs__item">
-    <a href="../index.html" class="md-tabs__link">
+    <a href="index.html" class="md-tabs__link md-tabs__link--active">
       首页
     </a>
   </li>
@@ -176,15 +176,13 @@
         
   
   
-    
-  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="01_how_to_pr.html" class="md-tabs__link md-tabs__link--active">
+      <a href="github/01_how_to_pr.html" class="md-tabs__link">
         一起学 GitHub
       </a>
     </li>
@@ -200,7 +198,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../learn_cpp/01_rvalue_ref.html" class="md-tabs__link">
+      <a href="learn_cpp/01_rvalue_ref.html" class="md-tabs__link">
         研究 C++ 新语法
       </a>
     </li>
@@ -212,6 +210,236 @@
 </nav>
         
       
+<style>
+    @-webkit-keyframes mdx-heart {
+
+        0%,
+        40%,
+        80%,
+        to {
+            transform: scale(1)
+        }
+
+        20%,
+        60% {
+            transform: scale(1.15)
+        }
+    }
+
+    @keyframes mdx-heart {
+
+        0%,
+        40%,
+        80%,
+        to {
+            transform: scale(1)
+        }
+
+        20%,
+        60% {
+            transform: scale(1.15)
+        }
+    }
+
+    .mdx-hero {
+        color: var(--md-primary-bg-color);
+        margin: 0 .8rem
+    }
+
+    .mdx-hero h1 {
+        color: currentColor;
+        font-weight: 700;
+        margin-bottom: 1rem
+    }
+
+    @media screen and (max-width: 29.9375em) {
+        .mdx-hero h1 {
+            font-size: 1.4rem
+        }
+    }
+
+    .mdx-hero__content {
+        padding-bottom: 10rem
+    }
+
+    @media screen and (min-width: 60em) {
+        .mdx-hero {
+            align-items: stretch;
+            display: flex
+        }
+
+        .mdx-hero__content {
+            margin-top: 3.5rem;
+            max-width: 19rem;
+            /* padding-bottom: 14vw */
+        }
+
+        .mdx-hero__image {
+            order: 1;
+            transform: translateX(4rem);
+            width: 40rem;
+            height: 20rem
+        }
+    }
+
+    @media screen and (min-width: 76.25em) {
+        .mdx-hero__image {
+            transform: translateX(10rem)
+        }
+    }
+
+    .mdx-hero .md-button {
+        color: var(--md-primary-bg-color);
+        margin-right: .5rem;
+        margin-top: .5rem
+    }
+
+    .mdx-hero .md-button:focus,
+    .mdx-hero .md-button:hover {
+        background-color: var(--md-accent-fg-color);
+        border-color: var(--md-accent-fg-color);
+        color: var(--md-accent-bg-color)
+    }
+
+    .mdx-hero .md-button--primary {
+        background-color: var(--md-primary-bg-color);
+        border-color: var(--md-primary-bg-color);
+        color: #02a6f2
+    }
+
+    .bilibili:hover path {
+        fill: #3dc2ff;
+    }
+
+    .tx-container {
+        padding-top: .0rem;
+        background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1123 258'><path d='m1125,30c0,0 0,256 0,256l-1125,0l0,-48c0,0 16,5 55,5c116,0 197,-92 325,-92c121,0 114,46 254,46c140,0 214,-167 572,-166l-81,-1z' style='fill: hsla(0, 0%, 100%, 1)' /></svg>") no-repeat bottom, linear-gradient(to bottom, var(--md-primary-fg-color), #add7ff 100%, var(--md-default-bg-color) 99%);
+        /*background: linear-gradient(to bottom, var(--md-primary-fg-color), #add7ff 100%,#02a6f2 99%)*/
+    }
+
+    .feature-item h2 svg {
+        height: 30px;
+        float: left;
+        margin-right: 10px;
+        transform: translateY(10%);
+    }
+
+    .top-hr {
+        margin-top: 42px;
+    }
+
+    .feature-item {
+        font-family: 'Lato', sans-serif;
+        font-weight: 300;
+        box-sizing: border-box;
+        padding: 0 15px;
+        word-break: break-word
+    }
+
+    .feature-item h2 {
+        color: #333;
+        font-weight: 300;
+        font-size: 25px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: normal;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        font-family: inherit;
+    }
+
+    .feature-item p {
+        font-size: 16px;
+        line-height: 1.8em;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        color: #111;
+        margin: 0 0 10px;
+        display: block;
+    }
+
+    @media screen and (min-width:76.25em) {
+        .md-sidebar--primary {
+            display: none
+        }
+
+        .top-hr {
+            width: 100%;
+            display: flex;
+            max-width: 61rem;
+            margin-right: auto;
+            margin-left: auto;
+            padding: 0 .2rem;
+        }
+
+        .bottom-hr {
+            margin-top: 10px;
+            width: 100%;
+            display: flex;
+            max-width: 61rem;
+            margin-right: auto;
+            margin-left: auto;
+            padding: 0 .2rem;
+        }
+
+        .feature-item {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .feature-item:hover {
+            background-color: #add7ff;
+            border-radius: 3px;
+        }
+    }
+
+    .hr {
+        border-bottom: 1px solid #eee;
+        width: 100%;
+        margin: 20px 0;
+    }
+
+    .md-footer-meta__inner {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-top: 1.0rem;
+    }
+
+    .md-footer-social {
+        padding-top: 20px;
+    }
+</style>
+
+<!-- Main site Entry button descriptions -->
+<section class="tx-container">
+    <div class="md-grid md-typeset">
+        <div class="mdx-hero">
+            <!-- Hero content -->
+            <div class="mdx-hero__content">
+                <h1>horrordor's blog</h1>
+                <p>我们所经历的每一个平凡的日常，也许就是连续发生的奇迹。</p>
+                <a href="github/01_how_to_pr.html" title="如何提交 PR"
+                    class="md-button md-button--primary">
+                    一起学习
+                </a>
+                <a href="https://github.com/horrordor/blog/" title="前往 GitHub 仓库" class="md-button">
+                    GitHub 仓库
+                </a>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!-- Main site box descriptions -->
+<div class="top-hr">
+
+</div>
+
+
+
       <main class="md-main" data-md-component="main">
         <div class="md-main__inner md-grid">
           
@@ -227,9 +455,9 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../index.html" title="horrordor&#39;s blog" class="md-nav__button md-logo" aria-label="horrordor's blog" data-md-component="logo">
+    <a href="index.html" title="horrordor&#39;s blog" class="md-nav__button md-logo" aria-label="horrordor's blog" data-md-component="logo">
       
-  <img src="../assets/logo.svg" alt="logo">
+  <img src="assets/logo.svg" alt="logo">
 
     </a>
     horrordor's blog
@@ -256,11 +484,19 @@
 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../index.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="index.html" class="md-nav__link md-nav__link--active">
         首页
       </a>
+      
     </li>
   
 
@@ -271,14 +507,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
       
       <label class="md-nav__link" for="__nav_2">
         一起学 GitHub
@@ -296,7 +530,7 @@
   
   
     <li class="md-nav__item">
-      <a href="01_how_to_pr.html" class="md-nav__link">
+      <a href="github/01_how_to_pr.html" class="md-nav__link">
         如何提交 PR
       </a>
     </li>
@@ -308,7 +542,7 @@
   
   
     <li class="md-nav__item">
-      <a href="02_learn_from_pr.html" class="md-nav__link">
+      <a href="github/02_learn_from_pr.html" class="md-nav__link">
         如何通过 PR 学习
       </a>
     </li>
@@ -320,7 +554,7 @@
   
   
     <li class="md-nav__item">
-      <a href="03_SSH_for_github.html" class="md-nav__link">
+      <a href="github/03_SSH_for_github.html" class="md-nav__link">
         github SSH免密码登录设置
       </a>
     </li>
@@ -332,7 +566,7 @@
   
   
     <li class="md-nav__item">
-      <a href="04_beauty_code.html" class="md-nav__link">
+      <a href="github/04_beauty_code.html" class="md-nav__link">
         美化代码工具分享
       </a>
     </li>
@@ -344,7 +578,7 @@
   
   
     <li class="md-nav__item">
-      <a href="05_get_started_with_Markdown.html" class="md-nav__link">
+      <a href="github/05_get_started_with_Markdown.html" class="md-nav__link">
         快速上手 Markdown
       </a>
     </li>
@@ -356,7 +590,7 @@
   
   
     <li class="md-nav__item">
-      <a href="06_Mkdocs.html" class="md-nav__link">
+      <a href="github/06_Mkdocs.html" class="md-nav__link">
         MkDocs 工具使用
       </a>
     </li>
@@ -366,58 +600,11 @@
             
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          GitHub Pages 的生成和使用
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="07_GitHub_Pages.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="github/07_GitHub_Pages.html" class="md-nav__link">
         GitHub Pages 的生成和使用
       </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#github-pages_1" class="md-nav__link">
-    什么是 GitHub Pages ？
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#github-pages-myblog" class="md-nav__link">
-    在 GitHub Pages 中发布 myblog
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -427,7 +614,7 @@
   
   
     <li class="md-nav__item">
-      <a href="08_GitHub_Actions.html" class="md-nav__link">
+      <a href="github/08_GitHub_Actions.html" class="md-nav__link">
         GitHub Actions 介绍 & 使用
       </a>
     </li>
@@ -439,7 +626,7 @@
   
   
     <li class="md-nav__item">
-      <a href="09_merge_conflicts.html" class="md-nav__link">
+      <a href="github/09_merge_conflicts.html" class="md-nav__link">
         解决 Git 冲突 Merge Conflicts
       </a>
     </li>
@@ -451,7 +638,7 @@
   
   
     <li class="md-nav__item">
-      <a href="10_git_rebase.html" class="md-nav__link">
+      <a href="github/10_git_rebase.html" class="md-nav__link">
         删除指定 commit 小妙招 git rebase
       </a>
     </li>
@@ -493,7 +680,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../learn_cpp/01_rvalue_ref.html" class="md-nav__link">
+      <a href="learn_cpp/01_rvalue_ref.html" class="md-nav__link">
         右值引用
       </a>
     </li>
@@ -505,7 +692,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../learn_cpp/02_forward.html" class="md-nav__link">
+      <a href="learn_cpp/02_forward.html" class="md-nav__link">
         完美转发
       </a>
     </li>
@@ -517,7 +704,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../learn_cpp/03_varadic_template.html" class="md-nav__link">
+      <a href="learn_cpp/03_varadic_template.html" class="md-nav__link">
         可变参模板
       </a>
     </li>
@@ -529,7 +716,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../learn_cpp/04_singleton.html" class="md-nav__link">
+      <a href="learn_cpp/04_singleton.html" class="md-nav__link">
         单例模式
       </a>
     </li>
@@ -541,7 +728,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../learn_cpp/05_using_against_typedef.html" class="md-nav__link">
+      <a href="learn_cpp/05_using_against_typedef.html" class="md-nav__link">
         类型别名：从 typedef 到 using
       </a>
     </li>
@@ -553,7 +740,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../learn_cpp/06_functor.html" class="md-nav__link">
+      <a href="learn_cpp/06_functor.html" class="md-nav__link">
         仿函数
       </a>
     </li>
@@ -565,7 +752,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../learn_cpp/07_complie_link_macro.html" class="md-nav__link">
+      <a href="learn_cpp/07_complie_link_macro.html" class="md-nav__link">
         编译链接和宏本质
       </a>
     </li>
@@ -577,7 +764,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../learn_cpp/08_template.html" class="md-nav__link">
+      <a href="learn_cpp/08_template.html" class="md-nav__link">
         模板 template
       </a>
     </li>
@@ -589,7 +776,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../learn_cpp/09_template_special.html" class="md-nav__link">
+      <a href="learn_cpp/09_template_special.html" class="md-nav__link">
         模板特例
       </a>
     </li>
@@ -601,7 +788,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../learn_cpp/11_template_sfinae.html" class="md-nav__link">
+      <a href="learn_cpp/11_template_sfinae.html" class="md-nav__link">
         搞懂 SFINAE
       </a>
     </li>
@@ -613,7 +800,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../learn_cpp/012_enable_if.html" class="md-nav__link">
+      <a href="learn_cpp/012_enable_if.html" class="md-nav__link">
         enable_if 新标准
       </a>
     </li>
@@ -625,7 +812,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../learn_cpp/13_enable_if_redefine_mistake.html" class="md-nav__link">
+      <a href="learn_cpp/13_enable_if_redefine_mistake.html" class="md-nav__link">
         enable_if 的重定义错误
       </a>
     </li>
@@ -637,7 +824,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../learn_cpp/014_materials.html" class="md-nav__link">
+      <a href="learn_cpp/014_materials.html" class="md-nav__link">
         模板元编程
       </a>
     </li>
@@ -657,79 +844,9 @@
               </div>
             
             
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#github-pages_1" class="md-nav__link">
-    什么是 GitHub Pages ？
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#github-pages-myblog" class="md-nav__link">
-    在 GitHub Pages 中发布 myblog
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
           
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
-              
-                
-                  <a href="https://github.com/horrordor/blog/edit/master/docs/github/07_GitHub_Pages.md" title="编辑此页" class="md-content__button md-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
-                  </a>
-                
-                
-                <h1 id="github-pages"><a href="https://pages.github.com/">GitHub Pages</a> 的生成和使用<a class="headerlink" href="#github-pages" title="Permanent link">&para;</a></h1>
-<p>看了前面 MkDocs 的介绍，我们可以使用 MkDocs 工具生成整个网站的 HTML 文件，我们把它上传到云服务器上，那就可以当作自己的博客了。但是这样做费时费力，有没有简单方便，最好还是免费的方法呢？答案是有的，这里我们就给大家介绍一下 <a href="https://pages.github.com/">GitHub Pages</a> 的生成和使用。</p>
-<h2 id="github-pages_1">什么是 GitHub Pages ？<a class="headerlink" href="#github-pages_1" title="Permanent link">&para;</a></h2>
-<p>GitHub Pages 是 GitHub 所提供的一项功能，它的作用就是使 GitHub 中的每一个仓库都有与之对应的网站。</p>
-<h2 id="github-pages-myblog">在 GitHub Pages 中发布 myblog<a class="headerlink" href="#github-pages-myblog" title="Permanent link">&para;</a></h2>
-<p>首先，我们需要创建一个远程的 GitHub 仓库，并将并且将刚刚的 myblog 推送到了这个仓库。然后使用 <code>mkdocs build</code> 命令编译得到 HTML 文件。删掉<code>site</code>这个静态网站之外的其它文件，将 site 文件中的目录都移动到根目录，最后删除 site 文件夹：</p>
-<p><code>shell
-rm -rf docs/ mkdocs.yml
-cp -R site/* ./
-rm -rf site/</code></p>
-<p>我们将刚刚的改动进行 commit  和 push：</p>
-<p><code>shell
-git commit -a -m "hello github pages"
-git push origin master</code></p>
-<p>接下来，我们找到远程仓库的 Settings 一栏，再找到 Pages 这一栏设置。这里我们选择 <code>master branch</code> 作为 GitHub Pages 所在的分支，然后点击 Save 按钮。这样，我们就可以在 GitHub Pages 中看到我们的网站了。</p>
-<p>我们点开这个 <code>&lt;账号&gt;github.io/&lt;仓库名&gt;</code> 的链接，就可以发现我们的博客已经成功上线了。</p>
-<p>看到这里，相信大家已经完全有能力来自己搭建一个网站了，如果不嫌麻烦的话，我们完全可以按照以下步骤来搭建网站：</p>
-<ul>
-<li>先用 Markdown 写内容</li>
-<li>再用 <code>mkdocs build</code> 编译得到 HTML 文件</li>
-<li>把 HTML 文件上传到 GitHub Pages 所在分支上</li>
-</ul>
-<p>但是这样的流程还是太繁琐了，我们在 GitHub 的操作上花费了太多精力。要是我们可以只管写博客，其他的工作可以自动化完成就好了。那如何做到自动化呢？请看我们下一篇的介绍。</p>
-                
               
               
                 
@@ -747,73 +864,16 @@ git push origin master</code></p>
         
       </main>
       
-        
-<footer class="md-footer">
-  
-    <nav class="md-footer__inner md-grid" aria-label="Footer">
-      
-        
-        <a href="06_Mkdocs.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: MkDocs 工具使用" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                上一页
-              </span>
-              MkDocs 工具使用
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="08_GitHub_Actions.html" class="md-footer__link md-footer__link--next" aria-label="下一页: GitHub Actions 介绍 &amp; 使用" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                下一页
-              </span>
-              GitHub Actions 介绍 & 使用
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-footer-copyright">
-        
-          <div class="md-footer-copyright__highlight">
-            Copyright &copy; horrordor
-          </div>
-        
-        Made with
-        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-          Material for MkDocs
-        </a>
-        
-      </div>
-      
-    </div>
-  </div>
-</footer>
-      
     </div>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.top", "instant"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.477d984a.min.js", "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.top", "instant"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.477d984a.min.js", "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.ddd52ceb.min.js"></script>
+      <script src="assets/javascripts/bundle.ddd52ceb.min.js"></script>
       
-        <script src="../javascripts/config.js"></script>
+        <script src="javascripts/config.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       
