@@ -893,8 +893,8 @@
 </ul>
 <h3 id="_1">本地生成密钥对<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <p>使用命令：</p>
-<div class="highlight"><pre><span></span><code>ssh-keygen -t rsa -b <span class="m">4096</span> -C <span class="s2">&quot;最好为github的账号&quot;</span>
-</code></pre></div>
+<pre><code class="language-shell">ssh-keygen -t rsa -b 4096 -C &quot;最好为github的账号&quot;
+</code></pre>
 <p>后面一路直接回车,接着就在（用户/.ssh）目录下生成了两个文件</p>
 <ul>
 <li>id_rsa是私钥文件</li>
@@ -904,8 +904,8 @@
 <p>打开github，点击个人页面的头像，点击<code>Settings</code>，然后点击 <code>SSH and GPG keys</code>，接下来点击<code>New SSH Key</code>，打开刚刚在本地生成的<code>id_rsa.pub</code>文件，将里面的所有内容复制到对话框中。最终点击<code>Add SSH Key</code>按钮 就能成功添加啦</p>
 <h3 id="_2">测试使用<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p>使用命令：</p>
-<div class="highlight"><pre><span></span><code>ssh -T git@github.com
-</code></pre></div>
+<pre><code class="language-shell">ssh -T git@github.com
+</code></pre>
 <p>检验是否配置成功</p>
 <div class="admonition note">
 <p class="admonition-title">第一次连接，会有提示是否信任github服务器，我们需要输入yes</p>
@@ -992,7 +992,7 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.top", "instant"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.top", "navigation.instant"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../assets/javascripts/bundle.5a2dcb6a.min.js"></script>

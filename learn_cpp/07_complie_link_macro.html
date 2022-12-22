@@ -945,23 +945,23 @@
 <p>但是，在 C++ 标准中，并没有对哪些声明应该放在头文件，哪些声明应该放在源文件中有标准规定，这种“约定”只是工程的最佳实践。</p>
 <p>实际上，<strong>编译时的基本单位是源文件</strong> 。那么头文件到底有什么作用呢？我们用 <code>helloworld</code> 这个程序来解析解析这背后的原理。因为 IDE 和 cmake 这类构建工具会屏蔽原理，接下来我们就以纯手工 gcc 的方式来编译、链接一个程序。</p>
 <p>在 <code>main.cpp</code> 文件中编写如下代码：</p>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<pre><code class="language-c++">#include &lt;stdio.h&gt;
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello World</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+int main(int argc, char* argv[]) {
+    printf(&quot;Hello World\n&quot;);
+    return 0;
+}
+</code></pre>
 <p>我们可以通过 gcc 来将这个 cpp 文件编译成一个可执行程序，使用如下命令：</p>
-<div class="highlight"><pre><span></span><code>gcc main.cpp -o ttlarva.exe
-</code></pre></div>
+<pre><code class="language-shell">gcc main.cpp -o ttlarva.exe
+</code></pre>
 <p>即可在当前目录生成 <code>ttlarva.exe</code> 文件，并且运行该文件就可以得到 Hello World 的打印结果。</p>
 <p>不过这样依然屏蔽了程序诞生的细节。实际上，这一行命令 gcc 帮我们完成了三件事情：预编译、编译、链接。</p>
 <p>接下来我们通过对 gcc 设置编译选项，就可以看到这几个过程的细节。</p>
 <h3 id="_3">预编译<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>gcc 中的 -E 选项可以显示预编译的结果，所谓预编译就是把预编译指令给转化为纯 C 代码。通过运行如下命令进行 <strong>预编译</strong>：</p>
-<div class="highlight"><pre><span></span><code>gcc -E main.cpp &gt; main.i
-</code></pre></div>
+<pre><code class="language-shell">gcc -E main.cpp &gt; main.i
+</code></pre>
 <p>这时候我们就获得了一个 <code>main.i</code> 文件。打开该文件我们可以看到，原本简单几行的 helloworld 代码变成了近千行。且在代码的最末尾部分，就是我们在 <code>main.cpp</code> 中写的 <code>main</code> 函数。</p>
 <p>那上面多出的几百行代码是怎么来的呢？其实对比可以发现，原本 <code>#include &lt;stdio.h&gt;</code> 在的位置变成了那些新的代码。这些代码就是 <code>#include &lt;stdio.h&gt;</code> 这一条预编译指令得来的。</p>
 <p><code>include</code> 的作用大家可以简单理解为：找到对应的文件，然后把文件的内容复制粘贴到当前的源文件中。大家可以验证 <code>main.i</code> 上方的代码就是 <code>stdio.h</code> 中的内容。</p>
@@ -975,8 +975,8 @@
 <h3 id="_4">编译<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>预编译得到的纯 C 代码文件经过编译就可以得到了 object 文件。object 文件中包含了对应的机器码。</p>
 <p>我们可以使用如下命令将 <code>main.cpp</code> <strong>编译</strong> 成 <code>main.o</code> 文件。</p>
-<div class="highlight"><pre><span></span><code>gcc - c main.cpp
-</code></pre></div>
+<pre><code class="language-shell">gcc - c main.cpp
+</code></pre>
 <p><code>main.o</code> 文件其实就是一个二进制文件，包含了程序功能的机器码。不过它并不能直接运行，需要链接才可以。</p>
 <h3 id="_5">链接<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>为什么我们编译得到的机器码不能直接运行，而是要经过链接才能成为程序呢？</p>
@@ -984,36 +984,36 @@
 <p>链接的责任就是把各个编译单元给“拼接”到一起，“打通”各个 object 文件之间的调用关系。</p>
 <p>我们通过下面的例子获得更清楚的理解。</p>
 <p>首先我们创建一个 <code>my_math.cpp</code>文件。</p>
-<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">my_add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">retrun</span><span class="w"> </span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+<pre><code class="language-c++">int my_add(int a, int b) {
+    retrun a+b;
+}
+</code></pre>
 <p>再在 <code>main.cpp</code> 文件中调用这个函数。</p>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<pre><code class="language-c++">#include &lt;stdio.h&gt;
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">my_add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"></span>
+int my_add(int a, int b)
 
-<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;5+9=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">my_add</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">9</span><span class="p">));</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+int main(int argc, char* argv[]) {
+    printf(&quot;5+9=%d\n&quot;, my_add(5,9));
+    return 0;
+}
+</code></pre>
 <p>然后分别编译这两个文件。</p>
-<div class="highlight"><pre><span></span><code>gcc - c main.cpp
+<pre><code class="language-shell">gcc - c main.cpp
 gcc - c my_math.cpp
-</code></pre></div>
+</code></pre>
 <p>编译完成后，我们就得到了 <code>main.o</code> 和 <code>my_math.o</code> 两个 object 文件。</p>
 <p>接着我们使用如下命令将两个文件 <strong>链接</strong> 到一起。</p>
-<div class="highlight"><pre><span></span><code>gcc main.o my_math.o -o ttlarva.exe
-</code></pre></div>
+<pre><code class="language-shell">gcc main.o my_math.o -o ttlarva.exe
+</code></pre>
 <p>我们就获得了类似之前的可执行程序 <code>ttlarva.exe</code>，运行该程序就得到了 <code>5+9=14</code> 的计算打印结果。</p>
 <p>对这种多个源文件的程序，我们就不能使用 <code>gcc main.cpp</code> 直接获得结果，会报错找不到 <code>my_add(int, int)</code> 函数的引用。这也是因为链接过程中找不到 <code>my_add</code> 的实现。</p>
 <h2 id="_6">宏的本质和优缺点<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>宏和 C++ 中的模板息息相关，可以这样说，说明模板的目的就是为了集成宏的优点，解决宏的缺点。</p>
 <h3 id="_7">宏的本质<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>宏的本质就是 <strong>查找替换</strong> ，所以大家应该有看到使用宏来代替函数的场景。</p>
-<div class="highlight"><pre><span></span><code><span class="cp">#define MYMAX(x,y)((x)&lt;(y)?(y):(x))</span>
-</code></pre></div>
+<pre><code class="language-c++">#define MYMAX(x,y)((x)&lt;(y)?(y):(x))
+</code></pre>
 <h3 id="_8">宏的优缺点<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>优点:</p>
 <ul>
@@ -1024,44 +1024,44 @@ gcc - c my_math.cpp
 <li>宏是没有类型检查的</li>
 </ul>
 <p>我们通过下面的例子获得更清楚的理解。</p>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<pre><code class="language-c++">#include &lt;stdio.h&gt;
 
-<span class="cp">#define MYMAX(x,y)((x)&lt;(y)?(y):(x))</span>
+#define MYMAX(x,y)((x)&lt;(y)?(y):(x))
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">MYMAX</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">));</span><span class="w"></span>
-<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%1f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">MYMAX</span><span class="p">(</span><span class="mf">3.14</span><span class="p">,</span><span class="w"> </span><span class="mf">2.73</span><span class="p">));</span><span class="w"></span>
-<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">MYMAX</span><span class="p">(</span><span class="s">&quot;short string&quot;</span><span class="p">,</span><span class="s">&quot;very very long string&quot;</span><span class="p">));</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+int main(int argc, char* argv[]) {
+    printf(&quot;%d\n&quot;, MYMAX(10, 5));
+    printf(&quot;%1f\n&quot;, MYMAX(3.14, 2.73));
+    printf(&quot;%s\n&quot;, MYMAX(&quot;short string&quot;,&quot;very very long string&quot;));
+    return 0;
+}
+</code></pre>
 <p>这里定义了一个 <code>MYMAX</code> 的宏，它的作用是取 x 和
 y 中的较大者。</p>
 <p>运行后发现如下输出：</p>
-<div class="highlight"><pre><span></span><code>10
+<pre><code class="language-text">10
 3.140000
 very very long string
-</code></pre></div>
+</code></pre>
 <p>运行没有报错，咋一看输出结果好像也并没有什么问题，但其实我们最后一次调用是有问题的。</p>
 <p>我们输出 <code>very very long string</code> 并不是因为这个字符串比较长，只是我们运气好。</p>
 <p>当我们调换最后一次调用两个参数的位置时：</p>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<pre><code class="language-c++">#include &lt;stdio.h&gt;
 
-<span class="cp">#define MYMAX(x,y)((x)&lt;(y)?(y):(x))</span>
+#define MYMAX(x,y)((x)&lt;(y)?(y):(x))
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">MYMAX</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">));</span><span class="w"></span>
-<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%1f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">MYMAX</span><span class="p">(</span><span class="mf">3.14</span><span class="p">,</span><span class="w"> </span><span class="mf">2.73</span><span class="p">));</span><span class="w"></span>
-<span class="w">    </span><span class="c1">//printf(&quot;%s\n&quot;, MYMAX(&quot;short string&quot;,&quot;very very long string&quot;));</span>
-<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">MYMAX</span><span class="p">(</span><span class="s">&quot;very very long string&quot;</span><span class="p">,</span><span class="s">&quot;short string&quot;</span><span class="p">));</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+int main(int argc, char* argv[]) {
+    printf(&quot;%d\n&quot;, MYMAX(10, 5));
+    printf(&quot;%1f\n&quot;, MYMAX(3.14, 2.73));
+    //printf(&quot;%s\n&quot;, MYMAX(&quot;short string&quot;,&quot;very very long string&quot;));
+    printf(&quot;%s\n&quot;, MYMAX(&quot;very very long string&quot;,&quot;short string&quot;));
+    return 0;
+}
+</code></pre>
 <p>运行结果如下：</p>
-<div class="highlight"><pre><span></span><code>10
+<pre><code class="language-text">10
 3.140000
 short string
-</code></pre></div>
+</code></pre>
 <p>第三次调用的结果不再是 <code>very very long string</code> 。</p>
 <p>为什么会这样呢？我们根据 <code>MYMAX</code> 宏的定义可以知道，在传递字符串的时候，字符串的比较实际上是其内存中地址的比较，而两者地址的比较在语言标准中是没有去做过明确规定的。</p>
 <p>综上所述，我们编写了一段意义不大的代码，它的运行结果和业务逻辑完全不相关。更恐怖的是，这类代码在编译时，连个报错或者是警告都没有。这直接拔高了我们以后查找 bug 的难度。</p>
@@ -1148,7 +1148,7 @@ short string
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.top", "instant"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.top", "navigation.instant"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../assets/javascripts/bundle.5a2dcb6a.min.js"></script>

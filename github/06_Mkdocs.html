@@ -925,13 +925,13 @@
 <p>下面我们就具体介绍一下如何使用它们打造属于自己的免费网站。我们首先来介绍一下 MkDocs。</p>
 <h2 id="mkdocs_1">MkDocs 介绍与安装<a class="headerlink" href="#mkdocs_1" title="Permanent link">&para;</a></h2>
 <p>MkDocs 是一个文本工具，我们可以使用 Markdown 写文章，接着再使用 MkDocs 命令，将其转变为 HTML 文件。MkDocs 是一个 Python 包，我们可以使用 <a href="https://pypi.org/project/pip/">pip</a> 来进行安装，安装命令如下：</p>
-<div class="highlight"><pre><span></span><code>python -m pip install mkdocs
-</code></pre></div>
+<pre><code class="language-shell">python -m pip install mkdocs
+</code></pre>
 <p>安装完 MkDocs 后，我们就可以运行 <code>mkdocs</code> 命令：</p>
-<div class="highlight"><pre><span></span><code>mkdocs
-</code></pre></div>
+<pre><code class="language-shell">mkdocs
+</code></pre>
 <p>可以看到相应的提示信息：</p>
-<div class="highlight"><pre><span></span><code>Usage: mkdocs <span class="o">[</span>OPTIONS<span class="o">]</span> COMMAND <span class="o">[</span>ARGS<span class="o">]</span>...
+<pre><code class="language-shell">Usage: mkdocs [OPTIONS] COMMAND [ARGS]...
 
   MkDocs - Project documentation with Markdown.
 
@@ -945,8 +945,8 @@ Commands:
   build      Build the MkDocs documentation
   gh-deploy  Deploy your documentation to GitHub Pages
   new        Create a new MkDocs project
-  serve      Run the <span class="nb">builtin</span> development server
-</code></pre></div>
+  serve      Run the builtin development server
+</code></pre>
 <h2 id="mkdocs_2">使用 MkDocs 创建工程<a class="headerlink" href="#mkdocs_2" title="Permanent link">&para;</a></h2>
 <p>接着，我们用 <code>mkdocs new</code> 命令来创建一个名叫 myblog 的工程。命令运行结束后，我们就可以看到<code>myblog</code>目录了。</p>
 <p>myblog 目录下只有两样东西，一个是 docs 目录和一个 yaml 文件，docs 目录下存放的就是 Markdown 文件，这里也就是我们网站的内容，yaml 文件是我们工程的配置文件。</p>
@@ -956,40 +956,40 @@ Commands:
 <h2 id="mkdocs_4">MkDocs 的配置<a class="headerlink" href="#mkdocs_4" title="Permanent link">&para;</a></h2>
 <p>通过改变  yaml 文件，我们可以改变网站的输出效果。那么 yaml 文件是如何起作用的呢？我们通过一个例子来了解一下。</p>
 <p>比如我们在  docs 目录下新增加一个 about.md 的文件，内容如下图所示：</p>
-<div class="highlight"><pre><span></span><code><span class="gh"># hello world</span>
-</code></pre></div>
+<pre><code class="language-markdown"># hello world
+</code></pre>
 <p>并且在  yaml 文件中做相应的修改：</p>
-<div class="highlight"><pre><span></span><code><span class="nt">site_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">My Docs</span><span class="w"></span>
-<span class="nt">nav</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">Home</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">index.md</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">About</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">about.md</span><span class="w"></span>
-</code></pre></div>
+<pre><code class="language-yaml">site_name: My Docs
+nav:
+    - Home: index.md
+    - About: about.md
+</code></pre>
 <p>重新编译，可以发现在网页中果然多了 about 这一栏。那么接下来我们就来看看 yaml 文件中的配置是如何起作用的。</p>
 <h3 id="1">1. 增加页面<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <p>如果我们想要在 mkdocs.yml 文件中配置添加页面，我们可以在并通过添加 <a href="https://mkdocs.zimoapps.com/user-guide/configuration/#nav">nav</a> 设置来实现：</p>
-<div class="highlight"><pre><span></span><code><span class="nt">site_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myproject</span><span class="w"></span>
-<span class="nt">nav</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">Home</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">index.md</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">About</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">about.md</span><span class="w"></span>
-</code></pre></div>
+<pre><code class="language-yaml">site_name: myproject
+nav:
+    - Home: index.md
+    - About: about.md
+</code></pre>
 <h3 id="2">2. 修改配置文件增加多级文档<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
 <p>我们也可以设置目录，增加多级文档：</p>
-<div class="highlight"><pre><span></span><code><span class="nt">site_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myproject</span><span class="w"></span>
-<span class="nt">nav</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">Home</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">index.md</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">Install</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">install.md</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">Documents</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">Usage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">usage.md</span><span class="w"></span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">Tutorial</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tutorial.md</span><span class="w"></span>
-</code></pre></div>
+<pre><code class="language-yaml">site_name: myproject
+nav:
+    - Home: index.md
+    - Install: install.md
+    - Documents:
+        - Usage: usage.md
+        - Tutorial: tutorial.md
+</code></pre>
 <h3 id="3">3. 主题化我们的文档<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
 <p>现在，更改配置文件以通过更改主题来更改文档的显示方式。 编辑 mkdocs.yml 文件并添加 <a href="https://mkdocs.zimoapps.com/user-guide/configuration/#theme">theme</a> 设置：</p>
-<div class="highlight"><pre><span></span><code><span class="nt">site_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myproject</span><span class="w"></span>
-<span class="nt">nav</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">Home</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">index.md</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">About</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">about.md</span><span class="w"></span>
-<span class="nt">theme</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">readthedocs</span><span class="w"></span>
-</code></pre></div>
+<pre><code class="language-yaml">site_name: myproject
+nav:
+    - Home: index.md
+    - About: about.md
+theme: readthedocs
+</code></pre>
 <p>保存更改并重新编译，你将看到改为使用了ReadTheDocs主题。</p>
 <h2 id="_1">扩展资料<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>通过以上介绍，相信你已经对 MkDocs 有了基本的了解，如果大家想要更详细了解 MkDocs，可以阅读 <a href="https://mkdocs.zimoapps.com/#mkdocs">MkDocs 中文文档</a>。</p>
@@ -1075,7 +1075,7 @@ Commands:
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.top", "instant"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.top", "navigation.instant"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../assets/javascripts/bundle.5a2dcb6a.min.js"></script>

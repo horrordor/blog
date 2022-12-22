@@ -920,13 +920,13 @@
 但是有类似的直观认识。</p>
 <p>什么是变参函数呢，学过 C 语言的人，不一定听说过这个名字，但一定已经用过变参函数。因为 <code>printf</code> 就是变参函数。</p>
 <p>所谓变参函数，就是调用时传递的参数个数是可以变化的。比如 <code>printf</code>：</p>
-<div class="highlight"><pre><span></span><code><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d, %d&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">);</span><span class="w"></span>
-<span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d, %d, %d&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">);</span><span class="w"></span>
-</code></pre></div>
+<pre><code class="language-c++">printf(&quot;%d, %d&quot;, 10, 20);
+printf(&quot;%d, %d, %d&quot;, 10, 20, 30);
+</code></pre>
 <p>而我们定义的普通函数却不能这样，参数个数是确定的：</p>
-<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">);</span><span class="w"> </span><span class="c1">// 只能2个参数</span>
-<span class="kt">int</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">);</span><span class="w"> </span><span class="c1">// 只能三个参数</span>
-</code></pre></div>
+<pre><code class="language-c++">int foo(int , int); // 只能2个参数
+int foo(int, int, int); // 只能三个参数
+</code></pre>
 <p>至于怎么实现变参函数，不是本文重点，我们就跳过了。感兴趣的可以通过搜索变参函数 + <code>va_start</code> 关键字得到答案。</p>
 <h2 id="_3">变参模板基本语法<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>所谓的变参模板，实现原理和变参函数是不一样的。</p>
@@ -935,18 +935,18 @@
 <p>但两者的直观效果是类似的，都可以定义函数或者类方法，接收任意个数的参数。</p>
 <h2 id="_4">变参模板的实例<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>让我们先从最简单的例子，看看变参模板的语法。</p>
-<div class="highlight"><pre><span></span><code><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="p">...</span><span class="w"> </span><span class="n">Args</span><span class="o">&gt;</span><span class="w"></span>
-<span class="kt">void</span><span class="w"> </span><span class="n">fun</span><span class="p">(</span><span class="n">Args</span><span class="p">...</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="c1">// do something</span>
-<span class="p">}</span><span class="w"></span>
+<pre><code class="language-c++">template&lt;typename... Args&gt;
+void fun(Args... args) {
+// do something
+}
 
-<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">fun</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">3.5</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;hello&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">fun</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">fun</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+int main(int argc, char* argv[]) {
+    fun(1, 3.5, &quot;hello&quot;);
+    fun(1, 2);
+    fun(1);
+    return 0;
+}
+</code></pre>
 <p>以上定义了一个变参模板。我们来调用它会发现，无论是传递3个参数、2个参数还是1个参数，都是可以的。甚至参数类型不一致也是可以的。</p>
 <p>通过上面的简单例子，我们总结下变参模板的基本语法，会发现关键点是两个：</p>
 <ol>
@@ -957,75 +957,75 @@
 <p>我们接着要看可变参模板函数内部，如何使用参数。</p>
 <h3 id="_5">打印任意个参数<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>我们先看一个实际的例子。如何使用变参模板“递归”实现一个可以打印任意多个参数的 <code>myprint</code>。</p>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<pre><code class="language-c++">#include &lt;iostream&gt;
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">myprint</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="c1">// do something</span>
-<span class="p">}</span><span class="w"></span>
+void myprint() {
+// do something
+}
 
-<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="p">...</span><span class="w"> </span><span class="n">Args</span><span class="o">&gt;</span><span class="w"></span>
-<span class="kt">void</span><span class="w"> </span><span class="n">myprint</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">firstArg</span><span class="p">,</span><span class="w"> </span><span class="n">Args</span><span class="p">...</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">firstArg</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"> </span><span class="c1">// 打印第一个参数</span>
-<span class="w">    </span><span class="n">myprint</span><span class="p">(</span><span class="n">args</span><span class="p">...);</span><span class="w">                     </span><span class="c1">// 打印剩下的参数</span>
-<span class="p">}</span><span class="w"></span>
+template&lt;typename T, typename... Args&gt;
+void myprint(T firstArg, Args... args) {
+    std::cout &lt;&lt; firstArg &lt;&lt; std::endl; // 打印第一个参数
+    myprint(args...);                     // 打印剩下的参数
+}
 
-<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">myprint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">3.14</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;hello&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+int main(int argc, char* argv[]) {
+    myprint(1, 3.14, &quot;hello&quot;);
+    return 0;
+}
+</code></pre>
 <p>我们暂时不用纠结细节，只要知道其中的关键点是： <code>Args...</code> 和 <code>args...</code>。它们是很重要的操作，称为 <strong>解包</strong>（pack expansion）。也就是根据调用时的情况，把打包好的参数展开。</p>
 <p>直接解释 <code>myprint</code> 的工作原理比较复杂，我们先通过 <code>myprint</code> 的模板展开过程了解解包操作。</p>
 <h3 id="myprint"><code>myprint</code> 的展开过程<a class="headerlink" href="#myprint" title="Permanent link">&para;</a></h3>
 <p>当 <code>myprint</code> 第一次被调用时（即 <code>myprint(1, 3.14, "hello");</code>），第一个参数 <code>1</code>，会被推导成 <code>int</code> 类型，<code>3.14</code> 被推导成 <code>double</code> 类型，<code>"Hello"</code> 被推导成 <code>const char*</code> 类型，<code>myprint</code> 模板被替换成了这个函数：</p>
-<div class="highlight"><pre><span></span><code><span class="c1">//第一次调用： myprint(1, 3.14, &quot;hello&quot;);</span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">myprint</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">firstArg</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">E1</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">E2</span><span class="cm">/*T firstArg, Args... args*/</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">firstArg</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w">  </span><span class="c1">// firstArg=1  打印第一个参数</span>
-<span class="w">    </span><span class="c1">//myprint(args...);</span>
-<span class="w">    </span><span class="c1">//E1=3.14   E2=&quot;hello&quot;</span>
-<span class="w">    </span><span class="n">myprint</span><span class="p">(</span><span class="n">E1</span><span class="p">,</span><span class="n">E2</span><span class="p">);</span><span class="w">                     </span><span class="c1">// 打印剩下的参数</span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+<pre><code class="language-c++">//第一次调用： myprint(1, 3.14, &quot;hello&quot;);
+void myprint(int firstArg, double E1, const char* E2/*T firstArg, Args... args*/) {
+    std::cout &lt;&lt; firstArg &lt;&lt; std::endl;  // firstArg=1  打印第一个参数
+    //myprint(args...);
+    //E1=3.14   E2=&quot;hello&quot;
+    myprint(E1,E2);                     // 打印剩下的参数
+}
+</code></pre>
 <p>类似的，以上 <code>myprint(E1,E2);</code> 会被自动推导类型，并展开为如下函数：</p>
-<div class="highlight"><pre><span></span><code><span class="c1">//第二次调用： myprint(3.14, &quot;hello&quot;);</span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">myprint</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">firstArg</span><span class="p">,</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">E1</span><span class="cm">/*T firstArg, Args... args*/</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">firstArg</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w">  </span><span class="c1">// firstArg=3.14 打印第一个参数</span>
-<span class="w">    </span><span class="c1">//myprint(args...);E1=&quot;hello&quot;</span>
-<span class="w">    </span><span class="n">myprint</span><span class="p">(</span><span class="n">E1</span><span class="p">);</span><span class="w">                     </span><span class="c1">// 打印剩下的参数</span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+<pre><code class="language-c++">//第二次调用： myprint(3.14, &quot;hello&quot;);
+void myprint(double firstArg,const char* E1/*T firstArg, Args... args*/) {
+    std::cout &lt;&lt; firstArg &lt;&lt; std::endl;  // firstArg=3.14 打印第一个参数
+    //myprint(args...);E1=&quot;hello&quot;
+    myprint(E1);                     // 打印剩下的参数
+}
+</code></pre>
 <p>继续，<code>myprint(E1);</code> 会被展开为：</p>
-<div class="highlight"><pre><span></span><code><span class="c1">//第三次调用： myprint(&quot;hello&quot;);</span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">myprint</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">firstArg</span><span class="cm">/*T firstArg, Args... args*/</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">firstArg</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w">  </span><span class="c1">// firstArg=&quot;hello&quot; 打印第一个参数</span>
-<span class="w">    </span><span class="c1">//myprint(args...);E1=无参数</span>
-<span class="w">    </span><span class="n">myprint</span><span class="p">();</span><span class="w">                     </span><span class="c1">// 打印剩下的参数</span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+<pre><code class="language-c++">//第三次调用： myprint(&quot;hello&quot;);
+void myprint(const char* firstArg/*T firstArg, Args... args*/) {
+    std::cout &lt;&lt; firstArg &lt;&lt; std::endl;  // firstArg=&quot;hello&quot; 打印第一个参数
+    //myprint(args...);E1=无参数
+    myprint();                     // 打印剩下的参数
+}
+</code></pre>
 <p>可以看到，这一次展开，内部的 <code>myprint()</code> 已经没有实参了，这也是在最初的实现 <code>myprit</code> 时，我们需要实现没有参数的 <code>myprint</code> 的原因：</p>
-<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">myprint</span><span class="p">(){</span><span class="w"></span>
-<span class="c1">// do something</span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+<pre><code class="language-c++">void myprint(){
+// do something
+}
+</code></pre>
 <h2 id="sizeof"><code>sizeof...</code> 运算符<a class="headerlink" href="#sizeof" title="Permanent link">&para;</a></h2>
 <p>变参模板的重点和原理，基本介绍完了。还有一个相关的运算符需要了解：<code>sizeof...</code>。</p>
 <p>它解决的需求是：帮助我们在编译时知晓，函数调用时具体有几个参数。</p>
-<div class="highlight"><pre><span></span><code><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="p">...</span><span class="w"> </span><span class="n">Args</span><span class="o">&gt;</span><span class="w"></span>
-<span class="kt">void</span><span class="w"> </span><span class="n">fun</span><span class="p">(</span><span class="n">Args</span><span class="p">...</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="s">&quot;sizeof...(Args): &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="k">sizeof</span><span class="p">...(</span><span class="n">Args</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="s">&quot;sizeof...(args): &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="k">sizeof</span><span class="p">...(</span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="s">&quot;======================&quot;</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<pre><code class="language-c++">template&lt;typename... Args&gt;
+void fun(Args... args) {
+    std::cout &lt;&lt;&quot;sizeof...(Args): &quot; &lt;&lt;sizeof...(Args) &lt;&lt; std::endl;
+    std::cout &lt;&lt;&quot;sizeof...(args): &quot; &lt;&lt;sizeof...(args) &lt;&lt; std::endl;
+    std::cout &lt;&lt;&quot;======================&quot;&lt;&lt; std::endl;
+}
 
-<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">fun</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">3.5</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;hello&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">fun</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">fun</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+int main(int argc, char* argv[]) {
+    fun(1, 3.5, &quot;hello&quot;);
+    fun(1, 2);
+    fun(1);
+    return 0;
+}
+</code></pre>
 <p>输出结果：</p>
-<div class="highlight"><pre><span></span><code>sizeof...(Args): 3
+<pre><code class="language-text">sizeof...(Args): 3
 sizeof...(args): 3
 ======================
 sizeof...(Args): 2
@@ -1034,7 +1034,7 @@ sizeof...(args): 2
 sizeof...(Args): 1
 sizeof...(args): 1
 ======================
-</code></pre></div>
+</code></pre>
 <h2 id="_6">总结<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>变参模板有什么用呢？其实独立使用变参模板的场景很少。但是结合我们之前介绍的完美转发，它被广泛应用于“创造类”的设计模式中。</p>
 <h2 id="_7">扩展阅读<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
@@ -1123,7 +1123,7 @@ sizeof...(args): 1
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.top", "instant"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.top", "navigation.instant"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../assets/javascripts/bundle.5a2dcb6a.min.js"></script>

@@ -856,20 +856,20 @@
 </ul>
 <h2 id="_2">函数重载的解决流程<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>大家先看一看这段代码：</p>
-<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">//do something</span>
-<span class="p">}</span><span class="w"></span>
+<pre><code class="language-C++">void f(int x, int y) {
+    //do something
+}
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">//do something</span>
-<span class="p">}</span><span class="w"></span>
+void f(double x, double y) {
+    //do something
+}
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">f</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">f</span><span class="p">(</span><span class="mf">3.14</span><span class="p">,</span><span class="w"> </span><span class="mf">2.73</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+int main(int argc, char* argv[]) {
+    f(3, 5);
+    f(3.14, 2.73);
+    return 0;
+}
+</code></pre>
 <p>这段代码在 C 语言中是编译不通过的，这是因为 C 语言是不支特“重载”的，到 C++ 才支持重载。C++ 编译器遇到某些调用语句时，它就会根据调用语句的**参数类型**、<strong>个数</strong>、**顺序**等来匹配到最合适的函数，然后生成调用代码。比如这个例子中函数调用 <code>f(3, 5)</code> 会匹配到第一个实现，<code>f(3.14, 2.73)</code> 则会匹配到第二个函数实现。</p>
 <p>作为一个爱学习的人，我们应该了解编译器是如何实现重载的，在实现重载的时候又做了些什么，这对我们后面理解 SFINAE 也非常重要。这里简单罗列一下函数重载过程中到底要做哪些事：</p>
 <ul>
@@ -888,77 +888,77 @@
 <h2 id="_3">模板特例的局限性<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>看了函数重载的基础之后，接下来我们就进入下一个话题，可变参模板的局限性，在之前的我们谈到了模板特例的许多优点，它可以在编译时有选择的展开，达到“编译时多态”的效果。可是如果不借助其他的语法，有时候模板特例所选择的分支，可能并不是我们想要的，并不是我们期待的。</p>
 <p>我们来看这个例子</p>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
-<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span><span class="w"></span>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
 
-<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">N</span><span class="o">&gt;</span><span class="w"></span>
-<span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="p">(</span><span class="n">T</span><span class="p">(</span><span class="o">&amp;</span><span class="p">)[</span><span class="n">N</span><span class="p">])</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+template&lt;typename T, unsigned N&gt;
+std::size_t len (T(&amp;)[N]) {
+    return N;
+}
 
-<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"></span>
-<span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">::</span><span class="n">size_type</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+template&lt;typename T&gt;
+typename T::size_type len (T const&amp;t) {
+    return t.size();
+}
 
-<span class="kt">unsigned</span><span class="w"> </span><span class="n">len</span><span class="p">(...)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+unsigned len(...) {
+    return 0;
+}
 
-<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mi">18</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">18</span><span class="p">};</span><span class="w"></span>
-<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+int main() {
+    int a[18] = {1,2,3,4,5,6,7,8,9,18};
+    cout &lt;&lt; len(a) &lt;&lt; endl;
 
-<span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">myvector</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">};</span><span class="w"></span>
-<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">len</span><span class="p">(</span><span class="n">myvector</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+    vector&lt;int&gt; myvector {1,2,3,4,5};
+    cout &lt;&lt; len(myvector) &lt;&lt; endl;
 
-<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">len</span><span class="p">(</span><span class="mf">3.14</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+    cout &lt;&lt; len(3.14) &lt;&lt; endl;
+    return 0;
+}
+</code></pre>
 <p>在这里，我们实现了一系列的 <code>len</code> 函数，用来返回数据的长度，第一个是针对数组的模板特例，返回数组的元素个数，第二个是针对 STL 容器，通过调用对象的 <code>size</code> 方法返回容器中的元素个数，第三个是一个“兜底”函数，如果前两个都不能匹配，那么就返回 0，这样不至于编译失败。</p>
 <p>程序运行得到的输出如下，这里结果打印都是 OK 的，第一个调用匹配的是数组特例，第二个匹配的是容器特例，最后一个匹配的是我们的“兜底”函数。</p>
-<div class="highlight"><pre><span></span><code>18
+<pre><code class="language-text">18
 5
 0
-</code></pre></div>
+</code></pre>
 <p>到目前为止我们打印的结果，都是符合我们期待的，但是我们加一个自定义的类，可能就会破坏这种和谐的局面。我们自定义一个这样的类，它并不打算支持 <code>size</code> 方法，但是它那里面确定了一个这样的类型  <code>size_type</code>，这时候我们内心的期待是他无法被针对数组、针对标准库容器的模板特例所捕获，所以它最后会落在 <code>len(...)</code> 这个函数上。最后的  <code>len(CMyClass())</code>  调用我们期待输出是 0。</p>
-<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">CMyClass</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="k">public</span><span class="o">:</span><span class="w"></span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">size_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<pre><code class="language-c++">class CMyClass {
+public:
+    using size_type = unsigned int;
+}
 
-<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="p">...</span><span class="w"></span>
-<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">len</span><span class="p">(</span><span class="n">CMyClass</span><span class="p">())</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">...</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+int main() {
+    ...
+    cout &lt;&lt; len(CMyClass()) &lt;&lt; endl;
+    ...
+}
+</code></pre>
 <p>然而，实际情况是什么样的呢？我们编译看看，发现出现了编译报错，提示 <code>CMyClass</code> 没有 <code>size</code> 成员，编译器并没有选择 <code>len(...)</code> 的函数特例，而是选择了容器的模板特例，编译器不听话，我们要怎么纠正它呢？</p>
-<div class="highlight"><pre><span></span><code>main.cpp: In instantiation of ‘typename T::size_type len<span class="o">(</span>const T<span class="p">&amp;</span><span class="o">)</span> <span class="o">[</span>with <span class="nv">T</span> <span class="o">=</span> CMyClass<span class="p">;</span> typename T::size_type <span class="o">=</span> unsigned int<span class="o">]</span>’:
+<pre><code class="language-bash">main.cpp: In instantiation of ‘typename T::size_type len(const T&amp;) [with T = CMyClass; typename T::size_type = unsigned int]’:
 main.cpp:37:27:   required from here
 main.cpp:15:14: error: ‘const class CMyClass’ has no member named ‘size’
-     <span class="k">return</span> t.size<span class="o">()</span><span class="p">;</span>
+     return t.size();
             ~~^~~~
-&lt;builtin&gt;: recipe <span class="k">for</span> target <span class="s1">&#39;main.o&#39;</span> failed
-make: *** <span class="o">[</span>main.o<span class="o">]</span> Error <span class="m">1</span>
-</code></pre></div>
+&lt;builtin&gt;: recipe for target 'main.o' failed
+make: *** [main.o] Error 1
+</code></pre>
 <h2 id="sfinae_1">SFINAE<a class="headerlink" href="#sfinae_1" title="Permanent link">&para;</a></h2>
 <p>在解决函数那个过程中，编译器会使用实参类型对函数声明做替换，注意这里和模板的展开是不同的，这里只针对函数声明做替换，并不针对整个函数体，如果把替换完成后发现得到的函数声明是没有意义的，那该怎么办呢？其实很简单，那就是**忽略不计**，也就是我们上面说到的从候选函数集合中**移除**，并且**不报错**。这种替换失败不算错的行为，它的英文的就是 Substitution Failure Is Not An Error，它的缩写就是 SFINAE。</p>
 <p>之前 <code>len(CMyClass())</code>  这个调用选择了容器这个函数特例，这并不是我们想要的结果，现在我们知道了 SFINAE 的存在，那么我们只需要故意让这一个特例针对 <code>CMyClass</code> 产生替换失败，从而让它在针对 <code>CMyClass</code> 的函数重载过程中，这个函数是被忽略的，这样就能达到最终 <code>len(CMyClass())</code> 匹配的是 <code>len(...)</code> 的目的。</p>
 <p>接下来看看我们是怎么做的吧，下面这个函数就是改造后的针对容器的模板特例</p>
-<div class="highlight"><pre><span></span><code><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"></span>
-<span class="k">decltype</span><span class="w"> </span><span class="p">(</span><span class="n">T</span><span class="p">().</span><span class="n">size</span><span class="p">(),</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">::</span><span class="n">size_type</span><span class="p">())</span><span class="w"> </span><span class="n">len</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+<pre><code class="language-c++">template&lt;typename T&gt;
+decltype (T().size(), typename T::size_type()) len(T const&amp;t) {
+    return t.size();
+}
+</code></pre>
 <p>程序的输出为：</p>
-<div class="highlight"><pre><span></span><code>18
+<pre><code class="language-text">18
 5
 0
 0
-</code></pre></div>
+</code></pre>
 <p>我们可以看到编译不再报错，最后一个调用的输出为 0，已经符合我们的预期了。这个代码看上去是不是还是有一丢丢的复杂，这里我们用至了 <code>decltype</code>，<code>decltype</code> 中乃至了逗号表达式，我们知道逗号运算符是以对右边的表达式为准，所以这里 <code>decltype</code> 最后声明的还是 <code>size_type</code>。但是因为我们这里调用了一次 <code>T().size()</code>，编译器在针对 <code>CMyClass</code> 做函数重载时，就会将其替换为 <code>CMyClass.size()</code>，而这个展开的结果是无效的，因为 <code>CMyClass</code> 是没有 <code>size</code> 方法的，于是替换失败，但是不会触发编译失败，编译器会继续找到更合适的函数，于是找到了 <code>len(...)</code></p>
 <p>这种编程技巧是不是有一点点可能会劝退大家，有没有一种更简单的方法来使用 SFINAE 呢？当然有！它就是我们下一期要讲的 <code>enable_if</code>。</p>
 
@@ -1043,7 +1043,7 @@ make: *** <span class="o">[</span>main.o<span class="o">]</span> Error <span cla
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.top", "instant"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.top", "navigation.instant"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../assets/javascripts/bundle.5a2dcb6a.min.js"></script>

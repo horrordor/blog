@@ -947,256 +947,256 @@
 <li>函数调用返回的值或对象（左值引用类型除外）</li>
 <li>无名对象</li>
 </ol>
-<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">funA</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<pre><code class="language-c++">int funA(int a) {
+    return a;
+}
 
-<span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">funB</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+int&amp; funB(int a) {
+    return a;
+}
 
-<span class="k">class</span><span class="w"> </span><span class="nc">A</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="k">public</span><span class="o">:</span><span class="w"></span>
-<span class="w">    </span><span class="n">A</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
-<span class="w">    </span><span class="o">~</span><span class="n">A</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
-<span class="p">};</span><span class="w"></span>
+class A {
+public:
+    A() {}
+    ~A() {}
+};
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">pos_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w">            </span><span class="c1">// 不能取地址 1. 常量字面量</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">pos_funA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="p">(</span><span class="n">funA</span><span class="p">(</span><span class="mh">0x1111</span><span class="p">));</span><span class="w"> </span><span class="c1">// 不能取地址 2. 函数调用的返回值</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">pos_funB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="p">(</span><span class="n">funB</span><span class="p">(</span><span class="mh">0x2222</span><span class="p">));</span><span class="w"> </span><span class="c1">// 函数调用返回的类型为左值引用，则返回的结果为左值</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">pos_class</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="p">(</span><span class="n">A</span><span class="p">());</span><span class="w">         </span><span class="c1">// 不能取地址 3. 无名对象</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+int main(int argc, char* argv[]) {
+    auto pos_num = &amp;(10);            // 不能取地址 1. 常量字面量
+    auto pos_funA = &amp;(funA(0x1111)); // 不能取地址 2. 函数调用的返回值
+    auto pos_funB = &amp;(funB(0x2222)); // 函数调用返回的类型为左值引用，则返回的结果为左值
+    auto pos_class = &amp;(A());         // 不能取地址 3. 无名对象
+    return 0;
+}
+</code></pre>
 <h2 id="_3">什么是右值引用<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>在 C++11 之前，是只有左值引用（C++11之后，为了和右值引用区分，原来的“引用”才称为“左值引用”），没有右值引用的。因此无法用非 <code>const</code> （左值）引用匹配右值的。</p>
 <p>比如：</p>
-<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">fun</span><span class="p">(</span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">){</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+<pre><code class="language-c++">int fun(int&amp; a){
+    return a;
+}
+</code></pre>
 <p>以下调用会出错：</p>
-<div class="highlight"><pre><span></span><code><span class="n">fun</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"> </span><span class="c1">// 编译报错：无法从 int 转为 int&amp;</span>
-</code></pre></div>
+<pre><code class="language-c++">fun(10); // 编译报错：无法从 int 转为 int&amp;
+</code></pre>
 <p>如果非要匹配，则需要使用 <code>const</code> （左值）引用：</p>
-<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">fun</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">){</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<pre><code class="language-c++">int fun(const int&amp; a){
+    return a;
+}
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[]){</span><span class="w"></span>
-<span class="w">    </span><span class="n">fun</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"> </span><span class="c1">// 可以编译通过。const (左值)引用可以匹配右值</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+int main(int argc, char* argv[]){
+    fun(10); // 可以编译通过。const (左值)引用可以匹配右值
+    return 0;
+}
+</code></pre>
 <p>在 C++11 之后，不用 <code>const</code> 左值引用，也可以匹配右值了：</p>
-<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">fun</span><span class="p">(</span><span class="kt">int</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">){</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<pre><code class="language-c++">int fun(int&amp;&amp; a){
+    return a;
+}
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[]){</span><span class="w"></span>
-<span class="w">    </span><span class="n">fun</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"> </span><span class="c1">// 右值引用可以匹配右值</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+int main(int argc, char* argv[]){
+    fun(10); // 右值引用可以匹配右值
+    return 0;
+}
+</code></pre>
 <p>当然，右值引用的发明不是主要为了解决这类简单的调用匹配问题，而是为了引入 <strong>move 语义</strong>。</p>
 <h2 id="move">move 语义<a class="headerlink" href="#move" title="Permanent link">&para;</a></h2>
 <p>先看一个右值引用发明前，资源利用效率不高的问题，以字符串类为例。我们知道，通常情况下，如果字符串做浅拷贝，是错误的：</p>
-<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">CMyString</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="k">public</span><span class="o">:</span><span class="w"></span>
-<span class="w">    </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">m_pBuffer</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">m_iLen</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="n">CMyString</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">pString</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">m_iLen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strlen</span><span class="p">(</span><span class="n">pString</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="n">m_pBuffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">char</span><span class="p">[</span><span class="n">m_iLen</span><span class="p">];</span><span class="w"></span>
-<span class="w">        </span><span class="n">strcpy</span><span class="p">(</span><span class="n">m_pBuffer</span><span class="p">,</span><span class="w"> </span><span class="n">pString</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="o">~</span><span class="n">CMyString</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">m_iLen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">m_pBuffer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">delete</span><span class="p">[]</span><span class="w"> </span><span class="n">m_pBuffer</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="n">CMyString</span><span class="p">(</span><span class="n">CMyString</span><span class="o">&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="c1">// 浅拷贝，错误</span>
-<span class="w">        </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">m_pBuffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">m_pBuffer</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">m_iLen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">m_iLen</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">};</span><span class="w"></span>
-</code></pre></div>
+<pre><code class="language-c++">class CMyString {
+public:
+    char* m_pBuffer;
+    int m_iLen;
+    CMyString(const char* pString) {
+        m_iLen = strlen(pString) + 1;
+        m_pBuffer = new char[m_iLen];
+        strcpy(m_pBuffer, pString);
+    }
+    ~CMyString() {
+        m_iLen = 0;
+        if(m_pBuffer) {
+            delete[] m_pBuffer;
+        }
+    }
+    CMyString(CMyString&amp; other) {
+        // 浅拷贝，错误
+        this-&gt;m_pBuffer = other.m_pBuffer;
+        this-&gt;m_iLen = other.m_iLen;
+    }
+};
+</code></pre>
 <p>错误的原因在于，如果 A 对象拷贝复制自 B 对象，那么当 B 对象析构时，会销毁 <code>m_pBuffer</code> 指向的缓冲区，这样 A 对象所指向的缓冲区也被一起销毁了。因此 CMyString 其实需要的是深拷贝：</p>
-<div class="highlight"><pre><span></span><code><span class="n">CMyString</span><span class="p">(</span><span class="n">CMyString</span><span class="o">&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// 深拷贝</span>
-<span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">m_iLen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">m_iLen</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">m_pBuffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">char</span><span class="p">[</span><span class="n">m_iLen</span><span class="p">];</span><span class="w"></span>
-<span class="w">    </span><span class="n">strcpy</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">m_pBuffer</span><span class="p">,</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">m_pBuffer</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+<pre><code class="language-c++">CMyString(CMyString&amp; other) {
+    // 深拷贝
+    this-&gt;m_iLen = other.m_iLen;
+    this-&gt;m_pBuffer = new char[m_iLen];
+    strcpy(this-&gt;m_pBuffer, other.m_pBuffer);
+}
+</code></pre>
 <p>这是安全、正确的做法。但是，在某些特殊情况下，这种深拷贝其实 <strong>不是最高效的</strong>，比如对于以下代码：</p>
-<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[]){</span><span class="w"></span>
-<span class="w">    </span><span class="n">CMyString</span><span class="w"> </span><span class="n">str1</span><span class="p">(</span><span class="n">CMyString</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">));</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+<pre><code class="language-c++">int main(int argc, char* argv[]){
+    CMyString str1(CMyString(&quot;hello&quot;));
+    return 0;
+}
+</code></pre>
 <p>以上的 <code>CMyString("hello")</code> 是一个右值（无名对象），这个无名对象在完成 <code>str1</code> 的构造后，生命周期也就结束了，无名对象的资源也就被释放了。</p>
 <p>这个时候问题来了：既然明知道无名对象的资源马上就会释放，那何必不做深拷贝，而是直接“偷”这个无名对象的资源呢？代码逻辑如下：</p>
-<div class="highlight"><pre><span></span><code><span class="n">CMyString</span><span class="p">(</span><span class="cm">/*类型暂且保密*/</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">m_iLen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">m_iLen</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">m_pBuffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">m_pBuffer</span><span class="p">;</span><span class="w"> </span><span class="c1">// 浅拷贝、偷资源</span>
-<span class="w">    </span><span class="n">other</span><span class="p">.</span><span class="n">m_pBuffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span><span class="w">         </span><span class="c1">// 让 other.m_pBuffer 不被释放</span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+<pre><code class="language-c++">CMyString(/*类型暂且保密*/ other) {
+    this-&gt;m_iLen = other.m_iLen;
+    this-&gt;m_pBuffer = other.m_pBuffer; // 浅拷贝、偷资源
+    other.m_pBuffer = nullptr;         // 让 other.m_pBuffer 不被释放
+}
+</code></pre>
 <p>有了以上概念后，我们就知道了，其实有两种“从对象B得到对象A”的构造：</p>
 <ul>
 <li>一种是 C++11 之前的拷贝构造</li>
 <li>一种是 C++11 之后引入的，专门针对 B 是右值、可以被“偷资源”场景的构造，称为 <strong>移动构造</strong></li>
 </ul>
 <p>用以上 CMyString 为例，揭晓移动构造的原型，它的形参是 <strong>右值引用</strong>：</p>
-<div class="highlight"><pre><span></span><code><span class="n">CMyString</span><span class="p">(</span><span class="n">CMyString</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">m_iLen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">m_iLen</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">m_pBuffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">m_pBuffer</span><span class="p">;</span><span class="w"> </span><span class="c1">// 浅拷贝、偷资源</span>
-<span class="w">    </span><span class="n">other</span><span class="p">.</span><span class="n">m_pBuffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span><span class="w">         </span><span class="c1">// 让 m_pBuffer 不因为other析构而释放</span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+<pre><code class="language-c++">CMyString(CMyString&amp;&amp; other) {
+    this-&gt;m_iLen = other.m_iLen;
+    this-&gt;m_pBuffer = other.m_pBuffer; // 浅拷贝、偷资源
+    other.m_pBuffer = nullptr;         // 让 m_pBuffer 不因为other析构而释放
+}
+</code></pre>
 <p>类似于拷贝构造有与之对应的运算符重载 <code>operator=(CMyString&amp;)</code>（拷贝赋值），移动构造也有与之对应的运算符重载：<code>operator=(CMyString&amp;&amp;)</code>（移动赋值）。</p>
 <p>移动构造和移动赋值，统称为 <strong>移动语义</strong>。</p>
 <h2 id="stdmove">std::move<a class="headerlink" href="#stdmove" title="Permanent link">&para;</a></h2>
 <p>C++11 中引入右值引用的同时，还在标准中引入了 <code>std::move</code> 函数。它的作用是“将表达式强行转为右值类型”。</p>
 <p>我们先看下例，它是一个“可以改进”的 <code>myswap</code> 函数：</p>
-<div class="highlight"><pre><span></span><code><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"></span>
-<span class="kt">void</span><span class="w"> </span><span class="n">myswap</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">T</span><span class="w"> </span><span class="nf">temp</span><span class="p">(</span><span class="n">a</span><span class="p">);</span><span class="w">  </span><span class="c1">// 发生拷贝构造</span>
-<span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w">      </span><span class="c1">// 发生拷贝赋值</span>
-<span class="w">    </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">temp</span><span class="p">;</span><span class="w">   </span><span class="c1">// 发生拷贝赋值</span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+<pre><code class="language-c++">template&lt;typename T&gt;
+void myswap(T&amp; a, T&amp; b) {
+    T temp(a);  // 发生拷贝构造
+    a = b;      // 发生拷贝赋值
+    b = temp;   // 发生拷贝赋值
+}
+</code></pre>
 <p>以上三行代码，因为没有右值类型，所以不会触发移动语义。如果 <code>T</code> 是 <code>CMyString</code>，那么会发生三次深拷贝。</p>
 <p>但是仔细分析一下，实际上以上三行使用移动语义也是可以的：作为构造或者赋值的源变量，要么使用过一次后就不再使用，要么仅作为赋值的目标。换言之，它们的资源是可以被“偷”的。</p>
 <p>这时候，就可以使用 <code>std::move</code> 强行把变量转为右值类型，来触发移动语义了：</p>
-<div class="highlight"><pre><span></span><code><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"></span>
-<span class="kt">void</span><span class="w"> </span><span class="n">myswap</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">T</span><span class="w"> </span><span class="nf">temp</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">));</span><span class="w"> </span><span class="c1">// 发生移动构造，偷 a 的资源</span>
-<span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">b</span><span class="p">);</span><span class="w">     </span><span class="c1">// 发生移动构造，偷 b 的资源</span>
-<span class="w">    </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">temp</span><span class="p">);</span><span class="w">  </span><span class="c1">// 发生移动赋值，偷 temp 的资源</span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+<pre><code class="language-c++">template&lt;typename T&gt;
+void myswap(T&amp; a, T&amp; b) {
+    T temp(std::move(a)); // 发生移动构造，偷 a 的资源
+    a = std::move(b);     // 发生移动构造，偷 b 的资源
+    b = std::move(temp);  // 发生移动赋值，偷 temp 的资源
+}
+</code></pre>
 <h3 id="stdmove_1">std::move 原理解析<a class="headerlink" href="#stdmove_1" title="Permanent link">&para;</a></h3>
 <p><code>std::move</code> 为什么可以神奇地把左值给强制转变成右值呢？我们可以解析它的源码知晓答案，从 C++ 头文件中找到 <code>move</code> 的源码：</p>
-<div class="highlight"><pre><span></span><code><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">_Tp</span><span class="o">&gt;</span><span class="w"></span>
-<span class="k">constexpr</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">std</span><span class="o">::</span><span class="n">remove_reference</span><span class="o">&lt;</span><span class="n">_Tp</span><span class="o">&gt;::</span><span class="n">type</span><span class="o">&amp;&amp;</span><span class="w"></span>
-<span class="n">move</span><span class="p">(</span><span class="n">_Tp</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">__t</span><span class="p">)</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">std</span><span class="o">::</span><span class="n">remove_reference</span><span class="o">&lt;</span><span class="n">_Tp</span><span class="o">&gt;::</span><span class="n">type</span><span class="o">&amp;&amp;&gt;</span><span class="p">(</span><span class="n">__t</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+<pre><code class="language-c++">template&lt;typename _Tp&gt;
+constexpr typename std::remove_reference&lt;_Tp&gt;::type&amp;&amp;
+move(_Tp&amp;&amp; __t) noexcept {
+    return static_cast&lt;typename std::remove_reference&lt;_Tp&gt;::type&amp;&amp;&gt;(__t);
+}
+</code></pre>
 <p>移除掉不太相关的 <code>constexpr</code>、<code>noexcept</code> 得到：</p>
-<div class="highlight"><pre><span></span><code><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">_Tp</span><span class="o">&gt;</span><span class="w"></span>
-<span class="k">typename</span><span class="w"> </span><span class="nc">std</span><span class="o">::</span><span class="n">remove_reference</span><span class="o">&lt;</span><span class="n">_Tp</span><span class="o">&gt;::</span><span class="n">type</span><span class="o">&amp;&amp;</span><span class="w"></span>
-<span class="n">move</span><span class="p">(</span><span class="n">_Tp</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">__t</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">std</span><span class="o">::</span><span class="n">remove_reference</span><span class="o">&lt;</span><span class="n">_Tp</span><span class="o">&gt;::</span><span class="n">type</span><span class="o">&amp;&amp;&gt;</span><span class="p">(</span><span class="n">__t</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+<pre><code class="language-c++">template&lt;typename _Tp&gt;
+typename std::remove_reference&lt;_Tp&gt;::type&amp;&amp;
+move(_Tp&amp;&amp; __t) {
+    return static_cast&lt;typename std::remove_reference&lt;_Tp&gt;::type&amp;&amp;&gt;(__t);
+}
+</code></pre>
 <p>会发现 <code>move</code> 的返回值和内部实现，都和 <code>std::remove_reference&lt;_Tp&gt;::type</code> 很有关系，那么继续看看 <code>std::remove_reference</code> 的实现：</p>
-<div class="highlight"><pre><span></span><code><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">_Tp</span><span class="o">&gt;</span><span class="w"></span>
-<span class="k">struct</span><span class="w"> </span><span class="nc">remove_reference</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">typedef</span><span class="w"> </span><span class="n">_Tp</span><span class="w">   </span><span class="n">type</span><span class="p">;</span><span class="w"></span>
-<span class="p">};</span><span class="w"></span>
+<pre><code class="language-c++">template&lt;typename _Tp&gt;
+struct remove_reference {
+    typedef _Tp   type;
+};
 
-<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">_Tp</span><span class="o">&gt;</span><span class="w"></span>
-<span class="k">struct</span><span class="w"> </span><span class="nc">remove_reference</span><span class="o">&lt;</span><span class="n">_Tp</span><span class="o">&amp;&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">typedef</span><span class="w"> </span><span class="n">_Tp</span><span class="w">   </span><span class="n">type</span><span class="p">;</span><span class="w"></span>
-<span class="p">};</span><span class="w"></span>
+template&lt;typename _Tp&gt;
+struct remove_reference&lt;_Tp&amp;&gt; {
+    typedef _Tp   type;
+};
 
-<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">_Tp</span><span class="o">&gt;</span><span class="w"></span>
-<span class="k">struct</span><span class="w"> </span><span class="nc">remove_reference</span><span class="o">&lt;</span><span class="n">_Tp</span><span class="o">&amp;&amp;&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">typedef</span><span class="w"> </span><span class="n">_Tp</span><span class="w">   </span><span class="n">type</span><span class="p">;</span><span class="w"></span>
-<span class="p">};</span><span class="w"></span>
-</code></pre></div>
+template&lt;typename _Tp&gt;
+struct remove_reference&lt;_Tp&amp;&amp;&gt; {
+    typedef _Tp   type;
+};
+</code></pre>
 <p>发现 <code>remove_reference</code> ，发现它的作用很简单，就是不管模板参数是 <code>_Tp</code>，还是 <code>_Tp</code> 的左值引用，或者 <code>_Tp</code> 的右值引用，都统统都定义一个 <code>type</code> 等价于 <code>_Tp</code> 类型。回头看，其实 <code>remove_reference</code> 的作用顾名思义，就是“移除掉类型的引用性质” 的意思。</p>
 <p>知道这个以后，我们可以进步一部简化 <code>move</code> 的源码，只谈原理不求严谨的话其实就是：</p>
-<div class="highlight"><pre><span></span><code><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">_Tp</span><span class="o">&gt;</span><span class="w"></span>
-<span class="n">_Tp</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">move</span><span class="p">(</span><span class="n">_Tp</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">__t</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">_Tp</span><span class="o">&amp;&amp;</span><span class="p">)(</span><span class="n">__t</span><span class="p">);</span><span class="w"> </span><span class="c1">// 强制类型转换</span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+<pre><code class="language-c++">template&lt;typename _Tp&gt;
+_Tp&amp;&amp; move(_Tp&amp;&amp; __t) {
+    return (_Tp&amp;&amp;)(__t); // 强制类型转换
+}
+</code></pre>
 <p><code>move</code> 仅仅是做了一个强制类型转换而已（其实还涉及到了“万能引用”的知识点，我们下一篇文章介绍）。</p>
 <h2 id="stdmove_2">std::move 的使用注意事项<a class="headerlink" href="#stdmove_2" title="Permanent link">&para;</a></h2>
 <h3 id="stdmove_3">组合或者继承时，显式调用 std::move<a class="headerlink" href="#stdmove_3" title="Permanent link">&para;</a></h3>
 <p>一般而言，派生类如果是移动，那么也 <strong>期待</strong> 基类也是移动构造（派生类、基类的资源一起“偷”）。
 但是，以下的写法是不正确的：</p>
-<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">CDerived</span><span class="o">:</span><span class="k">public</span><span class="w"> </span><span class="n">CBase</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="k">public</span><span class="o">:</span><span class="w"></span>
-<span class="w">    </span><span class="n">CDerived</span><span class="p">(</span><span class="n">CDerived</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="o">:</span><span class="n">CBase</span><span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// 无法触发 CBase 的移动构造</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">};</span><span class="w"></span>
-</code></pre></div>
+<pre><code class="language-c++">class CDerived:public CBase {
+public:
+    CDerived(CDerived&amp;&amp; other)
+        :CBase(other) { // 无法触发 CBase 的移动构造
+        // ...
+    }
+};
+</code></pre>
 <p>实际上，以上代码 <strong>不会</strong> 触发 <code>CBase</code> 的移动构造，而是触发的拷贝构造。</p>
 <p>因为<code>有名字</code>的右值引用其实是<code>左值</code>，所以，当我们期待“基类也是做移动构造时”，应该显式调用<code>std::move</code>：</p>
-<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">CDerived</span><span class="o">:</span><span class="k">public</span><span class="w"> </span><span class="n">CBase</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="k">public</span><span class="o">:</span><span class="w"></span>
-<span class="w">    </span><span class="n">CDerived</span><span class="p">(</span><span class="n">CDerived</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="o">:</span><span class="n">CBase</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">other</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// 强制转为右值，触发 CBase 的移动构造</span>
-<span class="w">        </span><span class="c1">// ...</span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">};</span><span class="w"></span>
-</code></pre></div>
+<pre><code class="language-c++">class CDerived:public CBase {
+public:
+    CDerived(CDerived&amp;&amp; other)
+        :CBase(std::move(other)) { // 强制转为右值，触发 CBase 的移动构造
+        // ...
+    }
+};
+</code></pre>
 <div class="admonition note">
 <p class="admonition-title">这样的例子也适用于组合（成员初始化）的情况。</p>
 </div>
 <h3 id="stdmove_4">局部变量返回时，不调用 std::move<a class="headerlink" href="#stdmove_4" title="Permanent link">&para;</a></h3>
 <p>有些情况下，我们会返回局部变量，比如下例：</p>
-<div class="highlight"><pre><span></span><code><span class="n">CTemp</span><span class="w"> </span><span class="nf">foo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">CTemp</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"> </span><span class="c1">// x 的作用域和生命周期即将结束</span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+<pre><code class="language-c++">CTemp foo() {
+    CTemp x;
+    return x; // x 的作用域和生命周期即将结束
+}
+</code></pre>
 <p>这时你可能会想到“等等，在 <code>foo()</code> 调用并返回的地方，会复制一次返回值，而 x 最好转成右值，使用移动构造来复制：</p>
-<div class="highlight"><pre><span></span><code><span class="n">CTemp</span><span class="w"> </span><span class="nf">foo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">CTemp</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="w"> </span><span class="c1">// 很可能好心办坏事</span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+<pre><code class="language-c++">CTemp foo() {
+    CTemp x;
+    return std::move(x); // 很可能好心办坏事
+}
+</code></pre>
 <p>其实这样修改后，反而可能会把事情变糟糕，我们用以下试验看看效果：</p>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;utility&gt;</span><span class="cp"></span>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;utility&gt;
 
-<span class="k">class</span><span class="w"> </span><span class="nc">CTemp</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="k">public</span><span class="o">:</span><span class="w"></span>
-<span class="w">    </span><span class="n">CTemp</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;CTemp：构造&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="n">CTemp</span><span class="p">(</span><span class="n">CTemp</span><span class="o">&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;CTemp：拷贝构造&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="n">CTemp</span><span class="p">(</span><span class="n">CTemp</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;CTemp：移动构造&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">};</span><span class="w"></span>
+class CTemp {
+public:
+    CTemp() {
+        std::cout &lt;&lt; &quot;CTemp：构造&quot; &lt;&lt; std::endl;
+    }
+    CTemp(CTemp&amp; other) {
+        std::cout &lt;&lt; &quot;CTemp：拷贝构造&quot; &lt;&lt; std::endl;
+    }
+    CTemp(CTemp&amp;&amp; other) {
+        std::cout &lt;&lt; &quot;CTemp：移动构造&quot; &lt;&lt; std::endl;
+    }
+};
 
-<span class="c1">//2.注意实现：返回时优化</span>
-<span class="n">CTemp</span><span class="w"> </span><span class="nf">foo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">CTemp</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="c1">//作用域在该函数中就结束了</span>
-<span class="p">}</span><span class="w"></span>
-<span class="n">CTemp</span><span class="w"> </span><span class="nf">foo_move</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">CTemp</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="c1">//作用域在该函数中就结束了</span>
-<span class="p">}</span><span class="w"></span>
+//2.注意实现：返回时优化
+CTemp foo() {
+    CTemp x;
+    return x;//作用域在该函数中就结束了
+}
+CTemp foo_move() {
+    CTemp x;
+    return std::move(x);//作用域在该函数中就结束了
+}
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">foo</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;-----------&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">foo_move</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+int main(int argc, char* argv[]) {
+    auto a = foo();
+    std::cout &lt;&lt; &quot;-----------&quot; &lt;&lt; std::endl;
+    auto b = foo_move();
+    return 0;
+}
+</code></pre>
 <p>输出结果是：</p>
-<div class="highlight"><pre><span></span><code>CTemp：构造
+<pre><code class="language-text">CTemp：构造
 -----------
 CTemp：构造
 CTemp：移动构造
-</code></pre></div>
+</code></pre>
 <p>会发现反而是做了 <code>std::move</code> 的 <code>foo_move</code> 多了一次构造。这是为什么呢？其实是因为，现代编译器一般都做 <strong>返回值优化</strong>，也就是说，与其现在 <code>foo</code> 内部构造一个局部变量 <code>x</code>，再把它复制出去；不如直接在 <code>foo</code> 函数调用的地方直接构造一个 <code>x</code> 对象。这样做的效率显然比移动语义要高。</p>
 <p>在这类情况下，不用 <code>std::move</code> 为佳。</p>
 <p>当然，这也不是一概而论的。总之，需要非常深刻的理解 <code>std::move</code> 的“副作用”，才能做好相关优化，推荐大家可以看看 <a href="https://en.cppreference.com/w/cpp/language/copy_elision">copy elision</a>。</p>
@@ -1282,7 +1282,7 @@ CTemp：移动构造
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.top", "instant"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.top", "navigation.instant"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../assets/javascripts/bundle.5a2dcb6a.min.js"></script>

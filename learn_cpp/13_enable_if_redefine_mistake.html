@@ -856,71 +856,71 @@
 <li>解决办法</li>
 </ul>
 <h2 id="_2">错误使用示例<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<pre><code class="language-c++">#include&lt;iostream&gt;
+#include&lt;vector&gt;
 
-<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span><span class="w"></span>
+using namespace std;
 
-<span class="k">class</span><span class="w"> </span><span class="nc">AMyClasss</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="k">public</span><span class="o">:</span><span class="w"></span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">size_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="p">;</span><span class="w"></span>
-<span class="p">};</span><span class="w"></span>
+class AMyClasss {
+public:
+    using size_type = unsigned int;
+};
 
-<span class="k">class</span><span class="w"> </span><span class="nc">BMyClasss</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="k">public</span><span class="o">:</span><span class="w"></span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">size_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="p">;</span><span class="w"></span>
-<span class="p">};</span><span class="w"></span>
+class BMyClasss {
+public:
+    using size_type = unsigned int;
+};
 
-<span class="c1">//T的类型需要等于 AMyClass</span>
-<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="k">typename</span><span class="w"> </span><span class="nc">enable_if</span><span class="o">&lt;</span><span class="n">is_same</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">AMyClass</span><span class="o">&gt;::</span><span class="n">value</span><span class="o">&gt;::</span><span class="n">type</span><span class="o">&gt;</span><span class="w"></span>
-<span class="kt">unsigned</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+//T的类型需要等于 AMyClass
+template&lt;typename T, typename =  typename enable_if&lt;is_same&lt;T, AMyClass&gt;::value&gt;::type&gt;
+unsigned len (T const&amp; t) {
+    return 0;
+}
 
-<span class="c1">//T的类型需要等于BMyClass</span>
-<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="k">typename</span><span class="w"> </span><span class="nc">enable_if</span><span class="o">&lt;</span><span class="n">is_same</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">BMyClass</span><span class="o">&gt;::</span><span class="n">value</span><span class="o">&gt;::</span><span class="n">type</span><span class="o">&gt;</span><span class="w"></span>
-<span class="kt">unsigned</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+//T的类型需要等于BMyClass
+template&lt;typename T, typename =  typename enable_if&lt;is_same&lt;T, BMyClass&gt;::value&gt;::type&gt;
+unsigned len (T const&amp; t) {
+    return 1;
+}
 
-<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">len</span><span class="p">(</span><span class="n">AMyClass</span><span class="p">())</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">len</span><span class="p">(</span><span class="n">AMyClass</span><span class="p">())</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+int main(int argc, char* argv[]) {
+    cout &lt;&lt; len(AMyClass()) &lt;&lt; endl;
+    cout &lt;&lt; len(AMyClass()) &lt;&lt; endl;
+    return 0;
+}
+</code></pre>
 <p>本段代码的期待是：如果是 AMyClass 返回 1 ， BMyClass 返回 2 。</p>
 <p>执行后，报错如下：</p>
 <p><code>error: redefinition of 'template&lt;class T,class&gt; unsigned int len(const T&amp;)'</code></p>
 <h2 id="_3">错误原因分析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>重定义了默认的模板参数，间接造成了重定义 <code>len</code> 函数。 <code>typename enable_if&lt;is_same&lt;T, BMyClass&gt;::value&gt;::type</code> 最终只是得到个类型。为了分析起来更清晰，简化代码如下：</p>
-<div class="highlight"><pre><span></span><code><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="kt">double</span><span class="o">&gt;</span><span class="w"></span>
-<span class="kt">unsigned</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<pre><code class="language-c++">template&lt;typename T, typename =  double&gt;
+unsigned len (T const&amp; t) {
+    return 0;
+}
 
-<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"></span>
-<span class="kt">unsigned</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+template&lt;typename T, typename =  int&gt;
+unsigned len (T const&amp; t) {
+    return 1;
+}
+</code></pre>
 <p>相当于我们定义了同一个 <code>len</code> 函数，却给了两套模板参数默认值。如果用户不设置这个模板参数， C++ 不知道是该调用 <code>int</code> 默认值还是 <code>double</code> 默认值，所以在编译时，会报重复定义的错误。</p>
 <h2 id="_4">解决办法<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>使用非类型模板参数，类型已知，值可以是未知的。更改代码如下：</p>
-<div class="highlight"><pre><span></span><code><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="k">typename</span><span class="w"> </span><span class="nc">enable_if</span><span class="o">&lt;</span><span class="n">is_same</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">AMyClass</span><span class="o">&gt;::</span><span class="n">value</span><span class="o">&gt;::</span><span class="n">type</span><span class="o">*</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="o">&gt;</span><span class="w"></span>
-<span class="kt">unsigned</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<pre><code class="language-c++">template&lt;typename T, typename =  typename enable_if&lt;is_same&lt;T, AMyClass&gt;::value&gt;::type* = nullptr&gt;
+unsigned len (T const&amp; t) {
+    return 0;
+}
 
-<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="k">typename</span><span class="w"> </span><span class="nc">enable_if</span><span class="o">&lt;</span><span class="n">is_same</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">BMyClass</span><span class="o">&gt;::</span><span class="n">value</span><span class="o">&gt;::</span><span class="n">type</span><span class="o">*</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="o">&gt;</span><span class="w"></span>
-<span class="kt">unsigned</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+template&lt;typename T, typename =  typename enable_if&lt;is_same&lt;T, BMyClass&gt;::value&gt;::type* = nullptr&gt;
+unsigned len (T const&amp; t) {
+    return 1;
+}
+</code></pre>
 <p>在默认情况下， <code>type</code> 相当于 <code>void</code> ，<code>type*</code> 相当于 <code>void*'</code>，因为用了 <code>enable_if</code> ，可以借助 SFINAE 消除调用时的二义性，解决了在编译时出现的重复定义默认函数的问题。之所以选择 <code>type*</code>   相当于把它当做一个占位符，用来实现 SFINAE 。<code>type</code> 几乎可以是任意类型，默认值 <code>nullptr</code> 也是万能的，可以赋值给任意类型的指针。</p>
 <p>当然不一定需要使用指针来做占位符， OneFlow 中例子如下：</p>
-<div class="highlight"><pre><span></span><code><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">std</span><span class="o">::</span><span class="n">enable_if</span><span class="o">&lt;!</span><span class="n">py</span><span class="o">::</span><span class="n">detail</span><span class="o">::</span><span class="n">is_pyobject</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;::</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="o">&gt;</span><span class="w"></span>
-</code></pre></div>
+<pre><code class="language-c++">template&lt;typename T, typename std::enable_if&lt;!py::detail::is_pyobject&lt;T&gt;::value, int&gt;::type = 0&gt;
+</code></pre>
 <p>使用 <code>int</code> 类型来做占位符，默认值是 0 。<a href="https://github.com/Oneflow-Inc/oneflow/blob/master/oneflow/api/python/functional/python_arg.h">对应源码地址</a>， 71 行</p>
 <p>更多的例子可以在 <a href="https://github.com/Oneflow-Inc/oneflow/blob/master/oneflow/api/python/functional">OneFlow源码</a> 中搜索</p>
 
@@ -1005,7 +1005,7 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.top", "instant"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.top", "navigation.instant"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../assets/javascripts/bundle.5a2dcb6a.min.js"></script>

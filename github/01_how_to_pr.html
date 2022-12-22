@@ -904,17 +904,17 @@
 <p>接着，将我们账号下的仓库，克隆一份到本地，方便修改和提交代码。</p>
 <h2 id="3">3. 创建新分支<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
 <p>在最新代码的基础上，通过 <code>git checkout -b</code> 命令，创建新的分支。并在这个新分支上进行修改和 commit 代码。</p>
-<div class="highlight"><pre><span></span><code>git checkout -b new_branch
-</code></pre></div>
+<pre><code class="language-shell">git checkout -b new_branch
+</code></pre>
 <p>以上的 <code>new_branch</code> 就是新分支名。该命令会创建 <code>new_branch</code> 分支并切换到这个新分支上。</p>
 <p>修改文件并提交代码</p>
-<div class="highlight"><pre><span></span><code>git add .
+<pre><code class="language-shell">git add .
 git commit 
-</code></pre></div>
+</code></pre>
 <h2 id="4-github">4. 推送到github<a class="headerlink" href="#4-github" title="Permanent link">&para;</a></h2>
 <p>提交到本地仓库成功之后，我们就要将改动提交到远程仓库啦，使用命令：</p>
-<div class="highlight"><pre><span></span><code>git push origin new_branch
-</code></pre></div>
+<pre><code class="language-shell">git push origin new_branch
+</code></pre>
 <p>其实 origin 就是远程仓库地址的别名，<code>new_branch</code> 是远程仓库分支名，强烈建议与本地分支名保持一致。</p>
 <h2 id="5-pr">5. 创建 PR<a class="headerlink" href="#5-pr" title="Permanent link">&para;</a></h2>
 <p>在第一次 push 到远程仓库成功后，控制台会出现一个链接，我们把这个链接复制到浏览器打开，就可以跳转到创建PR的界面。</p>
@@ -1007,7 +1007,7 @@ git commit
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.top", "instant"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.top", "navigation.instant"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
