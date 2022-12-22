@@ -3,7 +3,6 @@ site_url: https://blog.horrordor.tk/
 # Repository
 repo_name: horrordor
 repo_url: https://github.com/horrordor/blog/
-repo_branch: main
 
 # Copyright
 copyright: Copyright &copy; horrordor
@@ -17,7 +16,6 @@ theme:
   custom_dir: "overrides/"
   logo: assets/logo.svg
   favicon: assets/logo.svg
-  static-templates: ["404.html", "robots.txt"]
 
   # Don't include MkDocs' JavaScript
   include_search_page: false
@@ -28,7 +26,7 @@ theme:
   features:
     - navigation.tabs
     - navigation.top
-    - instant
+    - navigation.instant
   palette:
     scheme: default
     primary: blue grey
@@ -64,11 +62,9 @@ extra:
 markdown_extensions:
   - markdown.extensions.admonition
   - markdown.extensions.attr_list
-  - markdown.extensions.codehilite:
-      guess_lang: false
   - markdown.extensions.def_list
   - markdown.extensions.footnotes
-  - markdown.extensions.meta
+  - markdown.extensions.tables
   - markdown.extensions.toc:
       permalink: true
   - pymdownx.arithmatex:
@@ -91,8 +87,6 @@ markdown_extensions:
   - pymdownx.smartsymbols
   - pymdownx.snippets:
       check_paths: true
-  - pymdownx.superfences
-  - pymdownx.tabbed
   - pymdownx.tasklist:
       custom_checkbox: true
   - pymdownx.tilde
