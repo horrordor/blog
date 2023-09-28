@@ -1,6 +1,6 @@
 # 模板元编程推荐资料
 
-为了更好地入门或提升模板元编程能力，我们整理了 3 个视频，2 本书籍，共五个资料推荐给大家。
+为了更好地入门或提升模板元编程能力，我整理了 3 个视频，2 本书籍，共五个资料推荐给大家。
 
 ## 1. **视频传送门：** [CPPCON 2020: Template MetaProgramming](https://www.youtube.com/watch?v=tiAVWcjIF6o)
 

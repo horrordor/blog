@@ -125,3 +125,18 @@ nav:
       - enable_if 新标准: learn_cpp/012_enable_if.md
       - enable_if 的重定义错误: learn_cpp/13_enable_if_redefine_mistake.md
       - 模板元编程: learn_cpp/014_materials.md
+
+  - 深度学习:
+      - AlexNet： ImageNet Classification with Deep Convolutional Neural Networks: deep_learning/01_AlexNet.md
+      - VGG： Very Deep Convolutional Networks for Large-Scale Image Recognition: deep_learning/02_VGG.md
+      - ResNet：Deep Residual Learning for Image Recognition: deep_learning/03_ResNet.md
+      - MobileNet：Efficient Convolutional Neural Networks for Mobile Vision Applications: deep_learning/04_MoblieNets.md
+      - GoogLeNet: deep_learning/05_GoogLeNet.md
+      - R-CNN：Rich feature hierarchies for accurate object detection and semantic segmentation Tech report: deep_learning/06_R-CNN.md
+      - Fast R-CNN: deep_learning/07_Fast_R-CNN.md
+      - Faster R-CNN： Towards Real-Time Object Detection with Region Proposal Networks: deep_learning/08_Faster_R-CNN.md
+      - YOLO v1：You Only Look Once： Unified, Real-Time Object Detection: deep_learning/09_YOLO_v1.md
+      - YOLOv2：YOLO9000：Better, Faster, Stronger: deep_learning/10_YOLO_v2.md
+      - GAN：Generative Adversarial Nets: deep_learning/11_GAN.md
+      - 杂: deep_learning/other.md
+
