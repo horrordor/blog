@@ -55,7 +55,7 @@ $$ x_L = x_l + \sum_{i=l}^{L - 1} F(x_i, W_i) $$
 
 $$ \frac{ \partial loss }{ \partial x_l } = \frac{ \partial loss }{ \partial x_L } *  \frac{ \partial x_L }{ \partial x_l } = \frac{ \partial loss }{ \partial x_L } * (1 + \frac{ \partial }{ \partial x_l } \sum_{i = l}^{L - 1}F(x_i, W_i ))$$
 
-$\frac{ \partial loss }{ \partial x_l }  表示loss关于x_L的梯度$ ,括号中，1表示两层之间进行无损传播。在反向梯度传播中，残差块中任意两层该项的梯度都等于1，可以有效的避免梯度消失和梯度爆炸。另一项残差梯度则需要经过带有权重（W）的层，其梯度值即使很小，但因为有1的存在，也不会导致梯度消失。
+$\frac{ \partial loss }{ \partial x_l }$ 表示loss关于x_L的梯度；括号中，1表示两层之间进行无损传播。在反向梯度传播中，残差块中任意两层该项的梯度都等于1，可以有效的避免梯度消失和梯度爆炸。另一项残差梯度则需要经过带有权重（W）的层，其梯度值即使很小，但因为有1的存在，也不会导致梯度消失。
 
 # 残差模块
 
