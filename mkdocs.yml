@@ -127,6 +127,7 @@ nav:
       - 模板元编程: learn_cpp/014_materials.md
 
   - 深度学习:
+      - Deep Learning: deep_learning/00_Deep_Learning.md
       - AlexNet： ImageNet Classification with Deep Convolutional Neural Networks: deep_learning/01_AlexNet.md
       - VGG： Very Deep Convolutional Networks for Large-Scale Image Recognition: deep_learning/02_VGG.md
       - ResNet：Deep Residual Learning for Image Recognition: deep_learning/03_ResNet.md
