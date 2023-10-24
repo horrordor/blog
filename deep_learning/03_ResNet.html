@@ -1020,8 +1020,8 @@
 <p>基于上述公式，可得从浅层l到深层L的特征为：</p>
 <div class="arithmatex">\[ x_L = x_l + \sum_{i=l}^{L - 1} F(x_i, W_i) \]</div>
 <p>根据链式法则，可以求得方向过程的梯度：</p>
-<div class="arithmatex">\[ \frac{ \partial loss }{ \partial x_l } = \frac{ \partial loss }{ \partial x_L } *  \frac{ \partial x_L }{ \partial x_l } = \frac{ \partial loss }{ \partial x_L } * (1 + \frac{ \partial }{ \partial x_l } \sum_{i = l}^{L - 1}F(x_i, W_i )) (\frac{ \partial loss }{ \partial x_l }  表示loss关于x_L的梯度)\]</div>
-<p>括号中，1表示两层之间进行无损传播。在反向梯度传播中，残差块中任意两层该项的梯度都等于1，可以有效的避免梯度消失和梯度爆炸。另一项残差梯度则需要经过带有权重（W）的层，其梯度值即使很小，但因为有1的存在，也不会导致梯度消失。</p>
+<div class="arithmatex">\[ \frac{ \partial loss }{ \partial x_l } = \frac{ \partial loss }{ \partial x_L } *  \frac{ \partial x_L }{ \partial x_l } = \frac{ \partial loss }{ \partial x_L } * (1 + \frac{ \partial }{ \partial x_l } \sum_{i = l}^{L - 1}F(x_i, W_i ))\]</div>
+<p><span class="arithmatex">\(\frac{ \partial loss }{ \partial x_l }  表示loss关于x_L的梯度\)</span> ,括号中，1表示两层之间进行无损传播。在反向梯度传播中，残差块中任意两层该项的梯度都等于1，可以有效的避免梯度消失和梯度爆炸。另一项残差梯度则需要经过带有权重（W）的层，其梯度值即使很小，但因为有1的存在，也不会导致梯度消失。</p>
 <h1 id="_2">残差模块<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
 <p>在ResNet之前，主流的神经网络都是卷积层的线性堆叠。输入数据经过每个卷积层都会发生变化，产生一个输出的feature map。我们要训练的就是网络中的参数，使得输入，输出之间能够形成一个映射，即mapping。作者的思路是，引入一个identity mapping（恒等映射）跨越一些（至少一个）卷积层，然后网络只进行一个residual mapping（残差映射）。</p>
 <p>其中 x和网络输出的F(x)必须维度一致（维度不同，直接采用1*1的卷积进行上/下采样）。在网络的输出阶段，先相加，在进行relu。</p>
