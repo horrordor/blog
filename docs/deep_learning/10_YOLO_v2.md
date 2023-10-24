@@ -1,4 +1,4 @@
-主要改变了YOLOv1中奇怪的边界框获取方式———非极大值抑制 non-maximum suppression，改为了类似Faster RCNN中的RPN(Region Proposal Network)的**带锚点的直接调整边界框**。还有就是训练的时候每10轮就更改一次输入图像的大小，从而强制使训练得到的网络可以接受不同大小的输入。还有一系列改进来获取训练集的方法。
+主要改变了YOLOv1中奇怪的边界框获取方式———非极大值抑制 non-maximum suppression，改为了类似Faster RCNN中的RPN(Region Proposal Network)的 **带锚点的直接调整边界框** 。还有就是训练的时候每10轮就更改一次输入图像的大小，从而强制使训练得到的网络可以接受不同大小的输入。还有一系列改进来获取训练集的方法。
 
 > Q:YOLOv2与YOLOv1的主要不同点有哪些?
 > 
