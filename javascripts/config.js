@@ -17,8 +17,18 @@ document$.subscribe(() => {
 
 $('link').each(function () {
     var $intial = $(this).attr('href'),
-        $replace = $intial.replace('https://fonts.googleapis.com/', '//fonts.font.im/');
+        $replace = $intial.replace('https://fonts.googleapis.com/', 'https://fonts.font.im/');
     console.log($intial);
     console.log($replace);
     $(this).attr('href', $replace);
 });
+
+$('link').each(function () {
+    var $intial = $(this).attr('href'),
+        $replace = $intial.replace('https://cdn.jsdelivr.net/', 'https://jsd.cdn.zzko.cn/');
+    console.log($intial);
+    console.log($replace);
+    $(this).attr('href', $replace);
+});
+
+
