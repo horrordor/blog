@@ -53,10 +53,6 @@ theme:
 # Plugins
 plugins:
   - search
-extra:
-  version:
-    provider: mike
-  #disqus: livere_indeed
 
 # Extensions
 markdown_extensions:
