@@ -163,5 +163,6 @@ nav:
       - YOLOv2：YOLO9000：Better, Faster, Stronger: deep_learning/10_YOLO_v2.md
       - GAN：Generative Adversarial Nets: deep_learning/11_GAN.md
       - WANN：Weight Agnostic Neural Networks: deep_learning/12_WANN.md
+      - ViT：An Image is Worth 16x16 Words：Transformers for Image Recognition at Scale: deep_learning/13_Vit.md
       - 杂: deep_learning/other.md
 
