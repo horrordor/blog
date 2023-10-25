@@ -28,9 +28,20 @@ theme:
     - navigation.top
     - navigation.instant
   palette:
-    scheme: default
-    primary: blue grey
-    accent: blue grey
+   # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default 
+      toggle:
+        icon: material/brightness-7
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
   icon:
     admonition:
       note: octicons/tag-16
@@ -47,6 +58,7 @@ theme:
       quote: octicons/quote-16
   features:
       - navigation.footer
+      - header.autohide
   font:
     text: Roboto
     code: Roboto Mono
@@ -72,7 +84,7 @@ markdown_extensions:
   - pymdownx.critic
   - pymdownx.details
   - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
   - pymdownx.inlinehilite
   - pymdownx.keys
