@@ -45,7 +45,8 @@ theme:
       bug: octicons/bug-16
       example: octicons/beaker-16
       quote: octicons/quote-16
-
+  features:
+      - navigation.footer
   font:
     text: Roboto
     code: Roboto Mono
@@ -92,6 +93,20 @@ extra_javascript:
   - javascripts/config.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://jsd.cdn.zzko.cn/npm/mathjax@3/es5/tex-mml-chtml.js
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/horrordor/
+      name: github主页
+    - icon: fontawesome/solid/paper-plane
+      link: mailto:<cccccc2002@outlook.com>
+      name: 我的邮箱
+    - icon: fontawesome/solid/link
+      link: https://bing.horrordor.tk/
+      name: Bing每日壁纸
+
+
 
 nav:
   - 首页: index.md
