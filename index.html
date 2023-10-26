@@ -294,12 +294,22 @@
         }
     }
 </style>
+<script>
+    // 不支持 IE, iOS Safari < 10.1，
+    fetch('https://v1.hitokoto.cn?c=d&c=j&c=k')
+        .then(response => response.json())
+        .then(data => {
+            const hitokoto = document.querySelector('#hitokoto_text')
+            hitokoto.innerText = data.hitokoto
+        })
+        .catch(console.error)
+</script>
 <section class="mdx-container">
     <div class="md-grid md-typeset">
         <div class="mdx-hero">
             <div class="mdx-hero__content" style="padding-left:10vw;padding-right:10vw;">
                 <h1 style="mix-blend-mode: lighten;color: white;">
-                    <div class="fuck-box"></div> <b>我们所经历的每一个平凡的日常，也许就是连续发生的奇迹。</b>
+                    <div class="fuck-box"></div> <b id="hitokoto_text">我们所经历的每一个平凡的日常，也许就是连续发生的奇迹。</b>
                 </h1>
                 <a href="github/01_how_to_pr.html" title="如何提交 PR"
                     class="md-button md-button--primary">
