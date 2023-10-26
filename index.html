@@ -294,22 +294,34 @@
         }
     }
 </style>
-<script>
-    // 不支持 IE, iOS Safari < 10.1，
-    fetch('https://v1.hitokoto.cn?c=d&c=j&c=k')
-        .then(response => response.json())
-        .then(data => {
-            const hitokoto = document.querySelector('#hitokoto_text')
-            hitokoto.innerText = data.hitokoto
-        })
-        .catch(console.error);
 
-    window.onload = setTimeout(
-        function () {
-            document.getElementById("hitokoto_text").style.display = "flex";
-        },
-        500
-    );
+<link href="https://fonts.font.im/css2?family=Noto+Sans+SC:wght@600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+<script src="https://cdn.staticfile.org/webfont/1.6.28/webfontloader.js"></script>
+<script>
+    WebFont.load({
+        custom: {
+            families: ['Noto Sans SC', 'Roboto', 'Roboto Mono']
+        }
+    });
+</script>
+
+<script>
+    window.onload = function () {
+        fetch('https://v1.hitokoto.cn?c=d&c=j&c=k')
+            .then(response => response.json())
+            .then(fuck => {
+                var typed = new Typed('#typed', {
+                    strings: ["欢迎来到我的博客", fuck.hitokoto.toString()],//输出的文字
+                    typeSpeed: 50,//打字的速度
+                });
+            })
+            .catch(console.error);
+
+        document.getElementById("button_1").style.display = "inline-block";
+        document.getElementById("button_2").style.display = "inline-block";
+    };
 
 </script>
 </script>
@@ -317,15 +329,18 @@
     <div class="md-grid md-typeset">
         <div class="mdx-hero">
             <div class="mdx-hero__content" style="padding-left:10vw;padding-right:10vw;">
-                <h1 style="mix-blend-mode: lighten;color: white;">
+                <h1
+                    style="mix-blend-mode: lighten;color: white;font-weight:bolder;font-family: 'Noto Sans SC', serif;font-size: 65px;">
                     <div class="fuck-box"></div>
-                    <p id="hitokoto_text" style="display: none;font-weight:bolder">我们所经历的每一个平凡的日常，也许就是连续发生的奇迹。</p>
+                    <span id="typed">
+                    </span>
                 </h1>
-                <a href="github/01_how_to_pr.html" title="如何提交 PR"
-                    class="md-button md-button--primary">
+                <a id="button_1" style="display: none;" href="github/01_how_to_pr.html"
+                    title="如何提交 PR" class="md-button md-button--primary">
                     一起学习
                 </a>
-                <a href="https://github.com/horrordor" title="Github" class="md-button">
+                <a id="button_2" style="display: none;" href="https://github.com/horrordor" title="Github"
+                    class="md-button">
                     <b style="mix-blend-mode: lighten;color: white;"> Github 仓库</b>
                 </a>
             </div>
