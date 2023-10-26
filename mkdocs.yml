@@ -104,7 +104,7 @@ extra_javascript:
   - https://libs.baidu.com/jquery/2.1.4/jquery.min.js
   - https://cdn.staticfile.org/webfont/1.6.28/webfontloader.js
   - javascripts/config.js
-  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://polyfill.alicdn.com/polyfill.min.js
   - https://jsd.cdn.zzko.cn/npm/mathjax@3/es5/tex-mml-chtml.js
 
 extra:
