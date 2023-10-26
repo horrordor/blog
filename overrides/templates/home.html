@@ -53,14 +53,24 @@ This file was automatically generated - do not edit
             const hitokoto = document.querySelector('#hitokoto_text')
             hitokoto.innerText = data.hitokoto
         })
-        .catch(console.error)
+        .catch(console.error);
+
+    window.onload = setTimeout(
+        function () {
+            document.getElementById("hitokoto_text").style.display = "flex";
+        },
+        500
+    );
+
+</script>
 </script>
 <section class="mdx-container">
     <div class="md-grid md-typeset">
         <div class="mdx-hero">
             <div class="mdx-hero__content" style="padding-left:10vw;padding-right:10vw;">
                 <h1 style="mix-blend-mode: lighten;color: white;">
-                    <div class="fuck-box"></div> <b id="hitokoto_text">我们所经历的每一个平凡的日常，也许就是连续发生的奇迹。</b>
+                    <div class="fuck-box"></div>
+                    <p id="hitokoto_text" style="display: none;font-weight:bolder">我们所经历的每一个平凡的日常，也许就是连续发生的奇迹。</p>
                 </h1>
                 <a href="{{ page.next_page.url | url }}" title="{{ page.next_page.title | e }}"
                     class="md-button md-button--primary">
