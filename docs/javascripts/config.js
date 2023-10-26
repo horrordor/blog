@@ -24,10 +24,8 @@ $('link').each(function () {
 });
 
 
-// $('link').each(function () {
-//     var $intial = $(this).attr('href'),
-//         $replace = $intial.replace('https://fonts.gstatic.com', 'https://fonts.gstatic.font.im');
-//     console.log($intial);
-//     console.log($replace);
-//     $(this).attr('href', $replace);
-// });
+WebFont.load({
+    custom: {
+        families: ['Noto Sans SC', 'Ubuntu Mono', 'Roboto']
+    }
+});
