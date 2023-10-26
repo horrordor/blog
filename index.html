@@ -82,8 +82,8 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CUbuntu+Mono,+Roboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Ubuntu Mono, Roboto Mono"}</style>
       
     
     
@@ -293,19 +293,66 @@
             display: none
         }
     }
+
+    .typed-cursor {
+        opacity: 1;
+        animation: typedjsBlink 0.7s infinite;
+        -webkit-animation: typedjsBlink 0.7s infinite;
+        animation: typedjsBlink 0.7s infinite;
+    }
+
+    @keyframes typedjsBlink {
+        50% {
+            opacity: 0.0;
+        }
+    }
+
+    @-webkit-keyframes typedjsBlink {
+        0% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0.0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    .typed-fade-out {
+        opacity: 0;
+        transition: opacity .25s;
+        -webkit-animation: 0;
+        animation: 0;
+    }
+
+
+    /* noto-sans-sc-regular */
+    @font-face {
+        font-family: 'Noto Sans SC';
+        font-style: normal;
+        font-weight: regular;
+        src: url('//lib.baomitu.com/fonts/noto-sans-sc/noto-sans-sc-regular.eot');
+        /* IE9 Compat Modes */
+        src: local('Noto Sans SC'), local('NotoSans SC-Normal'),
+            url('//lib.baomitu.com/fonts/noto-sans-sc/noto-sans-sc-regular.eot?#iefix') format('embedded-opentype'),
+            /* IE6-IE8 */
+            url('//lib.baomitu.com/fonts/noto-sans-sc/noto-sans-sc-regular.woff2') format('woff2'),
+            /* Super Modern Browsers */
+            url('//lib.baomitu.com/fonts/noto-sans-sc/noto-sans-sc-regular.woff') format('woff'),
+            /* Modern Browsers */
+            url('//lib.baomitu.com/fonts/noto-sans-sc/noto-sans-sc-regular.ttf') format('truetype'),
+            /* Safari, Android, iOS */
+            url('//lib.baomitu.com/fonts/noto-sans-sc/noto-sans-sc-regular.svg#NotoSans SC') format('svg');
+        /* Legacy iOS */
+    }
 </style>
 
-<link href="https://fonts.font.im/css2?family=Noto+Sans+SC:wght@600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.font.im">
+<link rel="preconnect" href="https://fonts.gstatic.font.im" crossorigin>
 <script src="https://jsd.cdn.zzko.cn/npm/typed.js@2.0.12"></script>
-
-<script src="https://cdn.staticfile.org/webfont/1.6.28/webfontloader.js"></script>
-<script>
-    WebFont.load({
-        custom: {
-            families: ['Noto Sans SC', 'Roboto', 'Roboto Mono']
-        }
-    });
-</script>
 
 <script>
     window.onload = function () {
@@ -315,31 +362,28 @@
                 var typed = new Typed('#typed', {
                     strings: ["欢迎来到我的博客", fuck.hitokoto.toString()],//输出的文字
                     typeSpeed: 50,//打字的速度
+                    startDelay: 1000
                 });
             })
             .catch(console.error);
-
-        document.getElementById("button_1").style.display = "inline-block";
-        document.getElementById("button_2").style.display = "inline-block";
     };
-
 </script>
 </script>
 <section class="mdx-container">
     <div class="md-grid md-typeset">
         <div class="mdx-hero">
             <div class="mdx-hero__content" style="padding-left:10vw;padding-right:10vw;">
-                <h1 style="mix-blend-mode: lighten;color: white;font-weight:bolder;font-family: 'Noto Sans SC', serif;">
+                <h1 style="mix-blend-mode: lighten;color: white;font-weight:bolder;font-family:'Noto Sans SC'">
                     <div class="fuck-box"></div>
                     <span id="typed">
                     </span>
                 </h1>
-                <a id="button_1" style="display: none;" href="github/01_how_to_pr.html"
+                <a id="button_1" style="display: inline-block;" href="github/01_how_to_pr.html"
                     title="如何提交 PR" class="md-button md-button--primary">
                     一起学习
                 </a>
-                <a id="button_2" style="display: none;" href="https://github.com/horrordor" title="Github"
-                    class="md-button">
+                <a id="button_2" style="display: inline-block;" href="https://github.com/horrordor"
+                    title="Github" class="md-button">
                     <b style="mix-blend-mode: lighten;color: white;"> Github 仓库</b>
                 </a>
             </div>
@@ -1360,6 +1404,8 @@
       <script src="assets/javascripts/bundle.dff1b7c8.min.js"></script>
       
         <script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+      
+        <script src="https://cdn.staticfile.org/webfont/1.6.28/webfontloader.js"></script>
       
         <script src="javascripts/config.js"></script>
       

@@ -84,8 +84,8 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CUbuntu+Mono,+Roboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Ubuntu Mono, Roboto Mono"}</style>
       
     
     
@@ -1383,7 +1383,7 @@ int main(int argc, char* argv[]) {
     return 0;
 }
 </code></pre>
-<p>这段代码在 C 语言中是编译不通过的，这是因为 C 语言是不支特“重载”的，到 C++ 才支持重载。C++ 编译器遇到某些调用语句时，它就会根据调用语句的**参数类型**、<strong>个数</strong>、**顺序**等来匹配到最合适的函数，然后生成调用代码。比如这个例子中函数调用 <code>f(3, 5)</code> 会匹配到第一个实现，<code>f(3.14, 2.73)</code> 则会匹配到第二个函数实现。</p>
+<p>这段代码在 C 语言中是编译不通过的，这是因为 C 语言是不支特“重载”的，到 C++ 才支持重载。C++ 编译器遇到某些调用语句时，它就会根据调用语句的 <strong>参数类型</strong> 、<strong>个数</strong> 、<strong>顺序</strong> 等来匹配到最合适的函数，然后生成调用代码。比如这个例子中函数调用 <code>f(3, 5)</code> 会匹配到第一个实现，<code>f(3.14, 2.73)</code> 则会匹配到第二个函数实现。</p>
 <p>作为一个爱学习的人，我们应该了解编译器是如何实现重载的，在实现重载的时候又做了些什么，这对我们后面理解 SFINAE 也非常重要。这里简单罗列一下函数重载过程中到底要做哪些事：</p>
 <ul>
 <li>将所有对应的“同名”候选函数，做成一个集合</li>
@@ -1589,6 +1589,8 @@ decltype (T().size(), typename T::size_type()) len(T const&amp;t) {
       <script src="../assets/javascripts/bundle.dff1b7c8.min.js"></script>
       
         <script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+      
+        <script src="https://cdn.staticfile.org/webfont/1.6.28/webfontloader.js"></script>
       
         <script src="../javascripts/config.js"></script>
       
