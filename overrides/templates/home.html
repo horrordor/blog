@@ -148,6 +148,7 @@ This file was automatically generated - do not edit
 
 <script>
     window.onload = function () {
+        $(".loading-div").hide();
         fetch('https://v1.hitokoto.cn?c=d&c=j&c=k')
             .then(response => response.json())
             .then(fuck => {
