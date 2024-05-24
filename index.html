@@ -327,6 +327,21 @@
         animation: 0;
     }
 
+    .loading-div {
+      width: 100vh;
+      height: 100vh;
+      background-color: #fff;
+      display: table-cell;
+      vertical-align: middle;
+      color: #555;
+      overflow: hidden;
+      text-align: center;
+    }
+    .loading-div::before {
+      display: inline-block;
+      vertical-align: middle;
+    } 
+
 
     /* noto-sans-sc-regular */
     @font-face {
@@ -397,6 +412,10 @@
 </script>
 
 <section class="mdx-container">
+  <div class="loading-div">
+      <img src="https://pic.zeyiwl.cn/yunimg/20220418203424.jpg"/>
+  </div>
+  <div class="main">
     <div class="md-grid md-typeset">
         <div class="mdx-hero">
             <div class="mdx-hero__content" style="padding-left:10vw;padding-right:10vw;">
