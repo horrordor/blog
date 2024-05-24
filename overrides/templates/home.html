@@ -19,7 +19,6 @@ This file was automatically generated - do not edit
 
     body {
         overflow: hidden;
-        background: url('https://api.btstu.cn/sjbz/api.php?lx=fengjing&format=images');
         background-size:
             cover;
         background-attachment: fixed;
@@ -120,6 +119,23 @@ This file was automatically generated - do not edit
     };
 </script>
 </script>
+<script>
+    //定义一个函数判断是手机端还是pc端
+    function isMobile(){
+        if(window.navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)) {
+            return true; // 移动端
+        }else{
+            return false; // PC端
+        }
+    }
+    //    判断后的操作
+    if(isMobile()){
+        document.body.style.backgroundImage="url(https://api.btstu.cn/sjbz/api.php?lx=fengjing&format=images&method=mobile)"
+    }else{
+        document.body.style.backgroundImage="url(https://api.btstu.cn/sjbz/api.php?lx=fengjing&format=images)"
+    }
+</script>  
+
 <section class="mdx-container">
     <div class="md-grid md-typeset">
         <div class="mdx-hero">
