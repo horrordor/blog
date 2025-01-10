@@ -123,6 +123,7 @@ extra:
 
 nav:
   - 首页: index.md
+  
   - 一起学 GitHub:
       - 如何提交 PR: github/01_how_to_pr.md
       - 如何通过 PR 学习: github/02_learn_from_pr.md
@@ -167,4 +168,5 @@ nav:
       - ViT：An Image is Worth 16x16 Words：Transformers for Image Recognition at Scale: deep_learning/13_Vit.md
       - SwinT：Swin Transformer： Hierarchical Vision Transformer using Shifted Windows: deep_learning/14_SwinT.md
       - 杂: deep_learning/other.md
+  - 追番列表: anime.md
 
