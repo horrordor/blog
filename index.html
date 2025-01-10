@@ -328,19 +328,20 @@
     }
 
     .loading-div {
-      width: 100vw;
-      height: 100vh;
-      background-color: #fff;
-      display: table-cell;
-      vertical-align: middle;
-      color: #555;
-      overflow: hidden;
-      text-align: center;
+        width: 100vw;
+        height: 100vh;
+        background-color: #464646;
+        display: table-cell;
+        vertical-align: middle;
+        color: #555;
+        overflow: hidden;
+        text-align: center;
     }
+
     .loading-div::before {
-      display: inline-block;
-      vertical-align: middle;
-    } 
+        display: inline-block;
+        vertical-align: middle;
+    }
 
 
     /* noto-sans-sc-regular */
@@ -370,57 +371,56 @@
         position: relative;
     }
 
-        
-        .loader {
-            display: flex;
-            justify-content: center;
-            align-items: center
-        }
-        
-        .loader>span {
-            display: inline-block;
-            background-color: purple;
-            width: 0px;
-            height: 0px;
-            border-radius: 50%;
-            margin: 0 8px;
-            transform: translateY(0);
-            animation: bounce 0.6s infinite alternate
-        }
-        
-        .loader>span:nth-child(2) {
-            background-color: palevioletred;
-            animation-delay: 0.2s
-        }
-        
-        .loader>span:nth-child(3) {
-            background-color: palevioletred;
-            animation-delay: 0.4s
-        }
-        
-        @keyframes bounce {
-            to {
-                width: 16px;
-                height: 16px;
-                transform: translateY(-16px)
-            }
-        }
 
+    .loader {
+        display: flex;
+        justify-content: center;
+        align-items: center
+    }
+
+    .loader>span {
+        display: inline-block;
+        background-color: purple;
+        width: 0px;
+        height: 0px;
+        border-radius: 50%;
+        margin: 0 8px;
+        transform: translateY(0);
+        animation: bounce 0.6s infinite alternate
+    }
+
+    .loader>span:nth-child(2) {
+        background-color: palevioletred;
+        animation-delay: 0.2s
+    }
+
+    .loader>span:nth-child(3) {
+        background-color: palevioletred;
+        animation-delay: 0.4s
+    }
+
+    @keyframes bounce {
+        to {
+            width: 16px;
+            height: 16px;
+            transform: translateY(-16px)
+        }
+    }
 </style>
 
 
 <script>
     //定义一个函数判断是手机端还是pc端
-    var os = function (){
+    var os = function () {
         var ua = navigator.userAgent,
-        isWindowsPhone = /(?:Windows Phone)/.test(ua),
-        isSymbian = /(?:SymbianOS)/.test(ua) || isWindowsPhone,
-        isAndroid = /(?:Android)/.test(ua),
-        isFireFox = /(?:Firefox)/.test(ua),
-        isChrome = /(?:Chrome|CriOS)/.test(ua),
-        isTablet = /(?:iPad|PlayBook)/.test(ua) || (isAndroid && !/(?:Mobile)/.test(ua)) || (isFireFox && /(?:Tablet)/.test(ua)),
-        isPhone = /(?:iPhone)/.test(ua) && !isTablet,
-        isPc = !isPhone && !isAndroid && !isSymbian;
+            isWindowsPhone = /(?:Windows Phone)/.test(ua),
+            isSymbian = /(?:SymbianOS)/.test(ua) || isWindowsPhone,
+            isAndroid = /(?:Android)/.test(ua),
+            isFireFox = /(?:Firefox)/.test(ua),
+            isChrome = /(?:Chrome|CriOS)/.test(ua),
+            isTablet = /(?:iPad|PlayBook)/.test(ua) || (isAndroid && !/(?:Mobile)/.test(ua)) || (isFireFox && /(?:Tablet)/.test(ua)),
+            isPhone = /(?:iPhone)/.test(ua) && !isTablet,
+            isPc = !isPhone && !isAndroid && !isSymbian;
         return {
             isTablet: isTablet,
             isPhone: isPhone,
@@ -430,11 +430,11 @@
     }();
 
     if (os.isAndroid || os.isPhone) {
-          document.body.style.backgroundImage="url(https://api.vvhan.com/api/bing?rand=sj&size=768x1280)"
+        document.body.style.backgroundImage = "url(https://api.vvhan.com/api/bing?rand=sj&size=768x1280)"
     } else {
-          document.body.style.backgroundImage="url(https://api.vvhan.com/api/bing?rand=sj&size=1920x1080)"
+        document.body.style.backgroundImage = "url(https://api.vvhan.com/api/bing?rand=sj&size=1920x1080)"
     }
-</script>  
+</script>
 
 <link rel="preconnect" href="https://fonts.font.im">
 <link rel="preconnect" href="https://fonts.gstatic.font.im" crossorigin>
@@ -458,32 +458,32 @@
 </script>
 
 <section class="mdx-container">
-  <div class="loading-div" id="img_body">
-    <div class="loader">
-        <span></span><span></span><span></span>
-        <h1 style="display:none;">horrordor's blog</h1>
-    </div>
-  </div>
-  <div class="main">
-    <div class="md-grid md-typeset">
-        <div class="mdx-hero">
-            <div class="mdx-hero__content" style="padding-left:10vw;padding-right:10vw;">
-                <h1 style="mix-blend-mode: lighten;color: white;font-weight:bolder;font-family:'Noto Sans SC'">
-                    <div class="fuck-box"></div>
-                    <span id="typed">
-                    </span>
-                </h1>
-                <a id="button_1" style="display: inline-block;" href="github/01_how_to_pr.html"
-                    title="如何提交 PR" class="md-button md-button--primary">
-                    一起学习
-                </a>
-                <a id="button_2" style="display: inline-block;" href="https://github.com/horrordor"
-                    title="Github" class="md-button">
-                    <b style="mix-blend-mode: lighten;color: white;"> Github 仓库</b>
-                </a>
-            </div>
+    <div class="loading-div" id="img_body">
+        <div class="loader">
+            <span></span><span></span><span></span>
+            <h1 style="display:none;">horrordor's blog</h1>
         </div>
     </div>
+    <div class="main">
+        <div class="md-grid md-typeset">
+            <div class="mdx-hero">
+                <div class="mdx-hero__content" style="padding-left:10vw;padding-right:10vw;">
+                    <h1 style="mix-blend-mode: lighten;color: white;font-weight:bolder;font-family:'Noto Sans SC'">
+                        <div class="fuck-box"></div>
+                        <span id="typed">
+                        </span>
+                    </h1>
+                    <a id="button_1" style="display: inline-block;" href="github/01_how_to_pr.html"
+                        title="如何提交 PR" class="md-button md-button--primary">
+                        一起学习
+                    </a>
+                    <a id="button_2" style="display: inline-block;" href="https://github.com/horrordor"
+                        title="Github" class="md-button">
+                        <b style="mix-blend-mode: lighten;color: white;"> Github 仓库</b>
+                    </a>
+                </div>
+            </div>
+        </div>
 </section>
 
       <main class="md-main" data-md-component="main">
