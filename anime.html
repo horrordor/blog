@@ -254,10 +254,6 @@
         
       
 <style>
-    .body {
-        padding: 0;
-    }
-
     .md-header {
         position: initial
     }
@@ -271,6 +267,7 @@
     }
 
     body {
+        overflow: hidden;
         background-size:
             cover;
         background-attachment: fixed;
@@ -280,7 +277,6 @@
     .fuck-box {
         width: 80vw;
         height: 55vh;
-        padding: 5vw;
     }
 
 
@@ -334,7 +330,7 @@
     .loading-div {
         width: 100vw;
         height: 100vh;
-        background-color: #464646;
+        background-color: #000;
         display: table-cell;
         vertical-align: middle;
         color: #555;
@@ -347,13 +343,6 @@
         vertical-align: middle;
     }
 
-    .fuck {
-
-        background-color: rgba(17, 17, 17, 0.75);
-        border-radius: calc(3vw - 20px) calc(3vw - 20px) calc(3vw - 20px) calc(3vw - 20px);
-        padding: calc(3vw - 15px);
-        margin: 0 auto;
-    }
 
     /* noto-sans-sc-regular */
     @font-face {
@@ -382,33 +371,102 @@
         position: relative;
     }
 
-
-    .loader {
-        display: flex;
-        justify-content: center;
-        align-items: center
-    }
-
-    .loader>span {
+    .g-container {
         display: inline-block;
-        background-color: purple;
-        width: 0px;
-        height: 0px;
-        border-radius: 50%;
-        margin: 0 8px;
-        transform: translateY(0);
-        animation: bounce 0.6s infinite alternate
+        vertical-align: middle;
+        perspective: 4px;
+        perspective-origin: 50% 50%;
+        position: relative;
+        animation: hueRotate 21s infinite linear;
     }
 
-    .loader>span:nth-child(2) {
-        background-color: palevioletred;
-        animation-delay: 0.2s
+    .g-group {
+        position: absolute;
+        /*   perspective: 4px; */
+        width: 1000px;
+        height: 1000px;
+        left: -500px;
+        top: -500px;
+        transform-style: preserve-3d;
+        animation: move 12s infinite linear;
+        animation-fill-mode: forwards;
     }
 
-    .loader>span:nth-child(3) {
-        background-color: palevioletred;
-        animation-delay: 0.4s
+    .g-group:nth-child(2) {
+        animation: move 12s infinite linear;
+        animation-delay: -6s;
     }
+
+    .item {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: url(https://z3.ax1x.com/2021/08/20/fLwuMd.jpg);
+        background-size: cover;
+        opacity: 1;
+        animation: fade 12s infinite linear;
+        animation-delay: 0;
+    }
+
+    .g-group:nth-child(2) .item {
+        animation-delay: -6s;
+    }
+
+    .item-right {
+        transform: rotateY(90deg) translateZ(500px);
+    }
+
+    .item-left {
+        transform: rotateY(-90deg) translateZ(500px);
+    }
+
+    .item-top {
+        transform: rotateX(90deg) translateZ(500px);
+    }
+
+    .item-bottom {
+        transform: rotateX(-90deg) translateZ(500px);
+    }
+
+    .item-middle {
+        transform: rotateX(180deg) translateZ(1000px);
+    }
+
+    @keyframes move {
+        0% {
+            transform: translateZ(-500px) rotate(0deg);
+        }
+
+        100% {
+            transform: translateZ(500px) rotate(0deg);
+        }
+    }
+
+    @keyframes fade {
+        0% {
+            opacity: 0;
+        }
+
+        25%,
+        60% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+        }
+    }
+
+    @keyframes hueRotate {
+        0% {
+            filter: hue-rotate(0);
+        }
+
+        100% {
+            filter: hue-rotate(360deg);
+        }
+    }
+
 
     @keyframes bounce {
         to {
@@ -425,6 +483,13 @@
         --bbc-label-color: #FF9843;
         /* 下划线、背景之类的颜色 */
         --bbc-primary-color: #425aef;
+    }
+
+    .fuck {
+        background-color: rgba(17, 17, 17, 0.75);
+        border-radius: calc(3vw - 20px) calc(3vw - 20px) calc(3vw - 20px) calc(3vw - 20px);
+        padding: calc(3vw - 15px);
+        margin: 0 auto;
     }
 </style>
 
@@ -465,6 +530,9 @@
 <script>
     window.onload = function () {
         $(".loading-div").hide();
+        $(".main").show();
+
+        document.body.style.overflow = 'auto';
 
         const bilibiliBangumi = document.querySelector('bilibili-bangumi')
         const style = document.createElement('style')
@@ -481,12 +549,24 @@
 
 <section class="mdx-container">
     <div class="loading-div" id="img_body">
-        <div class="loader">
-            <span></span><span></span><span></span>
-            <h1 style="display:none;">horrordor's blog</h1>
+        <div class="g-container">
+            <div class="g-group">
+                <div class="item item-right"></div>
+                <div class="item item-left"></div>
+                <div class="item item-top"></div>
+                <div class="item item-bottom"></div>
+                <div class="item item-middle"></div>
+            </div>
+            <div class="g-group">
+                <div class="item item-right"></div>
+                <div class="item item-left"></div>
+                <div class="item item-top"></div>
+                <div class="item item-bottom"></div>
+                <div class="item item-middle"></div>
+            </div>
         </div>
     </div>
-    <div class="main">
+    <div class="main" style="display: none;">
         <div class="md-grid md-typeset">
             <div class="mdx-hero">
                 <div class="mdx-hero__content" style="padding: calc(1vw - 10px);">
