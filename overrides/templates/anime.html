@@ -5,6 +5,10 @@ This file was automatically generated - do not edit
 {% block tabs %}
 {{ super() }}
 <style>
+    .body {
+        padding: 0;
+    }
+
     .md-header {
         position: initial
     }
@@ -27,6 +31,7 @@ This file was automatically generated - do not edit
     .fuck-box {
         width: 80vw;
         height: 55vh;
+        padding: 5vw;
     }
 
 
@@ -78,24 +83,27 @@ This file was automatically generated - do not edit
     }
 
     .loading-div {
-      width: 100vw;
-      height: 100vh;
-      background-color: #fff;
-      display: table-cell;
-      vertical-align: middle;
-      color: #555;
-      overflow: hidden;
-      text-align: center;
+        width: 100vw;
+        height: 100vh;
+        background-color: #fff;
+        display: table-cell;
+        vertical-align: middle;
+        color: #555;
+        overflow: hidden;
+        text-align: center;
     }
-    .loading-div::before {
-      display: inline-block;
-      vertical-align: middle;
-    } 
 
-    .fuck{
-        background-color: rgba(17, 17, 17, 0.75);;
-        border-radius: 5vh 5vh 5vh 5vh;
-        padding: 5vh;
+    .loading-div::before {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .fuck {
+
+        background-color: rgba(17, 17, 17, 0.75);
+        border-radius: calc(3vw - 20px) calc(3vw - 20px) calc(3vw - 20px) calc(3vw - 20px);
+        padding: calc(3vw - 15px);
+        margin: 0 auto;
     }
 
     /* noto-sans-sc-regular */
@@ -125,66 +133,65 @@ This file was automatically generated - do not edit
         position: relative;
     }
 
-        
-        .loader {
-            display: flex;
-            justify-content: center;
-            align-items: center
-        }
-        
-        .loader>span {
-            display: inline-block;
-            background-color: purple;
-            width: 0px;
-            height: 0px;
-            border-radius: 50%;
-            margin: 0 8px;
-            transform: translateY(0);
-            animation: bounce 0.6s infinite alternate
-        }
-        
-        .loader>span:nth-child(2) {
-            background-color: palevioletred;
-            animation-delay: 0.2s
-        }
-        
-        .loader>span:nth-child(3) {
-            background-color: palevioletred;
-            animation-delay: 0.4s
-        }
-        
-        @keyframes bounce {
-            to {
-                width: 16px;
-                height: 16px;
-                transform: translateY(-16px)
-            }
-        }
 
-        bilibili-bangumi {
-            /* 基础文本颜色 */
-            --bbc-text-base-color:hsl(14, 37.80%, 91.20%);
-            /* 标签颜色 */
-            --bbc-label-color: #FF9843;
-            /* 下划线、背景之类的颜色 */
-            --bbc-primary-color: #425aef;
-        }
+    .loader {
+        display: flex;
+        justify-content: center;
+        align-items: center
+    }
 
+    .loader>span {
+        display: inline-block;
+        background-color: purple;
+        width: 0px;
+        height: 0px;
+        border-radius: 50%;
+        margin: 0 8px;
+        transform: translateY(0);
+        animation: bounce 0.6s infinite alternate
+    }
+
+    .loader>span:nth-child(2) {
+        background-color: palevioletred;
+        animation-delay: 0.2s
+    }
+
+    .loader>span:nth-child(3) {
+        background-color: palevioletred;
+        animation-delay: 0.4s
+    }
+
+    @keyframes bounce {
+        to {
+            width: 16px;
+            height: 16px;
+            transform: translateY(-16px)
+        }
+    }
+
+    bilibili-bangumi {
+        /* 基础文本颜色 */
+        --bbc-text-base-color: hsl(14, 37.80%, 91.20%);
+        /* 标签颜色 */
+        --bbc-label-color: #FF9843;
+        /* 下划线、背景之类的颜色 */
+        --bbc-primary-color: #425aef;
+    }
 </style>
 
 
 <script>
     //定义一个函数判断是手机端还是pc端
-    var os = function (){
+    var os = function () {
         var ua = navigator.userAgent,
-        isWindowsPhone = /(?:Windows Phone)/.test(ua),
-        isSymbian = /(?:SymbianOS)/.test(ua) || isWindowsPhone,
-        isAndroid = /(?:Android)/.test(ua),
-        isFireFox = /(?:Firefox)/.test(ua),
-        isChrome = /(?:Chrome|CriOS)/.test(ua),
-        isTablet = /(?:iPad|PlayBook)/.test(ua) || (isAndroid && !/(?:Mobile)/.test(ua)) || (isFireFox && /(?:Tablet)/.test(ua)),
-        isPhone = /(?:iPhone)/.test(ua) && !isTablet,
-        isPc = !isPhone && !isAndroid && !isSymbian;
+            isWindowsPhone = /(?:Windows Phone)/.test(ua),
+            isSymbian = /(?:SymbianOS)/.test(ua) || isWindowsPhone,
+            isAndroid = /(?:Android)/.test(ua),
+            isFireFox = /(?:Firefox)/.test(ua),
+            isChrome = /(?:Chrome|CriOS)/.test(ua),
+            isTablet = /(?:iPad|PlayBook)/.test(ua) || (isAndroid && !/(?:Mobile)/.test(ua)) || (isFireFox && /(?:Tablet)/.test(ua)),
+            isPhone = /(?:iPhone)/.test(ua) && !isTablet,
+            isPc = !isPhone && !isAndroid && !isSymbian;
         return {
             isTablet: isTablet,
             isPhone: isPhone,
@@ -194,18 +201,16 @@ This file was automatically generated - do not edit
     }();
 
     if (os.isAndroid || os.isPhone) {
-          document.body.style.backgroundImage="url(https://api.vvhan.com/api/bing?rand=sj&size=768x1280)"
+        document.body.style.backgroundImage = "url(https://api.vvhan.com/api/bing?rand=sj&size=768x1280)"
     } else {
-          document.body.style.backgroundImage="url(https://api.vvhan.com/api/bing?rand=sj&size=1920x1080)"
+        document.body.style.backgroundImage = "url(https://api.vvhan.com/api/bing?rand=sj&size=1920x1080)"
     }
-</script>  
-
-<script
-  type="module"
-  src="https://fastly.jsdelivr.net/npm/bilibili-bangumi-component@latest/dist/bilibili-bangumi-component/bilibili-bangumi-component.esm.js"
->
-
 </script>
+
+<script type="module"
+    src="https://fastly.jsdelivr.net/npm/bilibili-bangumi-component@latest/dist/bilibili-bangumi-component/bilibili-bangumi-component.esm.js">
+
+    </script>
 
 
 <script>
@@ -225,28 +230,28 @@ This file was automatically generated - do not edit
 
 
 <section class="mdx-container">
-  <div class="loading-div" id="img_body">
-    <div class="loader">
-        <span></span><span></span><span></span>
-        <h1 style="display:none;">horrordor's blog</h1>
+    <div class="loading-div" id="img_body">
+        <div class="loader">
+            <span></span><span></span><span></span>
+            <h1 style="display:none;">horrordor's blog</h1>
+        </div>
     </div>
-  </div>
-  <div class="main">
-    <div class="md-grid md-typeset">
-        <div class="mdx-hero">
-            <div class="mdx-hero__content" style="padding-left:10vw;padding-right:10vw;">
-                <br>	
-                
-                <div class="fuck">
-                    <bilibili-bangumi api="https://horrordor-anime.web.val.run/" bilibili-uid="500855113" bgm-enabled=false></bilibili-bangumi>
+    <div class="main">
+        <div class="md-grid md-typeset">
+            <div class="mdx-hero">
+                <div class="mdx-hero__content" style="padding: calc(1vw - 10px);">
+
+                    <div class="fuck">
+                        <bilibili-bangumi api="https://horrordor-anime.web.val.run/" bilibili-uid="500855113"
+                            bgm-enabled=false style="padding: 0;"></bilibili-bangumi>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 </section>
 
 <script>
-   
+
 </script>
 {% endblock %}
 {% block content %}{% endblock %}
