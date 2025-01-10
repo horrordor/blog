@@ -469,6 +469,7 @@
         const bilibiliBangumi = document.querySelector('bilibili-bangumi')
         const style = document.createElement('style')
         style.textContent = '.bbc-header-platform {display: none;}'
+        style.textContent += '.bbc-tabs {padding: 1vh;}'
         bilibiliBangumi.shadowRoot.appendChild(style)
     };
 </script>
@@ -491,7 +492,6 @@
                 <div class="mdx-hero__content" style="padding: calc(1vw - 10px);">
 
                     <div class="fuck">
-                        <br>
                         <bilibili-bangumi api="https://horrordor-anime.web.val.run/" bilibili-uid="500855113"
                             bgm-enabled=false style="padding: 0;"></bilibili-bangumi>
                     </div>
