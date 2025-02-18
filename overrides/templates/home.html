@@ -108,8 +108,8 @@ This file was automatically generated - do not edit
   
     .loader {
         width: 100vw;
-        height: 100vh;
-        background-color: --md-default-bg-color;
+        height: calc(100vh - 48px);
+        background-color: var(--md-default-bg-color);
         display: table-cell;
         vertical-align: middle;
         color: #555;
@@ -184,7 +184,11 @@ This file was automatically generated - do not edit
 
 <script>
     window.onload = function () {
-        $(".loader").hide();
+        setTimeout(
+            function () {
+                $(".loader").hide();
+                $(".main").show();
+            }, 100)
         fetch('https://v1.hitokoto.cn?c=d&c=j&c=k')
             .then(response => response.json())
             .then(fuck => {
@@ -204,7 +208,7 @@ This file was automatically generated - do not edit
         <span></span><span></span><span></span>
         <h1 style="display:none;">horrordor's blog</h1>
     </div>
-    <div class="main">
+    <div class="main" style="display: none;">
         <div class="md-grid md-typeset">
             <div class="mdx-hero">
                 <div class="mdx-hero__content" style="padding-left:10vw;padding-right:10vw;">
