@@ -255,7 +255,8 @@
       
 <style>
     .md-header {
-        position: initial
+        position: initial;
+        display: none;
     }
 
     .md-main__inner {
@@ -377,7 +378,7 @@
 
     .loader {
         width: 100vw;
-        height: calc(100vh - 48px);
+        height: 100vh;
         background-color: var(--md-default-bg-color);
         display: table-cell;
         vertical-align: middle;
@@ -472,6 +473,7 @@
     window.onload = function () {
         setTimeout(
             function () {
+                $('.md-header').show();
                 $(".loader").hide();
                 $(".main").show();
                 document.body.style.overflow = 'auto';
