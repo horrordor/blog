@@ -377,8 +377,8 @@
 
     .loader {
         width: 100vw;
-        height: 100vh;
-        background-color: --md-default-bg-color;
+        height: height: calc(100vh - 48px);
+        background-color: var(--md-default-bg-color);
         display: table-cell;
         vertical-align: middle;
         color: #555;
@@ -470,10 +470,12 @@
 
 <script>
     window.onload = function () {
-        $(".loader").hide();
-        $(".main").show();
-
-        document.body.style.overflow = 'auto';
+        setTimeout(
+            function () {
+                $(".loader").hide();
+                $(".main").show();
+                document.body.style.overflow = 'auto';
+            }, 100)
 
         const bilibiliBangumi = document.querySelector('bilibili-bangumi')
         const style = document.createElement('style')
