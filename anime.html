@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="assets/logo.svg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.4">
     
     
       
@@ -24,7 +24,7 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.6f8fc17f.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.8608ea7d.min.css">
       
         
         <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
@@ -233,7 +233,7 @@
         <a href="https://github.com/horrordor/blog/" title="前往仓库" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
   </div>
   <div class="md-source__repository">
     horrordor
@@ -375,102 +375,39 @@
         position: relative;
     }
 
-    .g-container {
-        display: inline-block;
+    .loader {
+        width: 100vw;
+        height: 100vh;
+        background-color: --md-default-bg-color;
+        display: table-cell;
         vertical-align: middle;
-        perspective: 4px;
-        perspective-origin: 50% 50%;
-        position: relative;
-        animation: hueRotate 21s infinite linear;
+        color: #555;
+        overflow: hidden;
+        text-align: center;
+        justify-content: center;
+        align-items: center
     }
-
-    .g-group {
-        position: absolute;
-        /*   perspective: 4px; */
-        width: 1000px;
-        height: 1000px;
-        left: -500px;
-        top: -500px;
-        transform-style: preserve-3d;
-        animation: move 12s infinite linear;
-        animation-fill-mode: forwards;
+    
+    .loader>span {
+        display: inline-block;
+        background-color: purple;
+        width: 0px;
+        height: 0px;
+        border-radius: 50%;
+        margin: 0 8px;
+        transform: translateY(0);
+        animation: bounce 0.6s infinite alternate
     }
-
-    .g-group:nth-child(2) {
-        animation: move 12s infinite linear;
-        animation-delay: -6s;
+    
+    .loader>span:nth-child(2) {
+        background-color: palevioletred;
+        animation-delay: 0.2s
     }
-
-    .item {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background: url(https://z3.ax1x.com/2021/08/20/fLwuMd.jpg);
-        background-size: cover;
-        opacity: 1;
-        animation: fade 12s infinite linear;
-        animation-delay: 0;
+    
+    .loader>span:nth-child(3) {
+        background-color: palevioletred;
+        animation-delay: 0.4s
     }
-
-    .g-group:nth-child(2) .item {
-        animation-delay: -6s;
-    }
-
-    .item-right {
-        transform: rotateY(90deg) translateZ(500px);
-    }
-
-    .item-left {
-        transform: rotateY(-90deg) translateZ(500px);
-    }
-
-    .item-top {
-        transform: rotateX(90deg) translateZ(500px);
-    }
-
-    .item-bottom {
-        transform: rotateX(-90deg) translateZ(500px);
-    }
-
-    .item-middle {
-        transform: rotateX(180deg) translateZ(1000px);
-    }
-
-    @keyframes move {
-        0% {
-            transform: translateZ(-500px) rotate(0deg);
-        }
-
-        100% {
-            transform: translateZ(500px) rotate(0deg);
-        }
-    }
-
-    @keyframes fade {
-        0% {
-            opacity: 0;
-        }
-
-        25%,
-        60% {
-            opacity: 1;
-        }
-
-        100% {
-            opacity: 0;
-        }
-    }
-
-    @keyframes hueRotate {
-        0% {
-            filter: hue-rotate(0);
-        }
-
-        100% {
-            filter: hue-rotate(360deg);
-        }
-    }
-
 
     @keyframes bounce {
         to {
@@ -533,7 +470,7 @@
 
 <script>
     window.onload = function () {
-        $(".loading-div").hide();
+        $(".loader").hide();
         $(".main").show();
 
         document.body.style.overflow = 'auto';
@@ -552,23 +489,9 @@
 
 
 <section class="mdx-container">
-    <div class="loading-div" id="img_body">
-        <div class="g-container">
-            <div class="g-group">
-                <div class="item item-right"></div>
-                <div class="item item-left"></div>
-                <div class="item item-top"></div>
-                <div class="item item-bottom"></div>
-                <div class="item item-middle"></div>
-            </div>
-            <div class="g-group">
-                <div class="item item-right"></div>
-                <div class="item item-left"></div>
-                <div class="item item-top"></div>
-                <div class="item item-bottom"></div>
-                <div class="item item-middle"></div>
-            </div>
-        </div>
+    <div class="loader">
+        <span></span><span></span><span></span>
+        <h1 style="display:none;">horrordor's blog</h1>
     </div>
     <div class="main" style="display: none;">
         <div class="md-grid md-typeset">
@@ -614,7 +537,7 @@
       <a href="https://github.com/horrordor/blog/" title="前往仓库" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
   </div>
   <div class="md-source__repository">
     horrordor
@@ -636,6 +559,7 @@
   
   <span class="md-ellipsis">
     首页
+    
   </span>
   
 
@@ -666,6 +590,7 @@
   
   <span class="md-ellipsis">
     一起学 GitHub
+    
   </span>
   
 
@@ -691,6 +616,7 @@
   
   <span class="md-ellipsis">
     如何提交 PR
+    
   </span>
   
 
@@ -712,6 +638,7 @@
   
   <span class="md-ellipsis">
     如何通过 PR 学习
+    
   </span>
   
 
@@ -733,6 +660,7 @@
   
   <span class="md-ellipsis">
     github SSH免密码登录设置
+    
   </span>
   
 
@@ -754,6 +682,7 @@
   
   <span class="md-ellipsis">
     美化代码工具分享
+    
   </span>
   
 
@@ -775,6 +704,7 @@
   
   <span class="md-ellipsis">
     快速上手 Markdown
+    
   </span>
   
 
@@ -796,6 +726,7 @@
   
   <span class="md-ellipsis">
     MkDocs 工具使用
+    
   </span>
   
 
@@ -817,6 +748,7 @@
   
   <span class="md-ellipsis">
     GitHub Pages 的生成和使用
+    
   </span>
   
 
@@ -838,6 +770,7 @@
   
   <span class="md-ellipsis">
     GitHub Actions 介绍 & 使用
+    
   </span>
   
 
@@ -859,6 +792,7 @@
   
   <span class="md-ellipsis">
     解决 Git 冲突 Merge Conflicts
+    
   </span>
   
 
@@ -880,6 +814,7 @@
   
   <span class="md-ellipsis">
     删除指定 commit 小妙招 git rebase
+    
   </span>
   
 
@@ -918,6 +853,7 @@
   
   <span class="md-ellipsis">
     研究 C++ 新语法
+    
   </span>
   
 
@@ -943,6 +879,7 @@
   
   <span class="md-ellipsis">
     右值引用
+    
   </span>
   
 
@@ -964,6 +901,7 @@
   
   <span class="md-ellipsis">
     完美转发
+    
   </span>
   
 
@@ -985,6 +923,7 @@
   
   <span class="md-ellipsis">
     可变参模板
+    
   </span>
   
 
@@ -1006,6 +945,7 @@
   
   <span class="md-ellipsis">
     单例模式
+    
   </span>
   
 
@@ -1027,6 +967,7 @@
   
   <span class="md-ellipsis">
     类型别名：从 typedef 到 using
+    
   </span>
   
 
@@ -1048,6 +989,7 @@
   
   <span class="md-ellipsis">
     仿函数
+    
   </span>
   
 
@@ -1069,6 +1011,7 @@
   
   <span class="md-ellipsis">
     编译链接和宏本质
+    
   </span>
   
 
@@ -1090,6 +1033,7 @@
   
   <span class="md-ellipsis">
     模板 template
+    
   </span>
   
 
@@ -1111,6 +1055,7 @@
   
   <span class="md-ellipsis">
     模板特例
+    
   </span>
   
 
@@ -1132,6 +1077,7 @@
   
   <span class="md-ellipsis">
     搞懂 SFINAE
+    
   </span>
   
 
@@ -1153,6 +1099,7 @@
   
   <span class="md-ellipsis">
     enable_if 新标准
+    
   </span>
   
 
@@ -1174,6 +1121,7 @@
   
   <span class="md-ellipsis">
     enable_if 的重定义错误
+    
   </span>
   
 
@@ -1195,6 +1143,7 @@
   
   <span class="md-ellipsis">
     模板元编程
+    
   </span>
   
 
@@ -1233,6 +1182,7 @@
   
   <span class="md-ellipsis">
     深度学习
+    
   </span>
   
 
@@ -1258,6 +1208,7 @@
   
   <span class="md-ellipsis">
     Deep Learning
+    
   </span>
   
 
@@ -1279,6 +1230,7 @@
   
   <span class="md-ellipsis">
     AlexNet： ImageNet Classification with Deep Convolutional Neural Networks
+    
   </span>
   
 
@@ -1300,6 +1252,7 @@
   
   <span class="md-ellipsis">
     VGG： Very Deep Convolutional Networks for Large-Scale Image Recognition
+    
   </span>
   
 
@@ -1321,6 +1274,7 @@
   
   <span class="md-ellipsis">
     ResNet：Deep Residual Learning for Image Recognition
+    
   </span>
   
 
@@ -1342,6 +1296,7 @@
   
   <span class="md-ellipsis">
     MobileNet：Efficient Convolutional Neural Networks for Mobile Vision Applications
+    
   </span>
   
 
@@ -1363,6 +1318,7 @@
   
   <span class="md-ellipsis">
     GoogLeNet
+    
   </span>
   
 
@@ -1384,6 +1340,7 @@
   
   <span class="md-ellipsis">
     R-CNN：Rich feature hierarchies for accurate object detection and semantic segmentation Tech report
+    
   </span>
   
 
@@ -1405,6 +1362,7 @@
   
   <span class="md-ellipsis">
     Fast R-CNN
+    
   </span>
   
 
@@ -1426,6 +1384,7 @@
   
   <span class="md-ellipsis">
     Faster R-CNN： Towards Real-Time Object Detection with Region Proposal Networks
+    
   </span>
   
 
@@ -1447,6 +1406,7 @@
   
   <span class="md-ellipsis">
     YOLO v1：You Only Look Once： Unified, Real-Time Object Detection
+    
   </span>
   
 
@@ -1468,6 +1428,7 @@
   
   <span class="md-ellipsis">
     YOLOv2：YOLO9000：Better, Faster, Stronger
+    
   </span>
   
 
@@ -1489,6 +1450,7 @@
   
   <span class="md-ellipsis">
     GAN：Generative Adversarial Nets
+    
   </span>
   
 
@@ -1510,6 +1472,7 @@
   
   <span class="md-ellipsis">
     WANN：Weight Agnostic Neural Networks
+    
   </span>
   
 
@@ -1531,6 +1494,7 @@
   
   <span class="md-ellipsis">
     ViT：An Image is Worth 16x16 Words：Transformers for Image Recognition at Scale
+    
   </span>
   
 
@@ -1552,6 +1516,7 @@
   
   <span class="md-ellipsis">
     SwinT：Swin Transformer： Hierarchical Vision Transformer using Shifted Windows
+    
   </span>
   
 
@@ -1573,6 +1538,7 @@
   
   <span class="md-ellipsis">
     杂
+    
   </span>
   
 
@@ -1608,6 +1574,7 @@
   
   <span class="md-ellipsis">
     追番列表
+    
   </span>
   
 
@@ -1660,10 +1627,10 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.footer", "header.autohide"], "search": "assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.footer", "header.autohide"], "search": "assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
-      <script src="assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      <script src="assets/javascripts/bundle.f1b6f286.min.js"></script>
       
         <script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
       
