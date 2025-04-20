@@ -105,7 +105,7 @@ extra_javascript:
   - https://cdn.staticfile.org/webfont/1.6.28/webfontloader.js
   - javascripts/config.js
   - https://polyfill.alicdn.com/polyfill.min.js
-  - https://jsd.cdn.zzko.cn/npm/mathjax@3/es5/tex-mml-chtml.js
+  - https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/mathjax/3.1.2/es5/tex-mml-chtml.min.js
 
 extra:
   social:
