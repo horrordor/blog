@@ -101,7 +101,7 @@ markdown_extensions:
   - pymdownx.tilde
 
 extra_javascript:
-  - https://libs.baidu.com/jquery/2.1.4/jquery.min.js
+  - https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js
   - https://cdn.staticfile.org/webfont/1.6.28/webfontloader.js
   - javascripts/config.js
   - https://polyfill.alicdn.com/polyfill.min.js
