@@ -10,14 +10,12 @@ This file was automatically generated - do not edit
         display: none;
     }
 
-    .md-main__inner {
-        margin: 0;
-        padding: 0;
+    .md-content {
         display: none;
     }
 
-    .md-content {
-        display: none;
+    .md-main {
+        height: calc(9vw - 100px);
     }
 
     body {
@@ -33,16 +31,16 @@ This file was automatically generated - do not edit
         height: 55vh;
     }
 
+    @media screen and (min-width:1200px) {
+        .md-sidebar--primary {
+            display: none
+        }
 
-    @media screen and (min-width:60em) {
         .md-sidebar--secondary {
             display: none
         }
-    }
 
-
-    @media screen and (min-width:76.25em) {
-        .md-sidebar--primary {
+        .md-sidebar__scrollwrap {
             display: none
         }
     }
@@ -253,7 +251,7 @@ This file was automatically generated - do not edit
         <div class="md-grid md-typeset">
             <div class="mdx-hero">
                 <div class="mdx-hero__content" style="padding: calc(1vw - 10px);">
-
+                    <div style="padding: calc(9vw - 100px);"></div>
                     <div class="fuck">
                         <bilibili-bangumi api="https://horrordor-anime.web.val.run/" bilibili-uid="500855113"
                             bgm-enabled=false style="padding: 0;"></bilibili-bangumi>
