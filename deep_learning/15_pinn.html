@@ -1516,14 +1516,38 @@
 <p>传统非线性动力学方法在计算效率、模型适应性、数据需求和实时控制能力上的局限, 而PINN本身是对微分方程（或偏微分方程）进行求解的一种方法, 不适用于control task. </p>
 <p>PINN计算偏微分方程速度快, 所以用PINN代替传统非线性动力学, 并通过采样策略和零保持假设来减少高维输入空间; 通过加入control actions和initial conditions使PINN能够完成control task.</p>
 <h2 id="nmpc">NMPC<a class="headerlink" href="#nmpc" title="Permanent link">&para;</a></h2>
-<p>非线性模型预测控制(NMPC, Nonlinear Model Predictive Control)是一种用于控制复杂系统的方法. 它的核心思想是: 在每个控制时刻, 根据当前系统状态, 利用系统的非线性模型预测未来一段时间内的系统行为, 然后通过优化算法选择一系列最优控制动作, 使系统在未来能够尽量达到目标(比如跟踪轨迹/保持稳定等), 同时满足各种约束(如物理限制/输入范围等). </p>
-<p>NMPC的流程通常包括:
-1. 获取当前状态;
-2. 用系统的非线性模型预测未来若干步的状态变化;
-3. 设定目标和约束, 构建优化问题;
-4. 求解优化问题, 得到一组最优控制动作;
-5. 只执行第一个控制动作, 然后进入下一时刻,重复上述过程.</p>
-<p>NMPC相比传统线性控制方法, 能够处理更复杂的动力学和约束, 适用于机器人/无人驾驶/过程工业等需要高精度和灵活性的场景.</p>
+<p>非线性模型预测控制(NMPC, Nonlinear Model Predictive Control)的核心思想是: 在每个控制周期内, 基于当前的系统状态和预测模型，预测未来多个时刻的系统行为，然后通过优化未来一段时间的控制输入序列来最小化某种代价函数，通常是跟踪误差或能量消耗。尽管 MPC 预测多个时刻的控制输入，但它只实施当前时刻的输入，并在下一时刻重新计算。</p>
+<p>MPC优化问题一般表达为：</p>
+<div class="arithmatex">\[
+\min_{u_0, u_1, ..., u_{N-1}} \sum_{k=0}^{N-1} \ell(x_k, u_k)
+\]</div>
+<p>其中，<span class="arithmatex">\(\ell(x_k, u_k)\)</span> 是每一步的代价函数（比如跟踪误差或能量消耗），<span class="arithmatex">\(x_k\)</span> 是第 <span class="arithmatex">\(k\)</span> 步的系统状态，<span class="arithmatex">\(u_k\)</span> 是第 <span class="arithmatex">\(k\)</span> 步的控制输入，<span class="arithmatex">\(N\)</span> 是预测步长。</p>
+<p>约束条件：
+- 状态更新：<span class="arithmatex">\(x_{k+1} = f(x_k, u_k)\)</span>
+- 控制输入约束：<span class="arithmatex">\(u_k \in U\)</span>
+- 状态约束：<span class="arithmatex">\(x_k \in X\)</span></p>
+<p>通俗解释：</p>
+<ol>
+<li>预测未来：MPC会用当前状态和系统模型，预测未来 <span class="arithmatex">\(N\)</span> 步的状态变化。</li>
+<li>优化控制序列：通过优化算法，找到一组控制输入，使得总的代价（比如误差或能耗）最小。</li>
+<li>只用第一个控制量：虽然算出了 <span class="arithmatex">\(N\)</span> 步的控制输入，但实际只用第一个，下一步再重新计算。</li>
+</ol>
+<p>这种方法可以让控制系统在面对复杂或非线性环境时，始终根据最新状态做出最优决策，兼顾性能和约束条件。MPC优化问题一般表达为：</p>
+<div class="arithmatex">\[
+\min_{u_0, u_1, ..., u_{N-1}} \sum_{k=0}^{N-1} \ell(x_k, u_k)
+\]</div>
+<p>其中，<span class="arithmatex">\(\ell(x_k, u_k)\)</span> 是每一步的代价函数（比如跟踪误差或能量消耗），<span class="arithmatex">\(x_k\)</span> 是第 <span class="arithmatex">\(k\)</span> 步的系统状态，<span class="arithmatex">\(u_k\)</span> 是第 <span class="arithmatex">\(k\)</span> 步的控制输入，<span class="arithmatex">\(N\)</span> 是预测步长。</p>
+<p>约束条件：
+- 状态更新：<span class="arithmatex">\(x_{k+1} = f(x_k, u_k)\)</span>
+- 控制输入约束：<span class="arithmatex">\(u_k \in U\)</span>
+- 状态约束：<span class="arithmatex">\(x_k \in X\)</span></p>
+<p><strong>通俗解释：</strong></p>
+<ol>
+<li><strong>预测未来</strong>：MPC会用当前状态和系统模型，预测未来 <span class="arithmatex">\(N\)</span> 步的状态变化。</li>
+<li><strong>优化控制序列</strong>：通过优化算法，找到一组控制输入，使得总的代价（比如误差或能耗）最小。</li>
+<li><strong>只用第一个控制量</strong>：虽然算出了 <span class="arithmatex">\(N\)</span> 步的控制输入，但实际只用第一个，下一步再重新计算。</li>
+</ol>
+<p>这种方法可以让控制系统在面对复杂或非线性环境时，始终根据最新状态做出最优决策，兼顾</p>
 
 
 
