@@ -1497,11 +1497,11 @@
 <h2 id="_3">拉格朗日方程<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>在力学建模中, 拉格朗日量定义为动能减去势能, 即</p>
 <div class="arithmatex">\[ L=T-V \]</div>
-<p>其中T是动能项, V是势能项. 文章中动能写成<span class="arithmatex">\(T = \frac{1}{2} \dot{\mathbf{q}}^{T} \mathbf{H}(\mathbf{q}) \dot{\mathbf{q}}\)</span>的形式, 其中<span class="arithmatex">\(\mathbf{H}(\mathbf{q})\)</span>是与坐标相关的质量矩阵, 可以描述流体身躯, <span class="arithmatex">\(\dot{\mathbf{q}}\)</span>是速度. 势能与引力, 弹簧的拉力等相关, 力 g(q) 与势能的关系是<span class="arithmatex">\(g(q)=-\frac{dV}{dq}\)</span>.</p>
+<p>其中T是动能项, V是势能项. 文章中动能写成<span class="arithmatex">\(T = \frac{1}{2} \dot{\mathbf{q}}^{T} \mathbf{H}(\mathbf{q}) \dot{\mathbf{q}}\)</span>的形式, 其中<span class="arithmatex">\(\mathbf{H}(\mathbf{q})\)</span>是与坐标相关的质量矩阵, <span class="arithmatex">\(\dot{\mathbf{q}}\)</span>是速度. 势能与引力, 弹簧的拉力等相关, 力 g(q) 与势能的关系是<span class="arithmatex">\(g(q)=-\frac{dV}{dq}\)</span>.</p>
 <p>应用变分微积分得到欧拉-拉格朗日方程, 其非保守力描述为:</p>
 <div class="arithmatex">\[\frac{d}{dt} \frac{\partial L}{\partial \dot{\mathbf{q}}_{i}} - \frac{\partial L}{\partial \mathbf{q}_i} = \mathbf{\tau}_{i}\]</div>
 <p>如果右边的<span class="arithmatex">\(\mathbf{\tau}_{i}=0\)</span>, 上面这个方程就是常见的没有外力的拉格朗日方程. 加了<span class="arithmatex">\(\mathbf{\tau}_{i}\)</span>, 表示这个系统有电机的驱动力输入. </p>
-<p>将欧拉拉格朗日方程中的动能和势能用逆问题的形式替换:</p>
+<p>将动能和势能带入欧拉-拉格朗日方程中:</p>
 <div class="arithmatex">\[ \mathbf{H}(\mathbf{q}) \ddot{\mathbf{q}} + \underbrace{\dot{\mathbf{H}}(\mathbf{q}) \dot{\mathbf{q}} - \frac{1}{2} \left( \frac{\partial}{\partial \mathbf{q}} \left( \dot{\mathbf{q}}^{T} \mathbf{H}(\mathbf{q}) \dot{\mathbf{q}} \right) \right)^{T}}_{:=\mathbf{c}(\mathbf{q}, \dot{\mathbf{q}})} + \: \mathbf{g}(\mathbf{q}) = \mathbf{\tau}\]</div>
 <p>然后将质量矩阵写成半正定的神经网络表示, 将势能对应的力也用神经网络表示:</p>
 <div class="arithmatex">\[\hat H(\mathbf{q}) = \hat L(\mathbf{q} \: ; \:\theta) \hat L(\mathbf{q} \: ; \:\theta)^{T} \hspace{15pt} \hat g(\mathbf{q}) = \hat g(\mathbf{q} \: ; \: \psi)\]</div>
