@@ -26,6 +26,6 @@ $('link').each(function () {
 
 WebFont.load({
     custom: {
-        families: ['Noto Sans SC', 'Ubuntu Mono', 'Roboto']
+        families: ['Ubuntu Mono', 'Source Sans Pro']
     }
 });

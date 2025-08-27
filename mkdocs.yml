@@ -59,9 +59,6 @@ theme:
   features:
       - navigation.footer
       - header.autohide
-  font:
-    text: Roboto
-    code: Ubuntu Mono, Roboto Mono
 
 # Plugins
 plugins:
@@ -106,6 +103,11 @@ extra_javascript:
   - javascripts/config.js
   - https://polyfill.alicdn.com/polyfill.min.js
   - https://cdn.bootcdn.net/ajax/libs/mathjax/3.1.2/es5/tex-mml-chtml.min.js
+
+extra_css:
+  - https://cdn.tonycrane.cc/jbmono/jetbrainsmono.css
+  - stylesheets/extra.css
+
 
 extra:
   social:
