@@ -1579,9 +1579,9 @@
 \textbf{0} = \begin{bmatrix} \textbf{I} &amp; \textbf{0} \\ \textbf{0} &amp; \textbf{M}(\textbf{q}) \end{bmatrix} \begin{bmatrix} \dot{\textbf{q}} \\ \ddot{\textbf{q}} \end{bmatrix} - \begin{bmatrix} \dot{\textbf{q}} \\ \textbf{h}(\textbf{q}, \dot{\textbf{q}}) - \textbf{k}(\textbf{q}, \dot{\textbf{q}}) \end{bmatrix} - \begin{bmatrix} \textbf{0} \\ \textbf{B}\textbf{u} \end{bmatrix}
 \]</div>
 <p>这等价于我们上面推导出的残差方程 <span class="arithmatex">\(\textbf{F} = 0\)</span>。</p>
-<p>现在，我们用神经网络 <span class="arithmatex">\(\widehat{\textbf{\varphi}}\)</span> 来近似系统的流映射。该网络以时间 <span class="arithmatex">\(t\)</span>、初始状态 <span class="arithmatex">\(\textbf{x}_0\)</span> 和控制输入 <span class="arithmatex">\(\textbf{u}\)</span> 为输入，输出预测状态 <span class="arithmatex">\(\widehat{\textbf{x}}(t)\)</span>。</p>
+<p>现在，我们用神经网络 <span class="arithmatex">\(\widehat{\textbf{φ}}\)</span> 来近似系统的流映射。该网络以时间 <span class="arithmatex">\(t\)</span>、初始状态 <span class="arithmatex">\(\textbf{x}_0\)</span> 和控制输入 <span class="arithmatex">\(\textbf{u}\)</span> 为输入，输出预测状态 <span class="arithmatex">\(\widehat{\textbf{x}}(t)\)</span>。</p>
 <div class="arithmatex">\[
-\widehat{\textbf{x}}(t) = \widehat{\textbf{\varphi}}(t, \textbf{x}_0, \textbf{u}; \textbf{\omega}) \approx \textbf{x}(t)
+\widehat{\textbf{x}}(t) = \widehat{\textbf{φ}}(t, \textbf{x}_0, \textbf{u}; \textbf{ω}) \approx \textbf{x}(t)
 \]</div>
 <p>为了将物理规律嵌入网络，我们要求网络的预测 <span class="arithmatex">\(\widehat{\textbf{x}}(t)\)</span> 必须尽可能满足残差方程 <span class="arithmatex">\(\textbf{F} = 0\)</span>。</p>
 <p>将网络的预测值 <span class="arithmatex">\(\widehat{\textbf{x}} = [\widehat{\textbf{q}}, \dot{\widehat{\textbf{q}}}]^\top\)</span> 和其导数(使用AutoDiff计算) <span class="arithmatex">\(\dot{\widehat{\textbf{x}}} = [\dot{\widehat{\textbf{q}}}, \ddot{\widehat{\textbf{q}}}]^\top\)</span> 代入我们预先已知的物理残差函数 <span class="arithmatex">\(\textbf{F}\)</span> 中：</p>
@@ -1591,7 +1591,7 @@
 <p>具体来说，就是代入质量矩阵 <span class="arithmatex">\(\textbf{M}\)</span>、力向量 <span class="arithmatex">\(\textbf{k}\)</span> 和 <span class="arithmatex">\(\textbf{h}\)</span> 等**已知的物理模型**中。</p>
 <p>物理损失函数旨在最小化这个预测残差。在大量采集点 <span class="arithmatex">\((t_i, \textbf{x}_{0,i}, \textbf{u}_i)\)</span> 上计算残差并求平均：</p>
 <div class="arithmatex">\[
-L_{\text{phys}}(\textbf{\omega}) = \frac{1}{N_{\text{phys}}} \sum_{i=1}^{N_{\text{phys}}} \| \widehat{\textbf{F}}(t_i, \textbf{x}_{0,i}, \textbf{u}_i, \textbf{\omega}) \|^2
+L_{\text{phys}}(\textbf{ω}) = \frac{1}{N_{\text{phys}}} \sum_{i=1}^{N_{\text{phys}}} \| \widehat{\textbf{F}}(t_i, \textbf{x}_{0,i}, \textbf{u}_i, \textbf{ω}) \|^2
 \]</div>
 <p>通过最小化 <span class="arithmatex">\(L_{\text{phys}}\)</span>，我们强制神经网络的输出 <span class="arithmatex">\(\widehat{\textbf{x}}(t)\)</span> 遵守已知的物理定律（运动方程）。</p>
 <div class="arithmatex">\[
@@ -1615,7 +1615,8 @@ L(\textbf{ω}) = L_{\text{data}}(\textbf{ω}) + L_{\text{phys}}(\textbf{ω})
 \widehat{\textbf{x}}_{k+1} = \widehat{\textbf{φ}}(\tau, \textbf{u}_k, \widehat{\textbf{x}}_k; \textbf{ω})
 \]</div>
 <p>即用当前预测值作为下一步的初始状态，逐步推进。</p>
-<p>最终，这个被物理定律“约束”过的神经网络 <span class="arithmatex">\(\widehat{\textbf{\varphi}}\)</span>，就能够更准确、更高效地预测机械臂的状态演化，从而替代传统的数值积分器，用于快速的模型预测控制（MPC）。</p>
+<h2 id="_6">总结<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>使用一个被物理定律“约束”过的神经网络 <span class="arithmatex">\(\widehat{\textbf{φ}}\)</span>预测机械臂的状态演化，从而替代传统的数值积分器，用于快速的模型预测控制（MPC）。</p>
 
 
 
