@@ -6,11 +6,8 @@ This file was automatically generated - do not edit
 {{ super() }}
 <style>
     .md-header {
-        position: initial
-    }
-
-    .md-main__inner {
-        margin: 0
+        position: initial;
+        display: none;
     }
 
     .md-content {
@@ -18,7 +15,7 @@ This file was automatically generated - do not edit
     }
 
     .md-main {
-        display: none;
+        height: calc(9vw - 100px);
     }
 
     body {
@@ -34,16 +31,16 @@ This file was automatically generated - do not edit
         height: 55vh;
     }
 
+    @media screen and (min-width:1200px) {
+        .md-sidebar--primary {
+            display: none
+        }
 
-    @media screen and (min-width:60em) {
         .md-sidebar--secondary {
             display: none
         }
-    }
 
-
-    @media screen and (min-width:76.25em) {
-        .md-sidebar--primary {
+        .md-sidebar__scrollwrap {
             display: none
         }
     }
@@ -128,7 +125,7 @@ This file was automatically generated - do not edit
 
     .loader {
         width: 100vw;
-        height: height: calc(100vh - 48px);
+        height: 100vh;
         background-color: var(--md-default-bg-color);
         display: table-cell;
         vertical-align: middle;
@@ -138,7 +135,7 @@ This file was automatically generated - do not edit
         justify-content: center;
         align-items: center
     }
-    
+
     .loader>span {
         display: inline-block;
         background-color: purple;
@@ -149,12 +146,12 @@ This file was automatically generated - do not edit
         transform: translateY(0);
         animation: bounce 0.6s infinite alternate
     }
-    
+
     .loader>span:nth-child(2) {
         background-color: palevioletred;
         animation-delay: 0.2s
     }
-    
+
     .loader>span:nth-child(3) {
         background-color: palevioletred;
         animation-delay: 0.4s
@@ -207,9 +204,12 @@ This file was automatically generated - do not edit
     }();
 
     if (os.isAndroid || os.isPhone) {
-        document.body.style.backgroundImage = "url(https://api.vvhan.com/api/bing?rand=sj&size=768x1280)"
+        // document.body.style.backgroundImage = "url(https://api.vvhan.com/api/bing?rand=sj&size=768x1280)"
+        document.body.style.backgroundImage = "url( https://souga.eu.org/api/random)"
+
     } else {
-        document.body.style.backgroundImage = "url(https://api.vvhan.com/api/bing?rand=sj&size=1920x1080)"
+        // document.body.style.backgroundImage = "url(https://api.vvhan.com/api/bing?rand=sj&size=1920x1080)"
+        document.body.style.backgroundImage = "url( https://souga.eu.org/api/random)"
     }
 </script>
 
@@ -223,6 +223,7 @@ This file was automatically generated - do not edit
     window.onload = function () {
         setTimeout(
             function () {
+                $('.md-header').show();
                 $(".loader").hide();
                 $(".main").show();
                 document.body.style.overflow = 'auto';
@@ -250,7 +251,7 @@ This file was automatically generated - do not edit
         <div class="md-grid md-typeset">
             <div class="mdx-hero">
                 <div class="mdx-hero__content" style="padding: calc(1vw - 10px);">
-
+                    <div style="padding: calc(9vw - 100px);"></div>
                     <div class="fuck">
                         <bilibili-bangumi api="https://horrordor-anime.web.val.run/" bilibili-uid="500855113"
                             bgm-enabled=false style="padding: 0;"></bilibili-bangumi>

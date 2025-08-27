@@ -6,7 +6,8 @@ This file was automatically generated - do not edit
 {{ super() }}
 <style>
     .md-header {
-        position: initial
+        position: initial;
+        display: none;
     }
 
     .md-main__inner {
@@ -105,10 +106,10 @@ This file was automatically generated - do not edit
         position: relative;
     }
 
-  
+
     .loader {
         width: 100vw;
-        height: calc(100vh - 48px);
+        height: 100vh;
         background-color: var(--md-default-bg-color);
         display: table-cell;
         vertical-align: middle;
@@ -118,7 +119,7 @@ This file was automatically generated - do not edit
         justify-content: center;
         align-items: center
     }
-    
+
     .loader>span {
         display: inline-block;
         background-color: purple;
@@ -129,12 +130,12 @@ This file was automatically generated - do not edit
         transform: translateY(0);
         animation: bounce 0.6s infinite alternate
     }
-    
+
     .loader>span:nth-child(2) {
         background-color: palevioletred;
         animation-delay: 0.2s
     }
-    
+
     .loader>span:nth-child(3) {
         background-color: palevioletred;
         animation-delay: 0.4s
@@ -147,7 +148,6 @@ This file was automatically generated - do not edit
             transform: translateY(-16px)
         }
     }
-    
 </style>
 
 
@@ -172,9 +172,12 @@ This file was automatically generated - do not edit
     }();
 
     if (os.isAndroid || os.isPhone) {
-        document.body.style.backgroundImage = "url(https://api.vvhan.com/api/bing?rand=sj&size=768x1280)"
+        // document.body.style.backgroundImage = "url(https://api.vvhan.com/api/bing?rand=sj&size=768x1280)"
+        document.body.style.backgroundImage = "url( https://souga.eu.org/api/random)"
+       
     } else {
-        document.body.style.backgroundImage = "url(https://api.vvhan.com/api/bing?rand=sj&size=1920x1080)"
+        // document.body.style.backgroundImage = "url(https://api.vvhan.com/api/bing?rand=sj&size=1920x1080)"
+        document.body.style.backgroundImage = "url( https://souga.eu.org/api/random)"
     }
 </script>
 
@@ -185,7 +188,9 @@ This file was automatically generated - do not edit
 <script>
     window.onload = function () {
         setTimeout(
+
             function () {
+                $('.md-header').show();
                 $(".loader").hide();
                 $(".main").show();
             }, 100)
