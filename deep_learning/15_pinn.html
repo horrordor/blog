@@ -1479,9 +1479,9 @@
 <li>逆问题：为了将机械臂移动到指定位置且拥有指定的动量和加速度（ 比如想以某个角度某种力度打脸），机器人各个关节处电机驱动力需要如何分配。</li>
 </ul>
 <p>正问题和逆问题的数学表达式如下，
-正问题: $ f(\mathbf{q}, :\dot{\mathbf{q}}, :\bm{\tau}) = \ddot{\mathbf{q}} $
-逆问题: $ f^{-1}(\mathbf{q}, :\dot{\mathbf{q}}, :\ddot{\mathbf{q}}) = \bm{\tau} $</p>
-<p>其中$ \mathbf{q} $表示坐标, $ \dot{\mathbf{q}} $表示速度, $ \dot{\mathbf{q}} $ 表示加速度, $ \tau $ 表示电机驱动力。</p>
+正问题: <span class="arithmatex">\(f(\mathbf{q}, \:\dot{\mathbf{q}}, \:\bm{\tau}) = \ddot{\mathbf{q}}\)</span>
+逆问题: <span class="arithmatex">\(f^{-1}(\mathbf{q}, \:\dot{\mathbf{q}}, \:\ddot{\mathbf{q}}) = \bm{\tau}\)</span></p>
+<p>其中<span class="arithmatex">\(\mathbf{q}\)</span>表示坐标, <span class="arithmatex">\(\dot{\mathbf{q}}\)</span>表示速度, <span class="arithmatex">\(\dot{\mathbf{q}}\)</span> 表示加速度, <span class="arithmatex">\(\tau\)</span> 表示电机驱动力。</p>
 <p>如果使用传统的深度学习，解决机器人的逆问题，可能会出现意想不到的问题。就算训练数据满足所有的物理规律，训练好的人工神经网络仍然可能做出非物理的预测。外插无约束。</p>
 <p>此外，有一些场景不适用刚体运动学。甚至很难用物理公式计算，比如下面这些场景，</p>
 <ul>
