@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://horrordor.eu.org/learn_cpp/012_enable_if.html">
+        <link rel="canonical" href="https://horrordor.eu.org/deep_learning/15_pinn.html">
       
       
-        <link rel="prev" href="11_template_sfinae.html">
+        <link rel="prev" href="14_SwinT.html">
       
       
-        <link rel="next" href="13_enable_if_redefine_mistake.html">
+        <link rel="next" href="other.html">
       
       
       <link rel="icon" href="../assets/logo.svg">
@@ -22,7 +22,7 @@
     
     
       
-        <title>enable_if 新标准 - horrordor's blog</title>
+        <title>PINN:Physics-informed Neural Network - horrordor's blog</title>
       
     
     
@@ -139,7 +139,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#enable_if" class="md-skip">
+        <a href="#_1" class="md-skip">
           跳转至
         </a>
       
@@ -174,7 +174,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              enable_if 新标准
+              PINN:Physics-informed Neural Network
             
           </span>
         </div>
@@ -623,20 +623,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
@@ -652,7 +650,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             研究 C++ 新语法
@@ -666,7 +664,7 @@
   
   
     <li class="md-nav__item">
-      <a href="01_rvalue_ref.html" class="md-nav__link">
+      <a href="../learn_cpp/01_rvalue_ref.html" class="md-nav__link">
         
   
   
@@ -689,7 +687,7 @@
   
   
     <li class="md-nav__item">
-      <a href="02_forward.html" class="md-nav__link">
+      <a href="../learn_cpp/02_forward.html" class="md-nav__link">
         
   
   
@@ -712,7 +710,7 @@
   
   
     <li class="md-nav__item">
-      <a href="03_varadic_template.html" class="md-nav__link">
+      <a href="../learn_cpp/03_varadic_template.html" class="md-nav__link">
         
   
   
@@ -735,7 +733,7 @@
   
   
     <li class="md-nav__item">
-      <a href="04_singleton.html" class="md-nav__link">
+      <a href="../learn_cpp/04_singleton.html" class="md-nav__link">
         
   
   
@@ -758,7 +756,7 @@
   
   
     <li class="md-nav__item">
-      <a href="05_using_against_typedef.html" class="md-nav__link">
+      <a href="../learn_cpp/05_using_against_typedef.html" class="md-nav__link">
         
   
   
@@ -781,7 +779,7 @@
   
   
     <li class="md-nav__item">
-      <a href="06_functor.html" class="md-nav__link">
+      <a href="../learn_cpp/06_functor.html" class="md-nav__link">
         
   
   
@@ -804,7 +802,7 @@
   
   
     <li class="md-nav__item">
-      <a href="07_complie_link_macro.html" class="md-nav__link">
+      <a href="../learn_cpp/07_complie_link_macro.html" class="md-nav__link">
         
   
   
@@ -827,7 +825,7 @@
   
   
     <li class="md-nav__item">
-      <a href="08_template.html" class="md-nav__link">
+      <a href="../learn_cpp/08_template.html" class="md-nav__link">
         
   
   
@@ -850,7 +848,7 @@
   
   
     <li class="md-nav__item">
-      <a href="09_template_special.html" class="md-nav__link">
+      <a href="../learn_cpp/09_template_special.html" class="md-nav__link">
         
   
   
@@ -873,7 +871,7 @@
   
   
     <li class="md-nav__item">
-      <a href="11_template_sfinae.html" class="md-nav__link">
+      <a href="../learn_cpp/11_template_sfinae.html" class="md-nav__link">
         
   
   
@@ -893,32 +891,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    enable_if 新标准
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="012_enable_if.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../learn_cpp/012_enable_if.html" class="md-nav__link">
         
   
   
@@ -929,119 +905,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#enable_if_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      为什么要使用 enable_if ？
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#enable_if-is_same" class="md-nav__link">
-    <span class="md-ellipsis">
-      enable_if 与 is_same 的使用
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="enable_if 与 is_same 的使用">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#enable_if_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      enable_if 的使用
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#is_same" class="md-nav__link">
-    <span class="md-ellipsis">
-      is_same 的使用
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#enable_if-is_same_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      enable_if 与 is_same 内部的实现原理
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="enable_if 与 is_same 内部的实现原理">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#type-traits" class="md-nav__link">
-    <span class="md-ellipsis">
-      什么是 type traits ?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#enable_if_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      enable_if 源码解析
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#is_same_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      is_same 源码解析
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      总结
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1054,7 +917,7 @@
   
   
     <li class="md-nav__item">
-      <a href="13_enable_if_redefine_mistake.html" class="md-nav__link">
+      <a href="../learn_cpp/13_enable_if_redefine_mistake.html" class="md-nav__link">
         
   
   
@@ -1077,7 +940,7 @@
   
   
     <li class="md-nav__item">
-      <a href="014_materials.html" class="md-nav__link">
+      <a href="../learn_cpp/014_materials.html" class="md-nav__link">
         
   
   
@@ -1104,18 +967,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
@@ -1131,7 +996,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             深度学习
@@ -1145,7 +1010,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../deep_learning/00_DeepLearning.html" class="md-nav__link">
+      <a href="00_DeepLearning.html" class="md-nav__link">
         
   
   
@@ -1168,7 +1033,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../deep_learning/01_AlexNet.html" class="md-nav__link">
+      <a href="01_AlexNet.html" class="md-nav__link">
         
   
   
@@ -1191,7 +1056,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../deep_learning/02_VGG.html" class="md-nav__link">
+      <a href="02_VGG.html" class="md-nav__link">
         
   
   
@@ -1214,7 +1079,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../deep_learning/03_ResNet.html" class="md-nav__link">
+      <a href="03_ResNet.html" class="md-nav__link">
         
   
   
@@ -1237,7 +1102,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../deep_learning/04_MoblieNets.html" class="md-nav__link">
+      <a href="04_MoblieNets.html" class="md-nav__link">
         
   
   
@@ -1260,7 +1125,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../deep_learning/05_GoogLeNet.html" class="md-nav__link">
+      <a href="05_GoogLeNet.html" class="md-nav__link">
         
   
   
@@ -1283,7 +1148,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../deep_learning/06_R-CNN.html" class="md-nav__link">
+      <a href="06_R-CNN.html" class="md-nav__link">
         
   
   
@@ -1306,7 +1171,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../deep_learning/07_Fast_R-CNN.html" class="md-nav__link">
+      <a href="07_Fast_R-CNN.html" class="md-nav__link">
         
   
   
@@ -1329,7 +1194,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../deep_learning/08_Faster_R-CNN.html" class="md-nav__link">
+      <a href="08_Faster_R-CNN.html" class="md-nav__link">
         
   
   
@@ -1352,7 +1217,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../deep_learning/09_YOLO_v1.html" class="md-nav__link">
+      <a href="09_YOLO_v1.html" class="md-nav__link">
         
   
   
@@ -1375,7 +1240,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../deep_learning/10_YOLO_v2.html" class="md-nav__link">
+      <a href="10_YOLO_v2.html" class="md-nav__link">
         
   
   
@@ -1398,7 +1263,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../deep_learning/11_GAN.html" class="md-nav__link">
+      <a href="11_GAN.html" class="md-nav__link">
         
   
   
@@ -1421,7 +1286,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../deep_learning/12_WANN.html" class="md-nav__link">
+      <a href="12_WANN.html" class="md-nav__link">
         
   
   
@@ -1444,7 +1309,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../deep_learning/13_Vit.html" class="md-nav__link">
+      <a href="13_Vit.html" class="md-nav__link">
         
   
   
@@ -1467,7 +1332,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../deep_learning/14_SwinT.html" class="md-nav__link">
+      <a href="14_SwinT.html" class="md-nav__link">
         
   
   
@@ -1487,10 +1352,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../deep_learning/15_pinn.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="15_pinn.html" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1501,6 +1375,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -1513,7 +1388,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../deep_learning/other.html" class="md-nav__link">
+      <a href="other.html" class="md-nav__link">
         
   
   
@@ -1578,107 +1453,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#enable_if_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      为什么要使用 enable_if ？
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#enable_if-is_same" class="md-nav__link">
-    <span class="md-ellipsis">
-      enable_if 与 is_same 的使用
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="enable_if 与 is_same 的使用">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#enable_if_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      enable_if 的使用
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#is_same" class="md-nav__link">
-    <span class="md-ellipsis">
-      is_same 的使用
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#enable_if-is_same_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      enable_if 与 is_same 内部的实现原理
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="enable_if 与 is_same 内部的实现原理">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#type-traits" class="md-nav__link">
-    <span class="md-ellipsis">
-      什么是 type traits ?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#enable_if_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      enable_if 源码解析
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#is_same_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      is_same 源码解析
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      总结
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -1696,146 +1470,8 @@
   
 
 
-<h1 id="enable_if">新标准：enable_if<a class="headerlink" href="#enable_if" title="Permanent link">&para;</a></h1>
-<p><a href="11_template_sfinae.html">上一期</a> 我们介绍了 SFINAE 原则，在此基础上，本篇文章将继续介绍了<code>enable_if</code> 新标准，为后续深入学习模板元编程打下基础。</p>
-<p>本文的结构如下：</p>
-<ul>
-<li>为什么要使用 <code>enable_if</code> ？</li>
-<li><code>enable_if</code> 与 <code>is_same</code> 的使用</li>
-<li><code>enable_if</code> 与 <code>is_same</code> 内部的实现原理</li>
-</ul>
-<h2 id="enable_if_1">为什么要使用 enable_if ？<a class="headerlink" href="#enable_if_1" title="Permanent link">&para;</a></h2>
-<p>C++模板函数重载依赖于 SFINAE (substitution-failure-is-not-an-error) 原则，即替换失败不认为是错误，编译器将会继续寻找合适的重载函数；以返回长度的函数为例，该函数针对 STL 中的  <code>vector</code> 容器来实现（容器中有<code>size()</code>成员函数）</p>
-<pre><code class="language-c++">class CMyclass {
-public:
-    using size_type = unsigned int;
-};
-
-template &lt;typename T&gt;
-decltype(T().size(), typename T::size_type()) len(T const &amp;t) { //该函数可以避免匹配到 CMyclass 类
-    return t.size();
-}
-unsigned len(...) {
-    return 0;
-}
-
-int main() {
-    vector&lt;int&gt;vec= {1,2,3};
-    cout&lt;&lt;len(vec)&lt;&lt;endl;  //调用针对stl库容器的len函数
-    cout &lt;&lt; len(CMyclass()) &lt;&lt; endl; //调用len(...)函数
-}
-</code></pre>
-<p><code>decltype(T().size(), typename T::size_type()) len(T const &amp;t)</code> 该函数声明通过 <code>decltype</code> 类型判别将不包含 <code>size()</code> 成员函数的特例类排除出去，同时逗号表达式返回逗号后面的参数 <code>typename T::size_type()</code> ，实现避免匹配到 <code>CMyclass</code> 类的功能；这种编程技巧晦涩难懂，需要程序员根据特例类不存在的方法制因此造“错误”,并不通用；</p>
-<p>为了实现 SFINAE ，同时降低程序的繁琐度，C++11 采用了具有通用性的 <code>enable_if</code> 新标准代替这种技巧 ；我们使用 <code>enable_if</code> 的形式重写该函数</p>
-<pre><code class="language-c++">// `enable_if`的应用
-class CMyclass {
-public:
-    using size_type = unsigned int;
-};
-
-template &lt;typename T, typename T2 = typename enable_if&lt;!is_same&lt;T, CMyclass&gt;::value&gt;::type&gt; //`enable_if`形式
-typename T::size_type len(T const &amp;t) {
-    return t.size();
-}
-
-unsigned len(...) {
-    return 0;
-}
-
-int main() {
-    vector&lt;int&gt; vec = {1, 2, 3};
-    cout &lt;&lt; len(vec) &lt;&lt; endl;
-    cout &lt;&lt; len(CMyclass()) &lt;&lt; endl;
-}
-</code></pre>
-<p>该程序的输出结果与不采用 <code>enable_if</code> 的程序一致，说明采用 <code>enable_if</code> 也可以实现**重载函数避免匹配到特例类**的功能。</p>
-<p>不同的地方在于，<code>enable_if</code> 可以避免匹配到 <code>CMyclass</code> 这个类，<code>decltype(T().size(), typename T::size_type()) len(T const &amp;t)</code> 是避免匹配到不包含 <code>size()</code> 成员函数的类；
-相比之下 <code>enable_if</code> 更加**灵活**。</p>
-<h2 id="enable_if-is_same">enable_if 与 is_same 的使用<a class="headerlink" href="#enable_if-is_same" title="Permanent link">&para;</a></h2>
-<h3 id="enable_if_2">enable_if 的使用<a class="headerlink" href="#enable_if_2" title="Permanent link">&para;</a></h3>
-<p>首先给出 <code>enable_if</code> 的基本形式</p>
-<pre><code class="language-c++">template&lt;bool B,typename T=void&gt;struct enable_if
-</code></pre>
-<ul>
-<li>当传入的模板参数 <code>B</code> 为 <code>True</code> 的时候，<code>enable_if</code> 模板类的 <code>type</code> 就等于 <code>T</code> ；如果不传入模板参数 <code>T</code> ， <code>type</code> 也会默认为 <code>void</code></li>
-<li>当传入的模板参数 <code>B</code> 为 <code>False</code> 的时候， <code>enable_if</code> 模板类就不再拥有 <code>type</code> 。</li>
-</ul>
-<p>使用 <code>enable_if</code> 时可以让重载函数自由丢弃不需要匹配的特例类；下面给出实际应用的例子</p>
-<pre><code class="language-c++">//判断类型字节数是否大于4输出显示
-template &lt;typename T&gt;
-typename std::enable_if&lt;(sizeof(T) &lt;= 4)&gt;::type show() { //针对 `T` 的长度小于等于4的情况生效
-    printf(&quot;size&lt;=4\n&quot;);
-}
-
-template &lt;typename T&gt;
-typename std::enable_if&lt;(sizeof(T) &gt; 4)&gt;::type show() { //针对 `T` 的长度大于4的情况生效
-    printf(&quot;size&gt;4\n&quot;);
-}
-
-int main() {
-    show&lt;double&gt;();
-    show&lt;char&gt;();
-}
-</code></pre>
-<p>输出结果为</p>
-<pre><code class="language-text">size&gt;4
-size&lt;=4
-</code></pre>
-<h3 id="is_same">is_same 的使用<a class="headerlink" href="#is_same" title="Permanent link">&para;</a></h3>
-<pre><code class="language-c++">template&lt;class T,class U&gt;struct is_same
-</code></pre>
-<ul>
-<li>当模板参数 <code>T</code> 等于模板参数 <code>U</code> 时, <code>is_same&lt;T,U&gt;</code>模板类的成员 <code>value</code> 等于 <code>True</code></li>
-<li>当模板参数 <code>T</code> 不等于模板 <code>U</code> 时, <code>is_same&lt;T,U&gt;</code>模板类的成员 <code>value</code> 等于 <code>False</code></li>
-</ul>
-<p><code>is_same</code> 经常与 <code>eanble_if</code> 搭配使用</p>
-<pre><code class="language-c++">template &lt;typename T, typename T2 = typename enable_if&lt;!is_same&lt;T, CMyclass&gt;::value&gt;::type&gt; //`enable_if`形式
-typename T::size_type len(T const &amp;t) {
-    return t.size();
-}
-</code></pre>
-<p><code>enable_if</code> 模板类的第一个参数经常用 <code>is_same</code> 的 <code>value</code> 来代替，结合起来对一些特例进行判断，实现 SFINAE</p>
-<h2 id="enable_if-is_same_1">enable_if 与 is_same 内部的实现原理<a class="headerlink" href="#enable_if-is_same_1" title="Permanent link">&para;</a></h2>
-<p>了解这两个模板类的内部实现原理之前，需要了解 type traits 的概念</p>
-<h3 id="type-traits">什么是 type traits ?<a class="headerlink" href="#type-traits" title="Permanent link">&para;</a></h3>
-<p>traits 是 C++ 模板编程中使用的一种技术，主要功能是把功能相同而参数不同的函数抽象出来，通过 traits 将不同的参数的相同属性提取出来，在函数中利用这些用 traits 提取的属性，使得**函数对不同的参数表现一致**。</p>
-<h3 id="enable_if_3">enable_if 源码解析<a class="headerlink" href="#enable_if_3" title="Permanent link">&para;</a></h3>
-<p>下面给出 <code>enable_if</code> 的源码</p>
-<pre><code class="language-c++">template&lt;bool, typename _Tp = void&gt;
-struct enable_if { };
-
-template&lt;typename _Tp&gt;
-struct enable_if&lt;true, _Tp&gt; {
-    typedef _Tp type;
-};
-</code></pre>
-<ul>
-<li>首先定义了一个空的通用模板，不包含任何成员</li>
-<li>当第一个模板参数值为 <code>True</code> 时，将模板特例化; <code>type</code> 的类型为第二个模板参数 <code>_Tp</code> 。</li>
-</ul>
-<h3 id="is_same_1">is_same 源码解析<a class="headerlink" href="#is_same_1" title="Permanent link">&para;</a></h3>
-<p>以下代码简单实现了 <code>is_same</code> 模板类的作用</p>
-<pre><code class="language-c++">template &lt;typename T,typename U&gt;
-struct my_is_same {
-    static constexpr bool value=false;
-}
-
-template &lt;typename T&gt;
-struct my_is_same {
-    static constexpr bool value=true;
-};
-</code></pre>
-<ul>
-<li>定义一个通用模板，针对两个模板参数类型不一致的情况，默认 <code>value</code> 值为 <code>False</code> 。</li>
-<li>模板特例化，针对两个模板参数类型一致的情况，将 <code>value</code> 值设置为 <code>True</code> 。</li>
-</ul>
-<p><code>is_same</code> 和 <code>enable_if</code> 的基本实现方案可以总结为：<strong>通用模板加模板实例化</strong>。</p>
-<h2 id="_1">总结<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong><code>enable_if</code> 是通用的避免重载函数匹配到特例类的解决方案,使用简单而且更加自由。</strong></li>
-<li><strong><code>is_same</code> 与 <code>enable_if</code> 是 type traits 技术的典型应用,实现函数对不同参数表现一致的功能。</strong></li>
-<li><strong><code>is_same</code> 与 <code>enable_if</code> 的源码实现采用了模板元编程的基本实现思想，大致分为通用模板与模板特例化。</strong></li>
-</ul>
+<h1 id="_1">实现原理<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>所谓的物理神经网络，其实就是把物理方程作为限制加入神经网络中使训练的结果满足物理规律。而这个所谓的限制是怎么实现的？其实就是通过把物理方程的迭代前后的差值加到神经网络的损失函数里面去，让物理方程也“参与”到了训练过程。这样，神经网络在训练迭代时候优化的不仅仅是网络自己的损失函数，还有物理方程每次迭代的差，使得最后训练出来的结果就满足物理规律了。</p>
 
 
 
@@ -1865,7 +1501,7 @@ struct my_is_same {
       <nav class="md-footer__inner md-grid" aria-label="页脚" >
         
           
-          <a href="11_template_sfinae.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: 搞懂 SFINAE">
+          <a href="14_SwinT.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: SwinT:Swin Transformer - Hierarchical Vision Transformer using Shifted Windows">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1875,20 +1511,20 @@ struct my_is_same {
                 上一页
               </span>
               <div class="md-ellipsis">
-                搞懂 SFINAE
+                SwinT:Swin Transformer - Hierarchical Vision Transformer using Shifted Windows
               </div>
             </div>
           </a>
         
         
           
-          <a href="13_enable_if_redefine_mistake.html" class="md-footer__link md-footer__link--next" aria-label="下一页: enable_if 的重定义错误">
+          <a href="other.html" class="md-footer__link md-footer__link--next" aria-label="下一页: 杂">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 下一页
               </span>
               <div class="md-ellipsis">
-                enable_if 的重定义错误
+                杂
               </div>
             </div>
             <div class="md-footer__button md-icon">
