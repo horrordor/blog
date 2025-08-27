@@ -1526,28 +1526,7 @@
 - 状态更新：<span class="arithmatex">\(x_{k+1} = f(x_k, u_k)\)</span>
 - 控制输入约束：<span class="arithmatex">\(u_k \in U\)</span>
 - 状态约束：<span class="arithmatex">\(x_k \in X\)</span></p>
-<p>通俗解释：</p>
-<ol>
-<li>预测未来：MPC会用当前状态和系统模型，预测未来 <span class="arithmatex">\(N\)</span> 步的状态变化。</li>
-<li>优化控制序列：通过优化算法，找到一组控制输入，使得总的代价（比如误差或能耗）最小。</li>
-<li>只用第一个控制量：虽然算出了 <span class="arithmatex">\(N\)</span> 步的控制输入，但实际只用第一个，下一步再重新计算。</li>
-</ol>
-<p>这种方法可以让控制系统在面对复杂或非线性环境时，始终根据最新状态做出最优决策，兼顾性能和约束条件。MPC优化问题一般表达为：</p>
-<div class="arithmatex">\[
-\min_{u_0, u_1, ..., u_{N-1}} \sum_{k=0}^{N-1} \ell(x_k, u_k)
-\]</div>
-<p>其中，<span class="arithmatex">\(\ell(x_k, u_k)\)</span> 是每一步的代价函数（比如跟踪误差或能量消耗），<span class="arithmatex">\(x_k\)</span> 是第 <span class="arithmatex">\(k\)</span> 步的系统状态，<span class="arithmatex">\(u_k\)</span> 是第 <span class="arithmatex">\(k\)</span> 步的控制输入，<span class="arithmatex">\(N\)</span> 是预测步长。</p>
-<p>约束条件：
-- 状态更新：<span class="arithmatex">\(x_{k+1} = f(x_k, u_k)\)</span>
-- 控制输入约束：<span class="arithmatex">\(u_k \in U\)</span>
-- 状态约束：<span class="arithmatex">\(x_k \in X\)</span></p>
-<p><strong>通俗解释：</strong></p>
-<ol>
-<li><strong>预测未来</strong>：MPC会用当前状态和系统模型，预测未来 <span class="arithmatex">\(N\)</span> 步的状态变化。</li>
-<li><strong>优化控制序列</strong>：通过优化算法，找到一组控制输入，使得总的代价（比如误差或能耗）最小。</li>
-<li><strong>只用第一个控制量</strong>：虽然算出了 <span class="arithmatex">\(N\)</span> 步的控制输入，但实际只用第一个，下一步再重新计算。</li>
-</ol>
-<p>这种方法可以让控制系统在面对复杂或非线性环境时，始终根据最新状态做出最优决策，兼顾</p>
+<p>这种方法可以让控制系统在面对复杂或非线性环境时，始终根据最新状态做出最优决策，兼顾性能和约束条件。</p>
 
 
 
