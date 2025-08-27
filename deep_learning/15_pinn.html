@@ -1542,17 +1542,17 @@
 \]</div>
 <p>损失函数由两部分组成：</p>
 <p><strong>数据损失</strong>（若有真实数据）：</p>
-<p>[
-  L_{\text{data}}(\textbf{\omega}) = \frac{1}{N_{\text{data}}} \sum_{i=1}^{N_{\text{data}}} |\widehat{\textbf{φ}}(t_i, \textbf{x}_{0,i}, \textbf{u}_i; \textbf{\omega}) - \textbf{x}_i|^2
-  ]</p>
+<div class="arithmatex">\[
+L_{\text{data}}(\textbf{\omega}) = \frac{1}{N_{\text{data}}} \sum_{i=1}^{N_{\text{data}}} \|\widehat{\textbf{φ}}(t_i, \textbf{x}_{0,i}, \textbf{u}_i; \textbf{\omega}) - \textbf{x}_i\|^2
+\]</div>
 <p><strong>物理损失</strong>（基于微分方程残差）：</p>
-<p>[
-  L_{\text{phys}}(\textbf{\omega}) = \frac{1}{N_{\text{phys}}} \sum_{i=1}^{N_{\text{phys}}} |\widehat{\textbf{F}}(t_i, \textbf{x}_{0,i}, \textbf{u}_i; \textbf{\omega})|^2
-  ]</p>
+<div class="arithmatex">\[
+L_{\text{phys}}(\textbf{\omega}) = \frac{1}{N_{\text{phys}}} \sum_{i=1}^{N_{\text{phys}}} \|\widehat{\textbf{F}}(t_i, \textbf{x}_{0,i}, \textbf{u}_i; \textbf{\omega})\|^2
+\]</div>
 <p>其中：</p>
-<p>[
-  \widehat{\textbf{F}} = \frac{\partial}{\partial t} \widehat{\textbf{φ}} - f(\widehat{\textbf{φ}}, \textbf{u})
-  ]</p>
+<div class="arithmatex">\[
+\widehat{\textbf{F}} = \frac{\partial}{\partial t} \widehat{\textbf{φ}} - f(\widehat{\textbf{φ}}, \textbf{u})
+\]</div>
 <p>总损失为：</p>
 <div class="arithmatex">\[
 L(\textbf{\omega}) = L_{\text{data}}(\textbf{\omega}) + L_{\text{phys}}(\textbf{\omega})
