@@ -1516,17 +1516,111 @@
 <p>传统非线性动力学方法在计算效率、模型适应性、数据需求和实时控制能力上的局限, 而PINN本身是对微分方程（或偏微分方程）进行求解的一种方法, 不适用于control task. </p>
 <p>PINN计算偏微分方程速度快, 所以用PINN代替传统非线性动力学, 并通过采样策略和零保持假设来减少高维输入空间; 通过加入control actions和initial conditions使PINN能够完成control task.</p>
 <h2 id="nmpc">NMPC<a class="headerlink" href="#nmpc" title="Permanent link">&para;</a></h2>
-<p>非线性模型预测控制(NMPC, Nonlinear Model Predictive Control)的核心思想是: 在每个控制周期内, 基于当前的系统状态和预测模型，预测未来多个时刻的系统行为，然后通过优化未来一段时间的控制输入序列来最小化某种代价函数，通常是跟踪误差或能量消耗。尽管 MPC 预测多个时刻的控制输入，但它只实施当前时刻的输入，并在下一时刻重新计算。</p>
-<p>MPC优化问题一般表达为：</p>
-<div class="arithmatex">\[
-\min_{u_0, u_1, ..., u_{N-1}} \sum_{k=0}^{N-1} \ell(x_k, u_k)
-\]</div>
-<p>其中，<span class="arithmatex">\(\ell(x_k, u_k)\)</span> 是每一步的代价函数（比如跟踪误差或能量消耗），<span class="arithmatex">\(x_k\)</span> 是第 <span class="arithmatex">\(k\)</span> 步的系统状态，<span class="arithmatex">\(u_k\)</span> 是第 <span class="arithmatex">\(k\)</span> 步的控制输入，<span class="arithmatex">\(N\)</span> 是预测步长。</p>
-<p>约束条件：
-- 状态更新：<span class="arithmatex">\(x_{k+1} = f(x_k, u_k)\)</span>
-- 控制输入约束：<span class="arithmatex">\(u_k \in U\)</span>
-- 状态约束：<span class="arithmatex">\(x_k \in X\)</span></p>
-<p>这种方法可以让控制系统在面对复杂或非线性环境时，始终根据最新状态做出最优决策，兼顾性能和约束条件。</p>
+<p>非线性模型预测控制(NMPC, Nonlinear Model Predictive Control)的核心思想是: 在每个控制周期内, 基于当前的系统状态和预测模型，预测未来多个时刻的系统行为，然后通过优化未来一段时间的控制输入序列来最小化某种代价函数，通常是跟踪误差或能量消耗。尽管 MPC 预测多个时刻的控制输入，但它只实施当前时刻的输入，并在下一时刻重新计算。这种方法可以让控制系统在面对复杂或非线性环境时，始终根据最新状态做出最优决策，兼顾性能和约束条件。</p>
+<p>连续时间系统可表示为：</p>
+<div class="arithmatex">\[\dot{\textbf{x}}(t) = f(\textbf{x}(t), \textbf{u}(t))\]</div>
+<p>在等间隔时间网格 <span class="arithmatex">\( t_k = k\tau + t_0 \)</span> 上离散化，得到：
+[
+\textbf{x}_{k+1} = \textbf{\varphi}(\tau, \textbf{u}_k, \textbf{x}_k)
+]
+其中 <span class="arithmatex">\(\textbf{\varphi}\)</span> 是系统的流映射（flow map），表示从 <span class="arithmatex">\(t_k\)</span> 到 <span class="arithmatex">\(t_{k+1}\)</span> 的状态演化。</p>
+<p>在每个时刻 <span class="arithmatex">\(t_\rho\)</span>, MPC优化问题即求解如下有限时域最优控制问题：
+[
+\min_{\bm{u}<em _rho_H-1="\rho+H-1">{\rho},\dots,\bm{u}</em>}} \sum_{k=\rho}^{\rho+H-1} \ell(\bm{x<em k_1="k+1">k^{\text{ref}}, \bm{x}_k, \bm{u}_k)
+]
+约束为：
+[
+\bm{x}</em>
+]
+其中 } = \bm{\varphi}(\tau, \bm{u}_k, \bm{x}_k), \quad \bm{u}_k \in \mathcal{U}, \quad \bm{x}_k \in \mathcal{X<span class="arithmatex">\(\ell\)</span> 是损失函数，通常为：
+[
+\ell(\bm{x}_k^{\text{ref}}, \bm{x}_k, \bm{u}_k) = |\bm{x}_k^{\text{ref}} - \bm{x}_k|^2_Q + |\bm{u}_k|^2_R
+]</p>
+<h4 id="3-pinn">3. <strong>物理信息神经网络（PINN）替代系统模型</strong><a class="headerlink" href="#3-pinn" title="Permanent link">&para;</a></h4>
+<p>用神经网络 <span class="arithmatex">\(\widehat{\bm{\varphi}}\)</span> 近似真实的流映射 <span class="arithmatex">\(\bm{\varphi}\)</span>：
+[
+\widehat{\bm{x}}_{k+1} = \widehat{\bm{\varphi}}(\tau, \bm{u}_k, \bm{x}_k; \bm{\omega})
+]
+损失函数由两部分组成：</p>
+<ul>
+<li>
+<p><strong>数据损失</strong>（若有真实数据）：
+  [
+  L_{\text{data}}(\bm{\omega}) = \frac{1}{N_{\text{data}}} \sum_{i=1}^{N_{\text{data}}} |\widehat{\bm{\varphi}}(t_i, \bm{x}_{0,i}, \bm{u}_i; \bm{\omega}) - \bm{x}_i|^2
+  ]</p>
+</li>
+<li>
+<p><strong>物理损失</strong>（基于微分方程残差）：
+  [
+  L_{\text{phys}}(\bm{\omega}) = \frac{1}{N_{\text{phys}}} \sum_{i=1}^{N_{\text{phys}}} |\widehat{\bm{F}}(t_i, \bm{x}_{0,i}, \bm{u}_i; \bm{\omega})|^2
+  ]
+  其中：
+  [
+  \widehat{\bm{F}} = \frac{\partial}{\partial t} \widehat{\bm{\varphi}} - f(\widehat{\bm{\varphi}}, \bm{u})
+  ]</p>
+</li>
+</ul>
+<p>总损失为：
+[
+L(\bm{\omega}) = L_{\text{data}}(\bm{\omega}) + L_{\text{phys}}(\bm{\omega})
+]</p>
+<hr />
+<h4 id="4">4. <strong>控制输入的零阶保持假设</strong><a class="headerlink" href="#4" title="Permanent link">&para;</a></h4>
+<p>假设在每个区间 <span class="arithmatex">\([k\tau, (k+1)\tau]\)</span> 上控制输入 <span class="arithmatex">\(\bm{u}(t)\)</span> 为常数，即：
+[
+\bm{u}(t) = \bm{u}_k \quad \text{for } t \in [k\tau, (k+1)\tau]
+]
+这使得输入空间从无限维降为有限维，便于采样和训练。</p>
+<hr />
+<h4 id="5-self-loop-prediction">5. <strong>自循环预测（Self-loop Prediction）</strong><a class="headerlink" href="#5-self-loop-prediction" title="Permanent link">&para;</a></h4>
+<p>对于超过一个时间步的预测，使用：
+[
+\widehat{\bm{x}}_{k+1} = \widehat{\bm{\varphi}}(\tau, \bm{u}_k, \widehat{\bm{x}}_k; \bm{\omega})
+]
+即用当前预测值作为下一步的初始状态，逐步推进。</p>
+<hr />
+<h3 id="_5">🧠 二、通俗解释<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>目标</strong>：快速且准确地控制一个多连杆机械臂跟踪目标轨迹。</p>
+</li>
+<li>
+<p><strong>问题</strong>：传统数值积分方法（如RK45）计算慢，难以满足实时控制要求。</p>
+</li>
+<li>
+<p><strong>解决方案</strong>：</p>
+</li>
+<li>使用**神经网络**（PINN）来“学习”机械臂的动态行为。</li>
+<li>这个网络不仅看数据，还“遵守物理规律”（通过物理损失函数）。</li>
+<li>
+<p>在每个控制周期内，用这个网络快速预测未来状态，代替耗时的数值积分。</p>
+</li>
+<li>
+<p><strong>优势</strong>：</p>
+</li>
+<li><strong>速度快</strong>：神经网络前向传播比数值积分快。</li>
+<li><strong>可微分</strong>：自动微分方便计算梯度，用于优化控制输入。</li>
+<li>
+<p><strong>适用于MPC</strong>：可嵌入NMPC框架中，实现实时控制。</p>
+</li>
+<li>
+<p><strong>训练方式</strong>：</p>
+</li>
+<li>在时间区间 <span class="arithmatex">\([0, \tau]\)</span> 上采样大量“虚拟点”（collocation points），训练网络满足物理规律。</li>
+<li>
+<p>可加入少量真实数据提升精度。</p>
+</li>
+<li>
+<p><strong>控制过程</strong>：</p>
+</li>
+<li>每个控制周期内，用当前状态和控制输入序列，通过PINN预测未来状态。</li>
+<li>优化控制输入使得预测轨迹尽可能接近目标轨迹。</li>
+<li>只执行第一个控制输入，然后重复整个过程。</li>
+</ol>
+<hr />
+<h3 id="_6">✅ 总结<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>该方法通过**物理信息神经网络（PINN）** 替代传统的数值积分器，在保持物理一致性的同时大幅提升计算速度，使得非线性模型预测控制（NMPC）能够应用于实时性要求高的机械臂控制系统。</p>
+<p>如果想要进一步调整，请随时和我沟通。</p>
 
 
 
