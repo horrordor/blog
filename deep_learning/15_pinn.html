@@ -1482,8 +1482,8 @@
 正问题: <span class="arithmatex">\(f(\mathbf{q}, \:\dot{\mathbf{q}}, \:\textbf{τ}) = \ddot{\mathbf{q}}\)</span>
 逆问题: <span class="arithmatex">\(f^{-1}(\mathbf{q}, \:\dot{\mathbf{q}}, \:\ddot{\mathbf{q}}) = \textbf{τ}\)</span></p>
 <p>其中<span class="arithmatex">\(\mathbf{q}\)</span>表示坐标, <span class="arithmatex">\(\dot{\mathbf{q}}\)</span>表示速度, <span class="arithmatex">\(\dot{\mathbf{q}}\)</span> 表示加速度, <span class="arithmatex">\(\textbfτ\)</span> 表示电机驱动力. </p>
-<p>如果使用传统的深度学习, 解决机器人的逆问题, 可能会出现意想不到的问题. 就算训练数据满足所有的物理规律, 训练好的人工神经网络仍然可能做出非物理的预测. 外插无约束. </p>
-<p>此外, 有一些场景不适用刚体运动学. 甚至很难用物理公式计算, 比如下面这些场景, </p>
+<p>如果使用传统的深度学习, 解决机器人的逆问题, 可能会出现意想不到的问题, 就算训练数据满足所有的物理规律, 训练好的人工神经网络仍然可能做出非物理的预测.</p>
+<p>此外, 有一些场景不适用刚体运动学, 甚至很难用物理公式计算, 比如下面这些场景, </p>
 <ul>
 <li>柔性关节, 关节之间用弹簧或绳子连接, 而弹性系数并无数值</li>
 <li>流体身躯, 体内有半满的液体, 内部质量分布随身躯的姿态而变化</li>
@@ -1493,6 +1493,7 @@
 </ul>
 </li>
 </ul>
+<p>这篇文章将欧拉拉格朗日方程中的物体质量矩阵用神经网络表示, 从而可以估计质量分布与机器人姿态之间的关系; 将机器人各部分受到的力(比如万有引力, 弹簧拉力, 关节摩擦力, 以及与地面的摩擦力), 用神经网络表示, 解决柔性关节与摩擦力不好理论计算的难题. </p>
 <h2 id="_3">拉格朗日方程<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>在力学建模中, 拉格朗日量定义为动能减去势能, 即</p>
 <div class="arithmatex">\[ L=T-V \]</div>
@@ -1510,7 +1511,6 @@
 <div class="arithmatex">\[
 \left(\theta^{*}, \: \psi^{*} \right) = \arg_{\theta, \psi}min \hspace{5pt} \ell \left( \hat{f}^{-1}(\mathbf{q}, \dot{\mathbf{q}}, \ddot{\mathbf{q}} \:; \: \theta, \psi), \:\:\textbf{τ} \right) \]</div>
 <h2 id="_4">总结<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p>这篇文章将欧拉拉格朗日方程中的物体质量矩阵用神经网络表示, 从而可以估计质量分布与机器人姿态之间的关系；将机器人各部分受到的力(比如万有引力, 弹簧拉力, 关节摩擦力, 以及与地面的摩擦力), 用神经网络表示, 解决柔性关节与摩擦力不好理论计算的难题. 质量矩阵构造的时候, 使用技巧使其满足半正定(即质量只能大于等于零, 而不能小于零). 逆问题的解用拉格朗日方程和质量矩阵, 外力表示. </p>
 <p>深度拉格朗日网络学会了力学系统的运动方程, 比传统的前馈神经网络训练速度更快, 预测结果更物理, 对新的径迹预测也更健壮. </p>
 <h1 id="pinn-based-mpc">PINN-based MPC<a class="headerlink" href="#pinn-based-mpc" title="Permanent link">&para;</a></h1>
 <p>传统非线性动力学方法在计算效率、模型适应性、数据需求和实时控制能力上的局限, 而PINN本身是对微分方程（或偏微分方程）进行求解的一种方法, 不适用于control task. </p>
@@ -1519,52 +1519,48 @@
 <p>非线性模型预测控制(NMPC, Nonlinear Model Predictive Control)的核心思想是: 在每个控制周期内, 基于当前的系统状态和预测模型，预测未来多个时刻的系统行为，然后通过优化未来一段时间的控制输入序列来最小化某种代价函数，通常是跟踪误差或能量消耗。尽管 MPC 预测多个时刻的控制输入，但它只实施当前时刻的输入，并在下一时刻重新计算。这种方法可以让控制系统在面对复杂或非线性环境时，始终根据最新状态做出最优决策，兼顾性能和约束条件。</p>
 <p>连续时间系统可表示为：</p>
 <div class="arithmatex">\[\dot{\textbf{x}}(t) = f(\textbf{x}(t), \textbf{u}(t))\]</div>
-<p>在等间隔时间网格 <span class="arithmatex">\( t_k = k\tau + t_0 \)</span> 上离散化，得到：
-[
-\textbf{x}_{k+1} = \textbf{\varphi}(\tau, \textbf{u}_k, \textbf{x}_k)
-]
-其中 <span class="arithmatex">\(\textbf{\varphi}\)</span> 是系统的流映射（flow map），表示从 <span class="arithmatex">\(t_k\)</span> 到 <span class="arithmatex">\(t_{k+1}\)</span> 的状态演化。</p>
-<p>在每个时刻 <span class="arithmatex">\(t_\rho\)</span>, MPC优化问题即求解如下有限时域最优控制问题：
-[
-\min_{\bm{u}<em _rho_H-1="\rho+H-1">{\rho},\dots,\bm{u}</em>}} \sum_{k=\rho}^{\rho+H-1} \ell(\bm{x<em k_1="k+1">k^{\text{ref}}, \bm{x}_k, \bm{u}_k)
-]
-约束为：
-[
-\bm{x}</em>
-]
-其中 } = \bm{\varphi}(\tau, \bm{u}_k, \bm{x}_k), \quad \bm{u}_k \in \mathcal{U}, \quad \bm{x}_k \in \mathcal{X<span class="arithmatex">\(\ell\)</span> 是损失函数，通常为：
-[
-\ell(\bm{x}_k^{\text{ref}}, \bm{x}_k, \bm{u}_k) = |\bm{x}_k^{\text{ref}} - \bm{x}_k|^2_Q + |\bm{u}_k|^2_R
-]</p>
-<h4 id="3-pinn">3. <strong>物理信息神经网络（PINN）替代系统模型</strong><a class="headerlink" href="#3-pinn" title="Permanent link">&para;</a></h4>
-<p>用神经网络 <span class="arithmatex">\(\widehat{\bm{\varphi}}\)</span> 近似真实的流映射 <span class="arithmatex">\(\bm{\varphi}\)</span>：
-[
+<p>在等间隔时间网格 <span class="arithmatex">\( t_k = k\tau + t_0 \)</span> 上离散化，得到：</p>
+<div class="arithmatex">\[
+\textbf{x}_{k+1} = \textbf{φ}(\tau, \textbf{u}_k, \textbf{x}_k)
+\]</div>
+<p>其中 <span class="arithmatex">\(\textbf{φ}\)</span> 是系统的流映射（flow map），表示从 <span class="arithmatex">\(t_k\)</span> 到 <span class="arithmatex">\(t_{k+1}\)</span> 的状态演化。</p>
+<p>在每个时刻 <span class="arithmatex">\(t_\rho\)</span>, MPC优化问题即求解如下有限时域最优控制问题：</p>
+<div class="arithmatex">\[
+\min_{\bm{u}_{\rho},\dots,\bm{u}_{\rho+H-1}} \sum_{k=\rho}^{\rho+H-1} \ell(\bm{x}_k^{\text{ref}}, \bm{x}_k, \bm{u}_k)
+\]</div>
+<p>约束为：</p>
+<div class="arithmatex">\[
+\bm{x}_{k+1} = \bm{\varphi}(\tau, \bm{u}_k, \bm{x}_k), \quad \bm{u}_k \in \mathcal{U}, \quad \bm{x}_k \in \mathcal{X}
+\]</div>
+<p>其中 <span class="arithmatex">\(\ell\)</span> 是损失函数，通常为：</p>
+<div class="arithmatex">\[
+\ell(\bm{x}_k^{\text{ref}}, \bm{x}_k, \bm{u}_k) = \|\bm{x}_k^{\text{ref}} - \bm{x}_k\|^2_Q + \|\bm{u}_k\|^2_R
+\]</div>
+<p>用PINN <span class="arithmatex">\(\widehat{\bm{\varphi}}\)</span> 近似真实的流映射 <span class="arithmatex">\(\bm{\varphi}\)</span>：</p>
+<div class="arithmatex">\[
 \widehat{\bm{x}}_{k+1} = \widehat{\bm{\varphi}}(\tau, \bm{u}_k, \bm{x}_k; \bm{\omega})
-]
-损失函数由两部分组成：</p>
+\]</div>
+<p>损失函数由两部分组成：</p>
 <ul>
-<li>
-<p><strong>数据损失</strong>（若有真实数据）：
-  [
+<li><strong>数据损失</strong>（若有真实数据）：</li>
+</ul>
+<p>[
   L_{\text{data}}(\bm{\omega}) = \frac{1}{N_{\text{data}}} \sum_{i=1}^{N_{\text{data}}} |\widehat{\bm{\varphi}}(t_i, \bm{x}_{0,i}, \bm{u}_i; \bm{\omega}) - \bm{x}_i|^2
   ]</p>
-</li>
-<li>
-<p><strong>物理损失</strong>（基于微分方程残差）：
-  [
+<ul>
+<li><strong>物理损失</strong>（基于微分方程残差）：</li>
+</ul>
+<p>[
   L_{\text{phys}}(\bm{\omega}) = \frac{1}{N_{\text{phys}}} \sum_{i=1}^{N_{\text{phys}}} |\widehat{\bm{F}}(t_i, \bm{x}_{0,i}, \bm{u}_i; \bm{\omega})|^2
-  ]
-  其中：
-  [
+  ]</p>
+<p>其中：</p>
+<p>[
   \widehat{\bm{F}} = \frac{\partial}{\partial t} \widehat{\bm{\varphi}} - f(\widehat{\bm{\varphi}}, \bm{u})
   ]</p>
-</li>
-</ul>
-<p>总损失为：
-[
+<p>总损失为：</p>
+<div class="arithmatex">\[
 L(\bm{\omega}) = L_{\text{data}}(\bm{\omega}) + L_{\text{phys}}(\bm{\omega})
-]</p>
-<hr />
+\]</div>
 <h4 id="4">4. <strong>控制输入的零阶保持假设</strong><a class="headerlink" href="#4" title="Permanent link">&para;</a></h4>
 <p>假设在每个区间 <span class="arithmatex">\([k\tau, (k+1)\tau]\)</span> 上控制输入 <span class="arithmatex">\(\bm{u}(t)\)</span> 为常数，即：
 [
@@ -1618,9 +1614,8 @@ L(\bm{\omega}) = L_{\text{data}}(\bm{\omega}) + L_{\text{phys}}(\bm{\omega})
 <li>只执行第一个控制输入，然后重复整个过程。</li>
 </ol>
 <hr />
-<h3 id="_6">✅ 总结<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<h2 id="_6">总结<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>该方法通过**物理信息神经网络（PINN）** 替代传统的数值积分器，在保持物理一致性的同时大幅提升计算速度，使得非线性模型预测控制（NMPC）能够应用于实时性要求高的机械臂控制系统。</p>
-<p>如果想要进一步调整，请随时和我沟通。</p>
 
 
 
