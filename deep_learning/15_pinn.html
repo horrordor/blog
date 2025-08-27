@@ -1504,7 +1504,11 @@
 <div class="arithmatex">\[ \mathbf{H}(\mathbf{q}) \ddot{\mathbf{q}} + \underbrace{\dot{\mathbf{H}}(\mathbf{q}) \dot{\mathbf{q}} - \frac{1}{2} \left( \frac{\partial}{\partial \mathbf{q}} \left( \dot{\mathbf{q}}^{T} \mathbf{H}(\mathbf{q}) \dot{\mathbf{q}} \right) \right)^{T}}_{:=\mathbf{c}(\mathbf{q}, \dot{\mathbf{q}})} + \: \mathbf{g}(\mathbf{q}) = \mathbf{\tau}\]</div>
 <p>然后将质量矩阵写成半正定的神经网络表示, 将势能对应的力也用神经网络表示:</p>
 <p><span class="arithmatex">\(<span class="arithmatex">\(\hat H(\mathbf{q}) = \hat L(\mathbf{q} \: ; \:\theta) \hat L(\mathbf{q} \: ; \:\theta)^{T} \hspace{15pt} \hat g(\mathbf{q}) = \hat g(\mathbf{q} \: ; \: \psi)\)</span>\)</span>
-L是下三角矩阵, 从构造上让质量矩阵半正定(使用 ReLU 激活函数 ReLU(x) = max(0,x) 为L矩阵添加大于等于零的对角元)。<span class="arithmatex">\(\theta\)</span>和<span class="arithmatex">\(\psi\)</span>是神经网络参数。此时逆问题变成了，</p>
+L是下三角矩阵, 从构造上让质量矩阵半正定(使用 ReLU 激活函数 ReLU(x) = max(0,x) 为L矩阵添加大于等于零的对角元)。<span class="arithmatex">\(\theta\)</span>和<span class="arithmatex">\(\psi\)</span>是神经网络参数。此时逆问题变成了:</p>
+<div class="arithmatex">\[\hat{f}^{-1}(\mathbf{q}, \:\dot{\mathbf{q}}, \:\ddot{\mathbf{q}} \:; \: \theta, \:\psi) = \tau\]</div>
+<p>训练的优化目标定为最小化<span class="arithmatex">\(\hat{f}^{-1}\)</span>和<span class="arithmatex">\(\tau\)</span>之间的距离:</p>
+<div class="arithmatex">\[
+\left(\theta^{*}, \: \psi^{*} \right) = \arg_{\theta, \psi}min \hspace{5pt} \ell \left( \hat{f}^{-1}(\mathbf{q}, \dot{\mathbf{q}}, \ddot{\mathbf{q}} \:; \: \theta, \psi), \:\:\textbf{τ} \right) \]</div>
 <h2 id="_4">总结<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>这篇文章将欧拉拉格朗日方程中的物体质量矩阵用神经网络表示，从而可以估计质量分布与机器人姿态之间的关系；将机器人各部分受到的力（比如万有引力，弹簧拉力，关节摩擦力，以及与地面的摩擦力），用神经网络表示，解决柔性关节与摩擦力不好理论计算的难题。质量矩阵构造的时候，使用技巧使其满足半正定（即质量只能大于等于零，而不能小于零）。逆问题的解用拉格朗日方程和质量矩阵，外力表示。</p>
 <p>深度拉格朗日网络学会了力学系统的运动方程，比传统的前馈神经网络训练速度更快，预测结果更物理，对新的径迹预测也更健壮。</p>
