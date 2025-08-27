@@ -1494,7 +1494,7 @@
 </li>
 </ul>
 <p>这篇文章将欧拉拉格朗日方程中的物体质量矩阵用神经网络表示, 从而可以估计质量分布与机器人姿态之间的关系; 将机器人各部分受到的力(比如万有引力, 弹簧拉力, 关节摩擦力, 以及与地面的摩擦力), 用神经网络表示, 解决柔性关节与摩擦力不好理论计算的难题. </p>
-<h2 id="_3">拉格朗日方程<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h2 id="_3">具体实现<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>在力学建模中, 拉格朗日量定义为动能减去势能, 即</p>
 <div class="arithmatex">\[ L=T-V \]</div>
 <p>其中T是动能项, V是势能项. 文章中动能写成<span class="arithmatex">\(T = \frac{1}{2} \dot{\mathbf{q}}^{T} \mathbf{H}(\mathbf{q}) \dot{\mathbf{q}}\)</span>的形式, 其中<span class="arithmatex">\(\mathbf{H}(\mathbf{q})\)</span>是与坐标相关的质量矩阵, <span class="arithmatex">\(\dot{\mathbf{q}}\)</span>是速度. 势能与引力, 弹簧的拉力等相关, 力 g(q) 与势能的关系是<span class="arithmatex">\(g(q)=-\frac{dV}{dq}\)</span>.</p>
