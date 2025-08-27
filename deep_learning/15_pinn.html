@@ -1471,22 +1471,22 @@
 
 
 <h1 id="_1">基本思路<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>所谓的物理神经网络，其实就是把物理方程作为限制加入神经网络中使训练的结果满足物理规律。而这个所谓的限制是怎么实现的？其实就是通过把物理方程的迭代前后的差值加到神经网络的损失函数里面去，让物理方程也“参与”到了训练过程。这样，神经网络在训练迭代时候优化的不仅仅是网络自己的损失函数，还有物理方程每次迭代的差，使得最后训练出来的结果就满足物理规律了。</p>
+<p>所谓的物理神经网络, 其实就是把物理方程作为限制加入神经网络中使训练的结果满足物理规律. 而这个所谓的限制是怎么实现的？其实就是通过把物理方程的迭代前后的差值加到神经网络的损失函数里面去, 让物理方程也“参与”到了训练过程. 这样, 神经网络在训练迭代时候优化的不仅仅是网络自己的损失函数, 还有物理方程每次迭代的差, 使得最后训练出来的结果就满足物理规律了. </p>
 <h1 id="deep-lagrangian-networks-delan">Deep Lagrangian Networks (DeLaN)<a class="headerlink" href="#deep-lagrangian-networks-delan" title="Permanent link">&para;</a></h1>
 <h2 id="_2">机器人科学的正问题与逆问题<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
-<li>正问题：已知机器人各个关节处电机的驱动力，预测机械臂最终到达的位置，动量和加速度。</li>
-<li>逆问题：为了将机械臂移动到指定位置且拥有指定的动量和加速度（ 比如想以某个角度某种力度打脸），机器人各个关节处电机驱动力需要如何分配。</li>
+<li>正问题：已知机器人各个关节处电机的驱动力, 预测机械臂最终到达的位置, 动量和加速度. </li>
+<li>逆问题：为了将机械臂移动到指定位置且拥有指定的动量和加速度(比如想以某个角度某种力度打脸), 机器人各个关节处电机驱动力需要如何分配. </li>
 </ul>
-<p>正问题和逆问题的数学表达式如下，
+<p>正问题和逆问题的数学表达式如下, 
 正问题: <span class="arithmatex">\(f(\mathbf{q}, \:\dot{\mathbf{q}}, \:\textbf{τ}) = \ddot{\mathbf{q}}\)</span>
 逆问题: <span class="arithmatex">\(f^{-1}(\mathbf{q}, \:\dot{\mathbf{q}}, \:\ddot{\mathbf{q}}) = \textbf{τ}\)</span></p>
-<p>其中<span class="arithmatex">\(\mathbf{q}\)</span>表示坐标, <span class="arithmatex">\(\dot{\mathbf{q}}\)</span>表示速度, <span class="arithmatex">\(\dot{\mathbf{q}}\)</span> 表示加速度, <span class="arithmatex">\(\textbfτ\)</span> 表示电机驱动力。</p>
-<p>如果使用传统的深度学习，解决机器人的逆问题，可能会出现意想不到的问题。就算训练数据满足所有的物理规律，训练好的人工神经网络仍然可能做出非物理的预测。外插无约束。</p>
-<p>此外，有一些场景不适用刚体运动学。甚至很难用物理公式计算，比如下面这些场景，</p>
+<p>其中<span class="arithmatex">\(\mathbf{q}\)</span>表示坐标, <span class="arithmatex">\(\dot{\mathbf{q}}\)</span>表示速度, <span class="arithmatex">\(\dot{\mathbf{q}}\)</span> 表示加速度, <span class="arithmatex">\(\textbfτ\)</span> 表示电机驱动力. </p>
+<p>如果使用传统的深度学习, 解决机器人的逆问题, 可能会出现意想不到的问题. 就算训练数据满足所有的物理规律, 训练好的人工神经网络仍然可能做出非物理的预测. 外插无约束. </p>
+<p>此外, 有一些场景不适用刚体运动学. 甚至很难用物理公式计算, 比如下面这些场景, </p>
 <ul>
-<li>柔性关节，关节之间用弹簧或绳子连接，而弹性系数并无数值</li>
-<li>流体身躯，体内有半满的液体，内部质量分布随身躯的姿态而变化</li>
+<li>柔性关节, 关节之间用弹簧或绳子连接, 而弹性系数并无数值</li>
+<li>流体身躯, 体内有半满的液体, 内部质量分布随身躯的姿态而变化</li>
 <li>摩擦力<ul>
 <li>关节之间存在静摩擦力与动摩擦力</li>
 <li>脚底与地面之间存在静摩擦力与动摩擦力</li>
@@ -1494,24 +1494,28 @@
 </li>
 </ul>
 <h2 id="_3">拉格朗日方程<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>在力学建模中，拉格朗日量定义为动能减去势能，即</p>
+<p>在力学建模中, 拉格朗日量定义为动能减去势能, 即</p>
 <div class="arithmatex">\[ L=T-V \]</div>
-<p>其中T是动能项, V是势能项. 文章中动能写成<span class="arithmatex">\(T = \frac{1}{2} \dot{\mathbf{q}}^{T} \mathbf{H}(\mathbf{q}) \dot{\mathbf{q}}\)</span>的形式, 其中<span class="arithmatex">\(\mathbf{H}(\mathbf{q})\)</span>是与坐标相关的质量矩阵, 可以描述流体身躯, <span class="arithmatex">\(\dot{\mathbf{q}}\)</span>是速度. 势能与引力，弹簧的拉力等相关，力 g(q) 与势能的关系是<span class="arithmatex">\(g(q)=-\frac{dV}{dq}\)</span>.</p>
-<p>应用变分微积分得到欧拉-拉格朗日方程，其非保守力描述为:</p>
+<p>其中T是动能项, V是势能项. 文章中动能写成<span class="arithmatex">\(T = \frac{1}{2} \dot{\mathbf{q}}^{T} \mathbf{H}(\mathbf{q}) \dot{\mathbf{q}}\)</span>的形式, 其中<span class="arithmatex">\(\mathbf{H}(\mathbf{q})\)</span>是与坐标相关的质量矩阵, 可以描述流体身躯, <span class="arithmatex">\(\dot{\mathbf{q}}\)</span>是速度. 势能与引力, 弹簧的拉力等相关, 力 g(q) 与势能的关系是<span class="arithmatex">\(g(q)=-\frac{dV}{dq}\)</span>.</p>
+<p>应用变分微积分得到欧拉-拉格朗日方程, 其非保守力描述为:</p>
 <div class="arithmatex">\[\frac{d}{dt} \frac{\partial L}{\partial \dot{\mathbf{q}}_{i}} - \frac{\partial L}{\partial \mathbf{q}_i} = \mathbf{\tau}_{i}\]</div>
-<p>如果右边的<span class="arithmatex">\(\mathbf{\tau}_{i}=0\)</span>, 上面这个方程就是常见的没有外力的拉格朗日方程。加了<span class="arithmatex">\(\mathbf{\tau}_{i}\)</span>, 表示这个系统有电机的驱动力输入。</p>
+<p>如果右边的<span class="arithmatex">\(\mathbf{\tau}_{i}=0\)</span>, 上面这个方程就是常见的没有外力的拉格朗日方程. 加了<span class="arithmatex">\(\mathbf{\tau}_{i}\)</span>, 表示这个系统有电机的驱动力输入. </p>
 <p>将欧拉拉格朗日方程中的动能和势能用逆问题的形式替换:</p>
 <div class="arithmatex">\[ \mathbf{H}(\mathbf{q}) \ddot{\mathbf{q}} + \underbrace{\dot{\mathbf{H}}(\mathbf{q}) \dot{\mathbf{q}} - \frac{1}{2} \left( \frac{\partial}{\partial \mathbf{q}} \left( \dot{\mathbf{q}}^{T} \mathbf{H}(\mathbf{q}) \dot{\mathbf{q}} \right) \right)^{T}}_{:=\mathbf{c}(\mathbf{q}, \dot{\mathbf{q}})} + \: \mathbf{g}(\mathbf{q}) = \mathbf{\tau}\]</div>
 <p>然后将质量矩阵写成半正定的神经网络表示, 将势能对应的力也用神经网络表示:</p>
 <div class="arithmatex">\[\hat H(\mathbf{q}) = \hat L(\mathbf{q} \: ; \:\theta) \hat L(\mathbf{q} \: ; \:\theta)^{T} \hspace{15pt} \hat g(\mathbf{q}) = \hat g(\mathbf{q} \: ; \: \psi)\]</div>
-<p>L是下三角矩阵, 从构造上让质量矩阵半正定(使用 ReLU 激活函数 ReLU(x) = max(0,x) 为L矩阵添加大于等于零的对角元)。<span class="arithmatex">\(\theta\)</span>和<span class="arithmatex">\(\psi\)</span>是神经网络参数。此时逆问题变成了:</p>
+<p>L是下三角矩阵, 从构造上让质量矩阵半正定(使用 ReLU 激活函数 ReLU(x) = max(0,x) 为L矩阵添加大于等于零的对角元). <span class="arithmatex">\(\theta\)</span>和<span class="arithmatex">\(\psi\)</span>是神经网络参数. 此时逆问题变成了:</p>
 <div class="arithmatex">\[\hat{f}^{-1}(\mathbf{q}, \:\dot{\mathbf{q}}, \:\ddot{\mathbf{q}} \:; \: \theta, \:\psi) = \tau\]</div>
 <p>训练的优化目标定为最小化<span class="arithmatex">\(\hat{f}^{-1}\)</span>和<span class="arithmatex">\(\tau\)</span>之间的距离:</p>
 <div class="arithmatex">\[
 \left(\theta^{*}, \: \psi^{*} \right) = \arg_{\theta, \psi}min \hspace{5pt} \ell \left( \hat{f}^{-1}(\mathbf{q}, \dot{\mathbf{q}}, \ddot{\mathbf{q}} \:; \: \theta, \psi), \:\:\textbf{τ} \right) \]</div>
 <h2 id="_4">总结<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p>这篇文章将欧拉拉格朗日方程中的物体质量矩阵用神经网络表示，从而可以估计质量分布与机器人姿态之间的关系；将机器人各部分受到的力（比如万有引力，弹簧拉力，关节摩擦力，以及与地面的摩擦力），用神经网络表示，解决柔性关节与摩擦力不好理论计算的难题。质量矩阵构造的时候，使用技巧使其满足半正定（即质量只能大于等于零，而不能小于零）。逆问题的解用拉格朗日方程和质量矩阵，外力表示。</p>
-<p>深度拉格朗日网络学会了力学系统的运动方程，比传统的前馈神经网络训练速度更快，预测结果更物理，对新的径迹预测也更健壮。</p>
+<p>这篇文章将欧拉拉格朗日方程中的物体质量矩阵用神经网络表示, 从而可以估计质量分布与机器人姿态之间的关系；将机器人各部分受到的力（比如万有引力, 弹簧拉力, 关节摩擦力, 以及与地面的摩擦力), 用神经网络表示, 解决柔性关节与摩擦力不好理论计算的难题. 质量矩阵构造的时候, 使用技巧使其满足半正定（即质量只能大于等于零, 而不能小于零). 逆问题的解用拉格朗日方程和质量矩阵, 外力表示. </p>
+<p>深度拉格朗日网络学会了力学系统的运动方程, 比传统的前馈神经网络训练速度更快, 预测结果更物理, 对新的径迹预测也更健壮. </p>
+<h1 id="pinn-based-mpc">PINN-based MPC<a class="headerlink" href="#pinn-based-mpc" title="Permanent link">&para;</a></h1>
+<p>传统非线性动力学方法在计算效率、模型适应性、数据需求和实时控制能力上的局限, 而PINN本身是对微分方程（或偏微分方程）进行求解的一种方法，不适用于control task. </p>
+<p>PINN计算偏微分方程速度快，所以用PINN代替传统非线性动力学，并通过采样策略和零保持假设来减少高维输入空间；通过加入control actions和initial conditions使PINN能够完成control task.</p>
+<h2 id="nmpc">NMPC<a class="headerlink" href="#nmpc" title="Permanent link">&para;</a></h2>
 
 
 
