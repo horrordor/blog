@@ -1515,7 +1515,7 @@
 <h1 id="pinn-based-mpc">PINN-based MPC<a class="headerlink" href="#pinn-based-mpc" title="Permanent link">&para;</a></h1>
 <p>传统非线性动力学方法在计算效率、模型适应性、数据需求和实时控制能力上的局限, 而PINN本身是对微分方程（或偏微分方程）进行求解的一种方法, 不适用于control task. </p>
 <p>PINN计算偏微分方程速度快, 所以用PINN代替传统非线性动力学, 并通过采样策略和零保持假设来减少高维输入空间; 通过加入control actions和initial conditions使PINN能够完成control task.</p>
-<h2 id="nmpc">NMPC<a class="headerlink" href="#nmpc" title="Permanent link">&para;</a></h2>
+<h2 id="_5">具体实现<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>非线性模型预测控制(NMPC, Nonlinear Model Predictive Control)的核心思想是: 在每个控制周期内, 基于当前的系统状态和预测模型，预测未来多个时刻的系统行为，然后通过优化未来一段时间的控制输入序列来最小化某种代价函数，通常是跟踪误差或能量消耗。尽管 MPC 预测多个时刻的控制输入，但它只实施当前时刻的输入，并在下一时刻重新计算。这种方法可以让控制系统在面对复杂或非线性环境时，始终根据最新状态做出最优决策，兼顾性能和约束条件。</p>
 <p>连续时间系统可表示为：</p>
 <div class="arithmatex">\[\dot{\textbf{x}}(t) = f(\textbf{x}(t), \textbf{u}(t))\]</div>
@@ -1536,6 +1536,67 @@
 <div class="arithmatex">\[
 \ell(\textbf{x}_k^{\text{ref}}, \textbf{x}_k, \textbf{u}_k) = \|\textbf{x}_k^{\text{ref}} - \textbf{x}_k\|^2_Q + \|\textbf{u}_k\|^2_R
 \]</div>
+<p>论文中研究的二连杆机械臂的运动方程由拉格朗日力学推导得出，其标准形式为：</p>
+<div class="arithmatex">\[
+\bm{M}(\bm{q})\ddot{\bm{q}} + \bm{k}(\bm{q}, \dot{\bm{q}}) = \bm{h}(\bm{q}, \dot{\bm{q}}) + \bm{B}\bm{u}
+\]</div>
+<p>其中：
+- <span class="arithmatex">\(\bm{q} = [\alpha, \beta]^\top\)</span> 是广义坐标（两个关节的角度）。
+- <span class="arithmatex">\(\dot{\bm{q}}\)</span> 是广义速度（角速度）。
+- <span class="arithmatex">\(\ddot{\bm{q}}\)</span> 是广义加速度（角加速度）。
+- <span class="arithmatex">\(\bm{M}(\bm{q})\)</span> 是质量矩阵（正定、对称）。
+- <span class="arithmatex">\(\bm{k}(\bm{q}, \dot{\bm{q}})\)</span> 包含科里奥利力、离心力和重力项。
+- <span class="arithmatex">\(\bm{h}(\bm{q}, \dot{\bm{q}})\)</span> 是施加的外力（如摩擦力）。
+- <span class="arithmatex">\(\bm{B}\)</span> 是输入矩阵。
+- <span class="arithmatex">\(\bm{u}\)</span> 是控制输入（电机电流）。</p>
+<p>为了将其转化为标准的一阶常微分方程组（便于数值积分和PINN处理），我们定义状态向量 <span class="arithmatex">\(\bm{x}\)</span>：</p>
+<div class="arithmatex">\[
+\bm{x} = \begin{bmatrix} \bm{q} \\ \dot{\bm{q}} \end{bmatrix} = \begin{bmatrix} q_1 \\ q_2 \\ \dot{q}_1 \\ \dot{q}_2 \end{bmatrix}
+\]</div>
+<p>对状态向量求导：</p>
+<div class="arithmatex">\[
+\dot{\bm{x}} = \begin{bmatrix} \dot{\bm{q}} \\ \ddot{\bm{q}} \end{bmatrix}
+\]</div>
+<p>我们的目标是将 <span class="arithmatex">\(\dot{\bm{x}}\)</span> 表达为状态 <span class="arithmatex">\(\bm{x}\)</span> 和控制输入 <span class="arithmatex">\(\bm{u}\)</span> 的函数，即 <span class="arithmatex">\(\dot{\bm{x}} = f(\bm{x}, \bm{u})\)</span>。</p>
+<p>从原始运动方程出发，解出 <span class="arithmatex">\(\ddot{\bm{q}}\)</span>：</p>
+<div class="arithmatex">\[
+\ddot{\bm{q}} = \bm{M}^{-1}(\bm{q}) \left[ \bm{h}(\bm{q}, \dot{\bm{q}}) + \bm{B}\bm{u} - \bm{k}(\bm{q}, \dot{\bm{q}}) \right]
+\]</div>
+<p>因此，整个状态空间方程可以写为：</p>
+<div class="arithmatex">\[
+\dot{\bm{x}} = \frac{d}{dt} \begin{bmatrix} \bm{q} \\ \dot{\bm{q}} \end{bmatrix} = \begin{bmatrix} \dot{\bm{q}} \\ \bm{M}^{-1}(\bm{q}) \left[ \bm{h}(\bm{q}, \dot{\bm{q}}) + \bm{B}\bm{u} - \bm{k}(\bm{q}, \dot{\bm{q}}) \right] \end{bmatrix} =: f(\bm{x}, \bm{u})
+\]</div>
+<p>PINN的核心思想不是直接学习解，而是学习满足微分方程的函数。因此，我们将控制方程重写为残差形式。定义残差向量 <span class="arithmatex">\(\bm{F}\)</span>：</p>
+<div class="arithmatex">\[
+\bm{F}(\bm{x}, \dot{\bm{x}}, \bm{u}) = \dot{\bm{x}} - f(\bm{x}, \bm{u})
+\]</div>
+<p>一个物理上真实的轨迹必须满足 <span class="arithmatex">\(\bm{F} = 0\)</span>。将 <span class="arithmatex">\(f(\bm{x}, \bm{u})\)</span> 代入：</p>
+<div class="arithmatex">\[
+\bm{F}(\bm{x}, \dot{\bm{x}}, \bm{u}) = \begin{bmatrix} \dot{\bm{q}} - \dot{\bm{q}} \\ \ddot{\bm{q}} - \left( \bm{M}^{-1}(\bm{q}) \left[ \bm{h}(\bm{q}, \dot{\bm{q}}) + \bm{B}\bm{u} - \bm{k}(\bm{q}, \dot{\bm{q}}) \right] \right) \end{bmatrix} = \begin{bmatrix} \bm{0} \\ \ddot{\bm{q}} - \left( \bm{M}^{-1}(\bm{q}) \left[ \bm{h}(\bm{q}, \dot{\bm{q}}) + \bm{B}\bm{u} - \bm{k}(\bm{q}, \dot{\bm{q}}) \right] \right) \end{bmatrix}
+\]</div>
+<p>这个残差也可以写成更紧凑的DAE形式：</p>
+<div class="arithmatex">\[
+\bm{0} = \begin{bmatrix} \bm{I} &amp; \bm{0} \\ \bm{0} &amp; \bm{M}(\bm{q}) \end{bmatrix} \begin{bmatrix} \dot{\bm{q}} \\ \ddot{\bm{q}} \end{bmatrix} - \begin{bmatrix} \dot{\bm{q}} \\ \bm{h}(\bm{q}, \dot{\bm{q}}) - \bm{k}(\bm{q}, \dot{\bm{q}}) \end{bmatrix} - \begin{bmatrix} \bm{0} \\ \bm{B}\bm{u} \end{bmatrix}
+\]</div>
+<p>这等价于我们上面推导出的残差方程 <span class="arithmatex">\(\bm{F} = 0\)</span>。</p>
+<p>现在，我们用神经网络 <span class="arithmatex">\(\widehat{\bm{\varphi}}\)</span> 来近似系统的流映射。该网络以时间 <span class="arithmatex">\(t\)</span>、初始状态 <span class="arithmatex">\(\bm{x}_0\)</span> 和控制输入 <span class="arithmatex">\(\bm{u}\)</span> 为输入，输出预测状态 <span class="arithmatex">\(\widehat{\bm{x}}(t)\)</span>。</p>
+<div class="arithmatex">\[
+\widehat{\bm{x}}(t) = \widehat{\bm{\varphi}}(t, \bm{x}_0, \bm{u}; \bm{\omega}) \approx \bm{x}(t)
+\]</div>
+<p>为了将物理规律嵌入网络，我们要求网络的预测 <span class="arithmatex">\(\widehat{\bm{x}}(t)\)</span> 必须尽可能满足残差方程 <span class="arithmatex">\(\bm{F} = 0\)</span>。</p>
+<p>使用自动微分（AutoDiff）计算网络输出对时间的导数 <span class="arithmatex">\(\frac{\partial}{\partial t}\widehat{\bm{\varphi}}\)</span>。这将给出预测的状态导数 <span class="arithmatex">\(\dot{\widehat{\bm{x}}}\)</span>。
+    - <span class="arithmatex">\(\dot{\widehat{\bm{q}}} = \frac{\partial \widehat{\bm{q}}}{\partial t}\)</span>
+    - <span class="arithmatex">\(\ddot{\widehat{\bm{q}}} = \frac{\partial^2 \widehat{\bm{q}}}{\partial t^2}\)</span></p>
+<p>将网络的预测值 <span class="arithmatex">\(\widehat{\bm{x}} = [\widehat{\bm{q}}, \dot{\widehat{\bm{q}}}]^\top\)</span> 和其导数 <span class="arithmatex">\(\dot{\widehat{\bm{x}}} = [\dot{\widehat{\bm{q}}}, \ddot{\widehat{\bm{q}}}]^\top\)</span> 代入我们预先已知的物理残差函数 <span class="arithmatex">\(\bm{F}\)</span> 中：</p>
+<div class="arithmatex">\[
+\widehat{\bm{F}} = \bm{F}(\widehat{\bm{x}}, \dot{\widehat{\bm{x}}}, \bm{u}) = \dot{\widehat{\bm{x}}} - f(\widehat{\bm{x}}, \bm{u})
+\]</div>
+<p>具体来说，就是代入质量矩阵 <span class="arithmatex">\(\bm{M}\)</span>、力向量 <span class="arithmatex">\(\bm{k}\)</span> 和 <span class="arithmatex">\(\bm{h}\)</span> 等**已知的物理模型**中。</p>
+<p>物理损失函数旨在最小化这个预测残差。在大量采集点 <span class="arithmatex">\((t_i, \bm{x}_{0,i}, \bm{u}_i)\)</span> 上计算残差并求平均：</p>
+<div class="arithmatex">\[
+L_{\text{phys}}(\bm{\omega}) = \frac{1}{N_{\text{phys}}} \sum_{i=1}^{N_{\text{phys}}} \| \widehat{\bm{F}}(t_i, \bm{x}_{0,i}, \bm{u}_i, \bm{\omega}) \|^2
+\]</div>
+<p>通过最小化 <span class="arithmatex">\(L_{\text{phys}}\)</span>，我们强制神经网络的输出 <span class="arithmatex">\(\widehat{\bm{x}}(t)\)</span> 遵守已知的物理定律（运动方程）。</p>
 <p>用PINN <span class="arithmatex">\(\widehat{\textbf{φ}}\)</span> 近似真实的流映射 <span class="arithmatex">\(\textbf{φ}\)</span>：</p>
 <div class="arithmatex">\[
 \widehat{\textbf{x}}_{k+1} = \widehat{\textbf{φ}}(\tau, \textbf{u}_k, \textbf{x}_k; \textbf{ω})
@@ -1567,6 +1628,7 @@ L(\textbf{ω}) = L_{\text{data}}(\textbf{ω}) + L_{\text{phys}}(\textbf{ω})
 \widehat{\textbf{x}}_{k+1} = \widehat{\textbf{φ}}(\tau, \textbf{u}_k, \widehat{\textbf{x}}_k; \textbf{ω})
 \]</div>
 <p>即用当前预测值作为下一步的初始状态，逐步推进。</p>
+<p>最终，这个被物理定律“约束”过的神经网络 <span class="arithmatex">\(\widehat{\bm{\varphi}}\)</span>，就能够更准确、更高效地预测机械臂的状态演化，从而替代传统的数值积分器，用于快速的模型预测控制（MPC）。</p>
 
 
 
