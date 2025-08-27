@@ -1503,8 +1503,8 @@
 <p>将欧拉拉格朗日方程中的动能和势能用逆问题的形式替换:</p>
 <div class="arithmatex">\[ \mathbf{H}(\mathbf{q}) \ddot{\mathbf{q}} + \underbrace{\dot{\mathbf{H}}(\mathbf{q}) \dot{\mathbf{q}} - \frac{1}{2} \left( \frac{\partial}{\partial \mathbf{q}} \left( \dot{\mathbf{q}}^{T} \mathbf{H}(\mathbf{q}) \dot{\mathbf{q}} \right) \right)^{T}}_{:=\mathbf{c}(\mathbf{q}, \dot{\mathbf{q}})} + \: \mathbf{g}(\mathbf{q}) = \mathbf{\tau}\]</div>
 <p>然后将质量矩阵写成半正定的神经网络表示, 将势能对应的力也用神经网络表示:</p>
-<p><span class="arithmatex">\(<span class="arithmatex">\(\hat H(\mathbf{q}) = \hat L(\mathbf{q} \: ; \:\theta) \hat L(\mathbf{q} \: ; \:\theta)^{T} \hspace{15pt} \hat g(\mathbf{q}) = \hat g(\mathbf{q} \: ; \: \psi)\)</span>\)</span>
-L是下三角矩阵, 从构造上让质量矩阵半正定(使用 ReLU 激活函数 ReLU(x) = max(0,x) 为L矩阵添加大于等于零的对角元)。<span class="arithmatex">\(\theta\)</span>和<span class="arithmatex">\(\psi\)</span>是神经网络参数。此时逆问题变成了:</p>
+<div class="arithmatex">\[\hat H(\mathbf{q}) = \hat L(\mathbf{q} \: ; \:\theta) \hat L(\mathbf{q} \: ; \:\theta)^{T} \hspace{15pt} \hat g(\mathbf{q}) = \hat g(\mathbf{q} \: ; \: \psi)\]</div>
+<p>L是下三角矩阵, 从构造上让质量矩阵半正定(使用 ReLU 激活函数 ReLU(x) = max(0,x) 为L矩阵添加大于等于零的对角元)。<span class="arithmatex">\(\theta\)</span>和<span class="arithmatex">\(\psi\)</span>是神经网络参数。此时逆问题变成了:</p>
 <div class="arithmatex">\[\hat{f}^{-1}(\mathbf{q}, \:\dot{\mathbf{q}}, \:\ddot{\mathbf{q}} \:; \: \theta, \:\psi) = \tau\]</div>
 <p>训练的优化目标定为最小化<span class="arithmatex">\(\hat{f}^{-1}\)</span>和<span class="arithmatex">\(\tau\)</span>之间的距离:</p>
 <div class="arithmatex">\[
