@@ -1543,11 +1543,11 @@
 <p>损失函数由两部分组成：</p>
 <p><strong>数据损失</strong>（若有真实数据）：</p>
 <div class="arithmatex">\[
-L_{\text{data}}(\textbf{\omega}) = \frac{1}{N_{\text{data}}} \sum_{i=1}^{N_{\text{data}}} \|\widehat{\textbf{φ}}(t_i, \textbf{x}_{0,i}, \textbf{u}_i; \textbf{\omega}) - \textbf{x}_i\|^2
+L_{\text{data}}(\textbf{ω}) = \frac{1}{N_{\text{data}}} \sum_{i=1}^{N_{\text{data}}} \|\widehat{\textbf{φ}}(t_i, \textbf{x}_{0,i}, \textbf{u}_i; \textbf{ω}) - \textbf{x}_i\|^2
 \]</div>
 <p><strong>物理损失</strong>（基于微分方程残差）：</p>
 <div class="arithmatex">\[
-L_{\text{phys}}(\textbf{\omega}) = \frac{1}{N_{\text{phys}}} \sum_{i=1}^{N_{\text{phys}}} \|\widehat{\textbf{F}}(t_i, \textbf{x}_{0,i}, \textbf{u}_i; \textbf{\omega})\|^2
+L_{\text{phys}}(\textbf{ω}) = \frac{1}{N_{\text{phys}}} \sum_{i=1}^{N_{\text{phys}}} \|\widehat{\textbf{F}}(t_i, \textbf{x}_{0,i}, \textbf{u}_i; \textbf{ω})\|^2
 \]</div>
 <p>其中：</p>
 <div class="arithmatex">\[
@@ -1555,7 +1555,7 @@ L_{\text{phys}}(\textbf{\omega}) = \frac{1}{N_{\text{phys}}} \sum_{i=1}^{N_{\tex
 \]</div>
 <p>总损失为：</p>
 <div class="arithmatex">\[
-L(\textbf{\omega}) = L_{\text{data}}(\textbf{\omega}) + L_{\text{phys}}(\textbf{\omega})
+L(\textbf{ω}) = L_{\text{data}}(\textbf{ω}) + L_{\text{phys}}(\textbf{ω})
 \]</div>
 <p>假设在每个区间 <span class="arithmatex">\([k\tau, (k+1)\tau]\)</span> 上控制输入 <span class="arithmatex">\(\textbf{u}(t)\)</span> 为常数，即：</p>
 <div class="arithmatex">\[
@@ -1564,7 +1564,7 @@ L(\textbf{\omega}) = L_{\text{data}}(\textbf{\omega}) + L_{\text{phys}}(\textbf{
 <p>这使得输入空间从无限维降为有限维，便于采样和训练。</p>
 <p>对于超过一个时间步的预测，使用：</p>
 <div class="arithmatex">\[
-\widehat{\textbf{x}}_{k+1} = \widehat{\textbf{φ}}(\tau, \textbf{u}_k, \widehat{\textbf{x}}_k; \textbf{\omega})
+\widehat{\textbf{x}}_{k+1} = \widehat{\textbf{φ}}(\tau, \textbf{u}_k, \widehat{\textbf{x}}_k; \textbf{ω})
 \]</div>
 <p>即用当前预测值作为下一步的初始状态，逐步推进。</p>
 
