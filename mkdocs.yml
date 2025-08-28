@@ -156,8 +156,7 @@ nav:
       - 计算机网络基础: computer_networks/01_network_basics.md
       - MAC地址和IP地址: computer_networks/02_mac_address.md
       - ISP和NAT: computer_networks/03_isp_and_nat.md
-      
-      
+      - OSI七层模型: computer_networks/04_osi_model.md
 
   - 深度学习:
       - Deep Learning: deep_learning/00_DeepLearning.md
