@@ -1204,6 +1204,39 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="NAT的分类">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      静态转换
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      动态转换
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pat" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAT
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -1810,6 +1843,39 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="NAT的分类">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      静态转换
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      动态转换
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pat" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAT
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -1859,35 +1925,23 @@
 </ul>
 <h2 id="nat-network-address-translation">NAT (Network Address Translation)<a class="headerlink" href="#nat-network-address-translation" title="Permanent link">&para;</a></h2>
 <p>私网IP在访问Internet的时候需要NAT将私网IP装换成公网IP, 转换过程可以由路由器来完成. 可以节约公网的IP资源, 隐藏内部的真实IP.</p>
-<h4 id="nat">NAT的分类<a class="headerlink" href="#nat" title="Permanent link">&para;</a></h4>
-<blockquote>
+<h3 id="nat">NAT的分类<a class="headerlink" href="#nat" title="Permanent link">&para;</a></h3>
+<h4 id="_4">静态转换<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
 <ul>
-<li>静态转换</li>
 <li>手动配置NAT映射表.</li>
-<li>
-<p>一对一转换, 一个私网IP只能转换成NAT映射表中的公网IP地址.</p>
-</li>
-<li>
-<p>动态转换：</p>
-</li>
-<li>定义外部地址池, 动态随机转换.</li>
-<li>
-<p>一对一转换.</p>
-</li>
-<li>
-<p>PAT</p>
-</li>
-<li>
-<p>多对一转换, 最大程度节约公网IP资源.多个私网IP使用同一个公网IP</p>
-</li>
-<li>
-<p>采用端口多路复用方式, 通过端口号标识不同的数据流.</p>
-</li>
-<li>
-<p>目前应用最广泛的NAT实现.</p>
-</li>
+<li>一对一转换, 一个私网IP只能转换成NAT映射表中的公网IP地址.</li>
 </ul>
-</blockquote>
+<h4 id="_5">动态转换<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<ul>
+<li>定义外部地址池, 动态随机转换.</li>
+<li>一对一转换.</li>
+</ul>
+<h4 id="pat">PAT<a class="headerlink" href="#pat" title="Permanent link">&para;</a></h4>
+<ul>
+<li>多对一转换, 最大程度节约公网IP资源.多个私网IP使用同一个公网IP</li>
+<li>采用端口多路复用方式, 通过端口号标识不同的数据流.</li>
+<li>目前应用最广泛的NAT实现.</li>
+</ul>
 
 
 
