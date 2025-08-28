@@ -1404,15 +1404,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#dchp" class="md-nav__link">
-    <span class="md-ellipsis">
-      DCHP协议细节
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -2199,15 +2190,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#dchp" class="md-nav__link">
-    <span class="md-ellipsis">
-      DCHP协议细节
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -2377,13 +2359,11 @@ ping ip地址 -i TTL
 <p class="admonition-title">通过tracert, pathping命令, 可以跟踪数据包经过了那些路由器</p>
 </div>
 <h3 id="ipv6">IPV6<a class="headerlink" href="#ipv6" title="Permanent link">&para;</a></h3>
-<p>ipV6在网络层, 属于底层, 需要升级设备, 操作系统, 所以使用增长缓慢</p>
-<p>IPv6地址为128bit, 每16bit一组, 共8组 </p>
-<p>每组以冒号“:”隔开, 每组以4位十六进制方式表示 </p>
+<p>ipV6在网络层, 属于底层, 需要升级设备, 操作系统, 所以使用增长缓慢. IPv6地址为128bit, 每16bit一组, 共8组, 每组以冒号“:”隔开, 每组以4位十六进制方式表示:</p>
 <ul>
 <li>例如2001:0db8:86a3:08d3:1319:8a2e:0370:7344 </li>
 </ul>
-<p>类似于IPv4的点分十进制, 同样也存在点分十六进制的写法 </p>
+<p>类似于IPv4的点分十进制, 同样也存在点分十六进制的写法:</p>
 <ul>
 <li>2.0.0.1.0.d.b.8.8.5.a.3.0.8.d.3.1.3.1.9.8.a.2.e.0.3.7.0.7.3.4.4</li>
 </ul>
@@ -2485,38 +2465,24 @@ nslookup 域名
 </ul>
 <h4 id="dhcpip4">DHCP分配IP地址的4个阶段<a class="headerlink" href="#dhcpip4" title="Permanent link">&para;</a></h4>
 <blockquote>
-<ul>
-<li>DISCOVER: 发现服务器</li>
-</ul>
+<p><strong>DISCOVER: 发现服务器</strong></p>
 <p>发广播包(源IP是0.0.0.0(因为这时候我还没有IP地址), 目标IP是255.255.255.255, 目标MAC是FF:FF:FF:FF:FF:FF) </p>
-<ul>
-<li>OFFER: 提供租约</li>
-</ul>
-<p>服务器返回可以租用的IP地址, 以及租用期限、子网掩码、网关、DNS等信息</p>
-<p>注意: 这里可能会有多个服务器提供租约</p>
-<ul>
-<li>REQUEST: 选择IP地址</li>
-</ul>
+<p><strong>OFFER: 提供租约</strong></p>
+<p>服务器返回可以租用的IP地址, 以及租用期限、子网掩码、网关、DNS等信息. 这里可能会有 <strong>多个</strong> 服务器提供租约</p>
+<p><strong>REQUEST: 选择IP地址</strong></p>
 <p>客户端选择一个OFFER, 发送广播包进行回应</p>
-<ul>
-<li>ACKNOWLEDGE: 确认</li>
-</ul>
-<p>被选中的服务器发送ACK数据包给客户端</p>
-<p>至此, IP地址分配完成.<br />
+<p><strong>ACKNOWLEDGE: 确认</strong></p>
+<p>被选中的服务器发送ACK数据包给客户端, 至此IP地址分配完成.<br />
 </p>
 </blockquote>
-<h4 id="dchp">DCHP协议细节<a class="headerlink" href="#dchp" title="Permanent link">&para;</a></h4>
-<blockquote>
-<ul>
-<li>DHCP服务器可以跨网段分配IP地址么？(DHCP服务器、客户端不在同一个网段)</li>
-</ul>
-<p>可以借助DHCP中继代理(DHCP Relay Agent)实现跨网段分配IP地址</p>
-<ul>
-<li>自动续约</li>
-</ul>
-<p>客户端会在租期不足的时候, 自动向DHCP服务器发送REQUEST信息申请续约
-</p>
-</blockquote>
+<div class="admonition note">
+<p class="admonition-title">DHCP服务器可以跨网段分配IP地址么?(DHCP服务器、客户端不在同一个网段)</p>
+<p>可以借助DHCP中继代理(DHCP Relay Agent)实现跨网段分配IP地址 </p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">自动续约</p>
+<p>客户端会在租期不足的时候, 自动向DHCP服务器发送REQUEST信息申请续约</p>
+</div>
 <p>常用命令:</p>
 <pre><code>ipconfig /all
     可以看到DHCP相关的详细信息, 比如租约过期时间、DHCP服务器地址等
