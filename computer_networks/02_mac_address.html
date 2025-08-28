@@ -1798,17 +1798,19 @@
 <p><code>ipconfig /all</code></p>
 </div>
 <p>可以修改MAC地址蹭网, 比如, 有些学校的交换机可以设置MAC地址来限制上网的设备的MAC地址, 如果你知道一台可以上学校网的MAC地址, 你可以把你的MAC改成这个可以上网的MAC地址就可以蹭网了, 但是两台相同MAC地址的主机肯定只有一个能上网. </p>
-<p>!!! note 当MAC地址的48位全部是1的时候, 代表广播地址. </p>
+<div class="admonition note">
+<p class="admonition-title">当MAC地址的48位全部是1的时候, 代表广播地址</p>
+</div>
 <h3 id="arp">ARP：地址解析协议<a class="headerlink" href="#arp" title="Permanent link">&para;</a></h3>
-<p>当不知道对方主机的MAC地址是, 可以通过ARP广播获取对方的MAC地址(通过ARP获取的MAC地址属于动态缓存, 过两分钟就会清除). 获取成功后, 会缓存IP地址, MAC地址的映射信息, 俗称：ARP缓存(<code>arp -a</code> 可以查看当前计算机缓存的MAC地址 .  <code>arp -d</code> 删除ARP缓存). </p>
+<p>当不知道对方主机的MAC地址是, 可以通过ARP广播获取对方的MAC地址(通过ARP获取的MAC地址属于动态缓存, 过两分钟就会清除). 获取成功后, 会缓存IP地址, MAC地址的映射信息, 俗称：ARP缓存(<code>arp -a</code> 可以查看当前计算机缓存的MAC地址.  <code>arp -d</code> 删除ARP缓存). </p>
 <ul>
 <li>ARP：通过IP地址获取MAC地址. </li>
 <li>RARP:逆地址解析协议, 作用与ARP相反, 用于将MAC地址转为IP地址</li>
 </ul>
 <h3 id="icmp">ICMP:互联网控制消息协议<a class="headerlink" href="#icmp" title="Permanent link">&para;</a></h3>
 <p>IPv4中的ICMP被称作ICMPv4, IPv6中的ICMP则被称作ICMPv6, 通常用于返回错误信息(比如TTL值过期,目的不可达).</p>
-<div class="admonition note icmp的错误消息总是包括了源数据并返回给发送者">
-<p class="admonition-title">Note</p>
+<div class="admonition note">
+<p class="admonition-title">ICMP的错误消息总是包括了源数据并返回给发送者</p>
 </div>
 <h2 id="ip">IP地址<a class="headerlink" href="#ip" title="Permanent link">&para;</a></h2>
 <p>互联网上面的每一个主机都有一个ip地址. 最初推出的IPv4, 32个bit(4字节), 2019年11月25日, 全球的IP地址已经用完了. 后面推出了IPv6, 128bit(16字节)</p>
@@ -1824,7 +1826,11 @@
 <p>两个二进制按位与的时候, 顺序可以互换的. </p>
 <p>所以上面这个地址的网络ID是 ,  192.168.1</p>
 </blockquote>
-<p>同一网段的计算机, 网络id相同. (子网掩码全是1对应的数字就是网络id ,  全是0对于的数字就是主机id), 所以一个网段能都表示多少台主机, 主要是看主机id有多少位, 但是要去掉 全是 0 和 全是 1,  全是0代表网段 ,  主机ip全是1时代表广播</p>
+<p>同一网段的计算机, 网络id相同, 所以一个网段能都表示多少台主机, 主要是看主机id有多少位.</p>
+<div class="admonition note">
+<p class="admonition-title">特殊IP</p>
+<p>主机id全是0, 表示该主机所在的网段; 主机id全是1, 表示主机所在网段的全部主机(广播), 可以尝试ping某个网段的全部主机. </p>
+</div>
 <h3 id="ip_1">IP地址的分类<a class="headerlink" href="#ip_1" title="Permanent link">&para;</a></h3>
 <p>ip地址被分成了五类:</p>
 <ul>
@@ -1835,10 +1841,6 @@
 <li>E类地址：以1111开头, 保留为今后使用. </li>
 </ul>
 <p>!!! note  注意：只有 A\B\C 类的地址才能分配给主机使用.</p>
-<div class="admonition note">
-<p class="admonition-title">特殊IP</p>
-<p>主机id全是0, 表示该主机所在的网段. 主机id全是1, 表示主机所在网段的全部主机(广播), 可以尝试ping某个网段的全部主机. </p>
-</div>
 <h3 id="cidr">子网掩码的CIDR表示方式<a class="headerlink" href="#cidr" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
@@ -1858,18 +1860,18 @@
 </ul>
 <div class="admonition note">
 <p class="admonition-title">超网</p>
-</div>
 <p>超网和子网是反过来的, 它是将多个连续的网段合并成一个更大的网段. </p>
+</div>
 <h2 id="_3">路由<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>在不同的网段之间转发数据时需要路由器，但是默认情况下路由器只知道和路由器直接连接的网段，非直接连接的网段需要通过静态路由或者动态路由告诉路由器。</p>
 <ul>
-<li>** 静态路由 **</li>
+<li><strong>静态路由</strong></li>
 <li>管理员手动添加路由信息。</li>
 <li>适合小规模网路。</li>
-<li>** 动态路由 **</li>
+<li><strong>动态路由</strong></li>
 <li>路由器通过路由协议（如RIP,OSPF）自动获取路由星系。</li>
 <li>适合大规模网路。</li>
-<li>** 路由表 **</li>
+<li><strong>路由表</strong></li>
 <li>需要和非直连的不同网段通信时，需要至少两个路由器，两个路由器连接的ip需要在同一个网段，需要连接哪个网段就配置下一跳的地址和这个网段相同就可以了。</li>
 </ul>
 
