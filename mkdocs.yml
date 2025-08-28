@@ -99,13 +99,12 @@ markdown_extensions:
 
 extra_javascript:
   - https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js
-  - https://cdn.bootcdn.net/ajax/libs/webfont/1.6.28/webfontloader.js
-  - javascripts/config.js
+  - https://s4.zstatic.net/ajax/libs/webfont/1.6.28/webfontloader.js
   - https://polyfill.alicdn.com/polyfill.min.js
-  - https://cdn.bootcdn.net/ajax/libs/mathjax/3.1.2/es5/tex-mml-chtml.min.js
+  - https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+  - javascripts/config.js
 
 extra_css:
-  - https://cdn.tonycrane.cc/jbmono/jetbrainsmono.css
   - stylesheets/extra.css
 
 
@@ -152,6 +151,13 @@ nav:
       - enable_if 新标准: learn_cpp/012_enable_if.md
       - enable_if 的重定义错误: learn_cpp/13_enable_if_redefine_mistake.md
       - 模板元编程: learn_cpp/014_materials.md
+
+  - 计算机网络协议研究:
+      - 计算机网络基础: computer_networks/01_network_basics.md
+      - MAC地址和IP地址: computer_networks/02_mac_address.md
+      - ISP和NAT: computer_networks/03_isp_and_nat.md
+      
+      
 
   - 深度学习:
       - Deep Learning: deep_learning/00_DeepLearning.md
