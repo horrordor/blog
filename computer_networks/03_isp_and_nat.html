@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://horrordor.eu.org/github/09_merge_conflicts.html">
+        <link rel="canonical" href="https://horrordor.eu.org/computer_networks/03_isp_and_nat.html">
       
       
-        <link rel="prev" href="08_GitHub_Actions.html">
+        <link rel="prev" href="02_mac_address.html">
       
       
-        <link rel="next" href="10_git_rebase.html">
+        <link rel="next" href="../deep_learning/00_DeepLearning.html">
       
       
       <link rel="icon" href="../assets/logo.svg">
@@ -22,7 +22,7 @@
     
     
       
-        <title>解决 Git 冲突 Merge Conflicts - horrordor's blog</title>
+        <title>ISP和NAT - horrordor's blog</title>
       
     
     
@@ -141,7 +141,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#git-merge-conflicts" class="md-skip">
+        <a href="#ispnat" class="md-skip">
           跳转至
         </a>
       
@@ -176,7 +176,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              解决 Git 冲突 Merge Conflicts
+              ISP和NAT
             
           </span>
         </div>
@@ -350,20 +350,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
@@ -379,7 +377,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             一起学 GitHub
@@ -393,7 +391,7 @@
   
   
     <li class="md-nav__item">
-      <a href="01_how_to_pr.html" class="md-nav__link">
+      <a href="../github/01_how_to_pr.html" class="md-nav__link">
         
   
   
@@ -416,7 +414,7 @@
   
   
     <li class="md-nav__item">
-      <a href="02_learn_from_pr.html" class="md-nav__link">
+      <a href="../github/02_learn_from_pr.html" class="md-nav__link">
         
   
   
@@ -439,7 +437,7 @@
   
   
     <li class="md-nav__item">
-      <a href="03_SSH_for_github.html" class="md-nav__link">
+      <a href="../github/03_SSH_for_github.html" class="md-nav__link">
         
   
   
@@ -462,7 +460,7 @@
   
   
     <li class="md-nav__item">
-      <a href="04_beauty_code.html" class="md-nav__link">
+      <a href="../github/04_beauty_code.html" class="md-nav__link">
         
   
   
@@ -485,7 +483,7 @@
   
   
     <li class="md-nav__item">
-      <a href="05_get_started_with_Markdown.html" class="md-nav__link">
+      <a href="../github/05_get_started_with_Markdown.html" class="md-nav__link">
         
   
   
@@ -508,7 +506,7 @@
   
   
     <li class="md-nav__item">
-      <a href="06_Mkdocs.html" class="md-nav__link">
+      <a href="../github/06_Mkdocs.html" class="md-nav__link">
         
   
   
@@ -531,7 +529,7 @@
   
   
     <li class="md-nav__item">
-      <a href="07_GitHub_Pages.html" class="md-nav__link">
+      <a href="../github/07_GitHub_Pages.html" class="md-nav__link">
         
   
   
@@ -554,7 +552,7 @@
   
   
     <li class="md-nav__item">
-      <a href="08_GitHub_Actions.html" class="md-nav__link">
+      <a href="../github/08_GitHub_Actions.html" class="md-nav__link">
         
   
   
@@ -574,32 +572,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    解决 Git 冲突 Merge Conflicts
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="09_merge_conflicts.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../github/09_merge_conflicts.html" class="md-nav__link">
         
   
   
@@ -610,68 +586,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      冲突是如何形成的
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="冲突是如何形成的">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      实践：冲突是如何产生的
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      如何解决冲突
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#github" class="md-nav__link">
-    <span class="md-ellipsis">
-      在 GitHub 上解决冲突
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -684,7 +598,7 @@
   
   
     <li class="md-nav__item">
-      <a href="10_git_rebase.html" class="md-nav__link">
+      <a href="../github/10_git_rebase.html" class="md-nav__link">
         
   
   
@@ -1055,18 +969,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
@@ -1082,7 +998,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             计算机网络协议研究
@@ -1096,7 +1012,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../computer_networks/01_network_basics.html" class="md-nav__link">
+      <a href="01_network_basics.html" class="md-nav__link">
         
   
   
@@ -1119,7 +1035,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../computer_networks/02_mac_address.html" class="md-nav__link">
+      <a href="02_mac_address.html" class="md-nav__link">
         
   
   
@@ -1139,10 +1055,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../computer_networks/03_isp_and_nat.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    ISP和NAT
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="03_isp_and_nat.html" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1153,6 +1089,156 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ispnat" class="md-nav__link">
+    <span class="md-ellipsis">
+      ISP和NAT
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ISP和NAT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#isp-internet-service-provider" class="md-nav__link">
+    <span class="md-ellipsis">
+      ISP (Internet Service Provider)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      网络分类
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="网络分类">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#local-area-network-lan" class="md-nav__link">
+    <span class="md-ellipsis">
+      局域网 (Local Area Network, LAN)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metropolitan-area-network-man" class="md-nav__link">
+    <span class="md-ellipsis">
+      城域网 (Metropolitan Area Network, MAN)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wide-area-network-wan" class="md-nav__link">
+    <span class="md-ellipsis">
+      广域网(Wide Area Network, WAN)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ipip" class="md-nav__link">
+    <span class="md-ellipsis">
+      公网IP和私网IP
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="公网IP和私网IP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      公网
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      私网
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nat-network-address-translation" class="md-nav__link">
+    <span class="md-ellipsis">
+      NAT (Network Address Translation)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="NAT (Network Address Translation)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      作用
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nat" class="md-nav__link">
+    <span class="md-ellipsis">
+      NAT的分类
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1640,8 +1726,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1650,19 +1734,56 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#ispnat" class="md-nav__link">
     <span class="md-ellipsis">
-      冲突是如何形成的
+      ISP和NAT
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="冲突是如何形成的">
+    <nav class="md-nav" aria-label="ISP和NAT">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#isp-internet-service-provider" class="md-nav__link">
     <span class="md-ellipsis">
-      实践：冲突是如何产生的
+      ISP (Internet Service Provider)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      网络分类
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="网络分类">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#local-area-network-lan" class="md-nav__link">
+    <span class="md-ellipsis">
+      局域网 (Local Area Network, LAN)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metropolitan-area-network-man" class="md-nav__link">
+    <span class="md-ellipsis">
+      城域网 (Metropolitan Area Network, MAN)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wide-area-network-wan" class="md-nav__link">
+    <span class="md-ellipsis">
+      广域网(Wide Area Network, WAN)
     </span>
   </a>
   
@@ -1672,22 +1793,75 @@
     </nav>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#ipip" class="md-nav__link">
     <span class="md-ellipsis">
-      如何解决冲突
+      公网IP和私网IP
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="公网IP和私网IP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      公网
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#github" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
-      在 GitHub 上解决冲突
+      私网
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nat-network-address-translation" class="md-nav__link">
+    <span class="md-ellipsis">
+      NAT (Network Address Translation)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="NAT (Network Address Translation)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      作用
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nat" class="md-nav__link">
+    <span class="md-ellipsis">
+      NAT的分类
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1710,44 +1884,61 @@
   
 
 
-<h1 id="git-merge-conflicts">解决 Git 冲突：Merge Conflicts<a class="headerlink" href="#git-merge-conflicts" title="Permanent link">&para;</a></h1>
-<p>参与过开源项目的同学或早或晚都会遇到 Git 冲突的问题。本文将从冲突的产生原因、冲突的形成过程、冲突的解决方法三个方面来介绍 Git 冲突的解决方法。</p>
-<h2 id="_1">冲突是如何形成的<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>在使用 GitHub 参与开源项目时，可能会遇到多个 commit 修改的代码都是同一处的情况。</p>
-<p>举个例子， A 同学和 B 同学都基于主分支进行修改。A 同学将某行代码写成了 Default True。但是 B 同学将某行代码写成了 Default False，然后先后合并入了主分支。</p>
-<p>此时 Git 检测到这两个同学都对这同一行代码进行了修改。但是 Git 却没有能力去判断哪一个修正是正确的，哪一个修改是更好的。</p>
-<p>这样的冲突，机器是没有办法通过自动化解决的，它需要人为地通过逻辑判断才能解决。于是 Git 就会报告产生了冲突，请求 B 同学去解决冲突。</p>
-<p>那冲突到底长什么样呢？接下来，本篇文章就将模拟 A 和 B 同学，用命令行演示一下冲突的形成过程。</p>
-<h3 id="_2">实践：冲突是如何产生的<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
-<p>接下来，以开源项目 OneFlow 中的 libai 仓库中的文档作为例子来演示。模拟 A 和 B 同学都对 libai 仓库中的 README 文件进行修改。</p>
-<p>首先，A 同学基于 main 分支建立了一个 branch_a 的分支，<code>git checkout -b branch_a</code>。他在 branch_a 上做了修改，比如他认为文档中提及的版本应该是 0.A.0，修改保存，并且他做了修改之后，进行了提交，<code>git commit -a -m “by a”</code>。</p>
-<p>接着来模拟 B 同学的操作，先切换到主分支，<code>git checkout main</code>。B 同学他也是类似的，基于 main 分支也创立了一个 branch_b 的分支，<code>git checkout -b branch_b</code>。但是 B 同学就和 A 同学的意见冲突了，他认为这个版本应该是 0.B.0，于是他做了相应的修改。接着，B 同学对这一笔修改进行了提交 commit，<code>git commit -a -m “by b”</code>。</p>
-<p>完成后，切换回主分支。接着，主分支想要合并新功能。所以，我们首先合并 a 分支，<code>git merge branch_a</code>, 然后就合并成功了。接着，类似地合并 b 分支，<code>git merge branch_b</code>。可以发现这里会报冲突，这是由于 A 和 B 修改了相同的地方，所以 Git 检测到了，并且提示了要先去解决冲突后，再来提交。</p>
-<h2 id="_3">如何解决冲突<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>冲突产生了，那么就必须通过人为解决才能合并入分支。实际上，Git 检测和标记冲突的方式是非常朴素且直接的，其实就是纯文本格式。</p>
-<p>用 notepad 打开刚刚修改过的 README 文件。可以发现 Git 检测出了发生冲突的地方，并且用大于，等于，小于符号作为分隔符都标记了出来。</p>
-<pre><code class="language-Text">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-LiBai 是一个基于 Oneflow 的大型规模模型训练开源工具箱，主分支代码目前支持 OneFlow 0.A.0 以上的版本。
-=======
-LiBai 是一个基于 Oneflow 的大型规模模型训练开源工具箱，主分支代码目前支持 OneFlow 0.B.0 以上的版本。
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; branch_b
-</code></pre>
-<p>大多数情况下，可能都是需要对这两个内容进行一个二选一的操作，即保留必要的内容，删除不必要的内容，还包括这里的标记符号。假设要保留 A 的修改，那就需要删掉 B 的内容和删掉分隔符。</p>
-<pre><code class="language-Text">LiBai 是一个基于 Oneflow 的大型规模模型训练开源工具箱，主分支代码目前支持 OneFlow 0.A.0 以上的版本。
-</code></pre>
-<p>保存后，再查看一下状态，<code>git status</code>。接着，将刚刚的改动进行一个提交，<code>git add .</code>。</p>
-<p>可以看到，它自动生成了 commit 的信息。</p>
-<p>输入 <code>git commit</code> 就可以提交成功了。</p>
-<p>可以输入 <code>git log</code> 查看一下，可以看到 branch_a 和 branch_b 都已经合并到了 main 分支，还有一个用于解决冲突的 commit。</p>
-<p>到目前为止，我们已经通过最本质的方式在本地制造了冲突，又解决了它。然而在更多情况下，作为开源贡献者，大家都是在远程协作的情况下产生的冲突。</p>
-<p>而 GitHub，大家可以理解为网页版的 Git 前端，它有一些很方便的设计来帮助解决冲突。</p>
-<h2 id="github">在 GitHub 上解决冲突<a class="headerlink" href="#github" title="Permanent link">&para;</a></h2>
-<p>依旧是和前面一样的例子。不过现在需要将 branch_a 和 branch_b 这两个分支给推送到远程仓库，并且创建 PR。接着，创建一个 PR 到自己的仓库后，然后点击 merge。</p>
-<p>接着，我们也对 b 分支进行一个创建 PR。可以看到这里 GitHub 已经检测出了在 README 这个文件中产生了冲突必须要解决。</p>
-<p>这个时候需要点击 Resolve Conflicts 来解决。</p>
-<p>然后可以发现 GitHub 的界面有一点点像网页版的编辑器，可以和刚刚本地的操作类似，去掉不重要，不必要的内容和分隔符。完成后，我们要点击右上角的 <strong>Mark as resolved</strong> ，接着点击 <strong>Commit merge</strong>。然后，就可以点到 <strong>Merge pull request</strong> 了。这样 branch_b 的 PR 也成功的被合并了。</p>
-<p>回过头看看，可以看到有两笔 commit。第一笔，是我们本地的修改的 b 版本，第二笔，就是解决冲突时产生的 commit。</p>
-<p>GitHub 可以使得在网页上就能解决冲突，但是对于一些比较复杂的冲突，GitHub 网页端也是无能为力，此时就需要像视频开始那样通过命令行 + 编辑器的方式来解决冲突。</p>
+  <h1>ISP和NAT</h1>
+
+<h2 id="ispnat">ISP和NAT<a class="headerlink" href="#ispnat" title="Permanent link">&para;</a></h2>
+<h3 id="isp-internet-service-provider">ISP (Internet Service Provider)<a class="headerlink" href="#isp-internet-service-provider" title="Permanent link">&para;</a></h3>
+<p>Internet服务提供商, 比如电信, 移动, 网通, 铁通等. 我们平时拉的网线和宽带就是通过ISP连接到Internet的.</p>
+<h3 id="_1">网络分类<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<h4 id="local-area-network-lan">局域网 (Local Area Network, LAN)<a class="headerlink" href="#local-area-network-lan" title="Permanent link">&para;</a></h4>
+<p>一般是范围在几百米到十几公里内的计算机所构成的计算机网络, 常用于公司、家庭、学校、医院、机关、一幢大楼等. 局域网中使用最广泛的网络技术叫：以太网(Ethernet); 在电脑、手机上经常见到的一个英文 WLAN(Wireless LAN), 意思是无线局域网.</p>
+<h4 id="metropolitan-area-network-man">城域网 (Metropolitan Area Network, MAN)<a class="headerlink" href="#metropolitan-area-network-man" title="Permanent link">&para;</a></h4>
+<p>一般范围是数十公里到数百公里, 可以覆盖一个城市</p>
+<h4 id="wide-area-network-wan">广域网(Wide Area Network, WAN)<a class="headerlink" href="#wide-area-network-wan" title="Permanent link">&para;</a></h4>
+<p>一般范围是几百公里到几千公里, 可以覆盖一个国家. 通常都需要租用ISP的线路.</p>
+<h3 id="ipip">公网IP和私网IP<a class="headerlink" href="#ipip" title="Permanent link">&para;</a></h3>
+<h4 id="_2">公网<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<p>Internet上的路由器中只有到达公网的路由表, 没有到达私网的路由表.公网IP由因特网信息中心(Inter NIC)同意分配和管理.ISP需要向Inrer INC 申请公网IP</p>
+<h4 id="_3">私网<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<p>主要用于局域网, 私网的保留网段如下：</p>
+<ul>
+<li>A类：10.0.0.0/8, 1个A类网络.</li>
+<li>B类：172.16.0.0/16 ~ 172.31.0.0/16, 16个B类网络.</li>
+<li>C类：192.168.0.0/24 ~ 192.168.255.0/24, 256个C类网段.</li>
+</ul>
+<h3 id="nat-network-address-translation">NAT (Network Address Translation)<a class="headerlink" href="#nat-network-address-translation" title="Permanent link">&para;</a></h3>
+<p>私网IP在访问Internet的时候需要NAT将私网IP装换成公网IP, 转换过程可以由路由器来完成.</p>
+<h4 id="_4">作用<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<p>可以节约公网的IP资源, 会隐藏内部的真实IP.</p>
+<h4 id="nat">NAT的分类<a class="headerlink" href="#nat" title="Permanent link">&para;</a></h4>
+<blockquote>
+<ul>
+<li>静态转换</li>
+<li>手动配置NAT映射表.</li>
+<li>
+<p>一对一转换, 一个私网IP只能转换成NAT映射表中的公网IP地址.</p>
+</li>
+<li>
+<p>动态转换：</p>
+</li>
+<li>定义外部地址池, 动态随机转换.</li>
+<li>
+<p>一对一转换.</p>
+</li>
+<li>
+<p>PAT</p>
+</li>
+<li>
+<p>多对一转换, 最大程度节约公网IP资源.多个私网IP使用同一个公网IP</p>
+</li>
+<li>
+<p>采用端口多路复用方式, 通过端口号标识不同的数据流.</p>
+</li>
+<li>
+<p>目前应用最广泛的NAT实现.</p>
+</li>
+</ul>
+</blockquote>
 
 
 
@@ -1777,7 +1968,7 @@ LiBai 是一个基于 Oneflow 的大型规模模型训练开源工具箱，主�
       <nav class="md-footer__inner md-grid" aria-label="页脚" >
         
           
-          <a href="08_GitHub_Actions.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: GitHub Actions 介绍 &amp; 使用">
+          <a href="02_mac_address.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: MAC地址和IP地址">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1787,20 +1978,20 @@ LiBai 是一个基于 Oneflow 的大型规模模型训练开源工具箱，主�
                 上一页
               </span>
               <div class="md-ellipsis">
-                GitHub Actions 介绍 & 使用
+                MAC地址和IP地址
               </div>
             </div>
           </a>
         
         
           
-          <a href="10_git_rebase.html" class="md-footer__link md-footer__link--next" aria-label="下一页: 删除指定 commit 小妙招 git rebase">
+          <a href="../deep_learning/00_DeepLearning.html" class="md-footer__link md-footer__link--next" aria-label="下一页: Deep Learning">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 下一页
               </span>
               <div class="md-ellipsis">
-                删除指定 commit 小妙招 git rebase
+                Deep Learning
               </div>
             </div>
             <div class="md-footer__button md-icon">
