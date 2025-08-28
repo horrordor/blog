@@ -1108,17 +1108,17 @@
   
 </li>
         
-          <li class="md-nav__item">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#icmp" class="md-nav__link">
     <span class="md-ellipsis">
       ICMP:互联网控制消息协议
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1769,17 +1769,17 @@
   
 </li>
         
-          <li class="md-nav__item">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#icmp" class="md-nav__link">
     <span class="md-ellipsis">
       ICMP:互联网控制消息协议
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1882,8 +1882,8 @@
 <h2 id="_1">概述<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>在计算机个其他计算机发送消息时 , 需要知道目标ip和MAC地址, 发送数据之前计算机都会判断目标ip和自己的ip是不是同一个网段.  这里分为两种情况：</p>
 <ul>
-<li>第一种是同一个网段, 这个MAC地址是通过ARP协议获取的. 比如, 两台从来没有通信过的电脑进行通信, 我们先ping一下 , ping其实是使用ICMP协议. 在使用ICPMP协议发送数据之前 , 会先使用ARP广播协议, 向当前网段中的所有计算机发送目标ip和目标MAC(因为此时不知道目标IP所在电脑的MAC地址, 所以目标MAC地址是：FFFF.FFFF.FFFF.FFFF(转换成二进制就是全是1) ,  全是1 代表广播), 这样这个网段所有的计算机就都收到了源计算机发送来的ARP, 然后就会询问到她所需要的MAC地址, 这时就会把他所需要的MAC地址带回原主机保存起来, 就可以进行ICMP协议通信了. </li>
-<li>第二种：不是同一个网段. 当发现目标ip与自己不在一个网段之后, 计算机会发送一个ARP协议给网关, 获取网关的MAC地址, 因为要有MAC地址才能发送数据. 网关是路由器用来区分网段的, 网关的ip地址属于当前连接路由器的网段中的地址, 计算机本身也需要配置网关. 由路由器根据目标地址的ip找到对应网段的网关, 将数据发送出去. </li>
+<li>同一个网段. 两台从来没有通信过的电脑进行通信, 此时不知道目标IP所在电脑的MAC地址, 会先使用ARP广播协议查找所需要的MAC, 随后就可以进行通信了. </li>
+<li>不是同一个网段. 计算机会发送一个ARP协议给网关, 获取网关的MAC地址, 因为要有MAC地址才能发送数据. 由网关根据目标地址的ip找到对应网段的网关, 将数据发送出去. </li>
 </ul>
 <h2 id="macmedia-access-control-address">MAC(Media Access Control Address)地址<a class="headerlink" href="#macmedia-access-control-address" title="Permanent link">&para;</a></h2>
 <p>每一个网卡都有一个6字节(48bit)的MAC地址,MAC地址全球唯一, 固化在网卡的ROM中的. </p>
@@ -1891,7 +1891,7 @@
 <p class="admonition-title">查看MAC地址</p>
 <p><code>ipconfig /all</code></p>
 </div>
-<p>可以修改MAC地址蹭网, 比如, 有些学校的交换机可以设置MAC地址来限制上网的设备的MAC地址, 如果你知道一台可以上学校网的MAC地址, 你可以把你的MAC改成这个可以上网的MAC地址就可以蹭网了, 但是两台相同MAC地址的主机肯定只有一个能上网. </p>
+<p><del>可以修改MAC地址蹭网, 比如, 有些学校的交换机可以设置MAC地址来限制上网的设备的MAC地址, 如果你知道一台可以上学校网的MAC地址, 你可以把你的MAC改成这个可以上网的MAC地址就可以蹭网了, 但是两台相同MAC地址的主机肯定只有一个能上网.</del></p>
 <div class="admonition note">
 <p class="admonition-title">当MAC地址的48位全部是1的时候, 代表广播地址</p>
 </div>
@@ -1901,7 +1901,7 @@
 <li>ARP：通过IP地址获取MAC地址. </li>
 <li>RARP:逆地址解析协议, 作用与ARP相反, 用于将MAC地址转为IP地址</li>
 </ul>
-<h3 id="icmp">ICMP:互联网控制消息协议<a class="headerlink" href="#icmp" title="Permanent link">&para;</a></h3>
+<h2 id="icmp">ICMP:互联网控制消息协议<a class="headerlink" href="#icmp" title="Permanent link">&para;</a></h2>
 <p>IPv4中的ICMP被称作ICMPv4, IPv6中的ICMP则被称作ICMPv6, 通常用于返回错误信息(比如TTL值过期,目的不可达). ICMP的错误消息总是包括了源数据并返回给发送者.</p>
 <h2 id="ip">IP地址<a class="headerlink" href="#ip" title="Permanent link">&para;</a></h2>
 <p>互联网上面的每一个主机都有一个ip地址. 最初推出的IPv4, 32个bit(4字节), 2019年11月25日, 全球的IP地址已经用完了. 后面推出了IPv6, 128bit(16字节)</p>
