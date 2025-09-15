@@ -21,6 +21,9 @@ theme:
   include_search_page: false
   search_index_only: true
 
+  # Don't use google fonts
+  font: false
+  
   # Default values, taken from mkdocs_theme.yml
   language: zh
   features:
