@@ -26,6 +26,9 @@ $('link').each(function () {
 
 WebFont.load({
     custom: {
-        families: ['Ubuntu Mono', 'Source Sans Pro']
+        families: ['Ubuntu Mono', 'Source Sans Pro'],
+        urls: [
+            "/stylesheets/extra.css"
+        ]
     }
 });
