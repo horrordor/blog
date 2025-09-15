@@ -22,12 +22,3 @@ $('link').each(function () {
     console.log($replace);
     $(this).attr('href', $replace);
 });
-
-
-
-WebFont.load({
-    google: {
-        families: ['Ubuntu Mono', 'Source Sans Pro'],
-        api: 'https://fonts.font.im/css',
-    },
-});
