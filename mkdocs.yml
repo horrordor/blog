@@ -23,7 +23,7 @@ theme:
 
   # Don't use google fonts
   font: false
-  
+
   # Default values, taken from mkdocs_theme.yml
   language: zh
   features:
@@ -102,7 +102,6 @@ markdown_extensions:
 
 extra_javascript:
   - https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js
-  - https://s4.zstatic.net/ajax/libs/webfont/1.6.28/webfontloader.js
   - https://polyfill.alicdn.com/polyfill.min.js
   - https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML
   - javascripts/config.js
