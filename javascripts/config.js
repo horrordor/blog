@@ -24,11 +24,10 @@ $('link').each(function () {
 });
 
 
+
 WebFont.load({
-    custom: {
+    google: {
         families: ['Ubuntu Mono', 'Source Sans Pro'],
-        urls: [
-            "/stylesheets/extra.css"
-        ]
-    }
+        api: 'https://fonts.font.im/css',
+    },
 });
